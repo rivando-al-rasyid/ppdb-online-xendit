@@ -12,61 +12,65 @@ class PembayaranController extends Controller
 {
     public function index(Request $request)
     {
-        $user = $request->user();
-        return view('dashboard.pembayaran.create', compact('user'));
+        $user_id = auth()->user()->id; // Get the currently authenticated user's ID
+        $pembayaran = Pembayaran::where('user_id', $user_id)->first();
+
+        if ($pembayaran && $pembayaran->checkout_link) {
+            $token = $pembayaran->token;
+            return view('pembayaran.hasil', compact('token'));
+        } else {
+            return view('pembayaran.create', compact('user'));
+        }
     }
+
 
     public function create(Request $request)
     {
         $Amount = 250000; // Assuming quantity is always 1
-
+        $ItemName = "Baju Sekolah";
         $params = array(
             'transaction_details' => array(
-                'order_id' => Str::uuid()->toString(), // Generate UUID as string
+                'order_id' => Str::uuid(),
                 'gross_amount' => $Amount,
             ),
             'item_details' => array(
                 array(
                     'price' => $Amount,
                     'quantity' => 1,
-                    'name' => $request->item_name,
+                    'name' => $ItemName,
                 )
             ),
             'customer_details' => array(
                 'first_name' => $request->customer_first_name,
                 'email' => $request->customer_email,
-                'phone' => '08111222333',
+                'phone' => $request->customer_phone,
             ),
 
             'enabled_payments' => array('credit_card', 'bca_va', 'bni_va', 'bri_va')
         );
+        $auth = base64_encode(env('MIDTRANS_SERVER_KEY'));
 
-        $auth = base64_encode('ServerKey:' . env('MIDTRANS_SERVER_KEY')); // Correct authorization format
+        $response = Http::withHeaders([
 
-        try {
-            $response = Http::withHeaders([
-                'Content-Type' => 'application/json',
-                'Authorization' => "Basic $auth",
-            ])->post('https://app.sandbox.midtrans.com/snap/v1/transactions', $params);
+            'Content-Type' => 'application/json',
 
-            $response = json_decode($response->body());
+            'Authorization' => "Basic $auth",
 
-            $payment = new Pembayaran;
-            $payment->order_id = $params['transaction_details']['order_id'];
-            $payment->status = 'pending';
-            $payment->price = $Amount;
-            $payment->customer_first_name = $request->customer_first_name;
-            $payment->customer_email = $request->customer_email;
-            $payment->item_name = $request->item_name;
-            $payment->checkout_link = $response->redirect_url;
-            $payment->save();
+        ])->post('https://app.sandbox.midtrans.com/snap/v1/transactions', $params);
+        $response = json_decode($response->body());
+        $payment = new Pembayaran;
+        $payment->order_id = $params['transaction_details']['order_id'];
+        $payment->status = 'pending';
+        $payment->price = $Amount;
+        $payment->customer_first_name = $request->customer_first_name;
+        $payment->customer_email = $request->customer_email;
+        $payment->item_name = $ItemName;
+        $payment->user_id = $request->user_id;
+        $payment->checkout_link = $response->redirect_url;
+        $payment->token = $response->token;
 
-            Alert::success('Success', 'Payment created successfully');
-            return response()->json($response);
-        } catch (\Exception $e) {
-            // Handle exceptions, log the error, and return an appropriate response.
-            return response()->json('Error: ' . $e->getMessage(), 500);
-        }
+        $payment->save();
+        return response()->json($response);
     }
     public function webhook(Request $request)
     {

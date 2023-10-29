@@ -32,6 +32,12 @@ Breadcrumbs::for('pembayaran.index', function (BreadcrumbTrail $trail) {
     $trail->push('Tagihan', route('pembayaran.index'));
 });
 
+Breadcrumbs::for('pembayaran.invoice', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Tagihan', route('pembayaran.invoice'));
+});
+
+
 Breadcrumbs::for('admin', function (BreadcrumbTrail $trail) {
     $trail->push('Admin', route('admin.dashboard'));
 });

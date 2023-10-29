@@ -1,8 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="card w-100 h-100 position-relative overflow-hidden">
-        <iframe src="{{ $invoiceUrl }}" frameborder="0" style="height: calc(100vh - 250px); width: 100%;"
-            data-simplebar=""></iframe>
-    </div>
+    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
+        data-client-key="SB-Mid-client-Bakl6nDg2pt1sK03"></script>
+
+    <script type="text/javascript">
+        // Retrieve the Snap Token passed from the controller
+        var snapToken = "{{ $token }}";
+
+        // Check if the Snap Token is valid
+        if (snapToken) {
+            // Call the snap.pay() function with the retrieved Snap Token
+            snap.pay(snapToken);
+        } else {
+            console.error('Invalid Snap Token received from the server.');
+        }
+    </script>
 @endsection
