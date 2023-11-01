@@ -20,8 +20,8 @@
                     @csrf
                     <div class="form-group">
                         <label>Nama Pekerjaan Orangtua</label>
-                        <input type="text" class="form-control" value="{{ $data->nama_pekerjaan_ortu }}"
-                            name="nama_pekerjaan_ortu">
+                        <input type="text" class="form-control" value="{{ $data->nama_pekerjaan }}"
+                            name="nama_pekerjaan">
                     </div>
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>

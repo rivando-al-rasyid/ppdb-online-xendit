@@ -63,18 +63,23 @@ class PekerjaanOrtuController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, PekerjaanOrtu $pekerjaanOrtu)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'nama_pekerjaan' => 'required',
         ]);
 
-        $pekerjaanOrtu->update([
-            'nama_pekerjaan' => $request->nama_pekerjaan,
-        ]);
+        $Query = PekerjaanOrtu::find($id);
+        $Query->nama_pekerjaan = $request->nama_pekerjaan;
 
-        Alert::success('Success', 'Data Updated Successfully');
-        return redirect()->route('pekerjaan_ortu.index');
+        if ($Query) {
+            $Query->update();
+            Alert::success('Sukses', 'Edit Data Sukses');
+            return redirect()->route('pekerjaan_ortu.index');
+        }
+
+        Alert::error('Error', 'Failed to update data');
+        return back();
     }
     /**
      * Remove the specified resource from storage.
