@@ -79,18 +79,16 @@ class DashboardController extends Controller
         }
 
         $user->email = $randomEmail;
-
         $user->password = bcrypt($randomEmail);
         // Save the user object to the database
-        $user->nis = $suffix;
-        $user->no_hp = $no_hp;
-
-
+        $user->phone = $no_hp;
         $user->save();
 
         // Update the status of the Hasil item to 'DITERIMA'
         $item = Hasil::findOrFail($id);
         $item->status = 'DITERIMA';
+        // Save the new user's ID to the $item->id_user field
+        $item->user_id = $user->id;
         $item->update();
 
         // Display a success message
