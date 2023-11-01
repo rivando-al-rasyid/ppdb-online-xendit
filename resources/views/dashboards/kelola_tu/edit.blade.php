@@ -15,16 +15,16 @@
             </div>
             <div class="card-body">
                 <a href="{{ route('kelola_tu.index') }}" class="btn btn-warning mb-2">Back</a>
-                <form action="{{ route('kelola_tu.update', $tu->id) }}" method="POST">
+                <form action="{{ route('kelola_tu.update', $data->id) }}" method="POST">
                     @method('PATCH')
                     @csrf
                     <div class="form-group">
                         <label>Nama User</label>
-                        <input type="text" class="form-control" value="{{ $tu->name }}" name="name">
+                        <input type="text" class="form-control" value="{{ $data->name }}" name="name">
                     </div>
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="email" class="form-control" value="{{ $tu->email }}" name="email">
+                        <input type="email" class="form-control" value="{{ $data->email }}" name="email">
                     </div>
                     <div class="form-group">
                         <label>Password</label>
@@ -65,11 +65,11 @@
                     @csrf
                     <div class="form-group">
                         <label>Nama User</label>
-                        <input type="text" class="form-control" value="{{ $tu->name }}" name="name">
+                        <input type="text" class="form-control" value="{{ $data->name }}" name="name">
                     </div>
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="email" class="form-control" value="{{ $tu->email }}" name="email">
+                        <input type="email" class="form-control" value="{{ $data->email }}" name="email">
                     </div>
                     <div class="form-group">
                         <label>Password</label>

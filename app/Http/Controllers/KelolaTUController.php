@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KelolaTU;
 use RealRashid\SweetAlert\Facades\Alert;
 
 // use App\Models\KelolaTU;
@@ -18,7 +19,7 @@ class KelolaTUController extends Controller
     public function index()
     {
         $items = User::all();
-        return view('dashboards.pekerjaan_ortu.index', compact('items'));
+        return view('dashboards.kelola_tu.index', compact('items'));
     }
 
     /**
@@ -26,7 +27,7 @@ class KelolaTUController extends Controller
      */
     public function create()
     {
-        return view('dashboards.pekerjaan_ortu.create');
+        return view('dashboards.kelola_tu.create');
     }
 
     /**
@@ -43,7 +44,7 @@ class KelolaTUController extends Controller
         $kelola_TU->save();
 
         Alert::success('Success', 'Data Saved Successfully');
-        return redirect()->route('pekerjaan_ortu.index');
+        return redirect()->route('kelola_tu.index');
     }
 
     /**
@@ -57,11 +58,12 @@ class KelolaTUController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $kelola_TU)
+    public function edit($id)
     {
-        return view('dashboards.pekerjaan_ortu.edit', compact('kelola_TU'));
-    }
+        $data = User::find($id);
 
+        return view('dashboards.kelola_tu.edit', compact('data'));
+    }
     /**
      * Update the specified resource in storage.
      */
@@ -76,7 +78,7 @@ class KelolaTUController extends Controller
         ]);
 
         Alert::success('Success', 'Data Updated Successfully');
-        return redirect()->route('pekerjaan_ortu.index');
+        return redirect()->route('kelola_tu.index');
     }
     /**
      * Remove the specified resource from storage.
@@ -86,6 +88,6 @@ class KelolaTUController extends Controller
         $kelola_TU->delete();
 
         Alert::success('Success', 'Data Deleted Successfully');
-        return redirect()->route('pekerjaan_ortu.index');
+        return redirect()->route('kelola_tu.index');
     }
 }

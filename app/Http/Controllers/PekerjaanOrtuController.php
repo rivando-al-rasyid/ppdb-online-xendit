@@ -54,11 +54,12 @@ class PekerjaanOrtuController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(PekerjaanOrtu $pekerjaanOrtu)
+    public function edit($id)
     {
-        return view('dashboards.pekerjaan_ortu.edit', compact('pekerjaanOrtu'));
-    }
+        $data = PekerjaanOrtu::find($id);
 
+        return view('dashboards.pekerjaan_ortu.edit', compact('data'));
+    }
     /**
      * Update the specified resource in storage.
      */

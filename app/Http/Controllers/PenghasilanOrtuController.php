@@ -53,12 +53,12 @@ class PenghasilanOrtuController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(PenghasilanOrtu $penghasilanOrtu)
+    public function edit($id)
     {
         $data = PenghasilanOrtu::find($id);
-        return view('dashboards.penghasilan_ortu.edit', compact('penghasilanOrtu'));
-    }
 
+        return view('dashboards.penghasilan_ortu.edit', compact('data'));
+    }
     /**
      * Update the specified resource in storage.
      */

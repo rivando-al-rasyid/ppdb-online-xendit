@@ -29,7 +29,7 @@
 
     <!-- Data Master Section -->
     <li
-        class="nav-item {{ request()->routeIs('pekerjaan_ortu.index') || request()->routeIs('penghasilan_ortu.index') || request()->routeIs('sekolah.profile') ? ' active' : '' }}">
+        class="nav-item {{ request()->routeIs('pekerjaan_ortu.index') || request()->routeIs('penghasilan_ortu.index') || request()->routeIs('kelola_tu.index') || request()->routeIs('sekolah.profile') ? ' active' : '' }}">
         <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
             aria-controls="collapseTwo">
             <i class="fas fa-fw fa-cog"></i>
@@ -44,6 +44,9 @@
                     href="{{ route('pekerjaan_ortu.index') }}">Pekerjaan Orang Tua</a>
                 <a class="collapse-item{{ request()->routeIs('penghasilan_ortu.index') ? ' active' : '' }}"
                     href="{{ route('penghasilan_ortu.index') }}">Penghasilan Orang tua</a>
+                <a class="collapse-item{{ request()->routeIs('kelola_tu.index') ? ' active' : '' }}"
+                    href="{{ route('kelola_tu.index') }}">Penghasilan Orang tua</a>
+
             </div>
         </div>
     </li>
