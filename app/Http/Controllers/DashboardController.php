@@ -40,7 +40,7 @@ class DashboardController extends Controller
         $count_diterima_peserta = Hasil::where('status', 'DITERIMA')->count();
 
 
-        return view('dashboard.index', compact(
+        return view('dashboards.laporan.index', compact(
             'items',
             'count_user',
             'count_all_peserta',
@@ -53,7 +53,7 @@ class DashboardController extends Controller
     public function detail($id)
     {
         $item = Hasil::with(['peserta.orang_tua'])->where('id', $id)->first();
-        return view('dashboard.detail', compact('item'));
+        return view('dashboards.pendaftaran.detail', compact('item'));
     }
     public function terima($id)
     {
@@ -69,14 +69,9 @@ class DashboardController extends Controller
 
         // Create a new user
         $user = new User();
-        // Set the name of the user based on the retrieved 'nama' field
         $user->name = $namaPeserta;
-
-        // Generate email with suffix based on ID
         $baseEmail = $namaPeserta . '@example.com';
         $suffix = $id; // Use the ID directly as the suffix
-
-        // Check if the email already exists, if yes, append a random suffix
         if (User::where('email', $baseEmail)->exists()) {
             $randomEmail = $namaPeserta . $suffix . '@example.com';
         } else {
@@ -85,12 +80,12 @@ class DashboardController extends Controller
 
         $user->email = $randomEmail;
 
-        // Set the ID from tbl_peserta_ppdb table to id_peserta_ppdb field in User model
-        $user->mobile_number = $no_hp;
-        $user->id_peserta_ppdb = $id;
-
         $user->password = bcrypt($randomEmail);
         // Save the user object to the database
+        $user->nis = $suffix;
+        $user->no_hp = $no_hp;
+
+
         $user->save();
 
         // Update the status of the Hasil item to 'DITERIMA'

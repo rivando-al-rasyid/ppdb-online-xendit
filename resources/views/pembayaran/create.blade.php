@@ -7,26 +7,26 @@
             <div class="card-body">
                 <form action="{{ route('pembayaran.store') }}" method="POST">
                     @csrf <!-- Add CSRF token for security, needed for POST requests -->
-                    <div class="mb-3">
-                        <label for="user_id" class="form-label">First Name</label>
+                    <div class="mb-3" style="display: none;">
+                        <label for="user_id" class="form-label">ID</label>
                         <input type="number" class="form-control" id="user_id" name="user_id" value="{{ $user->id }}"
-                            required>
+                            readonly>
                     </div>
 
                     <div class="mb-3">
                         <label for="customer_first_name" class="form-label">First Name</label>
                         <input type="text" class="form-control" id="customer_first_name" name="customer_first_name"
-                            value="{{ $user->name }}" required>
+                            value="{{ $user->name }}" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="customer_email" class="form-label">Email</label>
                         <input type="email" class="form-control" id="customer_email" name="customer_email"
-                            value="{{ $user->email }}" required>
+                            value="{{ $user->email }}" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="customer_phone" class="form-label">Phone</label>
                         <input type="text" class="form-control" id="customer_phone" name="customer_phone"
-                            value="{{ $user->phone }}" required>
+                            value="{{ $user->phone }}" readonly>
                     </div>
                     <button type="submit" class="btn btn-primary">Create Payment</button>
                 </form>

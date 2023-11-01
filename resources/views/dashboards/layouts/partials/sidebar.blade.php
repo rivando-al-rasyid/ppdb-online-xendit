@@ -44,8 +44,6 @@
                     href="{{ route('pekerjaan_ortu.index') }}">Pekerjaan Orang Tua</a>
                 <a class="collapse-item{{ request()->routeIs('penghasilan_ortu.index') ? ' active' : '' }}"
                     href="{{ route('penghasilan_ortu.index') }}">Penghasilan Orang tua</a>
-                <a class="collapse-item{{ request()->routeIs('sekolah.profile') ? ' active' : '' }}"
-                    href="{{ route('sekolah.profile') }}">Profil Sekolah</a>
             </div>
         </div>
     </li>

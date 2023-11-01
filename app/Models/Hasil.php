@@ -13,4 +13,8 @@ class Hasil extends Model
     {
         return $this->hasOne(PesertaPPDB::class, 'id', 'nis');
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

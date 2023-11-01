@@ -15,7 +15,7 @@ class PekerjaanOrtuController extends Controller
     public function index()
     {
         $items = PekerjaanOrtu::all();
-        return view('dashboard.pekerjaan_ortu.index', compact('items'));
+        return view('dashboards.pekerjaan_ortu.index', compact('items'));
     }
 
     /**
@@ -23,7 +23,7 @@ class PekerjaanOrtuController extends Controller
      */
     public function create()
     {
-        return view('dashboard.pekerjaan_ortu.create');
+        return view('dashboards.pekerjaan_ortu.create');
     }
 
     /**
@@ -56,7 +56,7 @@ class PekerjaanOrtuController extends Controller
      */
     public function edit(PekerjaanOrtu $pekerjaanOrtu)
     {
-        return view('dashboard.pekerjaan_ortu.edit', compact('pekerjaanOrtu'));
+        return view('dashboards.pekerjaan_ortu.edit', compact('pekerjaanOrtu'));
     }
 
     /**

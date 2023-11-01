@@ -14,7 +14,7 @@ class PenghasilanOrtuController extends Controller
     public function index()
     {
         $items = PenghasilanOrtu::all();
-        return view('dashboard.penghasilan_ortu.index', compact('items'));
+        return view('dashboards.penghasilan_ortu.index', compact('items'));
     }
 
     /**
@@ -22,7 +22,7 @@ class PenghasilanOrtuController extends Controller
      */
     public function create()
     {
-        return view('dashboard.penghasilan_ortu.create');
+        return view('dashboards.penghasilan_ortu.create');
     }
 
     /**
@@ -56,7 +56,7 @@ class PenghasilanOrtuController extends Controller
     public function edit(PenghasilanOrtu $penghasilanOrtu)
     {
         $data = PenghasilanOrtu::find($id);
-        return view('dashboard.penghasilan_ortu.edit', compact('penghasilanOrtu'));
+        return view('dashboards.penghasilan_ortu.edit', compact('penghasilanOrtu'));
     }
 
     /**

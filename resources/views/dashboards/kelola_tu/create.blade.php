@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.index')
+@extends('dashboards.layouts.index')
 @section('content')
     <div class="container-fluid">
 

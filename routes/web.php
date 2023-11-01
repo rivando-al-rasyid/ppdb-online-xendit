@@ -4,6 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DaftarController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PekerjaanOrtuController;
+use App\Http\Controllers\PenghasilanOrtuController;
+use App\Http\Controllers\KelolaTuController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +39,17 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.invoice');
+    Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.create');
+    Route::get('/invoice', [PembayaranController::class, 'hasil'])->name('pembayaran.hasil');
 });
+Route::get('/test', [DashboardController::class, 'index'])->name('home');
+Route::get('/test/detail/{id}', [DashboardController::class, 'detail'])->name('peserta.detail');
+Route::patch('/test/diterima/{id}', [DashboardController::class, 'terima'])->name('peserta.diterima');
+Route::patch('/test/ditolak/{id}', [DashboardController::class, 'tolak'])->name('peserta.ditolak');
+Route::get('/download', [DashboardController::class, 'download'])->name('download');
+
+Route::resource('dash/pekerjaan_ortu', PekerjaanOrtuController::class);
+Route::resource('dash/penghasilan_ortu', PenghasilanOrtuController::class);
+Route::resource('dash/kelola_tu', KelolaTuController::class);
 
 require __DIR__ . '/auth.php';

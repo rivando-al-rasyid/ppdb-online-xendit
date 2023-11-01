@@ -12,14 +12,28 @@ class PembayaranController extends Controller
 {
     public function index(Request $request)
     {
+        $user = $request->user();
         $user_id = auth()->user()->id; // Get the currently authenticated user's ID
         $pembayaran = Pembayaran::where('user_id', $user_id)->first();
 
-        if ($pembayaran && $pembayaran->checkout_link) {
-            $token = $pembayaran->token;
-            return view('pembayaran.hasil', compact('token'));
+        if ($pembayaran) {
+            return redirect()->route('pembayaran.hasil');
         } else {
             return view('pembayaran.create', compact('user'));
+        }
+    }
+
+    public function hasil(Request $request)
+    {
+        $user = $request->user();
+        $user_id = auth()->user()->id; // Get the currently authenticated user's ID
+        $pembayaran = Pembayaran::where('user_id', $user_id)->first();
+
+        if ($pembayaran) {
+            $token = $pembayaran->token;
+            return view('pembayaran.hasil', compact('token', "user"));
+        } else {
+            return redirect()->route('pembayaran.create');
         }
     }
 

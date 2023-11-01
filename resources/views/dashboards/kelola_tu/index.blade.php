@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.index')
+@extends('dashboards.layouts.index')
 @push('style')
     <link href="{{ url('sbadmin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 @endpush
