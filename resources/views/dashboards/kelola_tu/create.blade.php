@@ -1,4 +1,4 @@
-@extends('dashboards.layouts.index')
+@extends('dashboards.layouts.app')
 @section('content')
     <div class="container-fluid">
 
@@ -14,8 +14,8 @@
                 <h6 class="m-0 font-weight-bold text-primary">Form Data TU</h6>
             </div>
             <div class="card-body">
-                <a href="{{ route('tu.index') }}" class="btn btn-warning mb-2">Back</a>
-                <form action="{{ route('tu.store') }}" method="POST">
+                <a href="{{ route('kelola_tu.index') }}" class="btn btn-warning mb-2">Back</a>
+                <form action="{{ route('kelola_tu.store') }}" method="POST">
                     @csrf
                     <div class="form-group">
                         <label>Nama TU</label>

@@ -7,7 +7,7 @@ use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PekerjaanOrtuController;
 use App\Http\Controllers\PenghasilanOrtuController;
-use App\Http\Controllers\KelolaTuController;
+use App\Http\Controllers\KelolaTUController;
 
 
 /*
@@ -48,8 +48,8 @@ Route::patch('/test/diterima/{id}', [DashboardController::class, 'terima'])->nam
 Route::patch('/test/ditolak/{id}', [DashboardController::class, 'tolak'])->name('peserta.ditolak');
 Route::get('/download', [DashboardController::class, 'download'])->name('download');
 
-Route::resource('dash/pekerjaan_ortu', PekerjaanOrtuController::class);
-Route::resource('dash/penghasilan_ortu', PenghasilanOrtuController::class);
-Route::resource('dash/kelola_tu', KelolaTuController::class);
+Route::resource('test/pekerjaan_ortu', PekerjaanOrtuController::class);
+Route::resource('test/penghasilan_ortu', PenghasilanOrtuController::class);
+Route::resource('test/kelola_tu', KelolaTUController::class);
 
 require __DIR__ . '/auth.php';
