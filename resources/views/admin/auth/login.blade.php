@@ -2,84 +2,75 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Responsive Admin & Dashboard Template based on Bootstrap 5">
+    <meta name="author" content="AdminKit">
+    <meta name="keywords"
+        content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
 
-    <title>SB Admin 2 - Login</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="shortcut icon" href="img/icons/icon-48x48.png" />
 
-    <!-- Custom fonts for this template-->
-    @include('dashboards.layouts.partials.style')
-    @stack('style')
+
+    <title>Sign In Admin</title>
+
+    <link href="{{ asset('adminkit/css/app.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 
-<body class="bg-gradient-primary">
+<body>
+    <main class="d-flex w-100">
+        <div class="container d-flex flex-column">
+            <div class="row vh-100">
+                <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5 mx-auto d-table h-100">
+                    <div class="d-table-cell align-middle">
 
-    <div class="container">
+                        <div class="text-center mt-4">
+                            <h1 class="h2">Welcome back!</h1>
+                            <p class="lead">
+                                Sign in to your account to continue
+                            </p>
+                        </div>
 
-        <!-- Outer Row -->
-        <div class="row justify-content-center">
-
-            <div class="col-xl-6 col-lg-6 col-md-9">
-
-                <div class="card o-hidden border-0 shadow-lg my-5">
-                    <div class="card-body p-0">
-                        <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="p-5">
-                                    <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
-                                    </div>
-                                    <form class="user" method="POST" action="{{ route('admin.login') }}">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="m-sm-3">
+                                    <form method="POST" action="{{ route('admin.login') }}">
                                         @csrf
-                                        <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address..." name="email"
-                                                value="{{ old('email') }}" required autofocus autocomplete="username">
-                                            @error('email')
-                                                <div class="text-danger mt-2">{{ $message }}</div>
-                                            @enderror
+                                        <div class="mb-3">
+                                            <label class="form-label">Email</label>
+                                            <input class="form-control form-control-lg" type="email" name="email"
+                                                placeholder="Enter your email" />
                                         </div>
-                                        <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password" name="password"
-                                                required autocomplete="current-password">
-                                            @error('password')
-                                                <div class="text-danger mt-2">{{ $message }}</div>
-                                            @enderror
+                                        <div class="mb-3">
+                                            <label class="form-label">Password</label>
+                                            <input class="form-control form-control-lg" type="password" name="password"
+                                                placeholder="Enter your password" />
                                         </div>
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">
-                                            Login
-                                        </button>
+                                        <div>
+                                            <div class="form-check align-items-center">
+                                                <input id="customControlInline" type="checkbox" class="form-check-input"
+                                                    value="remember-me" name="remember-me" checked>
+                                                <label class="form-check-label text-small"
+                                                    for="customControlInline">Remember me</label>
+                                            </div>
+                                        </div>
+                                        <div class="d-grid gap-2 mt-3">
+                                            <button type="submit" class="btn btn-lg btn-primary">Sign in</button>
+                                        </div>
                                     </form>
-                                    <hr>
-                                    <div class="text-center">
-                                        @if (Route::has('admin.password.request'))
-                                            <a class="small" href="{{ route('admin.password.request') }}">Forgot
-                                                Password?</a>
-                                        @endif
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
+    </main>
 
-    </div>
-
-    <!-- Bootstrap core JavaScript-->
-    @include('dashboards.layouts.partials.script')
-    @stack('script')
-
+    <script src="{{ asset('adminkit/js/app.js') }}"></script>
 </body>
 
 </html>

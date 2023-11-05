@@ -4,8 +4,9 @@
 <head>
     <!-- Meta tags, title, and stylesheets go here -->
     <!-- For example: -->
+    <title>@yield('title', 'AdminKit Demo')</title>
     <link href="{{ asset('adminkit/css/app.css') }}" rel="stylesheet">
-    @stack('style') <!-- Include additional stylesheets from child views -->
+
     <!-- Additional stylesheets and meta tags can be added here -->
 </head>
 
@@ -13,10 +14,10 @@
     <div class="wrapper">
         <!-- Sidebar, Navbar, and Main Content go here -->
         <!-- For example: -->
-        @include('admin.layouts.partials.sidebar')
+        @include('dashboards.layouts.admin.sidebar')
 
         <div class="main">
-            @include('admin.layouts.partials.topbar')
+            @include('dashboards.layouts.admin.topbar')
 
             <main class="content">
                 <div class="container-fluid p-0">
@@ -25,13 +26,12 @@
                 </div>
             </main>
 
-            @include('admin.layouts.partials.footer')
+            @include('dashboards.layouts.footer')
         </div>
     </div>
 
     <script src="{{ asset('adminkit/js/app.js') }}"></script>
     <!-- Additional scripts can be included here -->
-    @stack('script') <!-- Include additional scripts from child views -->
 </body>
 
 </html>

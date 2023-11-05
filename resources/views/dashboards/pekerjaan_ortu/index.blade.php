@@ -1,4 +1,4 @@
-@extends('dashboards.layouts.app')
+@extends('admin.layouts.app')
 @push('style')
     <link href="{{ url('sbadmin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 @endpush
@@ -13,9 +13,6 @@
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Table Pekerjaan Orangtua</h6>
-            </div>
             <div class="card-body">
                 <a href="{{ route('pekerjaan_ortu.create') }}" class="btn btn-primary mb-2">Tambah Data</a>
                 <div class="table-responsive">

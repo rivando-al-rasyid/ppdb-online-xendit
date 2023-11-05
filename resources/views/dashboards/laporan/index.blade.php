@@ -1,7 +1,9 @@
-@extends('dashboards.layouts.app')
+@extends('admin.layouts.app')
+
 @push('style')
-    <link href="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('adminkit/datatables/dataTables.min.css') }}" rel="stylesheet">
 @endpush
+
 @section('content')
     <div class="container-fluid">
 
@@ -10,13 +12,12 @@
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
             <a href="{{ route('download') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                     class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-
         </div>
 
         <!-- Content Row -->
         <div class="row">
 
-            <!-- Earnings (Monthly) Card Example -->
+            <!-- Total Admin Card -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
@@ -34,7 +35,7 @@
                 </div>
             </div>
 
-            <!-- Earnings (Monthly) Card Example -->
+            <!-- Total Menunggu Card -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-success shadow h-100 py-2">
                     <div class="card-body">
@@ -52,7 +53,7 @@
                 </div>
             </div>
 
-            <!-- Earnings (Monthly) Card Example -->
+            <!-- Total Ditolak Card -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-info shadow h-100 py-2">
                     <div class="card-body">
@@ -70,7 +71,7 @@
                 </div>
             </div>
 
-            <!-- Pending Requests Card Example -->
+            <!-- Total Diterima Card -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-warning shadow h-100 py-2">
                     <div class="card-body">
@@ -129,11 +130,9 @@
                                             <td>
                                                 @if ($item->status == 'MENUNGGU')
                                                     <div class="font-weight-bold text-warning">MENUNGGU</div>
-                                                @endif
-                                                @if ($item->status == 'DITOLAK')
+                                                @elseif ($item->status == 'DITOLAK')
                                                     <div class="font-weight-bold text-danger">DITOLAK</div>
-                                                @endif
-                                                @if ($item->status == 'DITERIMA')
+                                                @else
                                                     <div class="font-weight-bold text-success">DITERIMA</div>
                                                 @endif
                                             </td>
@@ -142,7 +141,6 @@
                                                     Detail
                                                 </a>
                                             </td>
-
                                         </tr>
                                         <?php $i++; ?>
                                     @endforeach
@@ -155,9 +153,9 @@
         </div>
     </div>
 @endsection
+
 @push('script')
     <!-- Page level plugins -->
-    <script src="{{ asset('sbadmin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('sbadmin/js/demo/datatables-demo.js') }}"></script>
+    <script src="{{ asset('adminkit/datatables/jquery.min.js') }}"></script>
+    <script src="{{ asset('adminkit/datatables/dataTables.js') }}"></script>
 @endpush

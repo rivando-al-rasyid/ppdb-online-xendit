@@ -1,12 +1,12 @@
-@extends('dashboards.layouts.app')
+@extends('admin.layouts.app')
 
 @section('content')
     <div class="container-fluid">
         <a href="{{ route('home') }}" class="btn btn-danger mb-5">Back</a>
         <div class="card">
             <div class="card-body">
-                <h4>Data Lengkap Peserta</h4>
-                <div class="row">
+                <h4 class="mb-4">Data Lengkap Peserta</h4>
+                <div class="table-responsive">
                     <table class="table table-bordered">
                         <tr>
                             <td>Nama</td>
@@ -76,7 +76,7 @@
                                         action="{{ route('peserta.diterima', $item->id) }}">
                                         @method('PATCH')
                                         @csrf
-                                        <button type="submit" class="btn btn-success mr-2">
+                                        <button type="submit" class="btn btn-success me-2">
                                             TERIMA
                                         </button>
                                     </form>
@@ -84,15 +84,15 @@
                                         action="{{ route('peserta.ditolak', $item->id) }}">
                                         @method('PATCH')
                                         @csrf
-                                        <button type="submit" class="btn btn-danger mr-2">
+                                        <button type="submit" class="btn btn-danger">
                                             TOLAK
                                         </button>
                                     </form>
                                 @else
-                                    <button class="btn btn-success mr-2" disabled>
+                                    <button class="btn btn-success me-2" disabled>
                                         TERIMA
                                     </button>
-                                    <button class="btn btn-danger mr-2" disabled>
+                                    <button class="btn btn-danger" disabled>
                                         TOLAK
                                     </button>
                                 @endif

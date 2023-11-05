@@ -1,4 +1,4 @@
-@extends('dashboards.layouts.app')
+@extends('admin.layouts.app')
 @section('content')
     <div class="container-fluid">
 
@@ -10,9 +10,6 @@
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Form Data Penghasilan Ortu</h6>
-            </div>
             <div class="card-body">
                 <a href="{{ route('penghasilan_ortu.index') }}" class="btn btn-warning mb-2">Back</a>
                 <form action="{{ route('penghasilan_ortu.update', $data->id) }}" method="POST">

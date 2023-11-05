@@ -1,6 +1,6 @@
-@extends('dashboards.layouts.app')
+@extends('admin.layouts.app')
 @push('style')
-    <link href="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('adminkit/datatables/dataTables.min.css') }}" rel="stylesheet">
 @endpush
 @section('content')
     <div class="container-fluid">
@@ -13,9 +13,6 @@
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Table Penghasilan Ortu</h6>
-            </div>
             <div class="card-body">
                 <a href="{{ route('penghasilan_ortu.create') }}" class="btn btn-primary mb-2">Tambah Data</a>
                 <div class="table-responsive">
@@ -68,7 +65,6 @@
 @endsection
 @push('script')
     <!-- Page level plugins -->
-    <script src="{{ asset('sbadmin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('sbadmin/js/demo/datatables-demo.js') }}"></script>
+    <script src="{{ asset('adminkit/datatables/jquery.min.js') }}"></script>
+    <script src="{{ asset('adminkit/datatables/dataTables.js') }}"></script>
 @endpush

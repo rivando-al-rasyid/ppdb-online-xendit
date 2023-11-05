@@ -1,6 +1,6 @@
 @extends('home.index')
 @push('add-styles')
-    <link href="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('adminkit/datatables/dataTables.min.css') }}" rel="stylesheet">
 @endpush
 @section('content')
     <header id="header" class="fixed-top d-flex align-items-center">
@@ -84,7 +84,6 @@
 @endsection
 @push('add-scripts')
     <!-- Page level plugins -->
-    <script src="{{ asset('sbadmin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('sbadmin/js/demo/datatables-demo.js') }}"></script>
+    <script src="{{ asset('adminkit/datatables/jquery.min.js') }}"></script>
+    <script src="{{ asset('adminkit/datatables/dataTables.js') }}"></script>
 @endpush
