@@ -112,7 +112,7 @@ class DashboardController extends Controller
     public function download()
     {
         $data = PesertaPPDB::all();
-        $pdf = PDF::loadView('laporan', compact('data')); // 'reports.report' is the blade file for your report
+        $pdf = PDF::loadView('dashboards.laporan.laporan', compact('data')); // 'reports.report' is the blade file for your report
         return $pdf->download('laporan.pdf');
     }
 }
