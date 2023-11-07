@@ -1,44 +1,41 @@
 <div class="mb-4">
     <h2 class="text-lg font-medium text-gray-900" id="profile-info-label">
-        {{ __('Profile Information') }}
+        {{ __('Update Password ') }}
     </h2>
     <p class="mt-1 text-sm text-gray-600">
-        {{ __("Update your account's profile information and email address.") }}
+        {{ __('Ensure your account is using a long, random password to stay secure.') }}
     </p>
 </div>
-
-<form id="send-verification" method="post" action="{{ route('admin.verification.send') }}" class="mb-4">
+<form method="post" action="{{ route('tu.password.update') }}" class="mt-3">
     @csrf
-</form>
-
-<form method="post" action="{{ route('admin.profile.update') }}" class="mt-4">
-    @csrf
-    @method('patch')
+    @method('put')
 
     <div class="mb-3">
-        <label for="name" class="form-label">{{ __('Name') }}</label>
-        <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $user->name) }}"
-            required autofocus autocomplete="name" aria-labelledby="profile-info-label name">
-        <x-input-error class="mt-2" :messages="$errors->get('name')" />
+        <label for="current_password" class="form-label">Current Password</label>
+        <input type="password" class="form-control" id="current_password" name="current_password"
+            autocomplete="current-password">
+        <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
     </div>
 
     <div class="mb-3">
-        <label for="email" class="form-label">{{ __('Email') }}</label>
-        <input type="email" class="form-control" id="email" name="email"
-            value="{{ old('email', $user->email) }}" required autocomplete="email"
-            aria-labelledby="profile-info-label email">
-        <x-input-error class="mt-2" :messages="$errors->get('email')" />
+        <label for="password" class="form-label">New Password</label>
+        <input type="password" class="form-control" id="password" name="password" autocomplete="new-password">
+        <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
     </div>
 
-    <div class="row">
-        <div class="col-md-4">
-            <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
-        </div>
+    <div class="mb-3">
+        <label for="password_confirmation" class="form-label">Confirm Password</label>
+        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation"
+            autocomplete="new-password">
+        <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
+    </div>
 
-        <div class="col-md-8">
-            @if (session('status') === 'profile-updated')
-                <p class="text-sm text-gray-600">{{ __('Saved.') }}</p>
-            @endif
-        </div>
+    <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary">Save</button>
+
+        @if (session('status') === 'password-updated')
+            <p class="text-sm text-gray-600">Saved.</p>
+        @endif
     </div>
 </form>
+1

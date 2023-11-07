@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use RealRashid\SweetAlert\Facades\Alert;
-use App\Models\User;
+use App\Modules\Tus\Models\Tu;
+use Illuminate\Support\Str; // Import the Str class
+
 
 use Illuminate\Http\Request;
 
@@ -14,7 +16,7 @@ class KelolaTUController extends Controller
      */
     public function index()
     {
-        $items = User::all();
+        $items = Tu::all();
         return view('dashboards.kelola_tu.index', compact('items'));
     }
 
@@ -37,18 +39,21 @@ class KelolaTUController extends Controller
             'password' => 'required|min:6|confirmed',
         ]);
 
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        $user->save();
+        $tu = new Tu();
+        $tu->name = $request->name;
+        $tu->email = $request->email;
+        $tu->email_verified_at = now();
+        $tu->password = bcrypt($request->password);
+        $tu->remember_token = Str::random(10);
 
-        Alert::success('Success', 'User Created Successfully');
+        $tu->save();
+
+        Alert::success('Success', 'Akun Tu Created Successfully');
         return redirect()->route('admin.kelola_tu.index');
     }
     public function edit($id)
     {
-        $data = User::find($id);
+        $data = Tu::find($id);
         return view('dashboards.kelola_tu.edit', compact('data'));
     }
 
@@ -60,14 +65,14 @@ class KelolaTUController extends Controller
             'password' => 'nullable|min:6|confirmed',
         ]);
 
-        $user = User::find($id);
-        if ($user) {
-            $user->name = $request->name;
-            $user->email = $request->email;
+        $tu = Tu::find($id);
+        if ($tu) {
+            $tu->name = $request->name;
+            $tu->email = $request->email;
             if ($request->password) {
-                $user->password = bcrypt($request->password);
+                $tu->password = bcrypt($request->password);
             }
-            $user->save();
+            $tu->save();
 
             Alert::success('Success', 'Data Updated Successfully');
             return redirect()->route('admin.kelola_tu.index');
@@ -78,14 +83,14 @@ class KelolaTUController extends Controller
     }
     public function destroy($id)
     {
-        $user = User::find($id);
-        if ($user) {
-            $user->delete();
-            Alert::success('Success', 'User Deleted Successfully');
+        $tu = Tu::find($id);
+        if ($tu) {
+            $tu->delete();
+            Alert::success('Success', 'Tu Deleted Successfully');
             return redirect()->route('admin.kelola_tu.index');
         }
 
-        Alert::error('Error', 'Failed to delete user');
+        Alert::error('Error', 'Failed to delete tu');
         return back();
     }
 }

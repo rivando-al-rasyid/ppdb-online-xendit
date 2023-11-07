@@ -34,7 +34,7 @@ class DashboardController extends Controller
         $items = Hasil::with(['peserta.orang_tua'])->get();
 
         // Count
-        $count_user = Tu::all()->count();
+        $count_admin = Tu::all()->count();
         $count_all_peserta = Hasil::all()->count();
         $count_menunggu_peserta = Hasil::where('status', 'MENUNGGU')->count();
         $count_ditolak_peserta = Hasil::where('status', 'DITOLAK')->count();
@@ -43,7 +43,7 @@ class DashboardController extends Controller
 
         return view('dashboards.laporan.index', compact(
             'items',
-            'count_user',
+            'count_admin',
             'count_all_peserta',
             'count_menunggu_peserta',
             'count_ditolak_peserta',
