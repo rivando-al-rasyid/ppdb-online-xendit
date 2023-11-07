@@ -7,8 +7,8 @@
 
         <div class="card mb-4">
             <div class="card-body">
-                <a href="{{ route('kelola_tu.index') }}" class="btn btn-warning mb-3">Back</a>
-                <form action="{{ route('kelola_tu.store') }}" method="POST">
+                <a href="{{ route('admin.kelola_tu.index') }}" class="btn btn-warning mb-3">Back</a>
+                <form action="{{ route('admin.kelola_tu.store') }}" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Nama TU</label>

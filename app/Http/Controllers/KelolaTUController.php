@@ -44,7 +44,7 @@ class KelolaTUController extends Controller
         $user->save();
 
         Alert::success('Success', 'User Created Successfully');
-        return redirect()->route('kelola_tu.index');
+        return redirect()->route('admin.kelola_tu.index');
     }
     public function edit($id)
     {
@@ -70,7 +70,7 @@ class KelolaTUController extends Controller
             $user->save();
 
             Alert::success('Success', 'Data Updated Successfully');
-            return redirect()->route('kelola_tu.index');
+            return redirect()->route('admin.kelola_tu.index');
         }
 
         Alert::error('Error', 'Failed to update data');
@@ -82,7 +82,7 @@ class KelolaTUController extends Controller
         if ($user) {
             $user->delete();
             Alert::success('Success', 'User Deleted Successfully');
-            return redirect()->route('kelola_tu.index');
+            return redirect()->route('admin.kelola_tu.index');
         }
 
         Alert::error('Error', 'Failed to delete user');

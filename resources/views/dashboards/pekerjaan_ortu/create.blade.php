@@ -11,8 +11,8 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-body">
-                <a href="{{ route('pekerjaan_ortu.index') }}" class="btn btn-warning mb-2">Back</a>
-                <form action="{{ route('pekerjaan_ortu.store') }}" method="POST">
+                <a href="{{ route('admin.pekerjaan_ortu.index') }}" class="btn btn-warning mb-2">Back</a>
+                <form action="{{ route('admin.pekerjaan_ortu.store') }}" method="POST">
                     @csrf
                     <div class="form-group">
                         <label>Nama Pekerjaan Orangtua</label>

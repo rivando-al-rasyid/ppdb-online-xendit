@@ -14,7 +14,7 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-body">
-                <a href="{{ route('pekerjaan_ortu.create') }}" class="btn btn-primary mb-2">Tambah Data</a>
+                <a href="{{ route('admin.pekerjaan_ortu.create') }}" class="btn btn-primary mb-2">Tambah Data</a>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
@@ -38,12 +38,12 @@
                                     <td>{{ $i }}</td>
                                     <td>{{ $item->nama_pekerjaan }}</td>
                                     <td>
-                                        <a href="{{ route('pekerjaan_ortu.edit', $item->id) }}"
+                                        <a href="{{ route('admin.pekerjaan_ortu.edit', $item->id) }}"
                                             class="btn btn-success mr-2">
                                             Edit
                                         </a>
                                         <form method="post" class="d-inline-block"
-                                            action="{{ route('pekerjaan_ortu.destroy', $item->id) }}">
+                                            action="{{ route('admin.pekerjaan_ortu.destroy', $item->id) }}">
                                             @method('DELETE')
                                             @csrf
                                             <button type="submit" class="btn btn-danger mr-2">

@@ -11,7 +11,7 @@
 
         <div class="card mb-4">
             <div class="card-body">
-                <a href="{{ route('kelola_tu.create') }}" class="btn btn-primary mb-2">Tambah Data</a>
+                <a href="{{ route('admin.kelola_tu.create') }}" class="btn btn-primary mb-2">Tambah Data</a>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%">
                         <thead>
@@ -30,11 +30,11 @@
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->email }}</td>
                                     <td>
-                                        <a href="{{ route('kelola_tu.edit', $item->id) }}"
+                                        <a href="{{ route('admin.kelola_tu.edit', $item->id) }}"
                                             class="btn btn-success me-2">Edit</a>
                                         @if (count($items) > 1)
                                             <form method="post" class="d-inline-block"
-                                                action="{{ route('kelola_tu.destroy', $item->id) }}">
+                                                action="{{ route('admin.kelola_tu.destroy', $item->id) }}">
                                                 @method('DELETE')
                                                 @csrf
                                                 <button type="submit" class="btn btn-danger">Delete</button>

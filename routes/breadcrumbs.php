@@ -56,24 +56,24 @@ Breadcrumbs::for('sekolah.profile', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.dashboard');
     $trail->push('Profile Admin', route('sekolah.profile'));
 });
-Breadcrumbs::for('pekerjaan_ortu.index', function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('admin.pekerjaan_ortu.index', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.dashboard');
-    $trail->push('Profile Admin', route('pekerjaan_ortu.index'));
+    $trail->push('Profile Admin', route('admin.pekerjaan_ortu.index'));
 });
 
-Breadcrumbs::for('pekerjaan_ortu.create', function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('admin.pekerjaan_ortu.create', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.dashboard');
-    $trail->push('Profile Admin', route('pekerjaan_ortu.create'));
+    $trail->push('Profile Admin', route('admin.pekerjaan_ortu.create'));
 });
 
-Breadcrumbs::for('penghasilan_ortu.index', function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('admin.penghasilan_ortu.index', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.dashboard');
-    $trail->push('Profile Admin', route('penghasilan_ortu.index'));
+    $trail->push('Profile Admin', route('admin.penghasilan_ortu.index'));
 });
 
-Breadcrumbs::for('penghasilan_ortu.create', function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('admin.penghasilan_ortu.create', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.dashboard');
-    $trail->push('Profile Admin', route('penghasilan_ortu.create'));
+    $trail->push('Profile Admin', route('admin.penghasilan_ortu.create'));
 });
 
 Breadcrumbs::for('peserta.detail', function (BreadcrumbTrail $trail, $id) {

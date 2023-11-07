@@ -11,8 +11,8 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-body">
-                <a href="{{ route('penghasilan_ortu.index') }}" class="btn btn-warning mb-2">Back</a>
-                <form action="{{ route('penghasilan_ortu.update', $data->id) }}" method="POST">
+                <a href="{{ route('admin.penghasilan_ortu.index') }}" class="btn btn-warning mb-2">Back</a>
+                <form action="{{ route('admin.penghasilan_ortu.update', $data->id) }}" method="POST">
                     @method('PATCH')
                     @csrf
                     <div class="form-group">

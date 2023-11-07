@@ -40,7 +40,7 @@ class PekerjaanOrtuController extends Controller
         $pekerjaanOrtu->save();
 
         Alert::success('Success', 'Data Saved Successfully');
-        return redirect()->route('pekerjaan_ortu.index');
+        return redirect()->route('admin.pekerjaan_ortu.index');
     }
 
     /**
@@ -75,7 +75,7 @@ class PekerjaanOrtuController extends Controller
         if ($Query) {
             $Query->update();
             Alert::success('Sukses', 'Edit Data Sukses');
-            return redirect()->route('pekerjaan_ortu.index');
+            return redirect()->route('admin.pekerjaan_ortu.index');
         }
 
         Alert::error('Error', 'Failed to update data');
@@ -89,6 +89,6 @@ class PekerjaanOrtuController extends Controller
         $pekerjaanOrtu->delete();
 
         Alert::success('Success', 'Data Deleted Successfully');
-        return redirect()->route('pekerjaan_ortu.index');
+        return redirect()->route('admin.pekerjaan_ortu.index');
     }
 }

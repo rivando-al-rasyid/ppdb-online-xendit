@@ -2,6 +2,10 @@
 
 use App\Modules\Admins\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PekerjaanOrtuController;
+use App\Http\Controllers\PenghasilanOrtuController;
+use App\Http\Controllers\KelolaTUController;
 
 Route::middleware(['web', 'admin.auth', 'admin.verified'])->get('/admin', function () {
     return view('admin.dashboard');

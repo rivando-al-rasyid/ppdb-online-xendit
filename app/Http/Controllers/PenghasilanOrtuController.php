@@ -39,7 +39,7 @@ class PenghasilanOrtuController extends Controller
         $penghasilanOrtu->save();
 
         Alert::success('Success', 'Data Saved Successfully');
-        return redirect()->route('penghasilan_ortu.index');
+        return redirect()->route('admin.penghasilan_ortu.index');
     }
 
     /**
@@ -72,7 +72,7 @@ class PenghasilanOrtuController extends Controller
         $penghasilanOrtu->save();
 
         Alert::success('Success', 'Data Updated Successfully');
-        return redirect()->route('penghasilan_ortu.index');
+        return redirect()->route('admin.penghasilan_ortu.index');
     }
 
     /**
@@ -83,6 +83,6 @@ class PenghasilanOrtuController extends Controller
         $penghasilanOrtu->delete();
 
         Alert::success('Success', 'Data Deleted Successfully');
-        return redirect()->route('penghasilan_ortu.index');
+        return redirect()->route('admin.penghasilan_ortu.index');
     }
 }
