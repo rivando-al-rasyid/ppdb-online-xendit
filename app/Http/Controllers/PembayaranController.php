@@ -82,7 +82,6 @@ class PembayaranController extends Controller
         $payment->user_id = $request->user_id;
         $payment->checkout_link = $response->redirect_url;
         $payment->token = $response->token;
-
         $payment->save();
         return response()->json($response);
     }

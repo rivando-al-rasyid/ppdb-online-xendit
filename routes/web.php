@@ -4,10 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DaftarController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PembayaranController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\PekerjaanOrtuController;
-use App\Http\Controllers\PenghasilanOrtuController;
-use App\Http\Controllers\KelolaTUController;
 
 
 /*
@@ -30,16 +26,16 @@ Route::get('/daftar', [DaftarController::class, 'index'])->name('daftar');
 Route::get('/hasil', [DaftarController::class, 'hasil'])->name('hasil');
 Route::post('/daftar', [DaftarController::class, 'daftar'])->name('daftar.kirim');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('pembayaran.create');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.create');
+    Route::get('/dashboard', [PembayaranController::class, 'index'])->name('dashboard');
     Route::get('/invoice', [PembayaranController::class, 'hasil'])->name('pembayaran.hasil');
 });
 

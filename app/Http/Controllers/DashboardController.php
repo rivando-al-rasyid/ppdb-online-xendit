@@ -50,6 +50,29 @@ class DashboardController extends Controller
             'count_diterima_peserta'
         ));
     }
+    public function indextu()
+    {
+
+        $items = Hasil::with(['peserta.orang_tua'])->get();
+
+        // Count
+        $count_admin = Tu::all()->count();
+        $count_all_peserta = Hasil::all()->count();
+        $count_menunggu_peserta = Hasil::where('status', 'MENUNGGU')->count();
+        $count_ditolak_peserta = Hasil::where('status', 'DITOLAK')->count();
+        $count_diterima_peserta = Hasil::where('status', 'DITERIMA')->count();
+
+
+        return view('dashboards.laporan.dashboardtu', compact(
+            'items',
+            'count_admin',
+            'count_all_peserta',
+            'count_menunggu_peserta',
+            'count_ditolak_peserta',
+            'count_diterima_peserta'
+        ));
+    }
+
 
     public function detail($id)
     {

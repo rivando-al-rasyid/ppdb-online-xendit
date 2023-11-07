@@ -13,8 +13,8 @@ Route::group(['as' => 'tu.', 'prefix' => '/tu', 'middleware' => ['web', 'tu.auth
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/dashboard/download', [DashboardController::class, 'download'])->name('download');
+    Route::get('/', [DashboardController::class, 'indextu'])->name('dashboard');
+    Route::get('/download', [DashboardController::class, 'download'])->name('download');
 });
 
 require __DIR__ . '/auth.php';

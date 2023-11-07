@@ -1,8 +1,8 @@
 <nav id="sidebar" class="sidebar js-sidebar">
     <div class="sidebar-content js-simplebar">
-        <a class="sidebar-brand" href="index.html">
+        <as class="sidebar-brand" href="index.html">
             <span class="align-middle">Super Admin</span>
-        </a>
+        </as>
 
         <ul class="sidebar-nav">
             <li class="sidebar-item {{ request()->routeIs('admin.dashboard') ? ' active' : '' }}">
