@@ -7,6 +7,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 // Load Models
 use App\Models\User;
+use App\Modules\Tus\Models\Tu;
 use App\Models\Hasil;
 use App\Models\PesertaPPDB;
 use PDF;
@@ -33,7 +34,7 @@ class DashboardController extends Controller
         $items = Hasil::with(['peserta.orang_tua'])->get();
 
         // Count
-        $count_user = User::all()->count();
+        $count_user = Tu::all()->count();
         $count_all_peserta = Hasil::all()->count();
         $count_menunggu_peserta = Hasil::where('status', 'MENUNGGU')->count();
         $count_ditolak_peserta = Hasil::where('status', 'DITOLAK')->count();
