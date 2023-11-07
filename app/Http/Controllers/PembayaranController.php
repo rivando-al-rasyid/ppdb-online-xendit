@@ -83,7 +83,7 @@ class PembayaranController extends Controller
         $payment->checkout_link = $response->redirect_url;
         $payment->token = $response->token;
         $payment->save();
-        return response()->json($response);
+        return redirect()->route('pembayaran.hasil');
     }
     public function webhook(Request $request)
     {
