@@ -3,23 +3,6 @@
         <a class="sidebar-brand" href="index.html">
             <span class="align-middle">Super Admin</span>
         </a>
-        @auth('admin')
-            <!-- Content for admin users -->
-            <p>Welcome, Admin!</p>
-            <!-- Display admin-specific content here -->
-        @endauth
-
-        @auth('peserta')
-            <!-- Content for peserta users -->
-            <p>Welcome, Peserta!</p>
-            <!-- Display peserta-specific content here -->
-        @endauth
-
-        @guest
-            <!-- Content for guests (non-authenticated users) -->
-            <p>Welcome, Guest!</p>
-            <!-- Display content for non-authenticated users here -->
-        @endguest
 
         <ul class="sidebar-nav">
             <li class="sidebar-item {{ request()->routeIs('admin.dashboard') ? ' active' : '' }}">

@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('tu.layouts.app')
 
 @section('content')
     <div>
