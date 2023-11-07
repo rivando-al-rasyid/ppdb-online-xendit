@@ -1,14 +1,38 @@
 <nav id="sidebar" class="sidebar js-sidebar">
     <div class="sidebar-content js-simplebar">
         <a class="sidebar-brand" href="index.html">
-            <span class="align-middle">AdminKit</span>
+            <span class="align-middle">Super Admin</span>
         </a>
+        @auth('admin')
+            <!-- Content for admin users -->
+            <p>Welcome, Admin!</p>
+            <!-- Display admin-specific content here -->
+        @endauth
+
+        @auth('peserta')
+            <!-- Content for peserta users -->
+            <p>Welcome, Peserta!</p>
+            <!-- Display peserta-specific content here -->
+        @endauth
+
+        @guest
+            <!-- Content for guests (non-authenticated users) -->
+            <p>Welcome, Guest!</p>
+            <!-- Display content for non-authenticated users here -->
+        @endguest
 
         <ul class="sidebar-nav">
             <li class="sidebar-item {{ request()->routeIs('admin.dashboard') ? ' active' : '' }}">
                 <a class="sidebar-link" href="{{ route('admin.dashboard') }}">
-                    <i class="align-middle" data-feather="briefcase"></i>
+                    <i class="align-middle" data-feather="home"></i>
                     <span class="align-middle">Dashboard</span>
+                </a>
+            </li>
+
+            <li class="sidebar-item {{ request()->routeIs('admin.profile.edit') ? ' active' : '' }}">
+                <a class="sidebar-link" href="{{ route('admin.profile.edit') }}">
+                    <i class="align-middle" data-feather="user"></i>
+                    <span class="align-middle">Profile</span>
                 </a>
             </li>
 
@@ -31,16 +55,6 @@
                     <span class="align-middle">Data TU</span>
                 </a>
             </li>
-
-            <!-- More admin-specific menu items can be added here -->
-
-            {{-- @auth('tu')
-                <!-- More TU-specific menu items can be added here -->
-            @endauth
-
-            @guest
-                <!-- Handle guest user (not authenticated) menu items here -->
-            @endguest --}}
         </ul>
     </div>
 </nav>

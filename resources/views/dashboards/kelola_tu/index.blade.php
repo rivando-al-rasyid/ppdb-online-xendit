@@ -6,8 +6,8 @@
 
 @section('content')
     <div class="container-fluid py-4">
-        <h1 class="h3 mb-2 text-gray-800">User</h1>
-        <p class="mb-4">List data User</p>
+        <h1 class="h3 mb-2 text-gray-800">TU</h1>
+        <p class="mb-4">List data TU</p>
 
         <div class="card mb-4">
             <div class="card-body">
@@ -17,7 +17,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama User</th>
+                                <th>Nama TU</th>
                                 <th>Email</th>
                                 <th>Action</th>
                             </tr>

@@ -13,10 +13,10 @@
     <div class="wrapper">
         <!-- Sidebar, Navbar, and Main Content go here -->
         <!-- For example: -->
-        @include('admin.layouts.partials.sidebar')
+        @include('tu.layouts.partials.sidebar')
 
         <div class="main">
-            @include('admin.layouts.partials.topbar')
+            @include('tu.layouts.partials.topbar')
 
             <main class="content">
                 <div class="container-fluid p-0">
@@ -25,7 +25,7 @@
                 </div>
             </main>
 
-            @include('admin.layouts.partials.footer')
+            @include('tu.layouts.partials.footer')
         </div>
     </div>
 

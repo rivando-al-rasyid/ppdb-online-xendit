@@ -1,4 +1,5 @@
 @extends('admin.layouts.app')
+
 @section('content')
     <div class="container-fluid">
 
@@ -12,11 +13,12 @@
         <div class="card shadow mb-4">
             <div class="card-body">
                 <a href="{{ route('admin.penghasilan_ortu.index') }}" class="btn btn-warning mb-2">Back</a>
+
                 <form action="{{ route('admin.penghasilan_ortu.store') }}" method="POST">
                     @csrf
-                    <div class="form-group">
-                        <label>Penghasilan Ortu</label>
-                        <input type="number" class="form-control" name="penghasilan_ortu">
+                    <div class="mb-3">
+                        <label for="penghasilan_ortu" class="form-label">Penghasilan Ortu</label>
+                        <input type="number" class="form-control" id="penghasilan_ortu" name="penghasilan_ortu" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>

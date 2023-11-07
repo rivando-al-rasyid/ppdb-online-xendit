@@ -15,16 +15,14 @@ Route::group(['as' => 'admin.', 'prefix' => '/admin', 'middleware' => ['web', 'a
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/dashboard/download', [DashboardController::class, 'download'])->name('download');
-    Route::get('/dashboard/detail/{id}', [DashboardController::class, 'detail'])->name('peserta.detail');
-    Route::patch('/dashboard/diterima/{id}', [DashboardController::class, 'terima'])->name('peserta.diterima');
-    Route::patch('/dashboard/ditolak/{id}', [DashboardController::class, 'tolak'])->name('peserta.ditolak');
-    Route::resource('dashboard/pekerjaan_ortu', PekerjaanOrtuController::class);
-    Route::resource('dashboard/penghasilan_ortu', PenghasilanOrtuController::class);
-    Route::resource('dashboard/kelola_tu', KelolaTUController::class);
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/download', [DashboardController::class, 'download'])->name('download');
+    Route::get('/detail/{id}', [DashboardController::class, 'detail'])->name('peserta.detail');
+    Route::patch('/diterima/{id}', [DashboardController::class, 'terima'])->name('peserta.diterima');
+    Route::patch('/ditolak/{id}', [DashboardController::class, 'tolak'])->name('peserta.ditolak');
+    Route::resource('pekerjaan_ortu', PekerjaanOrtuController::class);
+    Route::resource('penghasilan_ortu', PenghasilanOrtuController::class);
+    Route::resource('kelola_tu', KelolaTUController::class);
 });
-
-
 
 require __DIR__ . '/auth.php';
