@@ -21,9 +21,9 @@ class DatabaseSeeder extends Seeder
 
 
         $this->call([
-            AdminSeeder::class,
+            // AdminSeeder::class,
             PenghasilanOrtuSeeder::class,
-            // PenghasilanOrtuSeeder::class,
+            PekerjaanOrtuSeeder::class,
             // Add more seeders if needed
         ]);
     }

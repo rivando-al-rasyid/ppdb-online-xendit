@@ -44,27 +44,27 @@ class DaftarController extends Controller
             'id_pekerjaan_ayah' => 'required|exists:tbl_pekerjaan_ortu,id',
             'id_pekerjaan_ibu' => 'required|exists:tbl_pekerjaan_ortu,id',
             'id_penghasilan_ayah' => 'required|exists:tbl_penghasilan_ortu,id',
-            // 'foto_kk' => 'required',
-            // 'ijasah' => 'required',
             'id_penghasilan_ibu' => 'required|exists:tbl_penghasilan_ortu,id',
-            'no_telp_ortu' => 'required'
+            'no_telp_ortu' => 'required',
+            'ijasah' => 'required|file|mimes:pdf|max:2048', // PDF file, 2MB maximum
+            'foto_kk' => 'required|image|mimes:jpg,jpeg,png|max:2048', // Image
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors());
         }
 
-        // $ijasah_name = '';
-        // if ($request->hasFile('ijasah')) {
-        //     $ijasah_name = time() . '_ijasah.' . $request->ijasah->extension();
-        //     $request->ijasah->move(public_path('uploads/documents'), $ijasah_name);
-        // }
+        $ijasahName = '';
+        if ($request->hasFile('ijasah')) {
+            $ijasahName = time() . '_ijasah.' . $request->file('ijasah')->getClientOriginalExtension();
+            $request->file('ijasah')->move(public_path('uploads/documents'), $ijasahName);
+        }
 
-        // $foto_kk_name = '';
-        // if ($request->hasFile('foto_kk')) {
-        //     $foto_kk_name = time() . '_foto_kk.' . $request->foto_kk->extension();
-        //     $request->foto_kk->move(public_path('uploads/documents'), $foto_kk_name);
-        // }
+        $fotoKkName = '';
+        if ($request->hasFile('foto_kk')) {
+            $fotoKkName = time() . '_foto_kk.' . $request->file('foto_kk')->getClientOriginalExtension();
+            $request->file('foto_kk')->move(public_path('uploads/documents'), $fotoKkName);
+        }
 
         $dataPeserta = [
             'nama' => $request->nama,
@@ -78,8 +78,8 @@ class DaftarController extends Controller
             'nama_ortu' => $request->nama_ayah,
             'id_pekerjaan_ortu' => $request->id_pekerjaan_ayah,
             'id_penghasilan_ortu' => $request->id_penghasilan_ayah,
-            // 'ijasah' => 'uploads/documents/' . $ijasah_name,
-            // 'foto_kk' => 'uploads/documents/' . $foto_kk_name,
+            'ijasah' => 'uploads/documents/' . $ijasahName,
+            'foto_kk' => 'uploads/documents/' . $fotoKkName,
         ];
 
         $daftar = PesertaPPDB::create($dataPeserta);

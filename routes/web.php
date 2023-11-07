@@ -42,14 +42,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.create');
     Route::get('/invoice', [PembayaranController::class, 'hasil'])->name('pembayaran.hasil');
 });
-Route::get('/test', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('/test/detail/{id}', [DashboardController::class, 'detail'])->name('peserta.detail');
-Route::patch('/test/diterima/{id}', [DashboardController::class, 'terima'])->name('peserta.diterima');
-Route::patch('/test/ditolak/{id}', [DashboardController::class, 'tolak'])->name('peserta.ditolak');
-Route::get('/download', [DashboardController::class, 'download'])->name('download');
-
-Route::resource('test/pekerjaan_ortu', PekerjaanOrtuController::class);
-Route::resource('test/penghasilan_ortu', PenghasilanOrtuController::class);
-Route::resource('test/kelola_tu', KelolaTUController::class);
 
 require __DIR__ . '/auth.php';
