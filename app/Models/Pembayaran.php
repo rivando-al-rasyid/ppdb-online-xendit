@@ -24,4 +24,13 @@ class Pembayaran extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function getCustomerFirstNameAttribute()
+    {
+        return $this->user->name;
+    }
+
+    public function getCustomerEmailAttribute()
+    {
+        return $this->user->email;
+    }
 }
