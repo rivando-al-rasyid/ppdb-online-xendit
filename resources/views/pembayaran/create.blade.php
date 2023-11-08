@@ -28,7 +28,7 @@
                         <input type="text" class="form-control" id="customer_phone" name="customer_phone"
                             value="{{ $user->phone }}" readonly>
                     </div>
-                    <button type="submit" class="btn btn-primary">Mebuat Pembayaran</button>
+                    <button type="submit" class="btn btn-primary">Membuat Pembayaran</button>
                 </form>
             </div>
         </div>
