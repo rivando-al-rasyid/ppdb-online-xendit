@@ -18,28 +18,27 @@ class CreateBiodataOrtuTable extends Migration
 
             $table->unsignedBigInteger('id_pekerjaan_ayah');
             $table->foreign('id_pekerjaan_ayah')
-            ->references('id')
-            ->on('tbl_pekerjaan_ortu')
-            ->onDelete('cascade');
+                ->references('id')
+                ->on('tbl_pekerjaan_ortu')
+                ->onDelete('cascade');
 
             $table->unsignedBigInteger('id_pekerjaan_ibu');
             $table->foreign('id_pekerjaan_ibu')
-            ->references('id')
-            ->on('tbl_pekerjaan_ortu')
-            ->onDelete('cascade');
+                ->references('id')
+                ->on('tbl_pekerjaan_ortu')
+                ->onDelete('cascade');
 
             $table->unsignedBigInteger('id_penghasilan_ayah');
             $table->foreign('id_penghasilan_ayah')
-            ->references('id')
-            ->on('tbl_penghasilan_ortu')
-            ->onDelete('cascade');
+                ->references('id')
+                ->on('tbl_penghasilan_ortu')
+                ->onDelete('cascade');
 
             $table->unsignedBigInteger('id_penghasilan_ibu');
             $table->foreign('id_penghasilan_ibu')
-            ->references('id')
-            ->on('tbl_penghasilan_ortu')
-            ->onDelete('cascade');
-
+                ->references('id')
+                ->on('tbl_penghasilan_ortu')
+                ->onDelete('cascade');
             $table->string('nama_ayah');
             $table->string('nama_ibu');
             $table->BigInteger('no_tlp');

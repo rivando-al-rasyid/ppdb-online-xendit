@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">tagihan anda!</div>
+                    <div class="card-header">Invoice anda!</div>
 
                     <div class="card-body">
                         <ul>

@@ -38,9 +38,9 @@ class CreatePesertaPpdbTable extends Migration
             $table->longText('alamat');
             $table->string('no_telp');
             $table->string('asal_sekolah');
-            $table->string('ijasah')->nullable(); // Column for storing ijasah file path
-            $table->string('foto_kk')->nullable(); // Column for storing fot
             $table->string('nama_ortu');
+            $table->string('ijasah'); // File path to store ijasah file
+            $table->string('kk'); // File path to store foto kk fi
             $table->timestamps();
         });
     }

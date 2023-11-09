@@ -52,7 +52,7 @@
                 <div class="card-body">
                     <h1>Biodata Calon Siswa</h1>
                     <hr>
-                    <form action="{{ route('daftar.kirim') }}" method="POST">
+                    <form action="{{ route('daftar.kirim') }}" enctype='multipart/form-data' method="POST">
                         @csrf
                         <div class="row">
                             <div class="col-12">
@@ -103,7 +103,7 @@
                                     <textarea name="alamat" rows="10" class="form-control"></textarea>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-12">
                                 <div class="form-group">
                                     <label>Jenis Kelamin</label>
                                     <select name="jenis_kelamin" class="form-control">
@@ -112,6 +112,19 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Upload Ijasah</label>
+                                    <input type="file" name="ijasah" class="form-control-file">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Upload KK</label>
+                                    <input type="file" name="kk" class="form-control-file">
+                                </div>
+                            </div>
+
 
                             <div class="col-12">
                                 <h1 class="mt-5">Biodata Orang Tua</h1>
@@ -152,7 +165,8 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Nama Orang Tua (Ibu)</label>
-                                    <input type="text" name="nama_ibu" class="form-control" autocomplete="off" autofocus>
+                                    <input type="text" name="nama_ibu" class="form-control" autocomplete="off"
+                                        autofocus>
                                 </div>
                             </div>
                             <div class="col-md-6">

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Storage;
 
 // Load Models
 use App\Models\PenghasilanOrtu;
@@ -46,25 +47,23 @@ class DaftarController extends Controller
             'id_penghasilan_ayah' => 'required|exists:tbl_penghasilan_ortu,id',
             'id_penghasilan_ibu' => 'required|exists:tbl_penghasilan_ortu,id',
             'no_telp_ortu' => 'required',
-            'ijasah' => 'required|file|mimes:pdf|max:2048', // PDF file, 2MB maximum
-            'foto_kk' => 'required|image|mimes:jpg,jpeg,png|max:2048', // Image
+            'ijasah' => 'required|file|mimes:jpeg,png,jpg,pdf|max:2048', // Accepts jpeg, png, jpg, pdf files
+            'kk' => 'required|file|mimes:jpeg,png,jpg,pdf|max:2048', //age
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors());
         }
 
-        $ijasahName = '';
-        if ($request->hasFile('ijasah')) {
-            $ijasahName = time() . '_ijasah.' . $request->file('ijasah')->getClientOriginalExtension();
-            $request->file('ijasah')->move(public_path('uploads/documents'), $ijasahName);
-        }
+        $name = $request->input('nama'); // Assuming you're getting the username from the request
 
-        $fotoKkName = '';
-        if ($request->hasFile('foto_kk')) {
-            $fotoKkName = time() . '_foto_kk.' . $request->file('foto_kk')->getClientOriginalExtension();
-            $request->file('foto_kk')->move(public_path('uploads/documents'), $fotoKkName);
-        }
+        // Handle 'ijasah' file upload with custom name
+        $ijasahPath = $request->file('ijasah')->storeAs('uploads', 'ijasah_' . $name . '.' . $request->file('ijasah')->getClientOriginalExtension(), 'public');
+
+        // Handle 'kk' file upload with custom name
+        $fotoKkPath = $request->file('kk')->storeAs('uploads', 'kk_' . $name . '.' . $request->file('kk')->getClientOriginalExtension(), 'public');
+
+
 
         $dataPeserta = [
             'nama' => $request->nama,
@@ -78,8 +77,8 @@ class DaftarController extends Controller
             'nama_ortu' => $request->nama_ayah,
             'id_pekerjaan_ortu' => $request->id_pekerjaan_ayah,
             'id_penghasilan_ortu' => $request->id_penghasilan_ayah,
-            'ijasah' => 'uploads/documents/' . $ijasahName,
-            'foto_kk' => 'uploads/documents/' . $fotoKkName,
+            'ijasah' => $ijasahPath,
+            'kk' => $fotoKkPath,
         ];
 
         $daftar = PesertaPPDB::create($dataPeserta);

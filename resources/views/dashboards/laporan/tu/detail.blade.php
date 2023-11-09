@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('tu.layouts.app')
 
 @push('style')
     <link href="{{ asset('adminkit/lightbox2/css/lightbox.min.css') }}" rel="stylesheet">
@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <a href="{{ route('admin.dashboard') }}" class="btn btn-danger mb-5">Back</a>
+        <a href="{{ route('tu.dashboard') }}" class="btn btn-danger mb-5">Back</a>
         <div class="card">
             <div class="card-body">
                 <h4 class="mb-4">Data Lengkap Peserta</h4>
@@ -103,7 +103,7 @@
                             <td>
                                 @if ($item->status == 'MENUNGGU')
                                     <form method="post" class="d-inline-block"
-                                        action="{{ route('admin.peserta.diterima', $item->id) }}">
+                                        action="{{ route('tu.peserta.diterima', $item->id) }}">
                                         @method('PATCH')
                                         @csrf
                                         <button type="submit" class="btn btn-success me-2">
@@ -111,7 +111,7 @@
                                         </button>
                                     </form>
                                     <form method="post" class="d-inline-block"
-                                        action="{{ route('admin.peserta.ditolak', $item->id) }}">
+                                        action="{{ route('tu.peserta.ditolak', $item->id) }}">
                                         @method('PATCH')
                                         @csrf
                                         <button type="submit" class="btn btn-danger">

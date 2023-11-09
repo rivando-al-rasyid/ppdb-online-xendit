@@ -137,7 +137,8 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('peserta.detail', $item->id) }}" class="btn btn-primary">
+                                                <a href="{{ route('tu.peserta.detail', $item->id) }}"
+                                                    class="btn btn-primary">
                                                     Detail
                                                 </a>
                                             </td>
@@ -157,5 +158,5 @@
 @push('script')
     <!-- Page level plugins -->
     <script src="{{ asset('adminkit/datatables/jquery.min.js') }}"></script>
-    <script src="{{ asset('adminkit/datatables/dataTables.js') }}"></script>
+    <script src="{{ asset('adminkit/datatables/dataTables.min.js') }}"></script>
 @endpush

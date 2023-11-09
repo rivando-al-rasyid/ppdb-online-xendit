@@ -11,6 +11,7 @@ use App\Modules\Tus\Models\Tu;
 use App\Models\Hasil;
 use App\Models\PesertaPPDB;
 use PDF;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -39,8 +40,6 @@ class DashboardController extends Controller
         $count_menunggu_peserta = Hasil::where('status', 'MENUNGGU')->count();
         $count_ditolak_peserta = Hasil::where('status', 'DITOLAK')->count();
         $count_diterima_peserta = Hasil::where('status', 'DITERIMA')->count();
-
-
         return view('dashboards.laporan.index', compact(
             'items',
             'count_admin',
@@ -61,9 +60,7 @@ class DashboardController extends Controller
         $count_menunggu_peserta = Hasil::where('status', 'MENUNGGU')->count();
         $count_ditolak_peserta = Hasil::where('status', 'DITOLAK')->count();
         $count_diterima_peserta = Hasil::where('status', 'DITERIMA')->count();
-
-
-        return view('dashboards.laporan.dashboardtu', compact(
+        return view('dashboards.laporan.tu.index', compact(
             'items',
             'count_admin',
             'count_all_peserta',
@@ -74,11 +71,18 @@ class DashboardController extends Controller
     }
 
 
+
     public function detail($id)
     {
         $item = Hasil::with(['peserta.orang_tua'])->where('id', $id)->first();
-        return view('dashboards.pendaftaran.detail', compact('item'));
+        return view('dashboards.laporan.detail', compact('item'));
     }
+    public function detailtu($id)
+    {
+        $item = Hasil::with(['peserta.orang_tua'])->where('id', $id)->first();
+        return view('dashboards.laporan.tu.detail', compact('item'));
+    }
+
     public function terima($id)
     {
         // Retrieve the 'name' field from 'tbl_peserta_ppdb' table based on the provided ID
@@ -117,9 +121,15 @@ class DashboardController extends Controller
 
         // Display a success message
         Alert::success('Sukses', 'Simpan Data Sukses');
+        if (Auth::guard('tu')->check()) {
+            return redirect()->route('admin.dashboard');
+        } elseif (Auth::guard('admin')->check()) {
+            return redirect()->route('tu.dashboard');
+        } else {
+            view()->share('guard', 'web');
+        }
 
         // Redirect the user to the 'home' route
-        return redirect()->route('home');
     }
 
     public function tolak($id)
@@ -130,7 +140,13 @@ class DashboardController extends Controller
         $item->update();
 
         Alert::success('Sukses', 'Simpan Data Sukses');
-        return redirect()->route('home');
+        if (Auth::guard('tu')->check()) {
+            return redirect()->route('admin.dashboard');
+        } elseif (Auth::guard('admin')->check()) {
+            return redirect()->route('tu.dashboard');
+        } else {
+            view()->share('guard', 'web');
+        }
     }
 
     public function download()

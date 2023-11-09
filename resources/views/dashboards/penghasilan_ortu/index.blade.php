@@ -66,5 +66,5 @@
 @push('script')
     <!-- Page level plugins -->
     <script src="{{ asset('adminkit/datatables/jquery.min.js') }}"></script>
-    <script src="{{ asset('adminkit/datatables/dataTables.js') }}"></script>
+    <script src="{{ asset('adminkit/datatables/dataTables.min.js') }}"></script>
 @endpush
