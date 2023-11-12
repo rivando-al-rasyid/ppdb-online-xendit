@@ -20,4 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/pembayaran', [PembayaranController::class, 'create'])->name('pembayaran.store');
-Route::post('/webhooks/midtrans', [PembayaranController::class, 'webhook']);
+Route::post('/webhooks', [PembayaranController::class, 'webhook']);

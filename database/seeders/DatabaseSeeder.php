@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             PenghasilanOrtuSeeder::class,
             PekerjaanOrtuSeeder::class,
+            UserSeeder::class,
+
             // Add more seeders if needed
         ]);
     }
