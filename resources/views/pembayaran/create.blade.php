@@ -28,7 +28,20 @@
                         <input type="text" class="form-control" id="customer_phone" name="customer_phone"
                             value="{{ $user->phone }}" readonly>
                     </div>
+                    <div class="mb-3">
+                        <label for="item_name" class="form-label">Item Name</label>
+                        <input type="text" class="form-control" id="item_name" name="item_name" value="Baju Sekolah"
+                            readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="amount" class="form-label">Amount</label>
+                        <input type="number" class="form-control" id="amount" name="amount" value="250.000`" readonly>
+                    </div>
+
                     <button type="submit" class="btn btn-primary">Membuat Pembayaran</button>
+                </form>
+
+
                 </form>
             </div>
         </div>
