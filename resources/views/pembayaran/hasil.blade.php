@@ -12,13 +12,12 @@
                             <li><strong>Nama:</strong> {{ $data['name'] }} </li>
                             <li><strong>No.HP:</strong> {{ $data['phone'] }} </li>
                             <li><strong>Barang:</strong> {{ $data['item'] }} </li>
-                            <li><strong>harga:</strong> {{ $data['price'] }} </li>
+                            <li><strong>harga:</strong> 250.000 </li>
                             <li><strong>status:</strong> {{ $data['status'] }} </li>
                         </ul>
 
                         @if ($data['status'] === 'pending')
                             <button id="payButton" class="btn btn-primary">melakukan pembayaran</button>
-                        
                         @else
                             <p>Payment already processed or status is not pending.</p>
                         @endif
