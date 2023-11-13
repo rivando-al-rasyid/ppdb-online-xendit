@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('item_name');
             $table->string('customer_first_name');
             $table->string('customer_email');
+            $table->string('customer_phone');
             $table->string('checkout_link');
             $table->string('token');
             $table->timestamps();

@@ -31,9 +31,20 @@ class PembayaranController extends Controller
 
         if ($pembayaran) {
             $token = $pembayaran->token;
-            return view('pembayaran.hasil', compact('token', "user"));
+            // You can add more fields from the Pembayaran model here
+            $data = [
+                'name' => $pembayaran->customer_first_name,
+                'status' => $pembayaran->status,
+                'order_id' => $pembayaran->order_id,
+                'phone' => $pembayaran->customer_phone,
+                'item' => $pembayaran->item_name,
+                'price' =>  $pembayaran->price,
+                // Add more fields as needed
+            ];
+
+            return view('pembayaran.hasil', compact('token', 'user', 'data'));
         } else {
-            return redirect()->route('pembayaran.create');
+            return redirect()->route('dashboard');
         }
     }
 
@@ -77,6 +88,7 @@ class PembayaranController extends Controller
         $payment->status = 'pending';
         $payment->price = $Amount;
         $payment->customer_first_name = $request->customer_first_name;
+        $payment->customer_phone = $request->customer_phone;
         $payment->customer_email = $request->customer_email;
         $payment->item_name = $ItemName;
         $payment->user_id = $request->user_id;
