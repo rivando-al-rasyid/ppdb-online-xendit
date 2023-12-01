@@ -14,6 +14,7 @@ Route::group(['as' => 'tu.', 'prefix' => '/tu', 'middleware' => ['web', 'tu.auth
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/', [DashboardController::class, 'indextu'])->name('dashboard');
+    Route::get('/transaksi', [DashboardController::class, 'transaksi'])->name('transaksi');
     Route::get('/download', [DashboardController::class, 'download'])->name('download');
     Route::get('/detail/{id}', [DashboardController::class, 'detailtu'])->name('peserta.detail');
     Route::patch('/diterima/{id}', [DashboardController::class, 'terima'])->name('peserta.diterima');

@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Modules\Tus\Models\Tu;
 use App\Models\Hasil;
 use App\Models\PesertaPPDB;
+use App\Models\Pembayaran;
 use PDF;
 use Illuminate\Support\Facades\Auth;
 
@@ -47,7 +48,8 @@ class DashboardController extends Controller
             'count_menunggu_peserta',
             'count_ditolak_peserta',
             'count_diterima_peserta'
-        ));
+        )
+        );
     }
     public function indextu()
     {
@@ -67,7 +69,15 @@ class DashboardController extends Controller
             'count_menunggu_peserta',
             'count_ditolak_peserta',
             'count_diterima_peserta'
-        ));
+        )
+        );
+    }
+
+
+    public function transaksi()
+    {
+        $pembayarans = Pembayaran::all();
+        return view('pembayaran_table', ['pembayarans' => $pembayarans]);
     }
 
 
