@@ -18,6 +18,13 @@
                     <span class="align-middle">Profile</span>
                 </a>
             </li>
+            <li class="sidebar-item {{ request()->routeIs('tu.laporan.transaksi') ? ' active' : '' }}">
+                <a class="sidebar-link" href="{{ route('tu.laporan.transaksi') }}">
+                    <i class="align-middle" data-feather="dollar-sign"></i>
+                    <span class="align-middle">Transaksi</span>
+                </a>
+            </li>
+
         </ul>
     </div>
 </nav>

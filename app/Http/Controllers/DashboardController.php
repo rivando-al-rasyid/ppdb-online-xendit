@@ -41,14 +41,16 @@ class DashboardController extends Controller
         $count_menunggu_peserta = Hasil::where('status', 'MENUNGGU')->count();
         $count_ditolak_peserta = Hasil::where('status', 'DITOLAK')->count();
         $count_diterima_peserta = Hasil::where('status', 'DITERIMA')->count();
-        return view('dashboards.laporan.index', compact(
-            'items',
-            'count_admin',
-            'count_all_peserta',
-            'count_menunggu_peserta',
-            'count_ditolak_peserta',
-            'count_diterima_peserta'
-        )
+        return view(
+            'dashboards.laporan.index',
+            compact(
+                'items',
+                'count_admin',
+                'count_all_peserta',
+                'count_menunggu_peserta',
+                'count_ditolak_peserta',
+                'count_diterima_peserta'
+            )
         );
     }
     public function indextu()
@@ -62,22 +64,30 @@ class DashboardController extends Controller
         $count_menunggu_peserta = Hasil::where('status', 'MENUNGGU')->count();
         $count_ditolak_peserta = Hasil::where('status', 'DITOLAK')->count();
         $count_diterima_peserta = Hasil::where('status', 'DITERIMA')->count();
-        return view('dashboards.laporan.tu.index', compact(
-            'items',
-            'count_admin',
-            'count_all_peserta',
-            'count_menunggu_peserta',
-            'count_ditolak_peserta',
-            'count_diterima_peserta'
-        )
+        return view(
+            'dashboards.laporan.tu.index',
+            compact(
+                'items',
+                'count_admin',
+                'count_all_peserta',
+                'count_menunggu_peserta',
+                'count_ditolak_peserta',
+                'count_diterima_peserta'
+            )
         );
     }
 
 
     public function transaksi()
     {
-        $pembayarans = Pembayaran::all();
-        return view('pembayaran_table', ['pembayarans' => $pembayarans]);
+        $items = Pembayaran::all();
+        return view(
+            'dashboards.laporan.tu.transaksi',
+            compact(
+                'items',
+            )
+        );
+
     }
 
 

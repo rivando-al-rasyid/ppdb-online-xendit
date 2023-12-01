@@ -17,7 +17,7 @@
         <!-- Content Row -->
         <div class="mt-5 row">
             <div class="col-12">
-                <h1>Data Peserta PPDB</h1>
+                <h1>Data Pembayaran Pakaian</h1>
             </div>
             <div class="col-12">
                 <div class="mt-3 card">
@@ -27,25 +27,24 @@
                                 <thead>
                                     <tr>
                                         <th>ID User</th>
-                                        <th>Order ID</th>
+                                        <th>Nama</th>
+                                        <th>OrderID</th>
+                                        <th>harga</th>
+                                        <th>Item</th>
                                         <th>Status</th>
-                                        <th>Price</th>
-                                        <th>Item Name</th>
-                                        <th>Customer First Name</th>
-                                        <th>Customer Email</th>
-                                        <th>Checkout Link</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($pembayarans as $pembayaran)
+                                    @foreach ($items as $items)
                                         <tr>
-                                            <td>{{ $pembayaran->user_id }}</td>
-                                            <td>{{ $pembayaran->order_id }}</td>
-                                            <td>{{ $pembayaran->status }}</td>
-                                            <td>{{ $pembayaran->price }}</td>
-                                            <td>{{ $pembayaran->item_name }}</td>
-                                            <td>{{ $pembayaran->customer_first_name }}</td>
-                                            <td>{{ $pembayaran->customer_email }}</td>
+                                            <td>{{ $items->user_id }}</td>
+                                            <td>{{ $items->customer_first_name }}</td>
+                                            <td>{{ $items->order_id }}</td>
+                                            <td>{{ $items->price }}</td>
+                                            <td>{{ $items->item_name }}</td>
+                                            <td>{{ $items->status }}</td>
+
                                         </tr>
                                     @endforeach
                                 </tbody>
