@@ -1,5 +1,8 @@
 @extends('home.app')
 
+@push('add-styles')
+    <link href="{{ asset('assets/css/daftar.css') }}" rel="stylesheet">
+@endpush
 @section('content')
     <main id="main">
         <div class="container" style="margin-top: 150px;">
@@ -48,88 +51,95 @@
                 </div>
             </div>
 
+
             <div class="card mt-5">
                 <div class="card-body">
-                    <h1>Biodata Calon Siswa</h1>
-                    <hr>
-                    <form action="{{ route('daftar.kirim') }}" enctype='multipart/form-data' method="POST">
+                    <h1></h1>
+
+                    <form method="POST" action="{{ route('daftar.kirim') }}" id="signup-form" class="signup-form"
+                        enctype="multipart/form-data">
                         @csrf
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>Nama</label>
-                                    <input type="text" name="nama" class="form-control" autocomplete="off" autofocus>
+                        <h3></h3>
+                        <fieldset>
+                            <span class="step-current"></span>
+                            <h2>Biodata Calon Siswa</h2>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>Nama</label>
+                                        <input type="text" name="nama" class="form-control" autocomplete="off"
+                                            autofocus>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>No Telepon</label>
-                                    <input type="number" name="no_telp" class="form-control" autocomplete="off">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>No Telepon</label>
+                                        <input type="number" name="no_telp" class="form-control" autocomplete="off">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>Agama</label>
-                                    <select name="agama" class="form-control">
-                                        <option value="islam">ISLAM</option>
-                                        <option value="kristen">KRISTEN</option>
-                                        <option value="hindu">HINDU</option>
-                                        <option value="buddha">BUDDHA</option>
-                                        <option value="khonghucu">KHONGHUCU</option>
-                                    </select>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>Agama</label>
+                                        <select name="agama" class="form-control">
+                                            <option value="islam">ISLAM</option>
+                                            <option value="kristen">KRISTEN</option>
+                                            <option value="hindu">HINDU</option>
+                                            <option value="buddha">BUDDHA</option>
+                                            <option value="khonghucu">KHONGHUCU</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Tanggal Lahir</label>
-                                    <input type="date" name="tanggal_lahir" class="form-control" autocomplete="off">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Tanggal Lahir</label>
+                                        <input type="date" name="tanggal_lahir" class="form-control" autocomplete="off">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Tempat Lahir</label>
-                                    <input type="text" name="tempat_lahir" class="form-control" autocomplete="off">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Tempat Lahir</label>
+                                        <input type="text" name="tempat_lahir" class="form-control" autocomplete="off">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>Asal Sekolah</label>
-                                    <input type="text" name="asal_sekolah" class="form-control" autocomplete="off">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>Asal Sekolah</label>
+                                        <input type="text" name="asal_sekolah" class="form-control" autocomplete="off">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>Alamat</label>
-                                    <textarea name="alamat" rows="10" class="form-control"></textarea>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>Alamat</label>
+                                        <textarea name="alamat" rows="10" class="form-control"></textarea>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>Jenis Kelamin</label>
-                                    <select name="jenis_kelamin" class="form-control">
-                                        <option value="laki-laki">Laki-laki</option>
-                                        <option value="perempuan">Perempuan</option>
-                                    </select>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>Jenis Kelamin</label>
+                                        <select name="jenis_kelamin" class="form-control">
+                                            <option value="laki-laki">Laki-laki</option>
+                                            <option value="perempuan">Perempuan</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Upload Ijasah</label>
-                                    <input type="file" name="ijasah" class="form-control-file">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Upload Ijasah</label>
+                                        <input type="file" name="ijasah" class="form-control-file">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Upload KK</label>
-                                    <input type="file" name="kk" class="form-control-file">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Upload KK</label>
+                                        <input type="file" name="kk" class="form-control-file">
+                                    </div>
                                 </div>
-                            </div>
+                        </fieldset>
 
-
-                            <div class="col-12">
-                                <h1 class="mt-5">Biodata Orang Tua</h1>
-                                <hr>
-                            </div>
+                        <h3></h3>
+                        <fieldset>
+                            <span class="step-current">Step 2 / 3</span>
+                            <h2>Biodata Orang Tua</h2>
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Nama Orang Tua (Ayah)</label>
@@ -200,14 +210,40 @@
                                     <input type="number" name="no_telp_ortu" class="form-control" autocomplete="off">
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <button class="btn btn-primary w-100" type="submit">Kirim</button>
+
+                        </fieldset>
+
+                        {{-- <h3></h3>
+                        <fieldset>
+                            <span class="step-current">Step 3 / 3</span>
+                            <h2>Kartu Beasiswa</h2>
+                            <div class="form-group">
+                                <label for="nomor_kps">Nomor KPS:</label>
+                                <input type="text" class="form-control" name="nomor_kps" id="nomor_kps" required>
+
+                                <label for="nomor_kks">Nomor KKS:</label>
+                                <input type="text" class="form-control" name="nomor_kks" id="nomor_kks" required>
+
+                                <label for="nomor_kip">Nomor KIP:</label>
+                                <input type="text" class="form-control" name="nomor_kip" id="nomor_kip" required>
+
+                                <label for="nomor_pkh">Nomor PKH:</label>
+                                <input type="text" class="form-control" name="nomor_pkh" id="nomor_pkh" required>
                             </div>
-                        </div>
+                        </fieldset>
+ --}}
                     </form>
+
                 </div>
             </div>
         </div>
     </main>
     <!-- End #main -->
 @endsection
+@push('add-scripts')
+    <!-- Page level plugins -->
+    <script src="{{ asset('assets/vendor/jquery-validation/dist/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/jquery-validation/dist/additional-methods.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/jquery-steps/jquery.steps.min.js') }}"></script>
+    <script src="{{ asset('assets/js/daftar.js') }}"></script>
+@endpush
