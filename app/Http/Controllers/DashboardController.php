@@ -142,9 +142,9 @@ class DashboardController extends Controller
         // Display a success message
         Alert::success('Sukses', 'Simpan Data Sukses');
         if (Auth::guard('tu')->check()) {
-            return redirect()->route('admin.dashboard');
-        } elseif (Auth::guard('admin')->check()) {
             return redirect()->route('tu.dashboard');
+        } elseif (Auth::guard('admin')->check()) {
+            return redirect()->route('admin.dashboard');
         } else {
             view()->share('guard', 'web');
         }
@@ -161,9 +161,9 @@ class DashboardController extends Controller
 
         Alert::success('Sukses', 'Simpan Data Sukses');
         if (Auth::guard('tu')->check()) {
-            return redirect()->route('admin.dashboard');
-        } elseif (Auth::guard('admin')->check()) {
             return redirect()->route('tu.dashboard');
+        } elseif (Auth::guard('admin')->check()) {
+            return redirect()->route('admin.dashboard');
         } else {
             view()->share('guard', 'web');
         }
