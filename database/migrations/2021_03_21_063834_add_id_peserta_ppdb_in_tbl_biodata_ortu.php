@@ -14,13 +14,11 @@ class AddIdPesertaPpdbInTblBiodataOrtu extends Migration
     public function up()
     {
         Schema::table('tbl_biodata_ortu', function (Blueprint $table) {
-
             $table->unsignedBigInteger('id_peserta_ppdb');
             $table->foreign('id_peserta_ppdb')
-            ->references('id')
-            ->on('tbl_peserta_ppdb')
-            ->onDelete('cascade');
-            
+                ->references('id')
+                ->on('tbl_peserta_ppdb')
+                ->onDelete('cascade');
         });
     }
 

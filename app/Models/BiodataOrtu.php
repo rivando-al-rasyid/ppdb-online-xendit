@@ -24,13 +24,4 @@ class BiodataOrtu extends Model
         return $this->belongsTo(PekerjaanOrtu::class, 'id_pekerjaan_ibu');
     }
 
-    public function penghasilan_ayah()
-    {
-        return $this->belongsTo(PenghasilanOrtu::class, 'id_penghasilan_ayah');
-    }
-
-    public function penghasilan_ibu()
-    {
-        return $this->belongsTo(PenghasilanOrtu::class, 'id_penghasilan_ibu');
-    }
 }

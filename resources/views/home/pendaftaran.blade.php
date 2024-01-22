@@ -159,17 +159,11 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+
+                            <div class="col-12">
                                 <div class="form-group">
-                                    <label>Penghasilan Ayah</label>
-                                    <select name="id_penghasilan_ayah" class="form-control">
-                                        @forelse ($hasil_ortu as $item)
-                                            <option value="{{ $item->id }}">
-                                                {{ 'Rp ' . number_format($item->penghasilan_ortu, 0, ',', '.') }}</option>
-                                        @empty
-                                            <option value="">NO Data</option>
-                                        @endforelse
-                                    </select>
+                                    <label>No Telepon</label>
+                                    <input type="number" name="no_telp_ortu" class="form-control" autocomplete="off">
                                 </div>
                             </div>
                             <div class="col-12">
@@ -191,19 +185,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Penghasilan Ibu</label>
-                                    <select name="id_penghasilan_ibu" class="form-control">
-                                        @forelse ($hasil_ortu as $item)
-                                            <option value="{{ $item->id }}">
-                                                {{ 'Rp ' . number_format($item->penghasilan_ortu, 0, ',', '.') }}</option>
-                                        @empty
-                                            <option value="">NO Data</option>
-                                        @endforelse
-                                    </select>
-                                </div>
-                            </div>
+
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>No Telepon</label>

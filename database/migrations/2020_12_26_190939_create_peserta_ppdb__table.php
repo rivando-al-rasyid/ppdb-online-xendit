@@ -15,21 +15,6 @@ class CreatePesertaPpdbTable extends Migration
     {
         Schema::create('tbl_peserta_ppdb', function (Blueprint $table) {
             $table->id();
-
-            //Penghasilam Ortu relasi
-            $table->unsignedBigInteger('id_penghasilan_ortu');
-            $table->foreign('id_penghasilan_ortu')
-                ->references('id')
-                ->on('tbl_penghasilan_ortu')
-                ->onDelete('cascade');
-
-            //Pekerjaan Ortu relasi
-            $table->unsignedBigInteger('id_pekerjaan_ortu');
-            $table->foreign('id_pekerjaan_ortu')
-                ->references('id')
-                ->on('tbl_pekerjaan_ortu')
-                ->onDelete('cascade');
-
             $table->string('nama');
             $table->string('agama');
             $table->string('jenis_kelamin');

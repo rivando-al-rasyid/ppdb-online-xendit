@@ -9,7 +9,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Storage;
 
 // Load Models
-use App\Models\PenghasilanOrtu;
 use App\Models\PekerjaanOrtu;
 use App\Models\PesertaPPDB;
 use App\Models\BiodataOrtu;
@@ -19,12 +18,13 @@ class DaftarController extends Controller
 {
     public function index()
     {
-        $hasil_ortu = PenghasilanOrtu::all();
         $pekerjaan_ortu = PekerjaanOrtu::all();
-        return view('home.pendaftaran', compact(
-            'hasil_ortu',
-            'pekerjaan_ortu',
-        ));
+        return view(
+            'home.pendaftaran',
+            compact(
+                'pekerjaan_ortu',
+            )
+        );
     }
 
     public function daftar(Request $request)
@@ -44,8 +44,6 @@ class DaftarController extends Controller
             'nama_ibu' => 'required',
             'id_pekerjaan_ayah' => 'required|exists:tbl_pekerjaan_ortu,id',
             'id_pekerjaan_ibu' => 'required|exists:tbl_pekerjaan_ortu,id',
-            'id_penghasilan_ayah' => 'required|exists:tbl_penghasilan_ortu,id',
-            'id_penghasilan_ibu' => 'required|exists:tbl_penghasilan_ortu,id',
             'no_telp_ortu' => 'required',
             'ijasah' => 'required|file|mimes:jpeg,png,jpg,pdf|max:2048', // Accepts jpeg, png, jpg, pdf files
             'kk' => 'required|file|mimes:jpeg,png,jpg,pdf|max:2048', //age
@@ -75,8 +73,6 @@ class DaftarController extends Controller
             'alamat' => $request->alamat,
             'no_telp' => $request->no_telp,
             'nama_ortu' => $request->nama_ayah,
-            'id_pekerjaan_ortu' => $request->id_pekerjaan_ayah,
-            'id_penghasilan_ortu' => $request->id_penghasilan_ayah,
             'ijasah' => $ijasahPath,
             'kk' => $fotoKkPath,
         ];
@@ -91,12 +87,12 @@ class DaftarController extends Controller
         $dataOrtu = [
             'id_peserta_ppdb' => $daftar->id,
             'id_pekerjaan_ayah' => $request->id_pekerjaan_ayah,
-            'id_penghasilan_ayah' => $request->id_penghasilan_ayah,
             'id_pekerjaan_ibu' => $request->id_pekerjaan_ibu,
-            'id_penghasilan_ibu' => $request->id_penghasilan_ibu,
             'nama_ayah' => $request->nama_ayah,
             'nama_ibu' => $request->nama_ibu,
-            'no_tlp' => $request->no_telp_ortu
+            'no_tlp_ayah' => $request->no_telp_ayah,
+            'no_tlp_ibu' => $request->no_telp_ibu
+
         ];
 
         $ortu = BiodataOrtu::create($dataOrtu);

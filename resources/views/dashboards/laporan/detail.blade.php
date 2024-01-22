@@ -82,14 +82,6 @@
                             <td>{{ $item->peserta->orang_tua->pekerjaan_ibu->nama_pekerjaan }}</td>
                         </tr>
                         <tr>
-                            <td>Penghasilan Ayah</td>
-                            <td>{{ $item->peserta->orang_tua->penghasilan_ayah->penghasilan_ortu }}</td>
-                        </tr>
-                        <tr>
-                            <td>Penghasilan Ibu</td>
-                            <td>{{ $item->peserta->orang_tua->penghasilan_ibu->penghasilan_ortu }}</td>
-                        </tr>
-                        <tr>
                             <td>No Telepon Ortu</td>
                             <td>{{ $item->peserta->orang_tua->no_tlp }}</td>
                         </tr>

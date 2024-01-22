@@ -40,14 +40,8 @@
             kk: 'required',
             nama_ayah: 'required',
             id_pekerjaan_ayah: 'required',
-            id_penghasilan_ayah: 'required',
             nama_ibu: 'required',
             id_pekerjaan_ibu: 'required',
-            id_penghasilan_ibu: 'required',
-            no_telp_ortu: {
-                required: true,
-                digits: true, // Allow only digits
-            }
         },
         messages: {
             ijasah: {
@@ -62,17 +56,11 @@
             id_pekerjaan_ayah: {
                 required: "Silakan pilih pekerjaan ayah Anda",
             },
-            id_penghasilan_ayah: {
-                required: "Silakan pilih penghasilan ayah Anda",
-            },
             nama_ibu: {
                 required: "Silakan masukkan nama ibu Anda",
             },
             id_pekerjaan_ibu: {
                 required: "Silakan pilih pekerjaan ibu Anda",
-            },
-            id_penghasilan_ibu: {
-                required: "Silakan pilih penghasilan ibu Anda",
             },
             no_telp_ortu: {
                 required: "Silakan masukkan nomor telepon orang tua Anda",
