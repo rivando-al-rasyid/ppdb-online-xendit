@@ -34,20 +34,20 @@ class DaftarController extends Controller
 
         $validator = Validator::make($request->all(), [
             'nama' => 'required',
+            'nisn' => 'required',
+            'nik' => 'required',
+            'no_kk' => 'required',
+            'jenis_kelamin' => 'required',
             'agama' => 'required',
             'tanggal_lahir' => 'date|before:yesterday',
             'tempat_lahir' => 'required',
             'asal_sekolah' => 'required',
-            'jenis_kelamin' => 'required',
             'alamat' => 'required',
-            'no_telp' => 'required',
             'nama_ayah' => 'required',
-            'nama_ibu' => 'required',
             'id_pekerjaan_ayah' => 'required|exists:tbl_pekerjaan_ortu,id',
+            'no_telp_ayah' => 'required',
+            'nama_ibu' => 'required',
             'id_pekerjaan_ibu' => 'required|exists:tbl_pekerjaan_ortu,id',
-            'no_telp_ortu' => 'required',
-            'ijasah' => 'required|file|mimes:jpeg,png,jpg,pdf|max:2048', // Accepts jpeg, png, jpg, pdf files
-            'kk' => 'required|file|mimes:jpeg,png,jpg,pdf|max:2048', //age
         ]);
 
         if ($validator->fails()) {
@@ -56,10 +56,10 @@ class DaftarController extends Controller
 
         $namaPeserta = $request->nama;
         // Handle 'ijasah' file upload with custom name
-        $ijasahPath = $request->file('ijasah')->storeAs('uploads', 'ijasah_' . $namaPeserta . '.' . $request->file('ijasah')->getClientOriginalExtension(), 'public');
+        // $ijasahPath = $request->file('ijasah')->storeAs('uploads', 'ijasah_' . $namaPeserta . '.' . $request->file('ijasah')->getClientOriginalExtension(), 'public');
 
-        // Handle 'kk' file upload with custom name
-        $fotoKkPath = $request->file('kk')->storeAs('uploads', 'kk_' . $namaPeserta . '.' . $request->file('kk')->getClientOriginalExtension(), 'public');
+        // // Handle 'kk' file upload with custom name
+        // $fotoKkPath = $request->file('kk')->storeAs('uploads', 'kk_' . $namaPeserta . '.' . $request->file('kk')->getClientOriginalExtension(), 'public');
 
         $user = new User();
         $user->name = $namaPeserta;
@@ -76,16 +76,15 @@ class DaftarController extends Controller
 
         $dataPeserta = [
             'nama' => $request->nama,
+            'nisn' => $request->nisn,
+            'nik' => $request->nik,
+            'no_kk' => $request->no_kk,
             'jenis_kelamin' => $request->jenis_kelamin,
             'agama' => $request->agama,
             'tanggal_lahir' => $request->tanggal_lahir,
             'tempat_lahir' => $request->tempat_lahir,
             'asal_sekolah' => $request->asal_sekolah,
             'alamat' => $request->alamat,
-            'no_telp' => $request->no_telp,
-            'nama_ortu' => $request->nama_ayah,
-            'ijasah' => $ijasahPath,
-            'kk' => $fotoKkPath,
             'id_user' => $user->id,
         ];
 
@@ -102,8 +101,7 @@ class DaftarController extends Controller
             'nama_ayah' => $request->nama_ayah,
             'nama_ibu' => $request->nama_ibu,
             'no_tlp_ayah' => $request->no_telp_ayah,
-            'no_tlp_ibu' => $request->no_telp_ibu
-
+            'no_tlp_ibu' => $request->no_telp_ibu,
         ];
 
         $ortu = BiodataOrtu::create($dataOrtu);

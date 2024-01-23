@@ -24,9 +24,6 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             TuSeeder::class,
             PekerjaanOrtuSeeder::class,
-            UserSeeder::class,
-
-            // Add more seeders if needed
         ]);
     }
 }

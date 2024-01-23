@@ -26,22 +26,36 @@
     form.validate({
         rules: {
             nama: 'required',
-            no_telp: {
+            nisn: {
                 required: true,
                 digits: true, // Allow only digits
             },
+            nik: {
+                required: true,
+                digits: true, // Allow only digits
+            },
+            no_kk: {
+                required: true,
+                digits: true, // Allow only digits
+            },
+            jenis_kelamin: 'required',
             agama: 'required',
             tanggal_lahir: 'required',
             tempat_lahir: 'required',
             asal_sekolah: 'required',
-            alamat: 'required',
-            jenis_kelamin: 'required',
-            ijazah: 'required',
-            kk: 'required',
             nama_ayah: 'required',
             id_pekerjaan_ayah: 'required',
+            no_telp_ayah: {
+                required: true,
+                digits: true, // Allow only digits
+            },
             nama_ibu: 'required',
             id_pekerjaan_ibu: 'required',
+            no_telp_ibu: {
+                required: true,
+                digits: true, // Allow only digits
+            },
+
         },
         messages: {
             ijasah: {

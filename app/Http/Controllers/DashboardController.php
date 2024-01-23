@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 
 
 class DashboardController extends Controller
-{
+{w
     /**
      * Create a new controller instance.
      *

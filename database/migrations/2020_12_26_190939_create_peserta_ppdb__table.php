@@ -20,10 +20,10 @@ class CreatePesertaPpdbTable extends Migration
             $table->bigInteger('nik');
             $table->bigInteger('no_kk');
             $table->string('jenis_kelamin');
+            $table->date('tanggal_lahir');
             $table->string('tempat_lahir');
             $table->string('agama');
-            $table->string('nilai_rata_rata');
-            $table->string('agama');
+            $table->string('nilai_rata_rata')->nullable();
             $table->string('asal_sekolah');
             $table->longText('alamat');
             $table->timestamps();
