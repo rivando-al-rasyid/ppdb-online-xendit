@@ -14,7 +14,7 @@
                     <table class="table table-bordered">
                         <tr>
                             <td>Nama</td>
-                            <td>{{ $item->peserta->nama }}</td>
+                            <td>{{ $item->peserta->name }}</td>
                         </tr>
                         <tr>
                             <td>TTL</td>

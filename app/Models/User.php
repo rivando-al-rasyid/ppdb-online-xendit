@@ -42,8 +42,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    public function table_peserta()
+    public function peserta()
     {
-        return $this->belongsTo(PesertaPPDB::class, 'id_peserta_ppdb');
+        return $this->hasOne(PesertaPPDB::class, 'id_user');
     }
 }

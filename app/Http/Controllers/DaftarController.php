@@ -9,6 +9,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Storage;
 
 // Load Models
+use App\Models\User;
 use App\Models\PekerjaanOrtu;
 use App\Models\PesertaPPDB;
 use App\Models\BiodataOrtu;
@@ -53,15 +54,25 @@ class DaftarController extends Controller
             return redirect()->back()->withErrors($validator->errors());
         }
 
-        $name = $request->input('nama'); // Assuming you're getting the username from the request
-
+        $namaPeserta = $request->nama;
         // Handle 'ijasah' file upload with custom name
-        $ijasahPath = $request->file('ijasah')->storeAs('uploads', 'ijasah_' . $name . '.' . $request->file('ijasah')->getClientOriginalExtension(), 'public');
+        $ijasahPath = $request->file('ijasah')->storeAs('uploads', 'ijasah_' . $namaPeserta . '.' . $request->file('ijasah')->getClientOriginalExtension(), 'public');
 
         // Handle 'kk' file upload with custom name
-        $fotoKkPath = $request->file('kk')->storeAs('uploads', 'kk_' . $name . '.' . $request->file('kk')->getClientOriginalExtension(), 'public');
+        $fotoKkPath = $request->file('kk')->storeAs('uploads', 'kk_' . $namaPeserta . '.' . $request->file('kk')->getClientOriginalExtension(), 'public');
 
-
+        $user = new User();
+        $user->name = $namaPeserta;
+        $baseEmail = $namaPeserta . '@example.com';
+        $suffix = $request->id; // Assuming 'id' is the user ID
+        if (User::where('email', $baseEmail)->exists()) {
+            $randomEmail = $namaPeserta . $suffix . '@example.com';
+        } else {
+            $randomEmail = $baseEmail;
+        }
+        $user->email = $randomEmail;
+        $user->password = bcrypt($randomEmail);
+        $user->save();
 
         $dataPeserta = [
             'nama' => $request->nama,
@@ -75,6 +86,7 @@ class DaftarController extends Controller
             'nama_ortu' => $request->nama_ayah,
             'ijasah' => $ijasahPath,
             'kk' => $fotoKkPath,
+            'id_user' => $user->id,
         ];
 
         $daftar = PesertaPPDB::create($dataPeserta);
@@ -83,7 +95,6 @@ class DaftarController extends Controller
             Alert::error('Error', 'Please check your form again!');
             return redirect()->back();
         }
-
         $dataOrtu = [
             'id_peserta_ppdb' => $daftar->id,
             'id_pekerjaan_ayah' => $request->id_pekerjaan_ayah,
@@ -101,16 +112,6 @@ class DaftarController extends Controller
             Alert::error('Error', 'Please check your form again!');
             return redirect()->back();
         }
-        $data3 = [
-            'nis' => $daftar->id
-        ];
-
-        $hasil = Hasil::create($data3);
-        if (!$hasil) {
-            DB::rollBack();
-            Alert::error('Error', 'Please check your form again!');
-            return redirect()->back();
-        }
 
         DB::commit();
         Alert::success('Success', 'Thank you for registering!');
@@ -119,7 +120,7 @@ class DaftarController extends Controller
 
     public function hasil()
     {
-        $items = Hasil::with(['peserta.orang_tua'])->get();
+        $items = User::with(['peserta'])->get();
         return view('home.hasil', compact('items'));
     }
 }

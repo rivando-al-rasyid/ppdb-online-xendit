@@ -16,16 +16,16 @@ class CreatePesertaPpdbTable extends Migration
         Schema::create('tbl_peserta_ppdb', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('agama');
+            $table->bigInteger('nisn');
+            $table->bigInteger('nik');
+            $table->bigInteger('no_kk');
             $table->string('jenis_kelamin');
             $table->string('tempat_lahir');
-            $table->date('tanggal_lahir');
-            $table->longText('alamat');
-            $table->string('no_telp');
+            $table->string('agama');
+            $table->string('nilai_rata_rata');
+            $table->string('agama');
             $table->string('asal_sekolah');
-            $table->string('nama_ortu');
-            $table->string('ijasah'); // File path to store ijasah file
-            $table->string('kk'); // File path to store foto kk fi
+            $table->longText('alamat');
             $table->timestamps();
         });
     }

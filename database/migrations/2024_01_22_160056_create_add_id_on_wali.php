@@ -10,13 +10,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_peserta_ppdb')->nullable();
+        Schema::table('wali', function (Blueprint $table) {
+            $table->unsignedBigInteger('id_peserta_ppdb');
             $table->foreign('id_peserta_ppdb')
-                ->references('id')->on('tbl_peserta_ppdb')
-                ->onDelete('set null');
-            $table->string('status', 100)->nullable()->default('MENUNGGU');
-
+                ->references('id')
+                ->on('tbl_peserta_ppdb')
+                ->onDelete('cascade');
         });
     }
 
@@ -25,9 +24,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('tbl_biodata_ortu', function (Blueprint $table) {
-            //
+        Schema::table('wali', function (Blueprint $table) {
         });
-
     }
 };
