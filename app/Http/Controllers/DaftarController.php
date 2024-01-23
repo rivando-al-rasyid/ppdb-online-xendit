@@ -104,8 +104,19 @@ class DaftarController extends Controller
             'no_tlp_ibu' => $request->no_telp_ibu,
         ];
 
+
         $ortu = BiodataOrtu::create($dataOrtu);
         if (!$ortu) {
+            DB::rollBack();
+            Alert::error('Error', 'Please check your form again!');
+            return redirect()->back();
+        }
+        $data3 = [
+            'nis' => $daftar->id
+        ];
+
+        $hasil = Hasil::create($data3);
+        if (!$hasil) {
             DB::rollBack();
             Alert::error('Error', 'Please check your form again!');
             return redirect()->back();

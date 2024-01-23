@@ -124,9 +124,9 @@
                                     @foreach ($items as $item)
                                         <tr>
                                             <td>{{ $i }}</td>
-                                            <td>{{ $item->peserta->nama }}</td>
-                                            <td>{{ $item->peserta->asal_sekolah }}</td>
-                                            <td>{{ $item->peserta->nama_ortu }}</td>
+                                            <td>{{ $item->nama }}</td>
+                                            <td>{{ $item->asal_sekolah }}</td>
+                                            <td>{{ $item->nama_ayah }}</td>
                                             <td>
                                                 @if ($item->status == 'MENUNGGU')
                                                     <div class="font-weight-bold text-warning">MENUNGGU</div>

@@ -14,8 +14,8 @@ class PesertaPPDB extends Model
     {
         return $this->hasOne(BiodataOrtu::class, 'id_peserta_ppdb', 'id');
     }
-    public function user()
+    public function hasil()
     {
-        return $this->belongsTo(User::class, 'id_user');
+        return $this->hasOne(Hasil::class, 'id_peserta_ppdb', 'id');
     }
 }

@@ -1,4 +1,4 @@
-@extends('home.app')
+@extends('pages.home.index')
 @push('add-styles')
     <link href="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 @endpush
@@ -33,6 +33,7 @@
                                     <th>No</th>
                                     <th>Nama</th>
                                     <th>Asal Sekolah</th>
+                                    <th>Jurusan</th>
                                     <th>Orang Tua</th>
                                     <th>Status</th>
                                     <th>Action</th>
@@ -43,6 +44,7 @@
                                     <th>No</th>
                                     <th>Nama</th>
                                     <th>Asal Sekolah</th>
+                                    <th>Jurusan</th>
                                     <th>Orang Tua</th>
                                     <th>Status</th>
                                     <th>Action</th>

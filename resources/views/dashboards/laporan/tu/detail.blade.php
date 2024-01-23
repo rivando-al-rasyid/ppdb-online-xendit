@@ -14,33 +14,33 @@
                     <table class="table table-bordered">
                         <tr>
                             <td>Nama</td>
-                            <td>{{ $item->peserta->nama }}</td>
+                            <td>{{ $item->nama }}</td>
                         </tr>
                         <tr>
                             <td>TTL</td>
-                            <td>{{ $item->peserta->tempat_lahir }}, {{ $item->peserta->tanggal_lahir }}</td>
+                            <td>{{ $item->tempat_lahir }}, {{ $item->tanggal_lahir }}</td>
                         </tr>
                         <tr>
                             <td>Asal Sekolah</td>
-                            <td>{{ $item->peserta->asal_sekolah }}</td>
+                            <td>{{ $item->asal_sekolah }}</td>
                         </tr>
                         <tr>
                             <td>Alamat</td>
-                            <td>{{ $item->peserta->alamat }}</td>
+                            <td>{{ $item->alamat }}</td>
                         </tr>
                         <tr>
                             <td>No Telepon</td>
-                            <td>{{ $item->peserta->no_telp }}</td>
+                            <td>{{ $item->no_telp }}</td>
                         </tr>
                         <tr>
                             <td>Agama</td>
-                            <td>{{ $item->peserta->agama }}</td>
+                            <td>{{ $item->agama }}</td>
                         </tr>
                         <tr>
                             <td>ijasah</td>
                             <td>
-                                @if ($item->peserta->ijasah)
-                                    <a href="{{ asset('storage/' . $item->peserta->ijasah) }}" data-lightbox="ijasah"
+                                @if ($item->ijasah)
+                                    <a href="{{ asset('storage/' . $item->ijasah) }}" data-lightbox="ijasah"
                                         class="btn btn-primary">View Ijasah</a>
                                 @else
                                     No ijasah available
@@ -50,8 +50,8 @@
                         <tr>
                             <td>kk</td>
                             <td>
-                                @if ($item->peserta->kk)
-                                    <a href="{{ asset('storage/' . $item->peserta->kk) }}" data-lightbox="kk"
+                                @if ($item->kk)
+                                    <a href="{{ asset('storage/' . $item->kk) }}" data-lightbox="kk"
                                         class="btn btn-primary">View KK</a>
                                 @else
                                     No KK available
@@ -63,15 +63,15 @@
 
                         <tr>
                             <td>Jenis Kelamin</td>
-                            <td>{{ $item->peserta->jenis_kelamin }}</td>
+                            <td>{{ $item->jenis_kelamin }}</td>
                         </tr>
                         <tr>
                             <td>Nama Ayah</td>
-                            <td>{{ $item->peserta->orang_tua->nama_ayah }}</td>
+                            <td>{{ $item->nama_ayah }}</td>
                         </tr>
                         <tr>
                             <td>Nama Ibu</td>
-                            <td>{{ $item->peserta->orang_tua->nama_ibu }}</td>
+                            <td>{{ $item->nama_ibu }}</td>
                         </tr>
                         <tr>
                             <td>Pekerjaan Ayah</td>
@@ -82,8 +82,12 @@
                             <td>{{ $item->peserta->orang_tua->pekerjaan_ibu->nama_pekerjaan }}</td>
                         </tr>
                         <tr>
-                            <td>No Telepon Ortu</td>
-                            <td>{{ $item->peserta->orang_tua->no_tlp }}</td>
+                            <td>No Telepon ayah</td>
+                            <td>{{ $item->peserta->orang_tua->no_tlp_ayah }}</td>
+                        </tr>
+                        <tr>
+                            <td>No Telepon ibu</td>
+                            <td>{{ $item->peserta->orang_tua->no_tlp_ibu }}</td>
                         </tr>
 
                         <tr>
