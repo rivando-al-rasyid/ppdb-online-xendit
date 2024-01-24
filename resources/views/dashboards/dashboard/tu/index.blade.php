@@ -1,8 +1,7 @@
 @extends('tu.layouts.app')
 
 @push('style')
-    <link rel="stylesheet" type="text/css"
-        href="{{ asset('node_modules/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}">
+    <link href="{{ asset('adminkit/datatables/dataTables.min.css') }}" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -14,8 +13,6 @@
             <a href="{{ route('tu.download') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                     class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
         </div>
-
-        <!-- Content Row -->
 
         <!-- Content Row -->
         <div class="row">
@@ -163,12 +160,6 @@
 
 @push('script')
     <!-- Page level plugins -->
-    <script type="text/javascript" src="{{ asset('node_modules/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('node_modules/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}">
-    </script>
-    <script>
-        $(document).ready(function() {
-            $('#dataTable').DataTable(); // 'example' should be replaced with the ID of your table
-        });
-    </script>
+    <script src="{{ asset('adminkit/datatables/jquery.min.js') }}"></script>
+    <script src="{{ asset('adminkit/datatables/dataTables.min.js') }}"></script>
 @endpush
