@@ -14,10 +14,7 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
-        "realrashid/sweet-alert": "^7.1",
-        "yajra/laravel-datatables-buttons": "^10.0",
-        "yajra/laravel-datatables-html": "^10.12",
-        "yajra/laravel-datatables-oracle": "^10.11"
+        "realrashid/sweet-alert": "^7.1"
     },
     "require-dev": {
         "bmatovu/multi-auth": "^12.0",
