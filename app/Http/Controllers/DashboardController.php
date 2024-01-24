@@ -85,7 +85,7 @@ class DashboardController extends Controller
     {
         $items = Pembayaran::all();
         return view(
-            'dashboards.laporan.tu.transaksi',
+            'dashboards.dashboard.tu..transaksi',
             compact(
                 'items',
             )
@@ -98,12 +98,12 @@ class DashboardController extends Controller
     public function detail($id)
     {
         $item = Hasil::with(['peserta.orang_tua'])->where('id', $id)->first();
-        return view('dashboards.laporan.detail', compact('item'));
+        return view('dashboards.dashboard.admin.detail', compact('item'));
     }
     public function detailtu($id)
     {
         $item = Hasil::with(['peserta.orang_tua'])->where('id', $id)->first();
-        return view('dashboards.laporan.tu.detail', compact('item'));
+        return view('dashboards.dashboard.tu..detail', compact('item'));
     }
 
     public function terima($id)
@@ -162,7 +162,7 @@ class DashboardController extends Controller
     public function download()
     {
         $data = PesertaPPDB::all();
-        $pdf = PDF::loadView('dashboards.laporan.laporan', compact('data')); // 'reports.report' is the blade file for your report
+        $pdf = PDF::loadView('dashboards.dashboard.admin.laporan', compact('data')); // 'reports.report' is the blade file for your report
         return $pdf->download('laporan.pdf');
     }
 }

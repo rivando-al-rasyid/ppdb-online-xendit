@@ -1,7 +1,8 @@
 @extends('tu.layouts.app')
 
 @push('style')
-    <link href="{{ asset('adminkit/datatables/dataTables.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('node_modules/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}">
 @endpush
 
 @section('content')
@@ -162,7 +163,12 @@
 
 @push('script')
     <!-- Page level plugins -->
-    <script src="{{ asset('adminkit/datatables/jquery.min.js') }}"></script>
-    <script src="{{ asset('adminkit/datatables/dataTables.min.js') }}"></script>
-    <script src="{{ asset('assets/js/demo/datatables-demo.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('node_modules/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('node_modules/datatables.net-bs5/js/dataTables.bootstrap5.min.js') }}">
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#dataTable').DataTable(); // 'example' should be replaced with the ID of your table
+        });
+    </script>
 @endpush
