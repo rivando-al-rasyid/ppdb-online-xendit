@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('tu.layouts.app')
 
 @push('style')
     <link href="{{ asset('adminkit/datatables/dataTables.min.css') }}" rel="stylesheet">
@@ -15,6 +15,8 @@
         </div>
 
         <!-- Content Row -->
+
+        <!-- Content Row -->
         <div class="row">
 
             <!-- Total Admin Card -->
@@ -24,8 +26,8 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    Total TU</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $count_admin }}</div>
+                                    Total Menunggu</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $count_menunggu_peserta }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -42,8 +44,8 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                    Total Menunggu</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $count_menunggu_peserta }}</div>
+                                    Total DITOLAK</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $count_ditolak_peserta }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -60,8 +62,8 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                    Total Ditolak</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $count_ditolak_peserta }}</div>
+                                    Total CADANGAN</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $count_cadangan_peserta }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
@@ -131,6 +133,8 @@
                                             <td>
                                                 @if ($item->status == 'MENUNGGU')
                                                     <div class="font-weight-bold text-warning">MENUNGGU</div>
+                                                @elseif ($item->status == 'CADANGAN')
+                                                    <div class="font-weight-bold text-primary">CADANGAN</div>
                                                 @elseif ($item->status == 'DITOLAK')
                                                     <div class="font-weight-bold text-danger">DITOLAK</div>
                                                 @else
@@ -138,7 +142,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('admin.peserta.detail', $item->id) }}"
+                                                <a href="{{ route('tu.peserta.detail', $item->id) }}"
                                                     class="btn btn-primary">
                                                     Detail
                                                 </a>

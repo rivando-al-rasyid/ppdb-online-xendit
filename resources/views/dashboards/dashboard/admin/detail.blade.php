@@ -106,11 +106,10 @@
                                         action="{{ route('admin.peserta.cadangan', $item->id) }}">
                                         @method('PATCH')
                                         @csrf
-                                        <button type="submit" class="btn btn-danger">
+                                        <button type="submit" class="btn btn-primary">
                                             CADANGAN
                                         </button>
                                     </form>
-
                                     <form method="post" class="d-inline-block"
                                         action="{{ route('admin.peserta.ditolak', $item->id) }}">
                                         @method('PATCH')
