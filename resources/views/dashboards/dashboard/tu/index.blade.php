@@ -164,9 +164,5 @@
     <!-- Page level plugins -->
     <script src="{{ asset('adminkit/datatables/jquery.min.js') }}"></script>
     <script src="{{ asset('adminkit/datatables/dataTables.min.js') }}"></script>
-    <script>
-        $(document).ready(function() {
-            $('#dataTable').DataTable();
-        });
-    </script>
+    <script src="{{ asset('assets/js/demo/datatables-demo.js') }}"></script>
 @endpush
