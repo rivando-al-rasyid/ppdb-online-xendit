@@ -85,7 +85,7 @@ class DashboardController extends Controller
     {
         $items = Pembayaran::all();
         return view(
-            'dashboards.dashboard.tu..transaksi',
+            'dashboards.dashboard.tu.transaksi',
             compact(
                 'items',
             )
@@ -103,7 +103,7 @@ class DashboardController extends Controller
     public function detailtu($id)
     {
         $item = Hasil::with(['peserta.orang_tua'])->where('id', $id)->first();
-        return view('dashboards.dashboard.tu..detail', compact('item'));
+        return view('dashboards.dashboard.tu.detail', compact('item'));
     }
 
     public function terima($id)

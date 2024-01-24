@@ -1,7 +1,7 @@
 <nav id="sidebar" class="sidebar js-sidebar">
     <div class="sidebar-content js-simplebar">
         <as class="sidebar-brand" href="index.html">
-            <span class="align-middle">Super Admin</span>
+            <span class="align-middle">Tata Usaha</span>
         </as>
 
         <ul class="sidebar-nav">
@@ -18,19 +18,13 @@
                     <span class="align-middle">Profile</span>
                 </a>
             </li>
+            <li class="sidebar-item {{ request()->routeIs('tu.laporan.transaksi') ? ' active' : '' }}">
+                <a class="sidebar-link" href="{{ route('tu.laporan.transaksi') }}">
+                    <i class="align-middle" data-feather="file-text"></i>
+                    <span class="align-middle">Lapooran Transaksi</span>
+                </a>
+            </li>
 
-            <li class="sidebar-item {{ request()->routeIs('tu.pekerjaan_ortu.index') ? ' active' : '' }}">
-                <a class="sidebar-link" href="{{ route('tu.pekerjaan_ortu.index') }}">
-                    <i class="align-middle" data-feather="briefcase"></i>
-                    <span class="align-middle">Pekerjaan Orang Tua</span>
-                </a>
-            </li>
-            <li class="sidebar-item {{ request()->routeIs('tu.kelola_tu.index') ? ' active' : '' }}">
-                <a class="sidebar-link" href="{{ route('tu.kelola_tu.index') }}">
-                    <i class="align-middle" data-feather="database"></i>
-                    <span class="align-middle">Data TU</span>
-                </a>
-            </li>
         </ul>
     </div>
 </nav>
