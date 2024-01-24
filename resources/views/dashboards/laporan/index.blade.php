@@ -10,7 +10,7 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-            <a href="{{ route('admin.download') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            <a href="{{ route('tu.download') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                     class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
         </div>
 
@@ -124,9 +124,10 @@
                                     @foreach ($items as $item)
                                         <tr>
                                             <td>{{ $i }}</td>
-                                            <td>{{ $item->nama }}</td>
-                                            <td>{{ $item->asal_sekolah }}</td>
-                                            <td>{{ $item->nama_ayah }}</td>
+                                            <td>{{ $item->peserta->nama }}</td>
+                                            <td>{{ $item->peserta->asal_sekolah }}</td>
+                                            <td>{{ $item->orang_tua->nama_ayah }}</td>
+
                                             <td>
                                                 @if ($item->status == 'MENUNGGU')
                                                     <div class="font-weight-bold text-warning">MENUNGGU</div>

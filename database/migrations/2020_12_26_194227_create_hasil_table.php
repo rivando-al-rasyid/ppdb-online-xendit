@@ -15,15 +15,11 @@ class CreateHasilTable extends Migration
     {
         Schema::create('tbl_hasil', function (Blueprint $table) {
             $table->id();
-
-
-            $table->unsignedBigInteger('id_jurusan');
             $table->unsignedBigInteger('nis');
             $table->foreign('nis')
                 ->references('id')
                 ->on('tbl_peserta_ppdb')
                 ->onDelete('cascade');
-
             $table->string('nama');
             $table->string('asal_sekolah');
             $table->timestamps();

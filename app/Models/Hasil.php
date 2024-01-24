@@ -13,4 +13,8 @@ class Hasil extends Model
     {
         return $this->hasOne(PesertaPPDB::class, 'id', 'nis');
     }
+    public function orang_tua()
+    {
+        return $this->hasOne(BiodataOrtu::class, 'id_peserta_ppdb', 'nis');
+    }
 }

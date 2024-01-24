@@ -32,7 +32,7 @@ class DashboardController extends Controller
     public function index()
     {
 
-        $items = Hasil::with(['peserta.orang_tua'])->get();
+        $items = Hasil::with(['peserta', 'orang_tua'])->get();
 
         // Count
         $count_admin = Tu::all()->count();
@@ -138,6 +138,23 @@ class DashboardController extends Controller
             view()->share('guard', 'web');
         }
     }
+    public function cadangan($id)
+    {
+        $item = Hasil::findOrFail($id);
+
+        $item->status = 'CADANGAN';
+        $item->update();
+
+        Alert::success('Sukses', 'Simpan Data Sukses');
+        if (Auth::guard('tu')->check()) {
+            return redirect()->route('tu.dashboard');
+        } elseif (Auth::guard('admin')->check()) {
+            return redirect()->route('admin.dashboard');
+        } else {
+            view()->share('guard', 'web');
+        }
+    }
+
 
     public function download()
     {

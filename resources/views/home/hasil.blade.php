@@ -1,4 +1,4 @@
-@extends('pages.home.index')
+@extends('home.app')
 @push('add-styles')
     <link href="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 @endpush
@@ -33,7 +33,6 @@
                                     <th>No</th>
                                     <th>Nama</th>
                                     <th>Asal Sekolah</th>
-                                    <th>Jurusan</th>
                                     <th>Orang Tua</th>
                                     <th>Status</th>
                                     <th>Action</th>
@@ -44,7 +43,6 @@
                                     <th>No</th>
                                     <th>Nama</th>
                                     <th>Asal Sekolah</th>
-                                    <th>Jurusan</th>
                                     <th>Orang Tua</th>
                                     <th>Status</th>
                                     <th>Action</th>
@@ -57,7 +55,7 @@
                                         <td>{{ $i }}</td>
                                         <td>{{ $item->peserta->nama }}</td>
                                         <td>{{ $item->peserta->asal_sekolah }}</td>
-                                        <td>{{ $item->peserta->nama_ortu }}</td>
+                                        <td>{{ $item->peserta->orang_tua->nama_ayah }}</td>
                                         <td>
                                             @if ($item->status == 'MENUNGGU')
                                                 <div class="font-weight-bold text-warning">MENUNGGU</div>

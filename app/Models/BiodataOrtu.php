@@ -9,11 +9,6 @@ class BiodataOrtu extends Model
     protected $guarded = [];
     protected $table = "tbl_biodata_ortu";
 
-    public function peserta()
-    {
-        return $this->belongsTo(PesertaPPDB::class, 'id_peserta_ppdb');
-    }
-
     public function pekerjaan_ayah()
     {
         return $this->belongsTo(PekerjaanOrtu::class, 'id_pekerjaan_ayah');

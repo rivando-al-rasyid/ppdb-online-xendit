@@ -14,8 +14,6 @@ class DeleteSomeColumnInHasilTable extends Migration
     public function up()
     {
         Schema::table('tbl_hasil', function (Blueprint $table) {
-            $table->dropForeign(['id_jurusan']);
-            $table->dropColumn('id_jurusan');
             $table->dropColumn('nama');
             $table->dropColumn('asal_sekolah');
             $table->string('status', 100)->nullable()->default('MENUNGGU');

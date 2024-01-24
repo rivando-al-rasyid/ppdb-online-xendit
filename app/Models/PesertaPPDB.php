@@ -12,10 +12,6 @@ class PesertaPPDB extends Model
 
     public function orang_tua()
     {
-        return $this->hasOne(BiodataOrtu::class, 'id_peserta_ppdb', 'id');
-    }
-    public function hasil()
-    {
-        return $this->hasOne(Hasil::class, 'id_peserta_ppdb', 'id');
+        return $this->hasOne(BiodataOrtu::class, 'id', 'id_peserta_ppdb');
     }
 }

@@ -129,7 +129,8 @@ class DaftarController extends Controller
 
     public function hasil()
     {
-        $items = User::with(['peserta'])->get();
+        $items = Hasil::with(['peserta', 'orang_tua'])->get();
         return view('home.hasil', compact('items'));
+
     }
 }
