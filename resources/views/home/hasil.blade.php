@@ -55,7 +55,7 @@
                                         <td>{{ $i }}</td>
                                         <td>{{ $item->peserta->nama }}</td>
                                         <td>{{ $item->peserta->asal_sekolah }}</td>
-                                        <td>{{ $item->peserta->orang_tua->nama_ayah }}</td>
+                                        <td>{{ $item->orang_tua->nama_ayah }}</td>
                                         <td>
                                             @if ($item->status == 'MENUNGGU')
                                                 <div class="font-weight-bold text-warning">MENUNGGU</div>
@@ -63,12 +63,16 @@
                                             @if ($item->status == 'DITOLAK')
                                                 <div class="font-weight-bold text-danger">DITOLAK</div>
                                             @endif
+                                            @if ($item->status == 'CADANGAN')
+                                                <div class="font-weight-bold text-primary">CADANGAN</div>
+                                            @endif
+
                                             @if ($item->status == 'DITERIMA')
                                                 <div class="font-weight-bold text-success">DITERIMA</div>
                                             @endif
                                         </td>
                                         <td>
-                                            @if ($item->status == 'DITERIMA')
+                                            {{-- @if ($item->status == 'DITERIMA')
                                                 <form method="get" class="d-inline-block"
                                                     action="{{ route('download-hasil') }}">
                                                     @csrf
@@ -80,7 +84,7 @@
                                                 <button type="submit" class="btn btn-secondary mr-2" disabled>
                                                     Download
                                                 </button>
-                                            @endif
+                                            @endif --}}
                                         </td>
 
                                     </tr>
