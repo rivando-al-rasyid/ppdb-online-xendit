@@ -15,33 +15,20 @@ class CreateBiodataOrtuTable extends Migration
     {
         Schema::create('tbl_biodata_ortu', function (Blueprint $table) {
             $table->id();
-
             $table->unsignedBigInteger('id_pekerjaan_ayah');
             $table->foreign('id_pekerjaan_ayah')
                 ->references('id')
                 ->on('tbl_pekerjaan_ortu')
                 ->onDelete('cascade');
-
             $table->unsignedBigInteger('id_pekerjaan_ibu');
             $table->foreign('id_pekerjaan_ibu')
                 ->references('id')
                 ->on('tbl_pekerjaan_ortu')
                 ->onDelete('cascade');
-
-            $table->unsignedBigInteger('id_penghasilan_ayah');
-            $table->foreign('id_penghasilan_ayah')
-                ->references('id')
-                ->on('tbl_penghasilan_ortu')
-                ->onDelete('cascade');
-
-            $table->unsignedBigInteger('id_penghasilan_ibu');
-            $table->foreign('id_penghasilan_ibu')
-                ->references('id')
-                ->on('tbl_penghasilan_ortu')
-                ->onDelete('cascade');
             $table->string('nama_ayah');
             $table->string('nama_ibu');
-            $table->BigInteger('no_tlp');
+            $table->BigInteger('no_tlp_ayah');
+            $table->BigInteger('no_tlp_ibu');
             $table->timestamps();
         });
     }

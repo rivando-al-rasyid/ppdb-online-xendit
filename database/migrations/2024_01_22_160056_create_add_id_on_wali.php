@@ -4,16 +4,13 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddIdPesertaPpdbInTblBiodataOrtu extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::table('tbl_biodata_ortu', function (Blueprint $table) {
+        Schema::table('wali', function (Blueprint $table) {
             $table->unsignedBigInteger('id_peserta_ppdb');
             $table->foreign('id_peserta_ppdb')
                 ->references('id')
@@ -24,13 +21,10 @@ class AddIdPesertaPpdbInTblBiodataOrtu extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::table('tbl_biodata_ortu', function (Blueprint $table) {
-            //
+        Schema::table('wali', function (Blueprint $table) {
         });
     }
-}
+};

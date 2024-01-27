@@ -8,16 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Pembayaran extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'user_id',
-        'order_id',
-        'status',
-        'price',
-        'item_name',
-        'customer_first_name',
-        'customer_email',
-        'checkout_link',
-    ];
+    protected $table = "pembayarans";
 
     // Define the relationship with the User model
     public function user()

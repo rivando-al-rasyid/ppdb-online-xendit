@@ -26,28 +26,36 @@
     form.validate({
         rules: {
             nama: 'required',
-            no_telp: {
+            nisn: {
                 required: true,
                 digits: true, // Allow only digits
             },
+            nik: {
+                required: true,
+                digits: true, // Allow only digits
+            },
+            no_kk: {
+                required: true,
+                digits: true, // Allow only digits
+            },
+            jenis_kelamin: 'required',
             agama: 'required',
             tanggal_lahir: 'required',
             tempat_lahir: 'required',
             asal_sekolah: 'required',
-            alamat: 'required',
-            jenis_kelamin: 'required',
-            ijazah: 'required',
-            kk: 'required',
             nama_ayah: 'required',
             id_pekerjaan_ayah: 'required',
-            id_penghasilan_ayah: 'required',
-            nama_ibu: 'required',
-            id_pekerjaan_ibu: 'required',
-            id_penghasilan_ibu: 'required',
-            no_telp_ortu: {
+            no_telp_ayah: {
                 required: true,
                 digits: true, // Allow only digits
-            }
+            },
+            nama_ibu: 'required',
+            id_pekerjaan_ibu: 'required',
+            no_telp_ibu: {
+                required: true,
+                digits: true, // Allow only digits
+            },
+
         },
         messages: {
             ijasah: {
@@ -62,17 +70,11 @@
             id_pekerjaan_ayah: {
                 required: "Silakan pilih pekerjaan ayah Anda",
             },
-            id_penghasilan_ayah: {
-                required: "Silakan pilih penghasilan ayah Anda",
-            },
             nama_ibu: {
                 required: "Silakan masukkan nama ibu Anda",
             },
             id_pekerjaan_ibu: {
                 required: "Silakan pilih pekerjaan ibu Anda",
-            },
-            id_penghasilan_ibu: {
-                required: "Silakan pilih penghasilan ibu Anda",
             },
             no_telp_ortu: {
                 required: "Silakan masukkan nomor telepon orang tua Anda",

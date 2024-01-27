@@ -1,8 +1,8 @@
 <nav id="sidebar" class="sidebar js-sidebar">
     <div class="sidebar-content js-simplebar">
-        <a class="sidebar-brand" href="index.html">
+        <as class="sidebar-brand" href="index.html">
             <span class="align-middle">Tata Usaha</span>
-        </a>
+        </as>
 
         <ul class="sidebar-nav">
             <li class="sidebar-item {{ request()->routeIs('tu.dashboard') ? ' active' : '' }}">
@@ -20,8 +20,8 @@
             </li>
             <li class="sidebar-item {{ request()->routeIs('tu.laporan.transaksi') ? ' active' : '' }}">
                 <a class="sidebar-link" href="{{ route('tu.laporan.transaksi') }}">
-                    <i class="align-middle" data-feather="dollar-sign"></i>
-                    <span class="align-middle">Transaksi</span>
+                    <i class="align-middle" data-feather="file-text"></i>
+                    <span class="align-middle">Lapooran Transaksi</span>
                 </a>
             </li>
 

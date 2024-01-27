@@ -9,7 +9,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Storage;
 
 // Load Models
-use App\Models\PenghasilanOrtu;
+use App\Models\User;
 use App\Models\PekerjaanOrtu;
 use App\Models\PesertaPPDB;
 use App\Models\BiodataOrtu;
@@ -19,12 +19,13 @@ class DaftarController extends Controller
 {
     public function index()
     {
-        $hasil_ortu = PenghasilanOrtu::all();
         $pekerjaan_ortu = PekerjaanOrtu::all();
-        return view('home.pendaftaran', compact(
-            'hasil_ortu',
-            'pekerjaan_ortu',
-        ));
+        return view(
+            'home.pendaftaran',
+            compact(
+                'pekerjaan_ortu',
+            )
+        );
     }
 
     public function daftar(Request $request)
@@ -33,52 +34,58 @@ class DaftarController extends Controller
 
         $validator = Validator::make($request->all(), [
             'nama' => 'required',
+            'nisn' => 'required',
+            'nik' => 'required',
+            'no_kk' => 'required',
+            'jenis_kelamin' => 'required',
             'agama' => 'required',
             'tanggal_lahir' => 'date|before:yesterday',
             'tempat_lahir' => 'required',
             'asal_sekolah' => 'required',
-            'jenis_kelamin' => 'required',
             'alamat' => 'required',
-            'no_telp' => 'required',
             'nama_ayah' => 'required',
-            'nama_ibu' => 'required',
             'id_pekerjaan_ayah' => 'required|exists:tbl_pekerjaan_ortu,id',
+            'no_telp_ayah' => 'required',
+            'nama_ibu' => 'required',
             'id_pekerjaan_ibu' => 'required|exists:tbl_pekerjaan_ortu,id',
-            'id_penghasilan_ayah' => 'required|exists:tbl_penghasilan_ortu,id',
-            'id_penghasilan_ibu' => 'required|exists:tbl_penghasilan_ortu,id',
-            'no_telp_ortu' => 'required',
-            'ijasah' => 'required|file|mimes:jpeg,png,jpg,pdf|max:2048', // Accepts jpeg, png, jpg, pdf files
-            'kk' => 'required|file|mimes:jpeg,png,jpg,pdf|max:2048', //age
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator->errors());
         }
 
-        $name = $request->input('nama'); // Assuming you're getting the username from the request
-
+        $namaPeserta = $request->nama;
         // Handle 'ijasah' file upload with custom name
-        $ijasahPath = $request->file('ijasah')->storeAs('uploads', 'ijasah_' . $name . '.' . $request->file('ijasah')->getClientOriginalExtension(), 'public');
+        // $ijasahPath = $request->file('ijasah')->storeAs('uploads', 'ijasah_' . $namaPeserta . '.' . $request->file('ijasah')->getClientOriginalExtension(), 'public');
 
-        // Handle 'kk' file upload with custom name
-        $fotoKkPath = $request->file('kk')->storeAs('uploads', 'kk_' . $name . '.' . $request->file('kk')->getClientOriginalExtension(), 'public');
+        // // Handle 'kk' file upload with custom name
+        // $fotoKkPath = $request->file('kk')->storeAs('uploads', 'kk_' . $namaPeserta . '.' . $request->file('kk')->getClientOriginalExtension(), 'public');
 
-
+        $user = new User();
+        $user->name = $namaPeserta;
+        $baseEmail = $namaPeserta . '@example.com';
+        $suffix = $request->id; // Assuming 'id' is the user ID
+        if (User::where('email', $baseEmail)->exists()) {
+            $randomEmail = $namaPeserta . $suffix . '@example.com';
+        } else {
+            $randomEmail = $baseEmail;
+        }
+        $user->email = $randomEmail;
+        $user->password = bcrypt($randomEmail);
+        $user->save();
 
         $dataPeserta = [
             'nama' => $request->nama,
+            'nisn' => $request->nisn,
+            'nik' => $request->nik,
+            'no_kk' => $request->no_kk,
             'jenis_kelamin' => $request->jenis_kelamin,
             'agama' => $request->agama,
             'tanggal_lahir' => $request->tanggal_lahir,
             'tempat_lahir' => $request->tempat_lahir,
             'asal_sekolah' => $request->asal_sekolah,
             'alamat' => $request->alamat,
-            'no_telp' => $request->no_telp,
-            'nama_ortu' => $request->nama_ayah,
-            'id_pekerjaan_ortu' => $request->id_pekerjaan_ayah,
-            'id_penghasilan_ortu' => $request->id_penghasilan_ayah,
-            'ijasah' => $ijasahPath,
-            'kk' => $fotoKkPath,
+            'id_user' => $user->id,
         ];
 
         $daftar = PesertaPPDB::create($dataPeserta);
@@ -87,17 +94,16 @@ class DaftarController extends Controller
             Alert::error('Error', 'Please check your form again!');
             return redirect()->back();
         }
-
         $dataOrtu = [
             'id_peserta_ppdb' => $daftar->id,
             'id_pekerjaan_ayah' => $request->id_pekerjaan_ayah,
-            'id_penghasilan_ayah' => $request->id_penghasilan_ayah,
             'id_pekerjaan_ibu' => $request->id_pekerjaan_ibu,
-            'id_penghasilan_ibu' => $request->id_penghasilan_ibu,
             'nama_ayah' => $request->nama_ayah,
             'nama_ibu' => $request->nama_ibu,
-            'no_tlp' => $request->no_telp_ortu
+            'no_tlp_ayah' => $request->no_telp_ayah,
+            'no_tlp_ibu' => $request->no_telp_ibu,
         ];
+
 
         $ortu = BiodataOrtu::create($dataOrtu);
         if (!$ortu) {
@@ -123,7 +129,8 @@ class DaftarController extends Controller
 
     public function hasil()
     {
-        $items = Hasil::with(['peserta.orang_tua'])->get();
+        $items = Hasil::with(['peserta', 'orang_tua'])->get();
         return view('home.hasil', compact('items'));
+
     }
 }

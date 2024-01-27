@@ -73,8 +73,29 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label>No Telepon</label>
-                                        <input type="number" name="no_telp" class="form-control" autocomplete="off">
+                                        <label>NISN</label>
+                                        <input type="number" name="nisn" class="form-control" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>NIK</label>
+                                        <input type="number" name="nik" class="form-control" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Nomor KK</label>
+                                        <input type="number" name="no_kk" class="form-control" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>Jenis Kelamin</label>
+                                        <select name="jenis_kelamin" class="form-control">
+                                            <option value="laki-laki">Laki-laki</option>
+                                            <option value="perempuan">Perempuan</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -113,27 +134,6 @@
                                         <textarea name="alamat" rows="10" class="form-control"></textarea>
                                     </div>
                                 </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label>Jenis Kelamin</label>
-                                        <select name="jenis_kelamin" class="form-control">
-                                            <option value="laki-laki">Laki-laki</option>
-                                            <option value="perempuan">Perempuan</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Upload Ijasah</label>
-                                        <input type="file" name="ijasah" class="form-control-file">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Upload KK</label>
-                                        <input type="file" name="kk" class="form-control-file">
-                                    </div>
-                                </div>
                         </fieldset>
 
                         <h3></h3>
@@ -159,17 +159,11 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+
+                            <div class="col-12">
                                 <div class="form-group">
-                                    <label>Penghasilan Ayah</label>
-                                    <select name="id_penghasilan_ayah" class="form-control">
-                                        @forelse ($hasil_ortu as $item)
-                                            <option value="{{ $item->id }}">
-                                                {{ 'Rp ' . number_format($item->penghasilan_ortu, 0, ',', '.') }}</option>
-                                        @empty
-                                            <option value="">NO Data</option>
-                                        @endforelse
-                                    </select>
+                                    <label>No telepon ayah</label>
+                                    <input type="number" name="no_telp_ayah" class="form-control" autocomplete="off">
                                 </div>
                             </div>
                             <div class="col-12">
@@ -191,23 +185,11 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Penghasilan Ibu</label>
-                                    <select name="id_penghasilan_ibu" class="form-control">
-                                        @forelse ($hasil_ortu as $item)
-                                            <option value="{{ $item->id }}">
-                                                {{ 'Rp ' . number_format($item->penghasilan_ortu, 0, ',', '.') }}</option>
-                                        @empty
-                                            <option value="">NO Data</option>
-                                        @endforelse
-                                    </select>
-                                </div>
-                            </div>
+
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>No Telepon</label>
-                                    <input type="number" name="no_telp_ortu" class="form-control" autocomplete="off">
+                                    <input type="number" name="no_telp_ibu" class="form-control" autocomplete="off">
                                 </div>
                             </div>
 

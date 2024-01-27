@@ -9,7 +9,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                     data-bs-toggle="dropdown" aria-expanded="false">
-                    {{ Auth::guard('tu')->user()->name }}
+                    {{ Auth::guard('admin')->user()->name }}
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" href="{{ route('tu.profile.edit') }}">{{ __('Profile') }}</a></li>

@@ -12,15 +12,7 @@ class PembayaranController extends Controller
 {
     public function index(Request $request)
     {
-        $user = $request->user();
-        $user_id = auth()->user()->id; // Get the currently authenticated user's ID
-        $pembayaran = Pembayaran::where('user_id', $user_id)->first();
-
-        if ($pembayaran) {
-            return redirect()->route('pembayaran.hasil');
-        } else {
-            return view('pembayaran.create', compact('user'));
-        }
+        return view('pembayaran.create', compact('user'));
     }
 
     public function hasil(Request $request)
@@ -38,7 +30,7 @@ class PembayaranController extends Controller
                 'order_id' => $pembayaran->order_id,
                 'phone' => $pembayaran->customer_phone,
                 'item' => $pembayaran->item_name,
-                'price' =>  $pembayaran->price,
+                'price' => $pembayaran->price,
                 // Add more fields as needed
             ];
 
@@ -84,14 +76,10 @@ class PembayaranController extends Controller
         ])->post('https://app.sandbox.midtrans.com/snap/v1/transactions', $params);
         $response = json_decode($response->body());
         $payment = new Pembayaran;
+        $payment->user_id = $request->user_id;
         $payment->order_id = $params['transaction_details']['order_id'];
         $payment->status = 'pending';
         $payment->price = $Amount;
-        $payment->customer_first_name = $request->customer_first_name;
-        $payment->customer_phone = $request->customer_phone;
-        $payment->customer_email = $request->customer_email;
-        $payment->item_name = $ItemName;
-        $payment->user_id = $request->user_id;
         $payment->checkout_link = $response->redirect_url;
         $payment->token = $response->token;
         $payment->save();

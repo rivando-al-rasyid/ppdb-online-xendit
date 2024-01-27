@@ -13,8 +13,8 @@ class Hasil extends Model
     {
         return $this->hasOne(PesertaPPDB::class, 'id', 'nis');
     }
-    public function user()
+    public function orang_tua()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasOne(BiodataOrtu::class, 'id_peserta_ppdb', 'nis');
     }
 }

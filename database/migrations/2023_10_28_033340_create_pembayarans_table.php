@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -19,10 +18,6 @@ return new class extends Migration
             $table->string('status');
             $table->double('price');
             $table->string('item_name');
-            $table->string('customer_first_name');
-            $table->string('customer_email');
-            $table->string('customer_phone');
-            $table->string('checkout_link');
             $table->string('token');
             $table->timestamps();
         });
