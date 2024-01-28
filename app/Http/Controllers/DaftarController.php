@@ -33,7 +33,8 @@ class DaftarController extends Controller
         DB::beginTransaction();
 
         $validator = Validator::make($request->all(), [
-            'nama' => 'required',
+            'nama_depan' => 'required',
+            'nama_belakang' => 'required',
             'nisn' => 'required',
             'nik' => 'required',
             'no_kk' => 'required',
@@ -61,21 +62,9 @@ class DaftarController extends Controller
         // // Handle 'kk' file upload with custom name
         // $fotoKkPath = $request->file('kk')->storeAs('uploads', 'kk_' . $namaPeserta . '.' . $request->file('kk')->getClientOriginalExtension(), 'public');
 
-        $user = new User();
-        $user->name = $namaPeserta;
-        $baseEmail = $namaPeserta . '@example.com';
-        $suffix = $request->id; // Assuming 'id' is the user ID
-        if (User::where('email', $baseEmail)->exists()) {
-            $randomEmail = $namaPeserta . $suffix . '@example.com';
-        } else {
-            $randomEmail = $baseEmail;
-        }
-        $user->email = $randomEmail;
-        $user->password = bcrypt($randomEmail);
-        $user->save();
-
         $dataPeserta = [
-            'nama' => $request->nama,
+            'nama_depan' => $request->nama_depan,
+            'nama_belakang' => $request->nama_belakang,
             'nisn' => $request->nisn,
             'nik' => $request->nik,
             'no_kk' => $request->no_kk,
@@ -85,7 +74,6 @@ class DaftarController extends Controller
             'tempat_lahir' => $request->tempat_lahir,
             'asal_sekolah' => $request->asal_sekolah,
             'alamat' => $request->alamat,
-            'id_user' => $user->id,
         ];
 
         $daftar = PesertaPPDB::create($dataPeserta);

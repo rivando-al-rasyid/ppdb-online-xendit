@@ -64,13 +64,21 @@
                             <span class="step-current"></span>
                             <h2>Biodata Calon Siswa</h2>
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Nama</label>
-                                        <input type="text" name="nama" class="form-control" autocomplete="off"
+                                        <label>Nama Depan</label>
+                                        <input type="text" name="nama_depan" class="form-control" autocomplete="off"
                                             autofocus>
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Nama Belakang</label>
+                                        <input type="text" name="nama_belakang" class="form-control" autocomplete="off"
+                                            autofocus>
+                                    </div>
+                                </div>
+
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label>NISN</label>

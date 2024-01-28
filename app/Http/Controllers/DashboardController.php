@@ -159,10 +159,4 @@ class DashboardController extends Controller
     }
 
 
-    public function download()
-    {
-        $data = PesertaPPDB::all();
-        $pdf = PDF::loadView('dashboards.dashboard.admin.laporan', compact('data')); // 'reports.report' is the blade file for your report
-        return $pdf->download('laporan.pdf');
-    }
 }

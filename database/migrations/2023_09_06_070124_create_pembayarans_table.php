@@ -12,13 +12,14 @@ return new class extends Migration {
     {
         Schema::create('pembayarans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id'); // Use unsignedBigInteger for the foreign key column
-            $table->foreign('user_id')->references('id')->on('users'); // Establ
-            $table->string('order_id');
+            $table->string('external_id')->unique();
+            $table->string('payer_email');
+            $table->text('description');
+            $table->bigInteger('amount'); // Use 'bigInteger' for large integers
             $table->string('status');
-            $table->double('price');
-            $table->string('item_name');
-            $table->string('token');
+            $table->string('checkout_link');
+            $table->unsignedBigInteger('user_id'); // Assuming invoices are related to users
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

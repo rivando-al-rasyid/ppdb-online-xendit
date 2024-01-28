@@ -13,30 +13,32 @@
         },
         titleTemplate: '<h3 class="title">#title#</h3>',
         onStepChanging: function (event, currentIndex, newIndex) {
-            // Add form validation logic here
             return form.valid();
         },
         onFinished: function(event, currentIndex) {
-            // Handle form submission here
-            form.submit();
+            if (form.valid()) {
+                form.submit();
+            } else {
+                form.find(":input.error:first").focus();
+            }
         }
     });
 
-    // Initialize form validation
     form.validate({
         rules: {
-            nama: 'required',
+            nama_depan: 'required',
+            nama_belakang: 'required',
             nisn: {
                 required: true,
-                digits: true, // Allow only digits
+                digits: true,
             },
             nik: {
                 required: true,
-                digits: true, // Allow only digits
+                digits: true,
             },
             no_kk: {
                 required: true,
-                digits: true, // Allow only digits
+                digits: true,
             },
             jenis_kelamin: 'required',
             agama: 'required',
@@ -47,15 +49,14 @@
             id_pekerjaan_ayah: 'required',
             no_telp_ayah: {
                 required: true,
-                digits: true, // Allow only digits
+                digits: true,
             },
             nama_ibu: 'required',
             id_pekerjaan_ibu: 'required',
             no_telp_ibu: {
                 required: true,
-                digits: true, // Allow only digits
+                digits: true,
             },
-
         },
         messages: {
             ijasah: {
@@ -80,6 +81,13 @@
                 required: "Silakan masukkan nomor telepon orang tua Anda",
                 number: "Silakan masukkan nomor telepon yang valid",
             },
+        },
+        invalidHandler: function(event, validator) {
+            var errors = validator.numberOfInvalids();
+            if (errors) {
+                var firstInvalidElement = $(validator.errorList[0].element);
+                firstInvalidElement.focus();
+            }
         }
     });
 
