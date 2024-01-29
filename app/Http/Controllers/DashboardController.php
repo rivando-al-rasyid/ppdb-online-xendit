@@ -58,9 +58,9 @@ class DashboardController extends Controller
     {
 
         $items = Hasil::with(['peserta', 'orang_tua'])->get();
+        $count_admin = Tu::all()->count();
 
         // Count
-        $count_admin = Tu::all()->count();
         $count_all_peserta = Hasil::all()->count();
         $count_menunggu_peserta = Hasil::where('status', 'MENUNGGU')->count();
         $count_ditolak_peserta = Hasil::where('status', 'DITOLAK')->count();
@@ -79,6 +79,31 @@ class DashboardController extends Controller
             )
         );
     }
+    public function laporan()
+    {
+        $items = Hasil::with(['peserta', 'orang_tua'])->get();
+
+        // Count
+        return view(
+            'dashboards.laporan.index',
+            compact(
+                'items',
+            )
+        );
+    }
+    public function dataortu()
+    {
+        $items = Hasil::with(['peserta', 'orang_tua'])->get();
+
+        // Count
+        return view(
+            'dashboards.laporan.dataortu',
+            compact(
+                'items',
+            )
+        );
+    }
+
 
 
     public function transaksi()

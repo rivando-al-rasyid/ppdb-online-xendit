@@ -14,8 +14,10 @@ Route::group(['as' => 'tu.', 'prefix' => '/tu', 'middleware' => ['web', 'tu.auth
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/', [DashboardController::class, 'indextu'])->name('dashboard');
+    Route::get('/laporan/siswa', [DashboardController::class, 'laporan'])->name('laporan.index');
+    Route::get('/laporan/ortu', [DashboardController::class, 'dataortu'])->name('laporan.dataortu');
+    Route::get('/laporan/kartusosial', [DashboardController::class, 'indextu'])->name('laporan.kartu');
     Route::get('/transaksi', [DashboardController::class, 'transaksi'])->name('laporan.transaksi');
-    Route::get('/download', [DashboardController::class, 'download'])->name('download');
     Route::get('/detail/{id}', [DashboardController::class, 'detailtu'])->name('peserta.detail');
     Route::patch('/diterima/{id}', [DashboardController::class, 'terima'])->name('peserta.diterima');
     Route::patch('/cadangan/{id}', [DashboardController::class, 'cadangan'])->name('peserta.cadangan');
