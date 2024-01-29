@@ -16,10 +16,10 @@
 
                         <h5>Customer Information:</h5>
                         <ul>
-                            <li><strong>Given Names:</strong> {{ $user->name }}</li>
-                            <li><strong>Surname:</strong> {{ $user->surname }}</li>
+                            <li><strong>Nama:</strong> {{ $user->name }}</li>
+                            <li><strong>Nama Belakang:</strong> {{ $user->surname }}</li>
                             <li><strong>Email:</strong> {{ $user->email }}</li>
-                            <li><strong>Mobile Number:</strong> {{ $user->mobile_number }}</li>
+                            <li><strong>nomor HP:</strong> {{ $user->mobile_number }}</li>
                             {{-- Add other necessary customer data here --}}
                         </ul>
                         <form action="{{ route('pembayaran.store') }}" method="POST">
@@ -29,7 +29,7 @@
 
                             {{-- Add other payment-related fields as needed --}}
 
-                            <button type="submit" class="btn btn-primary">Create Payment</button>
+                            <button type="submit" class="btn btn-primary">bayaar</button>
                         </form>
                     </div>
                 </div>
