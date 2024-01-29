@@ -36,14 +36,14 @@ class SekolahController extends Controller
             $sekolah->update($data);
             $message = 'Sekolah data has been updated successfully!';
             Alert::success('Success', $message);
-            return redirect('/sekolah');
+            return redirect()->route('admin.sekolah.profile');
         } else {
             // If sekolah data doesn't exist, create a new record
             Sekolah::create($data);
             $message = 'Sekolah data has been stored successfully!';
             Alert::success('Success', $message);
 
-            return redirect('/sekolah');
+            return redirect()->route('admin.sekolah.profile');
         }
     }
 }

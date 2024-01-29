@@ -14,7 +14,7 @@
             <div class="card shadow mb-4">
                 <div class="card-body">
                     <form method="POST"
-                        action="{{ $sekolah ? route('sekolah.update', ['id' => $sekolah->id]) : route('sekolah.store') }}">
+                        action="{{ $sekolah ? route('admin.sekolah.update', ['id' => $sekolah->id]) : route('admin.sekolah.store') }}">
                         @csrf
                         @if ($sekolah)
                             @method('PUT')
