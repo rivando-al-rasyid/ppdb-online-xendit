@@ -1,6 +1,7 @@
 @extends('tu.layouts.app')
 @push('style')
     <link href="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('sbadmin/vendor/datatables/Buttons/css/buttons.bootstrap4.css') }}" rel="stylesheet">
 @endpush
 @section('content')
     <div class="container-fluid">
@@ -20,7 +21,7 @@
                     <div class="card mt-3">
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered display " id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -80,5 +81,9 @@
 
         <script src="{{ asset('sbadmin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
-        <script src="{{ asset('sbadmin/js/demo/datatables-demo.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+        <script src="https://cdn.datatables.net/v/bs4/jszip-3.10.1/b-2.4.2/b-html5-2.4.2/b-print-2.4.2/datatables.min.js">
+        </script>
+        <script src="{{ asset('sbadmin/js/demo/admin.js') }}"></script>
     @endpush

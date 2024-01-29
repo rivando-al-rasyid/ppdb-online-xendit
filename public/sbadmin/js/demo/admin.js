@@ -1,9 +1,9 @@
 $(document).ready(function() {
-  var table = $('#dataTable').DataTable( {
-      lengthChange: false,
-      buttons: [ 'copy', 'excel', 'pdf', 'colvis' ]
+  $('#dataTable').DataTable( {
+      dom: 'Bfrtip',
+      buttons: [
+          'copy', 'csv', 'excel', 'pdf', 'print'
+      ],
+      scrollX: true // Add this line
   } );
-
-  table.buttons().container()
-      .appendTo( '#example_wrapper .col-md-6:eq(0)' );
 } );

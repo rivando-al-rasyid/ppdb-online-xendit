@@ -42,7 +42,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Laporan :</h6>
                 <a class="collapse-item{{ request()->routeIs('tu.laporan.index') ? ' active' : '' }}"
-                    href="{{ route('tu.laporan.dataortu') }}">Laporan Data siswa</a>
+                    href="{{ route('tu.laporan.index') }}">Laporan Data siswa</a>
                 <a class="collapse-item{{ request()->routeIs('tu.laporan.dataortu') ? ' active' : '' }}"
                     href="{{ route('tu.laporan.dataortu') }}">laporan Data orang tua</a>
             </div>

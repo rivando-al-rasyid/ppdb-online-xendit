@@ -67,5 +67,5 @@
     <!-- Page level plugins -->
     <script src="{{ url('sbadmin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ url('sbadmin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ url('sbadmin/js/demo/datatables-demo.js') }}"></script>
+    <script src="{{ url('sbadmin/js/demo/admin.js') }}"></script>
 @endpush
