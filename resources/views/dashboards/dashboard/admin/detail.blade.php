@@ -91,7 +91,7 @@
                             <td>
                                 @if ($item->status == 'MENUNGGU')
                                     <form method="post" class="d-inline-block"
-                                        action="{{ route('tu.peserta.diterima', $item->id) }}">
+                                        action="{{ route('admin.peserta.diterima', $item->id) }}">
                                         @method('PATCH')
                                         @csrf
                                         <button type="submit" class="btn btn-success me-2">
@@ -99,7 +99,7 @@
                                         </button>
                                     </form>
                                     <form method="post" class="d-inline-block"
-                                        action="{{ route('tu.peserta.cadangan', $item->id) }}">
+                                        action="{{ route('admin.peserta.cadangan', $item->id) }}">
                                         @method('PATCH')
                                         @csrf
                                         <button type="submit" class="btn btn-primary">
@@ -107,7 +107,7 @@
                                         </button>
                                     </form>
                                     <form method="post" class="d-inline-block"
-                                        action="{{ route('tu.peserta.ditolak', $item->id) }}">
+                                        action="{{ route('admin.peserta.ditolak', $item->id) }}">
                                         @method('PATCH')
                                         @csrf
                                         <button type="submit" class="btn btn-danger">

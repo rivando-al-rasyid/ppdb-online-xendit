@@ -8,7 +8,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 // Load Models
 use App\Models\Hasil;
 use App\Modules\Tus\Models\Tu;
-use App\Models\PesertaPPDB;
 use App\Models\Pembayaran;
 use PDF;
 use Illuminate\Support\Facades\Auth;
