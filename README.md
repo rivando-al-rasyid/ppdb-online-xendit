@@ -8,3 +8,4 @@ Cara Install Projek Ini
     Jalankan php artisan migrate --seed
     Jalankan php artisan serve
     Buka website sesuai dengan localhost dan portnya di web browser anda contoh http://localhost:8000
+    email dan password ada di seeder berdasarkan role nya
