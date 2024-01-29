@@ -1,6 +1,6 @@
 @extends('tu.layouts.app')
 @push('style')
-    <link href="{{ asset('sbtu/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 @endpush
 @section('content')
     <div class="container-fluid">
@@ -155,7 +155,7 @@
 @endsection
 @push('script')
     <!-- Page level plugins -->
-    <script src="{{ asset('sbtu/vendor/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('sbtu/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('sbtu/js/demo/datatables-demo.js') }}"></script>
+    <script src="{{ asset('sbadmin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('sbadmin/js/demo/datatables-demo.js') }}"></script>
 @endpush
