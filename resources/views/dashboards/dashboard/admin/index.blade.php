@@ -9,7 +9,11 @@
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
         </div>
-
+        <div class="row mt-3">
+            <div class="col-12">
+                <a href="{{ route('admin.create.customer') }}" class="btn btn-success">Create Customer</a>
+            </div>
+        </div>
         <!-- Content Row -->
         <div class="row">
 

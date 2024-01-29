@@ -153,6 +153,7 @@ class PembayaranController extends Controller
                 $pembayaran->external_id = $result['external_id'];
                 $pembayaran->description = $result['description'];
                 $pembayaran->amount = $result['amount'];
+                $pembayaran->payer_email = $user->email;
                 $pembayaran->status = 'pending';
                 $pembayaran->user_id = $user->id;
                 $pembayaran->checkout_link = $result['invoice_url'];
