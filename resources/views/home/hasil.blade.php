@@ -34,7 +34,7 @@
                                 @forelse ($items as $item)
                                     <tr>
                                         <td>{{ $i }}</td>
-                                        <td>{{ $item->peserta->nama }}</td>
+                                        <td>{{ $item->peserta->nama_depan }} {{ $item->peserta->nama_belakang }}</td>
                                         <td>{{ $item->peserta->asal_sekolah }}</td>
                                         <td>{{ $item->orang_tua->nama_ayah }}</td>
                                         <td>

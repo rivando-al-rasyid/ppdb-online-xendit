@@ -15,7 +15,8 @@ class CreatePesertaPpdbTable extends Migration
     {
         Schema::create('tbl_peserta_ppdb', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
+            $table->string('nama_depan');
+            $table->string('nama_belakang');
             $table->bigInteger('nisn');
             $table->bigInteger('nik');
             $table->bigInteger('no_kk');

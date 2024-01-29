@@ -1,30 +1,26 @@
 @extends('admin.layouts.app')
-
 @push('style')
-    <link href="{{ asset('adminkit/datatables/dataTables.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 @endpush
-
 @section('content')
     <div class="container-fluid">
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-            <a href="{{ route('tu.download') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                    class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
         </div>
 
         <!-- Content Row -->
         <div class="row">
 
-            <!-- Total Admin Card -->
+            <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-primary shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    Total Menunggu</div>
+                                    Total Admin</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $count_menunggu_peserta }}</div>
                             </div>
                             <div class="col-auto">
@@ -35,14 +31,14 @@
                 </div>
             </div>
 
-            <!-- Total Menunggu Card -->
+            <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-success shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                    Total DITOLAK</div>
+                                    Total Menunggu</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $count_ditolak_peserta }}</div>
                             </div>
                             <div class="col-auto">
@@ -53,14 +49,14 @@
                 </div>
             </div>
 
-            <!-- Total Ditolak Card -->
+            <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-info shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                    Total CADANGAN</div>
+                                    Total Ditolak</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $count_cadangan_peserta }}</div>
                             </div>
                             <div class="col-auto">
@@ -71,7 +67,7 @@
                 </div>
             </div>
 
-            <!-- Total Diterima Card -->
+            <!-- Pending Requests Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-left-warning shadow h-100 py-2">
                     <div class="card-body">
@@ -124,18 +120,17 @@
                                     @foreach ($items as $item)
                                         <tr>
                                             <td>{{ $i }}</td>
-                                            <td>{{ $item->peserta->nama }}</td>
+                                            <td>{{ $item->peserta->nama_depan }} {{ $item->peserta->nama_belakang }}</td>
                                             <td>{{ $item->peserta->asal_sekolah }}</td>
                                             <td>{{ $item->orang_tua->nama_ayah }}</td>
-
                                             <td>
                                                 @if ($item->status == 'MENUNGGU')
                                                     <div class="font-weight-bold text-warning">MENUNGGU</div>
-                                                @elseif ($item->status == 'CADANGAN')
-                                                    <div class="font-weight-bold text-primary">CADANGAN</div>
-                                                @elseif ($item->status == 'DITOLAK')
+                                                @endif
+                                                @if ($item->status == 'DITOLAK')
                                                     <div class="font-weight-bold text-danger">DITOLAK</div>
-                                                @else
+                                                @endif
+                                                @if ($item->status == 'DITERIMA')
                                                     <div class="font-weight-bold text-success">DITERIMA</div>
                                                 @endif
                                             </td>
@@ -145,6 +140,7 @@
                                                     Detail
                                                 </a>
                                             </td>
+
                                         </tr>
                                         <?php $i++; ?>
                                     @endforeach
@@ -157,9 +153,9 @@
         </div>
     </div>
 @endsection
-
 @push('script')
     <!-- Page level plugins -->
-    <script src="{{ asset('adminkit/datatables/jquery.min.js') }}"></script>
-    <script src="{{ asset('adminkit/datatables/dataTables.min.js') }}"></script>
+    <script src="{{ asset('sbadmin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('sbadmin/js/demo/datatables-demo.js') }}"></script>
 @endpush
