@@ -39,7 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [PembayaranController::class, 'create'])->name('dashboard');
     Route::post('/pembayaran', [PembayaranController::class, 'createInvoice'])->name('pembayaran.store');
     Route::post('/create-invoice', [PembayaranController::class, 'createInvoice']);
-
+    Route::get('/status/pembayaran/{id}', [PembayaranController::class, 'getInvoiceById']);
 });
 Route::post('/xendit-webhook/invoice', [XenditWebhookController::class, 'handleInvoiceCallback']);
 

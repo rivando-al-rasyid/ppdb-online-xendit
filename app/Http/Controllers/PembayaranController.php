@@ -144,6 +144,7 @@ class PembayaranController extends Controller
                     'invoice_duration' => 86400,
                     'customer' => $invoiceCustomerData,
                     'customer_notification_preference' => $notificationPreference,
+                    'success_redirect_url' => '',
                 ]);
 
                 // Create the invoice
