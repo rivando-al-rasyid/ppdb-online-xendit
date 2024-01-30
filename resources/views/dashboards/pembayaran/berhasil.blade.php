@@ -1,23 +1,21 @@
-@extends('layouts.app') {{-- Assuming you have a layout file --}}
+<!-- resources/views/invoice-details.blade.php -->
+
+@extends('layouts.app') <!-- Assuming you have a layout file -->
 
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Payment Successful!</div>
+                    <div class="card-header">Invoice Details</div>
 
                     <div class="card-body">
-                        <p>Thank you for your payment! Here are the payment details:</p>
-                        <ul>
-                            <li><strong>Payment ID:</strong> {{ $pembayaran->external_id }}</li>
-                            <li><strong>Amount:</strong> {{ $pembayaran->amount }} IDR</li>
-                            <li><strong>Description:</strong> {{ $pembayaran->description }}</li>
-                            <li><strong>Name:</strong> {{ $pembayaran->given_names }} {{ $pembayaran->surname }}</li>
-                            <li><strong>Email:</strong> {{ $pembayaran->email }}</li>
-                            <li><strong>Mobile Number:</strong> {{ $pembayaran->mobile_number }}</li>
-                            <li><strong>Status:</strong> {{ $pembayaran->status }}</li>
-                        </ul>
+                        <p><strong>Invoice ID:</strong> {{ $result['id'] }}</p>
+                        <p><strong>Amount:</strong> {{ number_format($result['amount']) }} {{ $result['currency'] }}</p>
+                        <p><strong>Status:</strong> {{ $result['status'] }}</p>
+                        <p><strong>Expiry Date:</strong> {{ $result['expiry_date']->format('Y-m-d H:i:s') }}</p>
+                        <p><strong>Payment Method:</strong> {{ $result['payment_method'] }}</p>
+                        <!-- Display other relevant invoice details -->
                     </div>
                 </div>
             </div>

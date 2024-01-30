@@ -12,6 +12,7 @@ return new class extends Migration {
     {
         Schema::create('pembayarans', function (Blueprint $table) {
             $table->id();
+            $table->string('invoice_id')->unique();
             $table->string('external_id')->unique();
             $table->string('payer_email');
             $table->text('description');

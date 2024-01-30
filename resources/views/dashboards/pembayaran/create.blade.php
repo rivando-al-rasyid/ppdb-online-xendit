@@ -19,7 +19,7 @@
                             <li><strong>Nama:</strong> {{ $user->name }}</li>
                             <li><strong>Nama Belakang:</strong> {{ $user->surname }}</li>
                             <li><strong>Email:</strong> {{ $user->email }}</li>
-                            <li><strong>nomor HP:</strong> {{ $user->mobile_number }}</li>
+                            <li><strong>nomor HP:</strong> {{ $user->no_hp }}</li>
                             {{-- Add other necessary customer data here --}}
                         </ul>
                         <form action="{{ route('pembayaran.store') }}" method="POST">

@@ -34,7 +34,7 @@ Breadcrumbs::for('pembayaran.index', function (BreadcrumbTrail $trail) {
 
 Breadcrumbs::for('pembayaran.invoice', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
-    $trail->push('Tagihan', route('pembayaran.invoice'));
+    $trail->push('kwintansi', route('pembayaran.invoice'));
 });
 
 

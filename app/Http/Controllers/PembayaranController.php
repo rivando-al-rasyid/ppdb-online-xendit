@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use App\Models\Pembayaran;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PembayaranController extends Controller
 {
@@ -82,25 +83,18 @@ class PembayaranController extends Controller
 
             \DB::commit();
 
-            // Additional logic after processing $items...
-
+            Alert::success('Success', 'Customer created successfully!')->persistent(true)->autoClose(3000);
             return redirect()->route('admin.dashboard');
         } catch (ModelNotFoundException $e) {
             \DB::rollBack();
+            Alert::error('Error', $e->getMessage())->persistent(true)->autoClose(5000);
             return response()->json(['error' => $e->getMessage()], 404);
         } catch (\Exception $e) {
             \DB::rollBack();
+            Alert::error('Error', $e->getMessage())->persistent(true)->autoClose(5000);
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
-
-    /**
-     * Get customer by ID and return the result in a view.
-     *
-     * @param Request $request
-     * @param string $customerId
-     * @return \Illuminate\View\View|\Illuminate\Http\JsonResponse
-     */
 
     /**
      * Create an invoice.
@@ -113,6 +107,7 @@ class PembayaranController extends Controller
             // Retrieve customer data from the authenticated user
             $user = Auth::user();
             $sekolah = Sekolah::first();
+            $url = app('url')->to('/invoice');
 
             // Check if any invoice with the same user_id exists
             $existingPembayaran = Pembayaran::where('user_id', $user->id)->first();
@@ -144,13 +139,14 @@ class PembayaranController extends Controller
                     'invoice_duration' => 86400,
                     'customer' => $invoiceCustomerData,
                     'customer_notification_preference' => $notificationPreference,
-                    'success_redirect_url' => '',
+                    'success_redirect_url' => $url,
                 ]);
 
                 // Create the invoice
                 $result = $this->invoiceApiInstance->createInvoice($createInvoiceRequest);
 
                 $pembayaran = new Pembayaran;
+                $pembayaran->invoice_id = $result['id'];
                 $pembayaran->external_id = $result['external_id'];
                 $pembayaran->description = $result['description'];
                 $pembayaran->amount = $result['amount'];
@@ -160,34 +156,70 @@ class PembayaranController extends Controller
                 $pembayaran->checkout_link = $result['invoice_url'];
                 $pembayaran->save();
 
+                Alert::success('Success', 'Invoice created successfully!')->persistent(true)->autoClose(3000);
                 return redirect()->away($result['invoice_url']);
             } else {
                 // If the invoice already exists, redirect to the checkout link
+                Alert::info('Info', 'Invoice already exists!')->persistent(true)->autoClose(3000);
                 return redirect()->away($existingPembayaran->checkout_link);
             }
         } catch (XenditSdkException $e) {
+            Alert::error('Error', $e->getMessage())->persistent(true)->autoClose(5000);
             return response()->json([
                 'error' => $e->getMessage(),
                 'full_error' => $e->getFullError(),
             ], 500);
         }
     }
+
+    /**
+     * Get customer by ID and return the result in a view.
+     *
+     * @param Request $request
+     * @param string $customerId
+     * @return \Illuminate\View\View|\Illuminate\Http\JsonResponse
+     */
+
     /**
      * Get invoice by ID.
      *
      * @param string $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getInvoiceById($id)
+
+    public function showInvoice()
     {
         try {
-            $result = $this->invoiceApiInstance->getInvoiceById($id);
-            return response()->json($result, 200);
+            // Ensure the user is authenticated
+            $user = Auth::user();
+            $userId = $user->id;
+
+            $pembayaran = Pembayaran::where('user_id', $userId)->first();
+
+            if (!$pembayaran) {
+                Alert::error('Error', 'Pembayaran not found')->persistent(true)->autoClose(5000);
+                return response()->json(['error' => 'Pembayaran not found'], 404);
+            }
+
+            $invoiceId = $pembayaran->invoice_id;
+
+            // Use $this->invoiceApiInstance for consistency
+            $result = $this->invoiceApiInstance->getInvoiceById($invoiceId);
+
+            // Update the status of the Pembayaran object
+            $pembayaran->status = $result['status']; // Assuming 'status' is the key for status in the API response
+
+            // Save the updated Pembayaran object
+            $pembayaran->save();
+
+            // Pass the invoice details to the view using compact
+            return view('dashboards.pembayaran.berhasil', compact('result'));
         } catch (XenditSdkException $e) {
-            return response()->json([
-                'error' => $e->getMessage(),
-                'full_error' => $e->getFullError(),
-            ], 500);
+            Alert::error('Error', $e->getMessage())->persistent(true)->autoClose(5000);
+            return response()->json(['error' => $e->getMessage()], 500);
+        } catch (\Exception $e) {
+            Alert::error('Error', 'An error occurred.')->persistent(true)->autoClose(5000);
+            return response()->json(['error' => 'An error occurred'], 500);
         }
     }
 
@@ -201,8 +233,10 @@ class PembayaranController extends Controller
     {
         try {
             $result = $this->invoiceApiInstance->expireInvoice($id);
+            Alert::warning('Warning', 'Invoice expired successfully!')->persistent(true)->autoClose(3000);
             return response()->json($result, 200);
         } catch (XenditSdkException $e) {
+            Alert::error('Error', $e->getMessage())->persistent(true)->autoClose(5000);
             return response()->json([
                 'error' => $e->getMessage(),
                 'full_error' => $e->getFullError(),
@@ -220,7 +254,6 @@ class PembayaranController extends Controller
         // Retrieve a Sekolah model and pass it to the view
         $sekolah = Sekolah::first();
         $user = Auth::user();
-
         return view('dashboards.pembayaran.create', compact('sekolah', 'user'));
     }
 }
