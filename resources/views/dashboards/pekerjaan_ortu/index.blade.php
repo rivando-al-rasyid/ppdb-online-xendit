@@ -32,10 +32,9 @@
                             </tr>
                         </tfoot>
                         <tbody>
-                            <?php $i = 1; ?>
                             @foreach ($items as $item)
                                 <tr>
-                                    <td>{{ $i }}</td>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->nama_pekerjaan }}</td>
                                     <td>
                                         <a href="{{ route('admin.pekerjaan_ortu.edit', $item->id) }}"
@@ -53,7 +52,6 @@
                                     </td>
 
                                 </tr>
-                                <?php $i++; ?>
                             @endforeach
                         </tbody>
                     </table>

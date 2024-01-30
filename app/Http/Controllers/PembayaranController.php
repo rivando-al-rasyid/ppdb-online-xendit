@@ -206,11 +206,14 @@ class PembayaranController extends Controller
             // Use $this->invoiceApiInstance for consistency
             $result = $this->invoiceApiInstance->getInvoiceById($invoiceId);
 
-            // Update the status of the Pembayaran object
-            $pembayaran->status = $result['status']; // Assuming 'status' is the key for status in the API response
+            // Check if the status from the API response is different from the current status
+            if ($result['status'] !== $pembayaran->status) {
+                // Update the status of the Pembayaran object
+                $pembayaran->status = $result['status'];
 
-            // Save the updated Pembayaran object
-            $pembayaran->save();
+                // Save the updated Pembayaran object
+                $pembayaran->save();
+            }
 
             // Pass the invoice details to the view using compact
             return view('dashboards.pembayaran.berhasil', compact('result'));

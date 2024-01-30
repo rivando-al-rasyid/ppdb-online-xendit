@@ -30,32 +30,8 @@ class DashboardController extends Controller
 
     public function index()
     {
-
-        $items = Hasil::with(['peserta', 'orang_tua'])->get();
-
-        // Count
-        $count_admin = Tu::all()->count();
-        $count_all_peserta = Hasil::all()->count();
-        $count_menunggu_peserta = Hasil::where('status', 'MENUNGGU')->count();
-        $count_ditolak_peserta = Hasil::where('status', 'DITOLAK')->count();
-        $count_cadangan_peserta = Hasil::where('status', 'CADANGAN')->count();
-        $count_diterima_peserta = Hasil::where('status', 'DITERIMA')->count();
-        return view(
-            'dashboards.dashboard.admin.index',
-            compact(
-                'items',
-                'count_admin',
-                'count_all_peserta',
-                'count_menunggu_peserta',
-                'count_ditolak_peserta',
-                'count_cadangan_peserta',
-                'count_diterima_peserta'
-            )
-        );
-    }
-    public function indextu()
-    {
-
+        // Determine the user's role
+        $role = Auth::guard('web')->user();
         $items = Hasil::with(['peserta', 'orang_tua'])->get();
         $count_admin = Tu::all()->count();
 
@@ -65,8 +41,12 @@ class DashboardController extends Controller
         $count_ditolak_peserta = Hasil::where('status', 'DITOLAK')->count();
         $count_cadangan_peserta = Hasil::where('status', 'CADANGAN')->count();
         $count_diterima_peserta = Hasil::where('status', 'DITERIMA')->count();
+
+        // Determine the view based on the user's role
+        $view = $role === 'admin' ? 'dashboards.dashboard.tu.index' : 'dashboards.dashboard.admin.index';
+
         return view(
-            'dashboards.dashboard.tu.index',
+            $view,
             compact(
                 'items',
                 'count_admin',
@@ -121,8 +101,16 @@ class DashboardController extends Controller
 
     public function detail($id)
     {
+        $role = Auth::guard('web')->user();
         $item = Hasil::with(['peserta.orang_tua'])->where('id', $id)->first();
-        return view('dashboards.dashboard.admin.detail', compact('item'));
+        $view = $role === 'admin' ? 'dashboards.dashboard.tu.detail' : 'dashboards.dashboard.admin.detail';
+        return view(
+            $view,
+            compact(
+                'item'
+            )
+        );
+
     }
     public function detailtu($id)
     {

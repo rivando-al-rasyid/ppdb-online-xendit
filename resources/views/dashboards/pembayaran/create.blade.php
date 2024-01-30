@@ -24,12 +24,7 @@
                         </ul>
                         <form action="{{ route('pembayaran.store') }}" method="POST">
                             @csrf <!-- Add CSRF token for security, needed for POST requests -->
-
-                            {{-- Add any payment-related fields here --}}
-
-                            {{-- Add other payment-related fields as needed --}}
-
-                            <button type="submit" class="btn btn-primary">bayaar</button>
+                            <button type="submit" class="btn btn-primary">bayar</button>
                         </form>
                     </div>
                 </div>

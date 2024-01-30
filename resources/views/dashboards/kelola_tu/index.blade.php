@@ -23,10 +23,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $i = 1; ?>
                             @foreach ($items as $item)
                                 <tr>
-                                    <td>{{ $i }}</td>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->email }}</td>
                                     <td>
@@ -43,7 +42,6 @@
                                     </td>
                                 </tr>
                                 <?php $i++; ?>
-                            @endforeach
                         </tbody>
                     </table>
                 </div>

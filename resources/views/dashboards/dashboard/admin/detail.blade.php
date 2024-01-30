@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <a href="{{ route('admin.dashboard') }}" class="btn btn-danger mb-5">Back</a>
+        <a href="{{ route('tu.dashboard') }}" class="btn btn-danger mb-5">Back</a>
         <div class="card">
             <div class="card-body">
                 <h4>Data Lengkap Peserta</h4>
@@ -12,10 +12,25 @@
                             <td>Nama</td>
                             <td>{{ $item->peserta->nama_depan }} {{ $item->peserta->nama_belakang }}</td>
                         </tr>
+
                         <tr>
                             <td>TTL</td>
                             <td>{{ $item->peserta->tempat_lahir }}, {{ $item->peserta->tanggal_lahir }}</td>
                         </tr>
+                        <tr>
+                            <td>NISN</td>
+                            <td>{{ $item->peserta->nisn }}</td>
+                        </tr>
+                        <tr>
+                            <td>NIK</td>
+                            <td>{{ $item->peserta->nik }}</td>
+                        </tr>
+                        <tr>
+                            <td>Nomor KK</td>
+                            <td>{{ $item->peserta->no_kk }}</td>
+                        </tr>
+
+
                         <tr>
                             <td>Asal Sekolah</td>
                             <td>{{ $item->peserta->asal_sekolah }}</td>
@@ -28,28 +43,6 @@
                             <td>Agama</td>
                             <td>{{ $item->peserta->agama }}</td>
                         </tr>
-                        {{-- <tr>
-                        <td>ijasah</td>
-                        <td>
-                            @if ($item->ijasah)
-                                <a href="{{ asset('storage/' . $item->ijasah) }}" data-lightbox="ijasah"
-                                    class="btn btn-primary">View Ijasah</a>
-                            @else
-                                No ijasah available
-                            @endif
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>kk</td>
-                        <td>
-                            @if ($item->kk)
-                                <a href="{{ asset('storage/' . $item->kk) }}" data-lightbox="kk"
-                                    class="btn btn-primary">View KK</a>
-                            @else
-                                No KK available
-                            @endif
-                        </td>
-                    </tr> --}}
 
                         <!-- Include the Lightbox2 CSS and JavaScript files in your HTML -->
 
@@ -91,7 +84,7 @@
                             <td>
                                 @if ($item->status == 'MENUNGGU')
                                     <form method="post" class="d-inline-block"
-                                        action="{{ route('admin.peserta.diterima', $item->id) }}">
+                                        action="{{ route('tu.peserta.diterima', $item->id) }}">
                                         @method('PATCH')
                                         @csrf
                                         <button type="submit" class="btn btn-success me-2">
@@ -99,7 +92,7 @@
                                         </button>
                                     </form>
                                     <form method="post" class="d-inline-block"
-                                        action="{{ route('admin.peserta.cadangan', $item->id) }}">
+                                        action="{{ route('tu.peserta.cadangan', $item->id) }}">
                                         @method('PATCH')
                                         @csrf
                                         <button type="submit" class="btn btn-primary">
@@ -107,7 +100,7 @@
                                         </button>
                                     </form>
                                     <form method="post" class="d-inline-block"
-                                        action="{{ route('admin.peserta.ditolak', $item->id) }}">
+                                        action="{{ route('tu.peserta.ditolak', $item->id) }}">
                                         @method('PATCH')
                                         @csrf
                                         <button type="submit" class="btn btn-danger">

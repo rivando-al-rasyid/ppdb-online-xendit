@@ -116,10 +116,9 @@
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                    <?php $i = 1; ?>
                                     @foreach ($items as $item)
                                         <tr>
-                                            <td>{{ $i }}</td>
+                                            <td>{{ $loop->iteration }}</td>
                                             <td>{{ $item->peserta->nama_depan }} {{ $item->peserta->nama_belakang }}</td>
                                             <td>{{ $item->peserta->asal_sekolah }}</td>
                                             <td>{{ $item->orang_tua->nama_ayah }}</td>
@@ -142,7 +141,6 @@
                                             </td>
 
                                         </tr>
-                                        <?php $i++; ?>
                                     @endforeach
                                 </tbody>
                             </table>
