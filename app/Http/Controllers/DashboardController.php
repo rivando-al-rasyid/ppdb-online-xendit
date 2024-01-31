@@ -112,12 +112,6 @@ class DashboardController extends Controller
         );
 
     }
-    public function detailtu($id)
-    {
-        $item = Hasil::with(['peserta.orang_tua'])->where('id', $id)->first();
-        return view('dashboards.dashboard.tu.detail', compact('item'));
-    }
-
     public function terima($id)
     {
         $item = Hasil::findOrFail($id);

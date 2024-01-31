@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Sekolah;
 use RealRashid\SweetAlert\Facades\Alert;
-use App\Models\Pembayaran;
-use App\Models\PesertaPPDB;
-use App\Models\User;
 
 class SekolahController extends Controller
 {
