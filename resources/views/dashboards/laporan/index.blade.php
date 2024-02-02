@@ -2,6 +2,7 @@
 @push('style')
     <link href="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="{{ asset('sbadmin/vendor/datatables/Buttons/css/buttons.bootstrap4.css') }}" rel="stylesheet">
+    <link href="{{ asset('sbadmin/css/custom/scroller.css') }}" rel="stylesheet">
 @endpush
 @section('content')
     <div class="container-fluid">
@@ -21,18 +22,17 @@
                     <div class="card mt-3">
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered display " id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered display nowrap" id="dataTable">
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama Depan</th>
-                                            <th>Nama Belakang</th>
+                                            <th>Nama</th>
                                             <th>NISN</th>
                                             <th>NIK</th>
                                             <th>No KK</th>
                                             <th>Jenis Kelamin</th>
                                             <th>Tanggal Lahir</th>
-                                            <th>Tempat Lahir</th>
+                                            <th>Tempat Lahir</ths>
                                             <th>Agama</th>
                                             <th>Asal Sekolah</th>
                                             <th>Alamat</th>
@@ -41,13 +41,14 @@
                                             <th>Nama Ibu</th>
                                             <th>No Telepon Ibu</th>
                                         </tr>
+
                                     </thead>
                                     <tbody>
                                         @forelse ($items as $item)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $item->peserta->nama_depan }}</td>
-                                                <td>{{ $item->peserta->nama_belakang }}</td>
+                                                <td>{{ $item->peserta->nama_depan }} {{ $item->peserta->nama_belakang }}
+                                                </td>
                                                 <td>{{ $item->peserta->nisn }}</td>
                                                 <td>{{ $item->peserta->nik }}</td>
                                                 <td>{{ $item->peserta->no_kk }}</td>
@@ -87,5 +88,4 @@
         <script src="https://cdn.datatables.net/v/bs4/jszip-3.10.1/b-2.4.2/b-html5-2.4.2/b-print-2.4.2/datatables.min.js">
         </script>
         <script src="{{ asset('sbadmin/js/demo/admin.js') }}"></script>
-        public/sbadmin/vendor/datatables/
     @endpush
