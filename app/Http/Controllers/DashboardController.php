@@ -30,33 +30,37 @@ class DashboardController extends Controller
 
     public function index()
     {
-        // Determine the user's role
-        $role = Auth::guard('web')->user();
+        // Get counts
+        $counts = $this->getCounts();
+
+        // Fetch items
         $items = Hasil::with(['peserta', 'orang_tua'])->get();
-        $count_admin = Tu::all()->count();
 
-        // Count
-        $count_all_peserta = Hasil::all()->count();
-        $count_menunggu_peserta = Hasil::where('status', 'MENUNGGU')->count();
-        $count_ditolak_peserta = Hasil::where('status', 'DITOLAK')->count();
-        $count_cadangan_peserta = Hasil::where('status', 'CADANGAN')->count();
-        $count_diterima_peserta = Hasil::where('status', 'DITERIMA')->count();
+        return view('dashboards.dashboard.admin.index', compact('items', 'counts'));
+    }
+    public function indextu()
+    {
+        // Get counts
+        $counts = $this->getCounts();
 
-        // Determine the view based on the user's role
-        $view = $role === 'admin' ? 'dashboards.dashboard.tu.index' : 'dashboards.dashboard.admin.index';
+        // Fetch items
+        $items = Hasil::with(['peserta', 'orang_tua'])->get();
 
-        return view(
-            $view,
-            compact(
-                'items',
-                'count_admin',
-                'count_all_peserta',
-                'count_menunggu_peserta',
-                'count_ditolak_peserta',
-                'count_cadangan_peserta',
-                'count_diterima_peserta'
-            )
-        );
+        return view('dashboards.dashboard.tu.index', compact('items', 'counts'));
+    }
+
+    private function getCounts()
+    {
+        $counts = [
+            'admin' => Tu::count(),
+            'all_peserta' => Hasil::count(),
+            'menunggu_peserta' => Hasil::where('status', 'MENUNGGU')->count(),
+            'ditolak_peserta' => Hasil::where('status', 'DITOLAK')->count(),
+            'cadangan_peserta' => Hasil::where('status', 'CADANGAN')->count(),
+            'diterima_peserta' => Hasil::where('status', 'DITERIMA')->count(),
+        ];
+
+        return $counts;
     }
     public function laporan()
     {
@@ -101,17 +105,27 @@ class DashboardController extends Controller
 
     public function detail($id)
     {
-        $role = Auth::guard('web')->user();
         $item = Hasil::with(['peserta.orang_tua'])->where('id', $id)->first();
-        $view = $role === 'admin' ? 'dashboards.dashboard.tu.detail' : 'dashboards.dashboard.admin.detail';
         return view(
-            $view,
+            'dashboards.dashboard.admin.detail',
             compact(
                 'item'
             )
         );
 
     }
+    public function detailtu($id)
+    {
+        $item = Hasil::with(['peserta.orang_tua'])->where('id', $id)->first();
+        return view(
+            'dashboards.dashboard.tu.detail',
+            compact(
+                'item'
+            )
+        );
+
+    }
+
     public function terima($id)
     {
         $item = Hasil::findOrFail($id);

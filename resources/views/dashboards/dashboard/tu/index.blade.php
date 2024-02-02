@@ -21,7 +21,7 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                     Total tu</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $count_menunggu_peserta }}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $counts['admin'] }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -39,7 +39,7 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                     Total Menunggu</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $count_ditolak_peserta }}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $counts['ditolak_peserta'] }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -57,7 +57,7 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                     Total Ditolak</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $count_cadangan_peserta }}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $counts['cadangan_peserta'] }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
@@ -75,7 +75,7 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                     Total Diterima</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $count_diterima_peserta }}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $counts['diterima_peserta'] }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-comments fa-2x text-gray-300"></i>
