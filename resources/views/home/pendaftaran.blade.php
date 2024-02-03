@@ -54,8 +54,6 @@
 
             <div class="card mt-5">
                 <div class="card-body">
-                    <h1></h1>
-
                     <form method="POST" action="{{ route('daftar.kirim') }}" id="signup-form" class="signup-form"
                         enctype="multipart/form-data">
                         @csrf
@@ -118,12 +116,15 @@
                                         </select>
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Tanggal Lahir</label>
-                                        <input type="date" name="tanggal_lahir" class="form-control" autocomplete="off">
+                                        <label for="tanggal_lahir">Tanggal Lahir</label>
+                                        <input type="date" id="tanggal_lahir" name="tanggal_lahir" class="form-control"
+                                            autocomplete="off">
                                     </div>
                                 </div>
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Tempat Lahir</label>
@@ -142,86 +143,126 @@
                                         <textarea name="alamat" rows="10" class="form-control"></textarea>
                                     </div>
                                 </div>
+                            </div>
                         </fieldset>
 
                         <h3></h3>
                         <fieldset>
-                            <span class="step-current">Step 2 / 3</span>
+                            <span class="step-current"></span>
                             <h2>Biodata Orang Tua</h2>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>Nama Orang Tua (Ayah)</label>
-                                    <input type="text" name="nama_ayah" class="form-control" autocomplete="off"
-                                        autofocus>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Nama Orang Ayah</label>
+                                        <input type="text" name="nama_ayah" class="form-control" autocomplete="off"
+                                            autofocus>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Pekerjaan Ayah</label>
-                                    <select name="id_pekerjaan_ayah" class="form-control">
-                                        @forelse ($pekerjaan_ortu as $item)
-                                            <option value="{{ $item->id }}">{{ $item->nama_pekerjaan }}</option>
-                                        @empty
-                                            <option value="">NO Data</option>
-                                        @endforelse
-                                    </select>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Pekerjaan Ayah</label>
+                                        <select name="id_pekerjaan_ayah" class="form-control">
+                                            @forelse ($pekerjaan_ortu as $item)
+                                                <option value="{{ $item->id }}">{{ $item->nama_pekerjaan }}</option>
+                                            @empty
+                                                <option value="">NO Data</option>
+                                            @endforelse
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>No telepon ayah</label>
+                                        <input type="number" name="no_telp_ayah" class="form-control"
+                                            autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Nama Ibu</label>
+                                        <input type="text" name="nama_ibu" class="form-control" autocomplete="off"
+                                            autofocus>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Pekerjaan Ibu</label>
+                                        <select name="id_pekerjaan_ibu" class="form-control">
+                                            @forelse ($pekerjaan_ortu as $item)
+                                                <option value="{{ $item->id }}">{{ $item->nama_pekerjaan }}</option>
+                                            @empty
+                                                <option value="">NO Data</option>
+                                            @endforelse
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>No Telepon</label>
+                                        <input type="number" name="no_telp_ibu" class="form-control"
+                                            autocomplete="off">
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>No telepon ayah</label>
-                                    <input type="number" name="no_telp_ayah" class="form-control" autocomplete="off">
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>Nama Orang Tua (Ibu)</label>
-                                    <input type="text" name="nama_ibu" class="form-control" autocomplete="off"
-                                        autofocus>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Pekerjaan Ibu</label>
-                                    <select name="id_pekerjaan_ibu" class="form-control">
-                                        @forelse ($pekerjaan_ortu as $item)
-                                            <option value="{{ $item->id }}">{{ $item->nama_pekerjaan }}</option>
-                                        @empty
-                                            <option value="">NO Data</option>
-                                        @endforelse
-                                    </select>
-                                </div>
-                            </div>
+                            <h2>Biodata Wali (Diisi bila memiliki)</h2>
+                            <div class="row">
 
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>No Telepon</label>
-                                    <input type="number" name="no_telp_ibu" class="form-control" autocomplete="off">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Nama Orang Wali</label>
+                                        <input type="text" name="nama_wali" class="form-control" autocomplete="off"
+                                            autofocus>
+                                    </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Pekerjaan Ayah</label>
+                                        <select name="id_pekerjaan_wali" class="form-control">
+                                            <option value="">kosong</option>
+                                            @forelse ($pekerjaan_ortu as $item)
+                                                <option value="{{ $item->id }}">{{ $item->nama_pekerjaan }}</option>
+                                            @empty
+                                                <option value="">NO Data</option>
+                                            @endforelse
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>No telepon Wali</label>
+                                        <input type="number" name="no_telp_wali" class="form-control"
+                                            autocomplete="off">
+                                    </div>
+                                </div>
+
+
                             </div>
 
                         </fieldset>
 
-                        {{-- <h3></h3>
+                        <h3></h3>
                         <fieldset>
-                            <span class="step-current">Step 3 / 3</span>
-                            <h2>Kartu Beasiswa</h2>
+                            <span class="step-current"></span>
+                            <h2>Kartu Bantuan (Diisi bila memiliki)</h2>
                             <div class="form-group">
                                 <label for="nomor_kps">Nomor KPS:</label>
-                                <input type="text" class="form-control" name="nomor_kps" id="nomor_kps" required>
+                                <input type="text" class="form-control" name="nomor_kps" id="nomor_kps">
 
                                 <label for="nomor_kks">Nomor KKS:</label>
-                                <input type="text" class="form-control" name="nomor_kks" id="nomor_kks" required>
+                                <input type="text" class="form-control" name="nomor_kks" id="nomor_kks">
 
                                 <label for="nomor_kip">Nomor KIP:</label>
-                                <input type="text" class="form-control" name="nomor_kip" id="nomor_kip" required>
+                                <input type="text" class="form-control" name="nomor_kip" id="nomor_kip">
 
                                 <label for="nomor_pkh">Nomor PKH:</label>
-                                <input type="text" class="form-control" name="nomor_pkh" id="nomor_pkh" required>
+                                <input type="text" class="form-control" name="nomor_pkh" id="nomor_pkh">
                             </div>
                         </fieldset>
- --}}
+
                     </form>
 
                 </div>

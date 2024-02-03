@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kartu;
+use App\Models\Wali;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -99,6 +101,28 @@ class DaftarController extends Controller
             Alert::error('Error', 'Please check your form again!');
             return redirect()->back();
         }
+
+        $dataWali = [
+            'id_peserta_ppdb' => $daftar->id,
+            'id_pekerjaan_wali' => $request->id_pekerjaan_wali,
+            'nama_wali' => $request->nama_wali,
+            'no_tlp_wali' => $request->no_telp_wali,
+        ];
+
+
+        $wali = Wali::create($dataWali);
+
+        $dataKartu = [
+            'id_peserta_ppdb' => $daftar->id,
+            'kip' => $request->nomor_kip,
+            'kks' => $request->nomor_kks,
+            'kps' => $request->nomor_kps,
+            'pkh' => $request->nomor_pkh,
+
+        ];
+
+        $kartu = Kartu::create($dataKartu);
+
         $data3 = [
             'nis' => $daftar->id
         ];

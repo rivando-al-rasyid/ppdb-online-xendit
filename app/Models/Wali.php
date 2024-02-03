@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Wali extends Model
 {
-    protected $table = "tbl_biodata_ortu";
+    protected $guarded = [];
+    protected $table = "wali";
 
     public function peserta()
     {

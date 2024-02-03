@@ -8,13 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Kartu extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'id_peserta_ppdb',
-        'kps',
-        'kks',
-        'kip',
-        'pkh',
-    ];
+    protected $guarded = [];
+    protected $table = "kartus";
 
     public function peserta()
     {
