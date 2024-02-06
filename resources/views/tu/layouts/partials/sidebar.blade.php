@@ -45,6 +45,9 @@
                     href="{{ route('tu.laporan.index') }}">Laporan Data siswa</a>
                 <a class="collapse-item{{ request()->routeIs('tu.laporan.dataortu') ? ' active' : '' }}"
                     href="{{ route('tu.laporan.dataortu') }}">laporan Data orang tua</a>
+                <a class="collapse-item{{ request()->routeIs('tu.update.invoices') ? ' active' : '' }}"
+                    href="{{ route('tu.update.invoices') }}">laporan Data Pembayaran</a>
+
             </div>
         </div>
     </li>

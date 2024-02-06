@@ -3,6 +3,7 @@
 use App\Modules\Tus\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PembayaranController;
 
 
 // Route::middleware(['web', 'tu.auth', 'tu.verified'])->get('/tu', function () {
@@ -22,6 +23,8 @@ Route::group(['as' => 'tu.', 'prefix' => '/tu', 'middleware' => ['web', 'tu.auth
     Route::patch('/diterima/{id}', [DashboardController::class, 'terima'])->name('peserta.diterima');
     Route::patch('/cadangan/{id}', [DashboardController::class, 'cadangan'])->name('peserta.cadangan');
     Route::patch('/ditolak/{id}', [DashboardController::class, 'tolak'])->name('peserta.ditolak');
+    Route::get('/laporan/pembayaran', [PembayaranController::class, 'updateInvoices'])->name('update.invoices');
+
 });
 
 require __DIR__ . '/auth.php';

@@ -44,7 +44,6 @@ Route::middleware('auth')->group(function () {
 Route::post('/xendit-webhook/invoice', [XenditWebhookController::class, 'handleInvoiceCallback']);
 
 
-
 // Get Customer by ID
 
 

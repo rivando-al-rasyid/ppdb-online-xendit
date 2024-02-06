@@ -17,4 +17,5 @@ class Hasil extends Model
     {
         return $this->hasOne(BiodataOrtu::class, 'id_peserta_ppdb', 'nis');
     }
+
 }

@@ -109,6 +109,7 @@ class PembayaranController extends Controller
             $sekolah = Sekolah::first();
             $url = app('url')->to('/invoice');
 
+
             // Check if any invoice with the same user_id exists
             $existingPembayaran = Pembayaran::where('user_id', $user->id)->first();
 
@@ -225,6 +226,7 @@ class PembayaranController extends Controller
             return response()->json(['error' => 'An error occurred'], 500);
         }
     }
+
 
     /**
      * Expire an invoice by ID.
