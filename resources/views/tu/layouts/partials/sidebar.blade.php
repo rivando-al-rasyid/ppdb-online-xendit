@@ -5,7 +5,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Super Admin <sup></sup></div>
+        <div class="sidebar-brand-text mx-3">Tata Usaha <sup></sup></div>
     </a>
 
     <!-- Divider -->
@@ -31,26 +31,28 @@
     </div>
 
     <!-- Nav Item - Data Master -->
-    <li <li
+    <li
         class="nav-item{{ request()->routeIs('tu.laporan.index') || request()->routeIs('tu.laporan.dataortu') ? ' active' : '' }}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
             aria-expanded="true" aria-controls="collapseOne">
             <i class="fas fa-fw fa-cog"></i>
-            <span>Laporan</span>
+            <span>Data Master</span>
         </a>
-        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+        <div id="collapseOne"
+            class="collapse {{ request()->routeIs('tu.laporan.index') || request()->routeIs('tu.laporan.dataortu') ? ' show' : '' }}"
+            aria-labelledby="headingOne" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Laporan :</h6>
+                <h6 class="collapse-header ">Laporan :</h6>
                 <a class="collapse-item{{ request()->routeIs('tu.laporan.index') ? ' active' : '' }}"
                     href="{{ route('tu.laporan.index') }}">Laporan Data siswa</a>
                 <a class="collapse-item{{ request()->routeIs('tu.laporan.dataortu') ? ' active' : '' }}"
                     href="{{ route('tu.laporan.dataortu') }}">laporan Data orang tua</a>
                 <a class="collapse-item{{ request()->routeIs('tu.update.invoices') ? ' active' : '' }}"
-                    href="{{ route('tu.update.invoices') }}">laporan Data Pembayaran</a>
-
+                    href="{{ route('tu.laporan.pembayaran') }}">laporan Data Pembayaran</a>
             </div>
         </div>
     </li>
+
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">

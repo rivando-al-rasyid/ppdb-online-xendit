@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <a href="{{ route('tu.dashboard') }}" class="btn btn-danger mb-5">Back</a>
+        <a href="{{ route('admin.dashboard') }}" class="btn btn-danger mb-5">Back</a>
         <div class="card">
             <div class="card-body">
                 <h4>Data Lengkap Peserta</h4>

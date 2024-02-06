@@ -200,7 +200,7 @@
 
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label>No Telepon</label>
+                                        <label>No Telepon Ibu</label>
                                         <input type="number" name="no_telp_ibu" class="form-control"
                                             autocomplete="off">
                                     </div>
@@ -219,7 +219,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Pekerjaan Ayah</label>
+                                        <label>Pekerjaan Wali</label>
                                         <select name="id_pekerjaan_wali" class="form-control">
                                             <option value="">kosong</option>
                                             @forelse ($pekerjaan_ortu as $item)
