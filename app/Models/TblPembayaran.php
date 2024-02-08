@@ -10,7 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Pembayaran
+ * Class TblPembayaran
  * 
  * @property int $id
  * @property string $invoice_id
@@ -28,9 +28,9 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class Pembayaran extends Model
+class TblPembayaran extends Model
 {
-	protected $table = 'pembayarans';
+	protected $table = 'tbl_pembayaran';
 
 	protected $casts = [
 		'amount' => 'int',

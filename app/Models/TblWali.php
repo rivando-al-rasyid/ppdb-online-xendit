@@ -10,40 +10,42 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Kartu
+ * Class TblWali
  * 
  * @property int $id
- * @property int|null $kps
- * @property int|null $kks
- * @property int|null $kip
- * @property int|null $pkh
+ * @property int|null $id_pekerjaan_wali
+ * @property string|null $nama_wali
+ * @property int|null $no_tlp_wali
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property int $id_peserta_ppdb
  * 
+ * @property TblPekerjaanOrtu|null $tbl_pekerjaan_ortu
  * @property TblPesertaPpdb $tbl_peserta_ppdb
  *
  * @package App\Models
  */
-class Kartu extends Model
+class TblWali extends Model
 {
-	protected $table = 'kartus';
+	protected $table = 'tbl_wali';
 
 	protected $casts = [
-		'kps' => 'int',
-		'kks' => 'int',
-		'kip' => 'int',
-		'pkh' => 'int',
+		'id_pekerjaan_wali' => 'int',
+		'no_tlp_wali' => 'int',
 		'id_peserta_ppdb' => 'int'
 	];
 
 	protected $fillable = [
-		'kps',
-		'kks',
-		'kip',
-		'pkh',
+		'id_pekerjaan_wali',
+		'nama_wali',
+		'no_tlp_wali',
 		'id_peserta_ppdb'
 	];
+
+	public function tbl_pekerjaan_ortu()
+	{
+		return $this->belongsTo(TblPekerjaanOrtu::class, 'id_pekerjaan_wali');
+	}
 
 	public function tbl_peserta_ppdb()
 	{

@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property string $name
  * @property string $surname
+ * @property string $jenkel
  * @property string $email
  * @property Carbon|null $email_verified_at
  * @property string $no_hp
@@ -24,7 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * 
- * @property Collection|Pembayaran[] $pembayarans
+ * @property Collection|TblPembayaran[] $tbl_pembayarans
  * @property Collection|TblPesertaPpdb[] $tbl_peserta_ppdbs
  *
  * @package App\Models
@@ -45,6 +46,7 @@ class User extends Model
 	protected $fillable = [
 		'name',
 		'surname',
+		'jenkel',
 		'email',
 		'email_verified_at',
 		'no_hp',
@@ -52,9 +54,9 @@ class User extends Model
 		'remember_token'
 	];
 
-	public function pembayarans()
+	public function tbl_pembayarans()
 	{
-		return $this->hasMany(Pembayaran::class);
+		return $this->hasMany(TblPembayaran::class);
 	}
 
 	public function tbl_peserta_ppdbs()

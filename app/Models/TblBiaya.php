@@ -10,22 +10,22 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Sekolah
+ * Class TblBiaya
  * 
  * @property int $id
- * @property string $amount
+ * @property string $amount_laki
  * @property string $amount_perempuan
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *
  * @package App\Models
  */
-class Sekolah extends Model
+class TblBiaya extends Model
 {
-	protected $table = 'sekolahs';
+	protected $table = 'tbl_biaya';
 
 	protected $fillable = [
-		'amount',
+		'amount_laki',
 		'amount_perempuan'
 	];
 }

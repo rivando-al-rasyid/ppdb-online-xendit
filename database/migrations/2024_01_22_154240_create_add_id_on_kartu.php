@@ -10,7 +10,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('kartus', function (Blueprint $table) {
+        Schema::table('tbl_kartu', function (Blueprint $table) {
             $table->unsignedBigInteger('id_peserta_ppdb');
             $table->foreign('id_peserta_ppdb')
                 ->references('id')
@@ -24,7 +24,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('kartus', function (Blueprint $table) {
+        Schema::table('tbl_kartu', function (Blueprint $table) {
             // Drop the foreign key constraint
         });
     }

@@ -10,9 +10,9 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('sekolahs', function (Blueprint $table) {
+        Schema::create('tbl_biaya', function (Blueprint $table) {
             $table->id();
-            $table->text('amount');
+            $table->text('amount_laki');
             $table->text('amount_perempuan');
             $table->timestamps();
         });
@@ -23,6 +23,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('sekolahs');
+        Schema::dropIfExists('tbl_biaya');
     }
 };

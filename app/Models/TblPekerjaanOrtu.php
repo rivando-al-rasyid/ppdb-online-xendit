@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon|null $updated_at
  * 
  * @property Collection|TblBiodataOrtu[] $tbl_biodata_ortus
- * @property Collection|Wali[] $walis
+ * @property Collection|TblWali[] $tbl_walis
  *
  * @package App\Models
  */
@@ -36,8 +36,8 @@ class TblPekerjaanOrtu extends Model
 		return $this->hasMany(TblBiodataOrtu::class, 'id_pekerjaan_ibu');
 	}
 
-	public function walis()
+	public function tbl_walis()
 	{
-		return $this->hasMany(Wali::class, 'id_pekerjaan_wali');
+		return $this->hasMany(TblWali::class, 'id_pekerjaan_wali');
 	}
 }

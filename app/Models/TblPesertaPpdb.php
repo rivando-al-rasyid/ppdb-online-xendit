@@ -31,10 +31,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $id_user
  * 
  * @property User|null $user
- * @property Collection|Kartu[] $kartus
  * @property Collection|TblBiodataOrtu[] $tbl_biodata_ortus
  * @property Collection|TblHasil[] $tbl_hasils
- * @property Collection|Wali[] $walis
+ * @property Collection|TblKartu[] $tbl_kartus
+ * @property Collection|TblWali[] $tbl_walis
  *
  * @package App\Models
  */
@@ -71,11 +71,6 @@ class TblPesertaPpdb extends Model
 		return $this->belongsTo(User::class, 'id_user');
 	}
 
-	public function kartus()
-	{
-		return $this->hasMany(Kartu::class, 'id_peserta_ppdb');
-	}
-
 	public function tbl_biodata_ortus()
 	{
 		return $this->hasMany(TblBiodataOrtu::class, 'id_peserta_ppdb');
@@ -86,8 +81,13 @@ class TblPesertaPpdb extends Model
 		return $this->hasMany(TblHasil::class, 'nis');
 	}
 
-	public function walis()
+	public function tbl_kartus()
 	{
-		return $this->hasMany(Wali::class, 'id_peserta_ppdb');
+		return $this->hasMany(TblKartu::class, 'id_peserta_ppdb');
+	}
+
+	public function tbl_walis()
+	{
+		return $this->hasMany(TblWali::class, 'id_peserta_ppdb');
 	}
 }
