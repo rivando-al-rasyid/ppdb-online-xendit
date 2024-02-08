@@ -37,7 +37,6 @@ class CreatePesertaPpdbTable extends Migration
 
             $table->unsignedBigInteger('id_invoice')->nullable();
 
-            $table->unsignedBigInteger('id_user')->nullable();
 
             // Timestamps
             $table->timestamps();

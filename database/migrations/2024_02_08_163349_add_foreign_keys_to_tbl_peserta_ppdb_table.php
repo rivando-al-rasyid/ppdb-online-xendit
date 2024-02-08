@@ -15,7 +15,6 @@ return new class extends Migration {
             $table->foreign('id_biodata_wali')->references('id')->on('tbl_biodata_wali')->onDelete('cascade');
             $table->foreign('id_kartu')->references('id')->on('tbl_kartu')->onDelete('cascade');
             $table->foreign('id_invoice')->references('id')->on('tbl_pembayaran')->onDelete('cascade');
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -29,7 +28,6 @@ return new class extends Migration {
             $table->dropForeign(['id_biodata_wali']);
             $table->dropForeign(['id_kartu']);
             $table->dropForeign(['id_invoice']);
-            $table->dropForeign(['id_user']);
         });
     }
 };
