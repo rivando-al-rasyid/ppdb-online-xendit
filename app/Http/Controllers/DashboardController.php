@@ -6,10 +6,9 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 
 // Load Models
-use App\Models\Hasil;
+use App\Models\TblHasil;
 use App\Modules\Tus\Models\Tu;
 use App\Models\Pembayaran;
-use PDF;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -34,7 +33,7 @@ class DashboardController extends Controller
         $counts = $this->getCounts();
 
         // Fetch items
-        $items = Hasil::with(['peserta', 'orang_tua'])->get();
+        $items = tblHasil::with(['peserta', 'orang_tua'])->get();
 
         return view('dashboards.dashboard.admin.index', compact('items', 'counts'));
     }
@@ -44,7 +43,7 @@ class DashboardController extends Controller
         $counts = $this->getCounts();
 
         // Fetch items
-        $items = Hasil::with(['peserta', 'orang_tua'])->get();
+        $items = tblHasil::with(['peserta', 'orang_tua'])->get();
 
         return view('dashboards.dashboard.tu.index', compact('items', 'counts'));
     }
@@ -53,18 +52,18 @@ class DashboardController extends Controller
     {
         $counts = [
             'admin' => Tu::count(),
-            'all_peserta' => Hasil::count(),
-            'menunggu_peserta' => Hasil::where('status', 'MENUNGGU')->count(),
-            'ditolak_peserta' => Hasil::where('status', 'DITOLAK')->count(),
-            'cadangan_peserta' => Hasil::where('status', 'CADANGAN')->count(),
-            'diterima_peserta' => Hasil::where('status', 'DITERIMA')->count(),
+            'all_peserta' => tblHasil::count(),
+            'menunggu_peserta' => tblHasil::where('status', 'MENUNGGU')->count(),
+            'ditolak_peserta' => tblHasil::where('status', 'DITOLAK')->count(),
+            'cadangan_peserta' => tblHasil::where('status', 'CADANGAN')->count(),
+            'diterima_peserta' => tblHasil::where('status', 'DITERIMA')->count(),
         ];
 
         return $counts;
     }
     public function laporan()
     {
-        $items = Hasil::with(['peserta', 'orang_tua'])->get();
+        $items = tblHasil::with(['peserta', 'orang_tua'])->get();
 
         // Count
         return view(
@@ -76,7 +75,7 @@ class DashboardController extends Controller
     }
     public function dataortu()
     {
-        $items = Hasil::with(['peserta', 'orang_tua'])->get();
+        $items = tblHasil::with(['peserta', 'orang_tua'])->get();
 
         // Count
         return view(
@@ -105,7 +104,7 @@ class DashboardController extends Controller
 
     public function detail($id)
     {
-        $item = Hasil::with(['peserta.orang_tua'])->where('id', $id)->first();
+        $item = tblHasil::with(['peserta.orang_tua'])->where('id', $id)->first();
         return view(
             'dashboards.dashboard.admin.detail',
             compact(
@@ -116,7 +115,7 @@ class DashboardController extends Controller
     }
     public function detailtu($id)
     {
-        $item = Hasil::with(['peserta.orang_tua'])->where('id', $id)->first();
+        $item = tblHasil::with(['peserta.orang_tua'])->where('id', $id)->first();
         return view(
             'dashboards.dashboard.tu.detail',
             compact(
@@ -128,7 +127,7 @@ class DashboardController extends Controller
 
     public function terima($id)
     {
-        $item = Hasil::findOrFail($id);
+        $item = tblHasil::findOrFail($id);
         $item->status = 'DITERIMA';
         // Save the new Hasil's ID to the $item->id_Hasil field
         $item->update();
@@ -148,7 +147,7 @@ class DashboardController extends Controller
 
     public function tolak($id)
     {
-        $item = Hasil::findOrFail($id);
+        $item = tblHasil::findOrFail($id);
 
         $item->status = 'DITOLAK';
         $item->update();
@@ -164,7 +163,7 @@ class DashboardController extends Controller
     }
     public function cadangan($id)
     {
-        $item = Hasil::findOrFail($id);
+        $item = tblHasil::findOrFail($id);
         $item->status = 'CADANGAN';
         $item->update();
 

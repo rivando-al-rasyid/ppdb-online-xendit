@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PekerjaanOrtu;
+use App\Models\TblPekerjaanOrtu;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -14,7 +14,7 @@ class PekerjaanOrtuController extends Controller
 
     public function index()
     {
-        $items = PekerjaanOrtu::all();
+        $items = TblPekerjaanOrtu::all();
         return view('dashboards.pekerjaan_ortu.index', compact('items'));
     }
 
@@ -56,7 +56,7 @@ class PekerjaanOrtuController extends Controller
      */
     public function edit($id)
     {
-        $data = PekerjaanOrtu::find($id);
+        $data = TblPekerjaanOrtu::find($id);
 
         return view('dashboards.pekerjaan_ortu.edit', compact('data'));
     }
@@ -69,7 +69,7 @@ class PekerjaanOrtuController extends Controller
             'nama_pekerjaan' => 'required',
         ]);
 
-        $Query = PekerjaanOrtu::find($id);
+        $Query = TblPekerjaanOrtu::find($id);
         $Query->nama_pekerjaan = $request->nama_pekerjaan;
 
         if ($Query) {
@@ -84,7 +84,7 @@ class PekerjaanOrtuController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PekerjaanOrtu $pekerjaanOrtu)
+    public function destroy(TblPekerjaanOrtu $pekerjaanOrtu)
     {
         $pekerjaanOrtu->delete();
 

@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PesertaPPDB;
+use App\Models\TblBiaya;
+use App\Models\TblHasil;
+use App\Models\TblPembayaran;
+use App\Models\TblPesertaPpdb;
 use Illuminate\Http\Request;
 use Xendit\Configuration;
 use Xendit\Customer\CustomerApi;
 use Xendit\Invoice\InvoiceApi;
 use Xendit\Invoice\CreateInvoiceRequest;
 use Xendit\XenditSdkException;
-use App\Models\Sekolah;
 use App\Models\User;
-use App\Models\Hasil;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -45,11 +46,11 @@ class PembayaranController extends Controller
             \DB::beginTransaction();
 
             $userId = $request->input('id');
-            $items = Hasil::with(['peserta', 'orang_tua'])->where('status', 'DITERIMA')->get();
+            $items = TblHasil::with(['peserta', 'orang_tua'])->where('status', 'DITERIMA')->get();
 
             foreach ($items as $item) {
                 $idpeserta = $item->peserta->id;
-                $student = PesertaPPDB::find($idpeserta);
+                $student = TblPesertaPpdb::find($idpeserta);
 
                 // Check if $student->id_user is null before creating a new user
                 if ($student->id_user === null) {
@@ -106,12 +107,12 @@ class PembayaranController extends Controller
         try {
             // Retrieve customer data from the authenticated user
             $user = Auth::user();
-            $sekolah = Sekolah::first();
+            $sekolah = TblBiaya::first();
             $url = app('url')->to('/invoice');
 
 
             // Check if any invoice with the same user_id exists
-            $existingPembayaran = Pembayaran::where('user_id', $user->id)->first();
+            $existingPembayaran = TblPembayaran::where('user_id', $user->id)->first();
 
             if (!$existingPembayaran) {
                 // If the invoice doesn't exist, proceed to create a new one
@@ -146,7 +147,7 @@ class PembayaranController extends Controller
                 // Create the invoice
                 $result = $this->invoiceApiInstance->createInvoice($createInvoiceRequest);
 
-                $pembayaran = new Pembayaran;
+                $pembayaran = new TblPembayaran;
                 $pembayaran->invoice_id = $result['id'];
                 $pembayaran->external_id = $result['external_id'];
                 $pembayaran->description = $result['description'];
@@ -195,7 +196,7 @@ class PembayaranController extends Controller
             $user = Auth::user();
             $userId = $user->id;
 
-            $pembayaran = Pembayaran::where('user_id', $userId)->first();
+            $pembayaran = TblPembayaran::where('user_id', $userId)->first();
 
             if (!$pembayaran) {
                 Alert::error('Error', 'Pembayaran not found')->persistent(true)->autoClose(5000);
@@ -257,7 +258,7 @@ class PembayaranController extends Controller
     public function create()
     {
         // Retrieve a Sekolah model and pass it to the view
-        $sekolah = Sekolah::first();
+        $sekolah = TblBiaya::first();
         $user = Auth::user();
         return view('dashboards.pembayaran.create', compact('sekolah', 'user'));
     }

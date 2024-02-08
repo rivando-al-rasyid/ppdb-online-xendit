@@ -1,66 +1,49 @@
 <?php
 
-/**
- * Created by Reliese Model.
- */
-
 namespace App\Models;
 
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-/**
- * Class User
- * 
- * @property int $id
- * @property string $name
- * @property string $surname
- * @property string $jenkel
- * @property string $email
- * @property Carbon|null $email_verified_at
- * @property string $no_hp
- * @property string $password
- * @property string|null $remember_token
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * 
- * @property Collection|TblPembayaran[] $tbl_pembayarans
- * @property Collection|TblPesertaPpdb[] $tbl_peserta_ppdbs
- *
- * @package App\Models
- */
-class User extends Model
+class User extends Authenticatable
 {
-	protected $table = 'users';
+    use HasApiTokens, HasFactory, Notifiable;
 
-	protected $casts = [
-		'email_verified_at' => 'datetime'
-	];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+    ];
 
-	protected $hidden = [
-		'password',
-		'remember_token'
-	];
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 
-	protected $fillable = [
-		'name',
-		'surname',
-		'jenkel',
-		'email',
-		'email_verified_at',
-		'no_hp',
-		'password',
-		'remember_token'
-	];
-
-	public function tbl_pembayarans()
-	{
-		return $this->hasMany(TblPembayaran::class);
-	}
-
-	public function tbl_peserta_ppdbs()
-	{
-		return $this->hasMany(TblPesertaPpdb::class, 'id_user');
-	}
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
+    public function peserta()
+    {
+        return $this->hasOne(PesertaPPDB::class, 'id_user');
+    }
 }
