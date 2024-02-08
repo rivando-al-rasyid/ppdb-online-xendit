@@ -24,9 +24,22 @@ class CreatePesertaPpdbTable extends Migration
             $table->date('tanggal_lahir');
             $table->string('tempat_lahir');
             $table->string('agama');
-            $table->string('nilai_rata_rata')->nullable();
+            $table->decimal('nilai_rata_rata', 8, 2)->nullable();
             $table->string('asal_sekolah');
             $table->longText('alamat');
+
+            // Foreign keys
+            $table->unsignedBigInteger('id_biodata_ortu')->nullable();
+
+            $table->unsignedBigInteger('id_biodata_wali')->nullable();
+
+            $table->unsignedBigInteger('id_kartu')->nullable();
+
+            $table->unsignedBigInteger('id_invoice')->nullable();
+
+            $table->unsignedBigInteger('id_user')->nullable();
+
+            // Timestamps
             $table->timestamps();
         });
     }

@@ -10,7 +10,7 @@ use App\Models\TblHasil;
 use App\Modules\Tus\Models\Tu;
 use App\Models\Pembayaran;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\TblBiodataOrtu;
 
 
 class DashboardController extends Controller
@@ -33,10 +33,9 @@ class DashboardController extends Controller
         $counts = $this->getCounts();
 
         // Fetch items
-        $items = TblHasil::with(['tbl_peserta_ppdb.tbl_biodata_ortus'])->get();
-        $ortus = $items->tbl_peserta_ppdb->tbl_biodata_ortus;
+        $items = TblHasil::with(['tbl_peserta_ppdb'.])->get();
 
-        return view('dashboards.dashboard.admin.index', compact('items', 'counts', 'ortus'));
+        return view('dashboards.dashboard.admin.index', compact('items', 'counts'));
     }
     public function indextu()
     {

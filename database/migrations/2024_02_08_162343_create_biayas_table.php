@@ -10,12 +10,11 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::table('tbl_wali', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_peserta_ppdb');
-            $table->foreign('id_peserta_ppdb')
-                ->references('id')
-                ->on('tbl_peserta_ppdb')
-                ->onDelete('cascade');
+        Schema::create('tbl_biaya', function (Blueprint $table) {
+            $table->id();
+            $table->text('amount_laki');
+            $table->text('amount_perempuan');
+            $table->timestamps();
         });
     }
 
@@ -24,7 +23,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('tbl_wali', function (Blueprint $table) {
-        });
+        Schema::dropIfExists('biayas');
     }
 };
