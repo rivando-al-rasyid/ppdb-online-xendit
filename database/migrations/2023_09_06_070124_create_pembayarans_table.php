@@ -10,8 +10,9 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('pembayarans', function (Blueprint $table) {
+        Schema::create('tbl_pembayaran', function (Blueprint $table) {
             $table->id();
+            $table->string('invoice_id')->unique();
             $table->string('external_id')->unique();
             $table->string('payer_email');
             $table->text('description');

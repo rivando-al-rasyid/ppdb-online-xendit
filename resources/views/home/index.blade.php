@@ -4,7 +4,7 @@
     <!-- ======= Hero Section ======= -->
     <section id="hero" class="d-flex align-items-center">
         <div class="container text-center position-relative" data-aos="fade-in" data-aos-delay="200">
-            <h1>Selamat Datang di SMK Harapan Bangsa </h1>
+            <h1>Selamat Datang di SMP Negeri 1 Padang Gelugur </h1>
             <h2>Ayo Kita Belajar Bersama</h2>
             <a href="#daftar" class="btn-get-started scrollto">Daftar Sekarang</a>
         </div>
@@ -21,16 +21,12 @@
                     </div>
                     <div class="col-lg-6 pt-4 pt-lg-0" data-aos="fade-left" data-aos-delay="200">
                         <p>
-                            Sekolah Harapan Bangsa didirikan pada tahun 1995 untuk memenuhi kebutuhan akademik yang semakin
-                            berkembang di Modernland, yang berada di atas tanah seluas 330 hektar di kawasan metropolitan,
-                            Tangerang. Dengan tujuan untuk mendidik murid-murid sebagai harapan bagi bangsa.
-                        </p>
-                        <p class="font-italic">
-                            Diawali saat PT Modernland Realty mengakuisisi Sekolah Ganesha yang berada di Jl. Pulau Putri
-                            Raya Kav 10, Modernland, Tangerang dan menamainya dengan Sekolah Harapan Bangsa, yang bernaung
-                            di bawah YayasanPendidikan Harapan Bangsa. Dengan jumlah awal 100 siswa dan 20 guru dari kelas
-                            satu sampai empat. Kini Sekolah Harapan Bangsa telah menghasilkan ratusan lulusan di sepanjang
-                            perjalanannya.
+                            SMP Negeri 1 Padang Gelugur adalah institusi pendidikan yang berlokasi di Padang Gelugur, sebuah
+                            kota kecil di Indonesia. Didirikan dengan tujuan memberikan pendidikan berkualitas bagi siswa di
+                            tingkat SMP, sekolah ini telah beroperasi selama lebih dari dua dekade. Dengan jumlah siswa
+                            rata-rata sekitar 600 hingga 700 siswa setiap tahunnya, SMP Negeri 1 Padang Gelugur memiliki
+                            staf pengajar yang terdiri dari lebih dari 30 guru yang berkualifikasi dan berpengalaman.
+
                         </p>
                     </div>
                 </div>
@@ -39,7 +35,7 @@
         </section><!-- End About Section -->
 
         <!-- ======= Why Us Section ======= -->
-        <section id="why-us" class="why-us">
+        {{-- <section id="why-us" class="why-us">
             <div class="container">
 
                 <div class="row">
@@ -47,7 +43,8 @@
                         <div class="content">
                             <h3>Kenapa Memilih Sekolah Ini?</h3>
                             <p>
-                                Lebih dari 1,750 siswa-siswi dengan beragam latar belakang datang ke Sekolah Harapan Bangsa
+                                Lebih dari 1,750 siswa-siswi dengan beragam latar belakang datang ke Sekolah SMP Negeri 1
+                                Padang Gelugur
                                 mencari sebuah lembaga pendidikan formal yang mempunyai pengakuan luar biasa baik secara
                                 prestasi akademik, proses belajar mengajar serta suasana belajar yang menyenangkan, tenaga
                                 pengajar dan staff yang kompeten, kesempatan untuk meraih beasiswa, dan penerapan
@@ -94,7 +91,7 @@
                 </div>
 
             </div>
-        </section><!-- End Why Us Section -->
+        </section><!-- End Why Us Section --> --}}
 
         <!-- ======= Services Section ======= -->
         <section id="services" class="services section-bg">
@@ -104,8 +101,11 @@
                     <div class="col-lg-4">
                         <div class="section-title" data-aos="fade-right">
                             <h2>Fasilitas</h2>
-                            <p>Fasilitas belajar merupakan sarana dan prasarana pembelajaran. Prasarana meliputi kantin,
-                                ruang belajar, lapangan olahraga, LAB Komputer, dll.</p>
+                            <p>Fasilitas sekolah mencakup bangunan utama yang terdiri dari ruang kelas, laboratorium sains,
+                                perpustakaan, dan lapangan olahraga. Dilengkapi dengan fasilitas yang
+                                memadai, sekolah ini menawarkan lingkungan belajar yang kondusif untuk pengembangan akademik
+                                dan non-akademik siswa.
+                            </p>
                         </div>
                     </div>
                     <div class="col-lg-8">

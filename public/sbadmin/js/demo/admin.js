@@ -2,8 +2,9 @@ $(document).ready(function() {
   $('#dataTable').DataTable( {
       dom: 'Bfrtip',
       buttons: [
-          'copy', 'csv', 'excel', 'pdf', 'print'
+          'copy', 'csv', 'excel',
+
       ],
-      scrollX: true // Add this line
-  } );
-} );
+      scrollX: true,
+  });
+});

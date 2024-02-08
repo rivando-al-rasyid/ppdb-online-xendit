@@ -9,7 +9,6 @@
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
         </div>
-
         <!-- Content Row -->
         <div class="row">
 
@@ -20,8 +19,8 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    Total Admin</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $count_menunggu_peserta }}</div>
+                                    Total tu</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $counts['admin'] }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -39,7 +38,7 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                     Total Menunggu</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $count_ditolak_peserta }}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $counts['ditolak_peserta'] }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -57,7 +56,7 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                     Total Ditolak</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $count_cadangan_peserta }}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $counts['cadangan_peserta'] }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
@@ -75,7 +74,7 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                     Total Diterima</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $count_diterima_peserta }}</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $counts['diterima_peserta'] }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -87,8 +86,9 @@
         </div>
 
         <div class="row mt-5">
-            <div class="col-12">
+            <div class="col-12 d-flex justify-content-between">
                 <h1>Data Peserta PPDB</h1>
+                <a href="{{ route('admin.create.customer') }}" class="btn btn-success btn-sm">Generated Akun Siswa</a>
             </div>
             <div class="col-12">
                 <div class="card mt-3">
@@ -116,13 +116,13 @@
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                    <?php $i = 1; ?>
                                     @foreach ($items as $item)
                                         <tr>
-                                            <td>{{ $i }}</td>
-                                            <td>{{ $item->peserta->nama_depan }} {{ $item->peserta->nama_belakang }}</td>
-                                            <td>{{ $item->peserta->asal_sekolah }}</td>
-                                            <td>{{ $item->orang_tua->nama_ayah }}</td>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $item->tbl_peserta_ppdb->nama_depan }}
+                                                {{ $item->tbl_peserta_ppdb->nama_belakang }}</td>
+                                            <td>{{ $item->tbl_peserta_ppdb->asal_sekolah }}</td>
+                                            <td>{{ $ortus->nama_ayah }}</td>
                                             <td>
                                                 @if ($item->status == 'MENUNGGU')
                                                     <div class="font-weight-bold text-warning">MENUNGGU</div>
@@ -142,7 +142,6 @@
                                             </td>
 
                                         </tr>
-                                        <?php $i++; ?>
                                     @endforeach
                                 </tbody>
                             </table>

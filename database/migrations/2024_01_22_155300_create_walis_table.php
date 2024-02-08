@@ -10,15 +10,15 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('wali', function (Blueprint $table) {
+        Schema::create('tbl_wali', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_ayah');
-            $table->unsignedBigInteger('id_pekerjaan_wali');
+            $table->unsignedBigInteger('id_pekerjaan_wali')->nullable();
             $table->foreign('id_pekerjaan_wali')
                 ->references('id')
                 ->on('tbl_pekerjaan_ortu')
                 ->onDelete('cascade');
-            $table->BigInteger('no_tlp_wali');
+            $table->string('nama_wali')->nullable();
+            $table->BigInteger('no_tlp_wali')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('wali');
+        Schema::dropIfExists('tbl_wali');
     }
 };

@@ -2,24 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TblKartu;
+use App\Models\TblPesertaPpdb;
+use App\Models\TblWali;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
-use Illuminate\Support\Facades\Storage;
 
 // Load Models
-use App\Models\User;
-use App\Models\PekerjaanOrtu;
-use App\Models\PesertaPPDB;
-use App\Models\BiodataOrtu;
-use App\Models\Hasil;
+use App\Models\TblPekerjaanOrtu;
+use App\Models\TblBiodataOrtu;
+use App\Models\TblHasil;
 
 class DaftarController extends Controller
 {
     public function index()
     {
-        $pekerjaan_ortu = PekerjaanOrtu::all();
+        $pekerjaan_ortu = TblPekerjaanOrtu::all();
         return view(
             'home.pendaftaran',
             compact(
@@ -32,7 +32,48 @@ class DaftarController extends Controller
     {
         DB::beginTransaction();
 
-        $validator = Validator::make($request->all(), [
+        $validator = $this->validateRequest($request);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors());
+        }
+
+        $daftar = $this->createPeserta($request);
+
+        if (!$daftar) {
+            DB::rollBack();
+            Alert::error('Error', 'Please check your form again!');
+            return redirect()->back();
+        }
+
+        $ortu = $this->createOrtu($request, $daftar);
+
+        if (!$ortu) {
+            DB::rollBack();
+            Alert::error('Error', 'Please check your form again!');
+            return redirect()->back();
+        }
+
+        $wali = $this->createWali($request, $daftar);
+
+        $kartu = $this->createKartu($request, $daftar);
+
+        $hasil = $this->createHasil($daftar);
+
+        if (!$hasil) {
+            DB::rollBack();
+            Alert::error('Error', 'Please check your form again!');
+            return redirect()->back();
+        }
+
+        DB::commit();
+        Alert::success('Success', 'Thank you for registering!');
+        return redirect()->route('landing-page');
+    }
+
+    private function validateRequest($request)
+    {
+        return Validator::make($request->all(), [
             'nama_depan' => 'required',
             'nama_belakang' => 'required',
             'nisn' => 'required',
@@ -50,18 +91,10 @@ class DaftarController extends Controller
             'nama_ibu' => 'required',
             'id_pekerjaan_ibu' => 'required|exists:tbl_pekerjaan_ortu,id',
         ]);
+    }
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator->errors());
-        }
-
-        $namaPeserta = $request->nama;
-        // Handle 'ijasah' file upload with custom name
-        // $ijasahPath = $request->file('ijasah')->storeAs('uploads', 'ijasah_' . $namaPeserta . '.' . $request->file('ijasah')->getClientOriginalExtension(), 'public');
-
-        // // Handle 'kk' file upload with custom name
-        // $fotoKkPath = $request->file('kk')->storeAs('uploads', 'kk_' . $namaPeserta . '.' . $request->file('kk')->getClientOriginalExtension(), 'public');
-
+    private function createPeserta($request)
+    {
         $dataPeserta = [
             'nama_depan' => $request->nama_depan,
             'nama_belakang' => $request->nama_belakang,
@@ -76,12 +109,11 @@ class DaftarController extends Controller
             'alamat' => $request->alamat,
         ];
 
-        $daftar = PesertaPPDB::create($dataPeserta);
-        if (!$daftar) {
-            DB::rollBack();
-            Alert::error('Error', 'Please check your form again!');
-            return redirect()->back();
-        }
+        return TblPesertaPpdb::create($dataPeserta);
+    }
+
+    private function createOrtu($request, $daftar)
+    {
         $dataOrtu = [
             'id_peserta_ppdb' => $daftar->id,
             'id_pekerjaan_ayah' => $request->id_pekerjaan_ayah,
@@ -92,32 +124,46 @@ class DaftarController extends Controller
             'no_tlp_ibu' => $request->no_telp_ibu,
         ];
 
+        return TblBiodataOrtu::create($dataOrtu);
+    }
 
-        $ortu = BiodataOrtu::create($dataOrtu);
-        if (!$ortu) {
-            DB::rollBack();
-            Alert::error('Error', 'Please check your form again!');
-            return redirect()->back();
-        }
+    private function createWali($request, $daftar)
+    {
+        $dataWali = [
+            'id_peserta_ppdb' => $daftar->id,
+            'id_pekerjaan_wali' => $request->id_pekerjaan_wali,
+            'nama_wali' => $request->nama_wali,
+            'no_tlp_wali' => $request->no_telp_wali,
+        ];
+
+        return TblWali::create($dataWali);
+    }
+
+    private function createKartu($request, $daftar)
+    {
+        $dataKartu = [
+            'id_peserta_ppdb' => $daftar->id,
+            'kip' => $request->nomor_kip,
+            'kks' => $request->nomor_kks,
+            'kps' => $request->nomor_kps,
+            'pkh' => $request->nomor_pkh,
+        ];
+
+        return TblKartu::create($dataKartu);
+    }
+
+    private function createHasil($daftar)
+    {
         $data3 = [
             'nis' => $daftar->id
         ];
 
-        $hasil = Hasil::create($data3);
-        if (!$hasil) {
-            DB::rollBack();
-            Alert::error('Error', 'Please check your form again!');
-            return redirect()->back();
-        }
-
-        DB::commit();
-        Alert::success('Success', 'Thank you for registering!');
-        return redirect()->route('landing-page');
+        return TblHasil::create($data3);
     }
 
     public function hasil()
     {
-        $items = Hasil::with(['peserta', 'orang_tua'])->get();
+        $items = TblHasil::with(['peserta', 'orang_tua'])->get();
         return view('home.hasil', compact('items'));
 
     }

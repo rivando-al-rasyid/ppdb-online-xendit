@@ -3,6 +3,7 @@
 use App\Modules\Tus\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PembayaranController;
 
 
 // Route::middleware(['web', 'tu.auth', 'tu.verified'])->get('/tu', function () {
@@ -16,12 +17,14 @@ Route::group(['as' => 'tu.', 'prefix' => '/tu', 'middleware' => ['web', 'tu.auth
     Route::get('/', [DashboardController::class, 'indextu'])->name('dashboard');
     Route::get('/laporan/siswa', [DashboardController::class, 'laporan'])->name('laporan.index');
     Route::get('/laporan/ortu', [DashboardController::class, 'dataortu'])->name('laporan.dataortu');
-    Route::get('/laporan/kartusosial', [DashboardController::class, 'indextu'])->name('laporan.kartu');
+    Route::get('/laporan/kartusosial', [DashboardController::class, 'kartu'])->name('laporan.kartu');
     Route::get('/transaksi', [DashboardController::class, 'transaksi'])->name('laporan.transaksi');
     Route::get('/detail/{id}', [DashboardController::class, 'detailtu'])->name('peserta.detail');
     Route::patch('/diterima/{id}', [DashboardController::class, 'terima'])->name('peserta.diterima');
     Route::patch('/cadangan/{id}', [DashboardController::class, 'cadangan'])->name('peserta.cadangan');
     Route::patch('/ditolak/{id}', [DashboardController::class, 'tolak'])->name('peserta.ditolak');
+    Route::get('/laporan/pembayaran', [PembayaranController::class, 'updateInvoices'])->name('laporan.pembayaran');
+
 });
 
 require __DIR__ . '/auth.php';

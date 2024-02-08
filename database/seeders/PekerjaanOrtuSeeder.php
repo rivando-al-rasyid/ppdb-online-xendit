@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\TblPekerjaanOrtu;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -24,7 +25,7 @@ class PekerjaanOrtuSeeder extends Seeder
         ];
 
         foreach ($input_pekerjaan as $pekerjaan) {
-            \App\Models\PekerjaanOrtu::create([
+            TblPekerjaanOrtu::create([
                 'nama_pekerjaan' => $pekerjaan
             ]);
         }

@@ -2,6 +2,7 @@
 @push('style')
     <link href="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="{{ asset('sbadmin/vendor/datatables/Buttons/css/buttons.bootstrap4.css') }}" rel="stylesheet">
+    <link href="{{ asset('sbadmin/css/custom/scroller.css') }}" rel="stylesheet">
 @endpush
 @section('content')
     <div class="container-fluid">
@@ -21,18 +22,17 @@
                     <div class="card mt-3">
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered display " id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered display nowrap" id="dataTable">
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama Depan</th>
-                                            <th>Nama Belakang</th>
+                                            <th>Nama</th>
                                             <th>NISN</th>
                                             <th>NIK</th>
                                             <th>No KK</th>
                                             <th>Jenis Kelamin</th>
                                             <th>Tanggal Lahir</th>
-                                            <th>Tempat Lahir</th>
+                                            <th>Tempat Lahir</ths>
                                             <th>Agama</th>
                                             <th>Asal Sekolah</th>
                                             <th>Alamat</th>
@@ -41,26 +41,28 @@
                                             <th>Nama Ibu</th>
                                             <th>No Telepon Ibu</th>
                                         </tr>
+
                                     </thead>
                                     <tbody>
                                         @forelse ($items as $item)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $item->peserta->nama_depan }}</td>
-                                                <td>{{ $item->peserta->nama_belakang }}</td>
-                                                <td>{{ $item->peserta->nisn }}</td>
-                                                <td>{{ $item->peserta->nik }}</td>
-                                                <td>{{ $item->peserta->no_kk }}</td>
-                                                <td>{{ $item->peserta->jenis_kelamin }}</td>
-                                                <td>{{ $item->peserta->tanggal_lahir }}</td>
-                                                <td>{{ $item->peserta->tempat_lahir }}</td>
-                                                <td>{{ $item->peserta->agama }}</td>
-                                                <td>{{ $item->peserta->asal_sekolah }}</td>
-                                                <td>{{ $item->peserta->alamat }}</td>
-                                                <td>{{ $item->orang_tua->nama_ayah }}</td>
-                                                <td>{{ $item->orang_tua->no_tlp_ayah }}</td>
-                                                <td>{{ $item->orang_tua->nama_ibu }}</td>
-                                                <td>{{ $item->orang_tua->no_tlp_ibu }}</td>
+                                                <td>{{ $item->tbl_peserta_ppdb->nama_depan }}
+                                                    {{ $item->tbl_peserta_ppdb->nama_belakang }}
+                                                </td>
+                                                <td>{{ $item->tbl_peserta_ppdb->nisn }}</td>
+                                                <td>{{ $item->tbl_peserta_ppdb->nik }}</td>
+                                                <td>{{ $item->tbl_peserta_ppdb->no_kk }}</td>
+                                                <td>{{ $item->tbl_peserta_ppdb->jenis_kelamin }}</td>
+                                                <td>{{ $item->tbl_peserta_ppdb->tanggal_lahir }}</td>
+                                                <td>{{ $item->tbl_peserta_ppdb->tempat_lahir }}</td>
+                                                <td>{{ $item->tbl_peserta_ppdb->agama }}</td>
+                                                <td>{{ $item->tbl_peserta_ppdb->asal_sekolah }}</td>
+                                                <td>{{ $item->tbl_peserta_ppdb->alamat }}</td>
+                                                <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->nama_ayah }}</td>
+                                                <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->no_tlp_ayah }}</td>
+                                                <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->nama_ibu }}</td>
+                                                <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->no_tlp_ibu }}</td>
                                             </tr>
                                         @empty
                                             <tr>
@@ -81,8 +83,9 @@
 
         <script src="{{ asset('sbadmin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+        <script src="{{ asset('sbadmin/vendor/datatables/pdfmake-0.2.7/pdfmake.min.js') }}"></script>
+        <script src="{{ asset('sbadmin/vendor/datatables/pdfmake-0.2.7/vfs_fonts.js') }}"></script>
+        <script src="{{ asset('sbadmin/vendor/datatables/pdfmake-0.2.7/datatables.min.js') }}"></script>
         <script src="https://cdn.datatables.net/v/bs4/jszip-3.10.1/b-2.4.2/b-html5-2.4.2/b-print-2.4.2/datatables.min.js">
         </script>
         <script src="{{ asset('sbadmin/js/demo/admin.js') }}"></script>

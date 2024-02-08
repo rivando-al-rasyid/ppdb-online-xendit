@@ -10,14 +10,12 @@
         <!-- Page Heading -->
         <div class="mb-4 d-sm-flex align-items-center justify-content-between">
             <h1 class="mb-0 text-gray-800 h3">Dashboard</h1>
-            <a href="{{ route('tu.download') }}" class="shadow-sm d-none d-sm-inline-block btn btn-sm btn-primary"><i
-                    class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
         </div>
 
         <!-- Content Row -->
         <div class="mt-5 row">
             <div class="col-12">
-                <h1>Data Pembayaran Pakaian</h1>
+                <h1>Data Pembayaran</h1>
             </div>
             <div class="col-12">
                 <div class="mt-3 card">
@@ -26,28 +24,29 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>ID User</th>
-                                        <th>Nama</th>
-                                        <th>OrderID</th>
-                                        <th>harga</th>
-                                        <th>Item</th>
+                                        <!-- Define table headers here -->
+                                        <th>Invoice ID</th>
+                                        <th>Payer Email</th>
+                                        <th>Description</th>
+                                        <th>Amount</th>
                                         <th>Status</th>
-
+                                        <th>Checkout Link</th>
+                                        <!-- Add other headers as needed -->
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($items as $items)
+                                    <!-- Loop through payment data and display in rows -->
+                                    @foreach ($payments as $payment)
                                         <tr>
-                                            <td>{{ $items->user_id }}</td>
-                                            <td>{{ $items->customer_first_name }}</td>
-                                            <td>{{ $items->order_id }}</td>
-                                            <td>{{ $items->price }}</td>
-                                            <td>{{ $items->item_name }}</td>
-                                            <td>{{ $items->status }}</td>
-
+                                            <td>{{ $payment->invoice_id }}</td>
+                                            <td>{{ $payment->payer_email }}</td>
+                                            <td>{{ $payment->description }}</td>
+                                            <td>{{ $payment->amount }}</td>
+                                            <td>{{ $payment->status }}</td>
+                                            <td>{{ $payment->checkout_link }}</td>
+                                            <!-- Add cells for other fields -->
                                         </tr>
                                     @endforeach
-                                </tbody>
                                 </tbody>
                             </table>
                         </div>
