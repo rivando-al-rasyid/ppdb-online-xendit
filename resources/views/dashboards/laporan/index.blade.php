@@ -47,21 +47,22 @@
                                         @forelse ($items as $item)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $item->peserta->nama_depan }} {{ $item->peserta->nama_belakang }}
+                                                <td>{{ $item->tbl_peserta_ppdb->nama_depan }}
+                                                    {{ $item->tbl_peserta_ppdb->nama_belakang }}
                                                 </td>
-                                                <td>{{ $item->peserta->nisn }}</td>
-                                                <td>{{ $item->peserta->nik }}</td>
-                                                <td>{{ $item->peserta->no_kk }}</td>
-                                                <td>{{ $item->peserta->jenis_kelamin }}</td>
-                                                <td>{{ $item->peserta->tanggal_lahir }}</td>
-                                                <td>{{ $item->peserta->tempat_lahir }}</td>
-                                                <td>{{ $item->peserta->agama }}</td>
-                                                <td>{{ $item->peserta->asal_sekolah }}</td>
-                                                <td>{{ $item->peserta->alamat }}</td>
-                                                <td>{{ $item->orang_tua->nama_ayah }}</td>
-                                                <td>{{ $item->orang_tua->no_tlp_ayah }}</td>
-                                                <td>{{ $item->orang_tua->nama_ibu }}</td>
-                                                <td>{{ $item->orang_tua->no_tlp_ibu }}</td>
+                                                <td>{{ $item->tbl_peserta_ppdb->nisn }}</td>
+                                                <td>{{ $item->tbl_peserta_ppdb->nik }}</td>
+                                                <td>{{ $item->tbl_peserta_ppdb->no_kk }}</td>
+                                                <td>{{ $item->tbl_peserta_ppdb->jenis_kelamin }}</td>
+                                                <td>{{ $item->tbl_peserta_ppdb->tanggal_lahir }}</td>
+                                                <td>{{ $item->tbl_peserta_ppdb->tempat_lahir }}</td>
+                                                <td>{{ $item->tbl_peserta_ppdb->agama }}</td>
+                                                <td>{{ $item->tbl_peserta_ppdb->asal_sekolah }}</td>
+                                                <td>{{ $item->tbl_peserta_ppdb->alamat }}</td>
+                                                <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->nama_ayah }}</td>
+                                                <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->no_tlp_ayah }}</td>
+                                                <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->nama_ibu }}</td>
+                                                <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->no_tlp_ibu }}</td>
                                             </tr>
                                         @empty
                                             <tr>

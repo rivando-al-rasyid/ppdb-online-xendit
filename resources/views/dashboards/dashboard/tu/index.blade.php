@@ -118,9 +118,10 @@
                                     @foreach ($items as $item)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $item->peserta->nama_depan }} {{ $item->peserta->nama_belakang }}</td>
-                                            <td>{{ $item->peserta->asal_sekolah }}</td>
-                                            <td>{{ $item->orang_tua->nama_ayah }}</td>
+                                            <td>{{ $item->tbl_peserta_ppdb->nama_depan }}
+                                                {{ $item->tbl_peserta_ppdb->nama_belakang }}</td>
+                                            <td>{{ $item->tbl_peserta_ppdb->asal_sekolah }}</td>
+                                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->nama_ayah }}</td>
                                             <td>
                                                 @if ($item->status == 'MENUNGGU')
                                                     <div class="font-weight-bold text-warning">MENUNGGU</div>

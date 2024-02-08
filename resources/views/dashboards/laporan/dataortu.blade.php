@@ -37,13 +37,13 @@
                                         @forelse ($items as $item)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $item->peserta->nama_depan }}</td>
-                                                <td>{{ $item->peserta->nama_belakang }}</td>
-                                                <td>{{ $item->peserta->alamat }}</td>
-                                                <td>{{ $item->orang_tua->nama_ayah }}</td>
-                                                <td>{{ $item->orang_tua->no_tlp_ayah }}</td>
-                                                <td>{{ $item->orang_tua->nama_ibu }}</td>
-                                                <td>{{ $item->orang_tua->no_tlp_ibu }}</td>
+                                                <td>{{ $item->tbl_peserta_ppdb->nama_depan }}</td>
+                                                <td>{{ $item->tbl_peserta_ppdb->nama_belakang }}</td>
+                                                <td>{{ $item->tbl_peserta_ppdb->alamat }}</td>
+                                                <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->nama_ayah }}</td>
+                                                <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->no_tlp_ayah }}</td>
+                                                <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->nama_ibu }}</td>
+                                                <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->no_tlp_ibu }}</td>
                                             </tr>
                                         @empty
                                             <tr>

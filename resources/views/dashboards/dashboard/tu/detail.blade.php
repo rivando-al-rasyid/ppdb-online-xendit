@@ -10,69 +10,70 @@
                     <table class="table table-bordered">
                         <tr>
                             <td>Nama</td>
-                            <td>{{ $item->peserta->nama_depan }} {{ $item->peserta->nama_belakang }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->nama_depan }} {{ $item->tbl_peserta_ppdb->nama_belakang }}</td>
                         </tr>
 
                         <tr>
                             <td>TTL</td>
-                            <td>{{ $item->peserta->tempat_lahir }}, {{ $item->peserta->tanggal_lahir }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->tempat_lahir }}, {{ $item->tbl_peserta_ppdb->tanggal_lahir }}
+                            </td>
                         </tr>
                         <tr>
                             <td>NISN</td>
-                            <td>{{ $item->peserta->nisn }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->nisn }}</td>
                         </tr>
                         <tr>
                             <td>NIK</td>
-                            <td>{{ $item->peserta->nik }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->nik }}</td>
                         </tr>
                         <tr>
                             <td>Nomor KK</td>
-                            <td>{{ $item->peserta->no_kk }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->no_kk }}</td>
                         </tr>
 
 
                         <tr>
                             <td>Asal Sekolah</td>
-                            <td>{{ $item->peserta->asal_sekolah }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->asal_sekolah }}</td>
                         </tr>
                         <tr>
                             <td>Alamat</td>
-                            <td>{{ $item->peserta->alamat }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->alamat }}</td>
                         </tr>
                         <tr>
                             <td>Agama</td>
-                            <td>{{ $item->peserta->agama }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->agama }}</td>
                         </tr>
 
                         <!-- Include the Lightbox2 CSS and JavaScript files in your HTML -->
 
                         <tr>
                             <td>Jenis Kelamin</td>
-                            <td>{{ $item->peserta->jenis_kelamin }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->jenis_kelamin }}</td>
                         </tr>
                         <tr>
                             <td>Nama Ayah</td>
-                            <td>{{ $item->orang_tua->nama_ayah }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->nama_ayah }}</td>
                         </tr>
                         <tr>
                             <td>Nama Ibu</td>
-                            <td>{{ $item->orang_tua->nama_ibu }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->nama_ibu }}</td>
                         </tr>
                         <tr>
                             <td>Pekerjaan Ayah</td>
-                            <td>{{ $item->orang_tua->pekerjaan_ayah->nama_pekerjaan }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->pekerjaan_ayah->nama_pekerjaan }}</td>
                         </tr>
                         <tr>
                             <td>Pekerjaan Ibu</td>
-                            <td>{{ $item->orang_tua->pekerjaan_ibu->nama_pekerjaan }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->pekerjaan_ibu->nama_pekerjaan }}</td>
                         </tr>
                         <tr>
                             <td>No Telepon ayah</td>
-                            <td>{{ $item->orang_tua->no_tlp_ayah }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->no_tlp_ayah }}</td>
                         </tr>
                         <tr>
                             <td>No Telepon ibu</td>
-                            <td>{{ $item->orang_tua->no_tlp_ibu }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->no_tlp_ibu }}</td>
                         </tr>
 
                         <tr>
