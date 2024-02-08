@@ -10,28 +10,33 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Sekolah
+ * Class TblHasil
  * 
  * @property int $id
- * @property array|null $deskripsi_tagihan
- * @property string $amount
- * @property string $amount_perempuan
+ * @property int $nis
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property string|null $status
+ * 
+ * @property TblPesertaPpdb $tbl_peserta_ppdb
  *
  * @package App\Models
  */
-class Sekolah extends Model
+class TblHasil extends Model
 {
-	protected $table = 'sekolahs';
+	protected $table = 'tbl_hasil';
 
 	protected $casts = [
-		'deskripsi_tagihan' => 'json'
+		'nis' => 'int'
 	];
 
 	protected $fillable = [
-		'deskripsi_tagihan',
-		'amount',
-		'amount_perempuan'
+		'nis',
+		'status'
 	];
+
+	public function tbl_peserta_ppdb()
+	{
+		return $this->belongsTo(TblPesertaPpdb::class, 'nis');
+	}
 }

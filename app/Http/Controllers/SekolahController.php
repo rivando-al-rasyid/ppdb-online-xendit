@@ -11,19 +11,14 @@ class SekolahController extends Controller
     public function index()
     {
         $sekolah = Sekolah::first(); // Retrieve sekolah data from the database
-        return view('dashboards.sekolah', compact('sekolah'));
+        return view('dashboards.sekolah.index', compact('sekolah'));
     }
 
-    public function storeOrUpdate(Request $request)
+    public function createOrUpdate(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'deskripsi' => 'required|string',
-            'email' => 'required|email|max:255',
-            'phone' => 'required|string|max:15',
             'amount' => 'required|numeric',
-            'deskripsi_tagihan' => 'required|string',
-            // Add validation rules for other fields as needed
+            'amount_perempuan' => 'required|numeric',
         ]);
 
         $sekolah = Sekolah::first(); // Retrieve existing sekolah data from the database
@@ -32,15 +27,13 @@ class SekolahController extends Controller
             // If sekolah data exists, update it
             $sekolah->update($data);
             $message = 'Sekolah data has been updated successfully!';
-            Alert::success('Success', $message);
-            return redirect()->route('admin.sekolah.profile');
         } else {
             // If sekolah data doesn't exist, create a new record
             Sekolah::create($data);
             $message = 'Sekolah data has been stored successfully!';
-            Alert::success('Success', $message);
-
-            return redirect()->route('admin.sekolah.profile');
         }
+
+        // Redirect back with a success message
+        return redirect()->back()->with('success', $message);
     }
 }

@@ -1,12 +1,55 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ */
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Pembayaran
+ * 
+ * @property int $id
+ * @property string $invoice_id
+ * @property string $external_id
+ * @property string $payer_email
+ * @property string $description
+ * @property int $amount
+ * @property string $status
+ * @property string $checkout_link
+ * @property int $user_id
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * 
+ * @property User $user
+ *
+ * @package App\Models
+ */
 class Pembayaran extends Model
 {
-    protected $guarded = [];
-    protected $table = "pembayarans";
+	protected $table = 'pembayarans';
+
+	protected $casts = [
+		'amount' => 'int',
+		'user_id' => 'int'
+	];
+
+	protected $fillable = [
+		'invoice_id',
+		'external_id',
+		'payer_email',
+		'description',
+		'amount',
+		'status',
+		'checkout_link',
+		'user_id'
+	];
+
+	public function user()
+	{
+		return $this->belongsTo(User::class);
+	}
 }
