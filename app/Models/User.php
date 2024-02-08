@@ -44,6 +44,6 @@ class User extends Authenticatable
     ];
     public function peserta()
     {
-        return $this->hasOne(PesertaPPDB::class, 'id_user');
+        return $this->hasOne(TblPesertaPpdb::class, 'id_user');
     }
 }

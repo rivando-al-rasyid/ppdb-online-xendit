@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\TblKartu;
+use App\Models\TblPesertaPpdb;
 use App\Models\TblWali;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -10,16 +11,15 @@ use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 
 // Load Models
-use App\Models\tblPekerjaanOrtu;
-use App\Models\PesertaPPDB;
+use App\Models\TblPekerjaanOrtu;
 use App\Models\TblBiodataOrtu;
-use App\Models\tblHasil;
+use App\Models\TblHasil;
 
 class DaftarController extends Controller
 {
     public function index()
     {
-        $pekerjaan_ortu = tblPekerjaanOrtu::all();
+        $pekerjaan_ortu = TblPekerjaanOrtu::all();
         return view(
             'home.pendaftaran',
             compact(
@@ -109,7 +109,7 @@ class DaftarController extends Controller
             'alamat' => $request->alamat,
         ];
 
-        return PesertaPPDB::create($dataPeserta);
+        return TblPesertaPpdb::create($dataPeserta);
     }
 
     private function createOrtu($request, $daftar)
@@ -124,7 +124,7 @@ class DaftarController extends Controller
             'no_tlp_ibu' => $request->no_telp_ibu,
         ];
 
-        return tblBiodataOrtu::create($dataOrtu);
+        return TblBiodataOrtu::create($dataOrtu);
     }
 
     private function createWali($request, $daftar)
@@ -136,7 +136,7 @@ class DaftarController extends Controller
             'no_tlp_wali' => $request->no_telp_wali,
         ];
 
-        return tblWali::create($dataWali);
+        return TblWali::create($dataWali);
     }
 
     private function createKartu($request, $daftar)
@@ -149,7 +149,7 @@ class DaftarController extends Controller
             'pkh' => $request->nomor_pkh,
         ];
 
-        return tblKartu::create($dataKartu);
+        return TblKartu::create($dataKartu);
     }
 
     private function createHasil($daftar)
@@ -158,12 +158,12 @@ class DaftarController extends Controller
             'nis' => $daftar->id
         ];
 
-        return tblHasil::create($data3);
+        return TblHasil::create($data3);
     }
 
     public function hasil()
     {
-        $items = tblHasil::with(['peserta', 'orang_tua'])->get();
+        $items = TblHasil::with(['peserta', 'orang_tua'])->get();
         return view('home.hasil', compact('items'));
 
     }
