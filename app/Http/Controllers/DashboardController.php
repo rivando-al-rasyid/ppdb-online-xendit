@@ -33,7 +33,7 @@ class DashboardController extends Controller
         $counts = $this->getCounts();
 
         // Fetch items
-        $items = TblHasil::with(['tbl_peserta_ppdb'.])->get();
+        $items = TblHasil::with(['tbl_peserta_ppdb'])->get();
 
         return view('dashboards.dashboard.admin.index', compact('items', 'counts'));
     }

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TblBiodataWali;
 use App\Models\TblKartu;
 use App\Models\TblPesertaPpdb;
-use App\Models\TblWali;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -38,37 +38,24 @@ class DaftarController extends Controller
             return redirect()->back()->withErrors($validator->errors());
         }
 
-        $daftar = $this->createPeserta($request);
+        try {
+            $ortu = $this->createOrtu($request);
+            $wali = $this->createWali($request);
+            $kartu = $this->createKartu($request);
 
-        if (!$daftar) {
+            $daftar = $this->createPeserta($request, $ortu->id, $wali->id, $kartu->id);
+
+            $hasil = $this->createHasil($daftar);
+
+            DB::commit();
+
+            Alert::success('Success', 'Thank you for registering!');
+            return redirect()->route('landing-page');
+        } catch (\Exception $e) {
             DB::rollBack();
             Alert::error('Error', 'Please check your form again!');
             return redirect()->back();
         }
-
-        $ortu = $this->createOrtu($request, $daftar);
-
-        if (!$ortu) {
-            DB::rollBack();
-            Alert::error('Error', 'Please check your form again!');
-            return redirect()->back();
-        }
-
-        $wali = $this->createWali($request, $daftar);
-
-        $kartu = $this->createKartu($request, $daftar);
-
-        $hasil = $this->createHasil($daftar);
-
-        if (!$hasil) {
-            DB::rollBack();
-            Alert::error('Error', 'Please check your form again!');
-            return redirect()->back();
-        }
-
-        DB::commit();
-        Alert::success('Success', 'Thank you for registering!');
-        return redirect()->route('landing-page');
     }
 
     private function validateRequest($request)
@@ -76,26 +63,22 @@ class DaftarController extends Controller
         return Validator::make($request->all(), [
             'nama_depan' => 'required',
             'nama_belakang' => 'required',
-            'nisn' => 'required',
-            'nik' => 'required',
-            'no_kk' => 'required',
+            'nisn' => 'required|numeric',
+            'nik' => 'required|numeric',
+            'no_kk' => 'required|numeric',
             'jenis_kelamin' => 'required',
             'agama' => 'required',
-            'tanggal_lahir' => 'date|before:yesterday',
+            'tanggal_lahir' => 'required|date|before:yesterday',
             'tempat_lahir' => 'required',
             'asal_sekolah' => 'required',
             'alamat' => 'required',
-            'nama_ayah' => 'required',
-            'id_pekerjaan_ayah' => 'required|exists:tbl_pekerjaan_ortu,id',
-            'no_telp_ayah' => 'required',
-            'nama_ibu' => 'required',
-            'id_pekerjaan_ibu' => 'required|exists:tbl_pekerjaan_ortu,id',
+            'nilai_rata_rata' => 'nullable|numeric',
         ]);
     }
 
-    private function createPeserta($request)
+    private function createPeserta($request, $idBiodataOrtu, $idBiodataWali, $idKartu)
     {
-        $dataPeserta = [
+        return TblPesertaPpdb::create([
             'nama_depan' => $request->nama_depan,
             'nama_belakang' => $request->nama_belakang,
             'nisn' => $request->nisn,
@@ -107,63 +90,53 @@ class DaftarController extends Controller
             'tempat_lahir' => $request->tempat_lahir,
             'asal_sekolah' => $request->asal_sekolah,
             'alamat' => $request->alamat,
-        ];
-
-        return TblPesertaPpdb::create($dataPeserta);
+            'id_biodata_ortu' => $idBiodataOrtu,
+            'id_biodata_wali' => $idBiodataWali,
+            'id_kartu' => $idKartu,
+        ]);
     }
 
-    private function createOrtu($request, $daftar)
+    private function createOrtu($request)
     {
-        $dataOrtu = [
-            'id_peserta_ppdb' => $daftar->id,
-            'id_pekerjaan_ayah' => $request->id_pekerjaan_ayah,
-            'id_pekerjaan_ibu' => $request->id_pekerjaan_ibu,
+        return TblBiodataOrtu::create([
             'nama_ayah' => $request->nama_ayah,
             'nama_ibu' => $request->nama_ibu,
             'no_tlp_ayah' => $request->no_telp_ayah,
             'no_tlp_ibu' => $request->no_telp_ibu,
-        ];
-
-        return TblBiodataOrtu::create($dataOrtu);
+            'id_pekerjaan_ayah' => $request->id_pekerjaan_ayah,
+            'id_pekerjaan_ibu' => $request->id_pekerjaan_ibu,
+        ]);
     }
 
-    private function createWali($request, $daftar)
+    private function createWali($request)
     {
-        $dataWali = [
-            'id_peserta_ppdb' => $daftar->id,
-            'id_pekerjaan_wali' => $request->id_pekerjaan_wali,
+        return TblBiodataWali::create([
             'nama_wali' => $request->nama_wali,
             'no_tlp_wali' => $request->no_telp_wali,
-        ];
-
-        return TblWali::create($dataWali);
+            'id_pekerjaan_wali' => $request->id_pekerjaan_wali,
+        ]);
     }
 
-    private function createKartu($request, $daftar)
+    private function createKartu($request)
     {
-        $dataKartu = [
-            'id_peserta_ppdb' => $daftar->id,
+        return TblKartu::create([
             'kip' => $request->nomor_kip,
             'kks' => $request->nomor_kks,
             'kps' => $request->nomor_kps,
             'pkh' => $request->nomor_pkh,
-        ];
-
-        return TblKartu::create($dataKartu);
+        ]);
     }
 
     private function createHasil($daftar)
     {
-        $data3 = [
+        return TblHasil::create([
             'nis' => $daftar->id
-        ];
-
-        return TblHasil::create($data3);
+        ]);
     }
 
     public function hasil()
     {
-        $items = TblHasil::with(['peserta', 'orang_tua'])->get();
+        $items = TblHasil::with(['tbl_peserta_ppdb.tbl_biodata_ortu'])->get();
         return view('home.hasil', compact('items'));
 
     }

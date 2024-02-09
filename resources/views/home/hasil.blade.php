@@ -16,7 +16,7 @@
                                     <th>Asal Sekolah</th>
                                     <th>Orang Tua</th>
                                     <th>Status</th>
-                                    <!-- Remove the "Action" column -->
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tfoot>
@@ -26,17 +26,17 @@
                                     <th>Asal Sekolah</th>
                                     <th>Orang Tua</th>
                                     <th>Status</th>
-                                    <!-- Remove the "Action" column -->
+                                    <th>Action</th>
                                 </tr>
                             </tfoot>
                             <tbody>
-                                <?php $i = 1; ?>
-                                @forelse ($items as $item)
+                                @foreach ($items as $item)
                                     <tr>
-                                        <td>{{ $i }}</td>
-                                        <td>{{ $item->peserta->nama_depan }} {{ $item->peserta->nama_belakang }}</td>
-                                        <td>{{ $item->peserta->asal_sekolah }}</td>
-                                        <td>{{ $item->orang_tua->nama_ayah }}</td>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item->tbl_peserta_ppdb->nama_depan }}
+                                            {{ $item->tbl_peserta_ppdb->nama_belakang }}</td>
+                                        <td>{{ $item->tbl_peserta_ppdb->asal_sekolah }}</td>
+                                        <td>{{ $item->nama_ayah }}</td>
                                         <td>
                                             @if ($item->status == 'MENUNGGU')
                                                 <div class="font-weight-bold text-warning">MENUNGGU</div>
@@ -44,23 +44,22 @@
                                             @if ($item->status == 'DITOLAK')
                                                 <div class="font-weight-bold text-danger">DITOLAK</div>
                                             @endif
-                                            @if ($item->status == 'CADANGAN')
-                                                <div class="font-weight-bold text-primary">CADANGAN</div>
-                                            @endif
                                             @if ($item->status == 'DITERIMA')
                                                 <div class="font-weight-bold text-success">DITERIMA</div>
                                             @endif
                                         </td>
-                                        <!-- Remove the "Action" column -->
+                                        <td>
+                                            <a href="{{ route('admin.peserta.detail', $item->id) }}"
+                                                class="btn btn-primary">
+                                                Detail
+                                            </a>
+                                        </td>
+
                                     </tr>
-                                    <?php $i++; ?>
-                                @empty
-                                    <tr class="text-center">
-                                        <td colspan="7"> Tidak Ada Data</td>
-                                    </tr>
-                                @endforelse
+                                @endforeach
                             </tbody>
                         </table>
+
                     </div>
                 </div>
             </div>
