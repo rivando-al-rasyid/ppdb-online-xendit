@@ -16,7 +16,7 @@
         <div class="row">
             <div class="row mt-5">
                 <div class="col-12">
-                    <h1>Data Peserta PPDB</h1>
+                    <h1>Data Kartu </h1>
                 </div>
                 <div class="col-12">
                     <div class="card mt-3">
@@ -40,9 +40,6 @@
                                             <th>No Telepon Ayah</th>
                                             <th>Nama Ibu</th>
                                             <th>No Telepon Ibu</th>
-                                            <th>Nama Wali</th>
-                                            <th>No Telepon Wali</th>
-
                                         </tr>
 
                                     </thead>
@@ -66,10 +63,6 @@
                                                 <td>{{ $item->tbl_biodata_ortu->no_tlp_ayah }}</td>
                                                 <td>{{ $item->tbl_biodata_ortu->nama_ibu }}</td>
                                                 <td>{{ $item->tbl_biodata_ortu->no_tlp_ibu }}</td>
-                                                <td>{{ $item->tbl_biodata_wali->nama_wali ?? ' ' }}</td>
-                                                <td>{{ $item->tbl_biodata_wali->no_tlp_wali ?? ' ' }}</td>
-
-
                                             </tr>
                                         @empty
                                             <tr>

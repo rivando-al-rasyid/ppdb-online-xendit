@@ -23,7 +23,6 @@ Route::group(['as' => 'tu.', 'prefix' => '/tu', 'middleware' => ['web', 'tu.auth
     Route::patch('/diterima/{id}', [DashboardController::class, 'terima'])->name('peserta.diterima');
     Route::patch('/cadangan/{id}', [DashboardController::class, 'cadangan'])->name('peserta.cadangan');
     Route::patch('/ditolak/{id}', [DashboardController::class, 'tolak'])->name('peserta.ditolak');
-    Route::get('/laporan/pembayaran', [PembayaranController::class, 'updateInvoices'])->name('laporan.pembayaran');
 
 });
 

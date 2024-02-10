@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TblPesertaPpdb;
 use RealRashid\SweetAlert\Facades\Alert;
 
 
@@ -10,7 +11,6 @@ use App\Models\TblHasil;
 use App\Modules\Tus\Models\Tu;
 use App\Models\Pembayaran;
 use Illuminate\Support\Facades\Auth;
-use App\Models\TblBiodataOrtu;
 
 
 class DashboardController extends Controller
@@ -43,7 +43,7 @@ class DashboardController extends Controller
         $counts = $this->getCounts();
 
         // Fetch items
-        $items = TblHasil::with(['peserta', 'orang_tua'])->get();
+        $items = TblHasil::with(['tbl_peserta_ppdb'])->get();
 
         return view('dashboards.dashboard.tu.index', compact('items', 'counts'));
     }
@@ -63,7 +63,7 @@ class DashboardController extends Controller
     }
     public function laporan()
     {
-        $items = TblHasil::with(['peserta', 'orang_tua'])->get();
+        $items = TblPesertaPpdb::with(['tbl_biodata_ortu', 'tbl_biodata_wali'])->get();
 
         // Count
         return view(
@@ -75,7 +75,7 @@ class DashboardController extends Controller
     }
     public function dataortu()
     {
-        $items = TblHasil::with(['peserta', 'orang_tua'])->get();
+        $items = TblPesertaPpdb::with(['tbl_biodata_ortu', 'tbl_biodata_wali'])->get();
 
         // Count
         return view(
@@ -90,7 +90,7 @@ class DashboardController extends Controller
 
     public function transaksi()
     {
-        $items = Pembayaran::all();
+        $items = TblPesertaPpdb::with(['tbl_pembayaran'])->get();
         return view(
             'dashboards.dashboard.tu.transaksi',
             compact(
@@ -104,7 +104,10 @@ class DashboardController extends Controller
 
     public function detail($id)
     {
-        $item = TblHasil::with(['peserta.orang_tua'])->where('id', $id)->first();
+        $item = TblHasil::findOrFail($id); // Assuming TblHasil is your model
+
+        // You can also eager load relationships if needed
+        $item->load('tbl_peserta_ppdb');
         return view(
             'dashboards.dashboard.admin.detail',
             compact(
@@ -115,9 +118,12 @@ class DashboardController extends Controller
     }
     public function detailtu($id)
     {
-        $item = TblHasil::with(['peserta.orang_tua'])->where('id', $id)->first();
+        $item = TblHasil::findOrFail($id); // Assuming TblHasil is your model
+
+        // You can also eager load relationships if needed
+        $item->load('tbl_peserta_ppdb');
         return view(
-            'dashboards.dashboard.tu.detail',
+            'dashboards.dashboard.admin.detail',
             compact(
                 'item'
             )

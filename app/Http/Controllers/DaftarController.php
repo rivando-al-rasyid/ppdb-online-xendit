@@ -136,7 +136,7 @@ class DaftarController extends Controller
 
     public function hasil()
     {
-        $items = TblHasil::with(['tbl_peserta_ppdb.tbl_biodata_ortu'])->get();
+        $items = TblHasil::with(['tbl_peserta_ppdb'])->get();
         return view('home.hasil', compact('items'));
 
     }

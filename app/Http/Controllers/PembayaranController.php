@@ -55,12 +55,9 @@ class PembayaranController extends Controller
                 // Check if $student->id_user is null before creating a new user
                 if ($student->id_user === null) {
                     $namaDepan = $item->peserta->nama_depan;
-                    $namaBelakang = $item->peserta->nama_belakang;
-                    $no_hp = $item->orang_tua->no_tlp_ayah;
 
                     $user = new User();
                     $user->name = $namaDepan;
-                    $user->surname = $namaBelakang;
 
                     $baseEmail = $namaDepan . '@example.com';
                     $randomEmail = User::where('email', $baseEmail)->exists()
@@ -69,7 +66,6 @@ class PembayaranController extends Controller
 
                     $user->email = $randomEmail;
                     $user->password = bcrypt($randomEmail);
-                    $user->no_hp = $no_hp;
                     $user->save();
 
                     // Update $student->id_user after creating the user

@@ -53,27 +53,27 @@
                         </tr>
                         <tr>
                             <td>Nama Ayah</td>
-                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->nama_ayah }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortu->nama_ayah }}</td>
                         </tr>
                         <tr>
                             <td>Nama Ibu</td>
-                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->nama_ibu }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortu->nama_ibu }}</td>
                         </tr>
                         <tr>
                             <td>Pekerjaan Ayah</td>
-                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->pekerjaan_ayah->nama_pekerjaan }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortu->tbl_pekerjaan_ortu->nama_pekerjaan }}</td>
                         </tr>
                         <tr>
                             <td>Pekerjaan Ibu</td>
-                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->pekerjaan_ibu->nama_pekerjaan }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortu->tbl_pekerjaan_ortu->nama_pekerjaan }}</td>
                         </tr>
                         <tr>
                             <td>No Telepon ayah</td>
-                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->no_tlp_ayah }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortu->no_tlp_ayah }}</td>
                         </tr>
                         <tr>
                             <td>No Telepon ibu</td>
-                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->no_tlp_ibu }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortu->no_tlp_ibu }}</td>
                         </tr>
 
                         <tr>

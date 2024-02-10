@@ -26,7 +26,6 @@
                                     <th>Asal Sekolah</th>
                                     <th>Orang Tua</th>
                                     <th>Status</th>
-                                    <th>Action</th>
                                 </tr>
                             </tfoot>
                             <tbody>
@@ -36,7 +35,8 @@
                                         <td>{{ $item->tbl_peserta_ppdb->nama_depan }}
                                             {{ $item->tbl_peserta_ppdb->nama_belakang }}</td>
                                         <td>{{ $item->tbl_peserta_ppdb->asal_sekolah }}</td>
-                                        <td>{{ $item->nama_ayah }}</td>
+                                        <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortu->nama_ayah }}</td>
+
                                         <td>
                                             @if ($item->status == 'MENUNGGU')
                                                 <div class="font-weight-bold text-warning">MENUNGGU</div>
@@ -47,12 +47,6 @@
                                             @if ($item->status == 'DITERIMA')
                                                 <div class="font-weight-bold text-success">DITERIMA</div>
                                             @endif
-                                        </td>
-                                        <td>
-                                            <a href="{{ route('admin.peserta.detail', $item->id) }}"
-                                                class="btn btn-primary">
-                                                Detail
-                                            </a>
                                         </td>
 
                                     </tr>

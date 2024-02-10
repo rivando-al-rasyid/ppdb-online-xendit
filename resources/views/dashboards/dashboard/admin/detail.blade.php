@@ -53,27 +53,27 @@
                         </tr>
                         <tr>
                             <td>Nama Ayah</td>
-                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->nama_ayah }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortu->nama_ayah }}</td>
                         </tr>
                         <tr>
                             <td>Nama Ibu</td>
-                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->nama_ibu }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortu->nama_ibu }}</td>
                         </tr>
                         <tr>
                             <td>Pekerjaan Ayah</td>
-                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->pekerjaan_ayah->nama_pekerjaan }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortu->tbl_pekerjaan_ortu->nama_pekerjaan }}</td>
                         </tr>
                         <tr>
                             <td>Pekerjaan Ibu</td>
-                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->pekerjaan_ibu->nama_pekerjaan }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortu->tbl_pekerjaan_ortu->nama_pekerjaan }}</td>
                         </tr>
                         <tr>
                             <td>No Telepon ayah</td>
-                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->no_tlp_ayah }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortu->no_tlp_ayah }}</td>
                         </tr>
                         <tr>
                             <td>No Telepon ibu</td>
-                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->no_tlp_ibu }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortu->no_tlp_ibu }}</td>
                         </tr>
 
                         <tr>
@@ -85,7 +85,7 @@
                             <td>
                                 @if ($item->status == 'MENUNGGU')
                                     <form method="post" class="d-inline-block"
-                                        action="{{ route('tu.peserta.diterima', $item->id) }}">
+                                        action="{{ route('admin.peserta.diterima', $item->id) }}">
                                         @method('PATCH')
                                         @csrf
                                         <button type="submit" class="btn btn-success me-2">
@@ -93,7 +93,7 @@
                                         </button>
                                     </form>
                                     <form method="post" class="d-inline-block"
-                                        action="{{ route('tu.peserta.cadangan', $item->id) }}">
+                                        action="{{ route('admin.peserta.cadangan', $item->id) }}">
                                         @method('PATCH')
                                         @csrf
                                         <button type="submit" class="btn btn-primary">
@@ -101,7 +101,7 @@
                                         </button>
                                     </form>
                                     <form method="post" class="d-inline-block"
-                                        action="{{ route('tu.peserta.ditolak', $item->id) }}">
+                                        action="{{ route('admin.peserta.ditolak', $item->id) }}">
                                         @method('PATCH')
                                         @csrf
                                         <button type="submit" class="btn btn-danger">
