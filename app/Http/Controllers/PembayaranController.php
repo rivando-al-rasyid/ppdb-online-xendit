@@ -46,7 +46,8 @@ class PembayaranController extends Controller
             \DB::beginTransaction();
 
             $userId = $request->input('id');
-            $items = TblHasil::with(['peserta', 'orang_tua'])->where('status', 'DITERIMA')->get();
+            $items = TblHasil::with(['tbl_peserta_ppdb'])->where('status', 'DITERIMA')->get();
+
 
             foreach ($items as $item) {
                 $idpeserta = $item->peserta->id;

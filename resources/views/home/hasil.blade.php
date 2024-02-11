@@ -1,6 +1,6 @@
 @extends('home.app')
-@push('add-styles')
-    <link href="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+@push('style')
+    <link href="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 @endpush
 @section('content')
     <main id="main">
@@ -16,7 +16,6 @@
                                     <th>Asal Sekolah</th>
                                     <th>Orang Tua</th>
                                     <th>Status</th>
-                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tfoot>
@@ -63,7 +62,7 @@
 @endsection
 @push('add-scripts')
     <!-- Page level plugins -->
-    <script src="{{ asset('assets/vendor/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('assets/js/demo/admin.js') }}"></script>
+    <script src="{{ asset('sbadmin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('sbadmin/js/demo/datatables-demo.js') }}"></script>
 @endpush
