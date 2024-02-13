@@ -145,14 +145,102 @@ class PembayaranController extends Controller
                 $data = TblPesertaPpdb::where('id_user', $user->id)->with('tbl_biodata_ortu')->first();
 
                 $no_hp = $data->tbl_biodata_ortu->id;
-                $items = [
+                // Original items1 array
+                $items1 = [
                     [
-                        'name' => 'Air Conditioner',
+                        'name' => 'Satu Stel Dasar Pakaian Putih Dongker',
                         'quantity' => 1,
-                        'price' => 100000,
+                        'price' => 140000,
+                    ],
+                    [
+                        'name' => 'Satu Stel Dasar Pakaian Pramuka',
+                        'quantity' => 1,
+                        'price' => 175000,
+                    ],
+                    [
+                        'name' => 'Dasar Baju Batik Sekolah',
+                        'quantity' => 1,
+                        'price' => 65000,
+                    ],
+                    [
+                        'name' => 'Dasar Pakaian Muslim ( Khusus Jum’at )',
+                        'quantity' => 1,
+                        'price' => 60000,
+                    ],
+                    [
+                        'name' => 'Satu Stel Pakaian Baju Olahraga',
+                        'quantity' => 1,
+                        'price' => 115000,
+                    ],
+                    [
+                        'name' => 'Atribut, topi, dasi, pin, lambang (osis, pramuka, lokasi, dan nama siswa)',
+                        'quantity' => 1,
+                        'price' => 50000,
+                    ],
+                    [
+                        'name' => 'Sampul Rapor',
+                        'quantity' => 1,
+                        'price' => 50000,
+                    ],
+                    [
+                        'name' => 'Uang Osis (1 tahun)',
+                        'quantity' => 1,
+                        'price' => 20000,
                     ]
-
                 ];
+
+                // Modified items2 array
+                $items2 = [
+                    [
+                        'name' => 'Satu Stel Dasar Pakaian Putih Dongker',
+                        'quantity' => 1,
+                        'price' => 145000,
+                    ],
+                    [
+                        'name' => 'Satu Stel Dasar Pakaian Pramuka',
+                        'quantity' => 1,
+                        'price' => 175000,
+                    ],
+                    [
+                        'name' => 'Dasar Baju Batik Sekolah',
+                        'quantity' => 1,
+                        'price' => 70000,
+                    ],
+                    [
+                        'name' => 'Dasar Pakaian Muslim ( Khusus Jum’at )',
+                        'quantity' => 1,
+                        'price' => 65000,
+                    ],
+                    [
+                        'name' => 'Satu Stel Pakaian Baju Olahraga',
+                        'quantity' => 1,
+                        'price' => 115000,
+                    ],
+                    [
+                        'name' => 'Atribut,topi,dasi,pin,lambang (osis,pramuka,lokasi, dan nama siswa)',
+                        'quantity' => 1,
+                        'price' => 50000,
+                    ],
+                    [
+                        'name' => 'Sampul Rapor',
+                        'quantity' => 1,
+                        'price' => 50000,
+                    ],
+                    [
+                        'name' => 'Uang Osis (1 tahun)',
+                        'quantity' => 1,
+                        'price' => 20000,
+                    ],
+                ];
+
+                // No changes needed for items1, just define items2 as above
+
+
+                $itemsCollect = collect($items);
+
+                $total = $itemsCollect->sum(function ($item) {
+                    return $item['price'] * $item['quantity'];
+                });
 
                 $invoiceCustomerData = [
                     'given_names' => $data->nama_depan,
@@ -172,7 +260,7 @@ class PembayaranController extends Controller
                 // Use $this->invoiceApiInstance for consistency
                 $createInvoiceRequest = new CreateInvoiceRequest([
                     'external_id' => (string) Str::uuid(),
-                    'amount' => 100000,
+                    'amount' => $total,
                     'items' => $items,
                     'description' => 'test',
                     'invoice_duration' => 86400,
