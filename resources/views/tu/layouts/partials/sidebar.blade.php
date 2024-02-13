@@ -32,14 +32,14 @@
 
     <!-- Nav Item - Data Master -->
     <li
-        class="nav-item{{ request()->routeIs('tu.laporan.index') || request()->routeIs('tu.laporan.dataortu') ? ' active' : '' }}">
+        class="nav-item{{ request()->routeIs('tu.laporan.index') || request()->routeIs('tu.laporan.dataortu') || request()->routeIs('tu.laporan.transaksi') ? ' active' : '' }}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
             aria-expanded="true" aria-controls="collapseOne">
             <i class="fas fa-fw fa-cog"></i>
             <span>Data Master</span>
         </a>
         <div id="collapseOne"
-            class="collapse {{ request()->routeIs('tu.laporan.index') || request()->routeIs('tu.laporan.dataortu') ? ' show' : '' }}"
+            class="collapse {{ request()->routeIs('tu.laporan.index') || request()->routeIs('tu.laporan.dataortu') || request()->routeIs('tu.laporan.transaksi') ? ' show' : '' }}"
             aria-labelledby="headingOne" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header ">Laporan :</h6>

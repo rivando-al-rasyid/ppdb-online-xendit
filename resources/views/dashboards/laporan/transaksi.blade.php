@@ -1,9 +1,15 @@
 @extends('tu.layouts.app')
 @push('style')
     <link href="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('sbadmin/vendor/datatables/Buttons/css/buttons.bootstrap4.css') }}" rel="stylesheet">
 @endpush
 @section('content')
     <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+        </div>
 
         <!-- Content Row -->
         <div class="row">
@@ -20,10 +26,12 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama</th>
+                                            <th>Jenis Kelamin</th>
                                             <th>nama orang tua</th>
                                             <th>id invoice</th>
                                             <th>amount</th>
                                             <th>status</th>
+                                            <th>Link Pembayaran</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -31,10 +39,14 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }} </td>
                                                 <td>{{ $item->nama_depan }} {{ $item->nama_belakang }}</td>
+                                                <td>{{ $item->jenis_kelamin }} </td>
                                                 <td>{{ $item->tbl_biodata_ortu->nama_ayah }} </td>
                                                 <td>{{ $item->tbl_pembayaran->invoice_id ?? 'null' }}</td>
                                                 <td>{{ $item->tbl_pembayaran->amount ?? 'null' }}</td>
                                                 <td>{{ $item->tbl_pembayaran->status ?? 'null' }}</td>
+                                                <td><a href="{{ $item->tbl_pembayaran->checkout_link ?? '#' }}">link
+                                                        Pembyaran</a>
+                                                </td>
 
                                             </tr>
                                         @empty
@@ -53,7 +65,13 @@
     @endsection
     @push('script')
         <!-- Page level plugins -->
+
         <script src="{{ asset('sbadmin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+        <script src="{{ asset('sbadmin/vendor/datatables/pdfmake-0.2.7/pdfmake.min.js') }}"></script>
+        <script src="{{ asset('sbadmin/vendor/datatables/pdfmake-0.2.7/vfs_fonts.js') }}"></script>
+        <script src="{{ asset('sbadmin/vendor/datatables/pdfmake-0.2.7/datatables.min.js') }}"></script>
+        <script src="https://cdn.datatables.net/v/bs4/jszip-3.10.1/b-2.4.2/b-html5-2.4.2/b-print-2.4.2/datatables.min.js">
+        </script>
         <script src="{{ asset('sbadmin/js/demo/admin.js') }}"></script>
     @endpush

@@ -125,6 +125,8 @@
                                     </div>
                                 </div>
 
+
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Tempat Lahir</label>
@@ -277,4 +279,17 @@
     <script src="{{ asset('assets/vendor/jquery-validation/dist/additional-methods.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/jquery-steps/jquery.steps.min.js') }}"></script>
     <script src="{{ asset('assets/js/daftar.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#tanggal_lahir').on('change', function() {
+                var inputValue = $(this).val();
+                if (inputValue) {
+                    var date = new Date(inputValue);
+                    var formattedDate = ("0" + date.getDate()).slice(-2) + "-" + ("0" + (date.getMonth() +
+                        1)).slice(-2) + "-" + date.getFullYear();
+                    $(this).attr('value', formattedDate);
+                }
+            });
+        });
+    </script>
 @endpush

@@ -57,7 +57,7 @@
                                                 <td>{{ $item->nik }}</td>
                                                 <td>{{ $item->no_kk }}</td>
                                                 <td>{{ $item->jenis_kelamin }}</td>
-                                                <td>{{ $item->tanggal_lahir }}</td>
+                                                <td>{{ date('d-m-Y', strtotime($item->tanggal_lahir)) }}</td>
                                                 <td>{{ $item->tempat_lahir }}</td>
                                                 <td>{{ $item->agama }}</td>
                                                 <td>{{ $item->asal_sekolah }}</td>

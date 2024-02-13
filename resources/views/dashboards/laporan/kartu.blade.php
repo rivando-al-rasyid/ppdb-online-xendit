@@ -2,7 +2,6 @@
 @push('style')
     <link href="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="{{ asset('sbadmin/vendor/datatables/Buttons/css/buttons.bootstrap4.css') }}" rel="stylesheet">
-    <link href="{{ asset('sbadmin/css/custom/scroller.css') }}" rel="stylesheet">
 @endpush
 @section('content')
     <div class="container-fluid">
@@ -16,53 +15,39 @@
         <div class="row">
             <div class="row mt-5">
                 <div class="col-12">
-                    <h1>Data Kartu </h1>
+                    <h1>Data Peserta PPDB</h1>
                 </div>
                 <div class="col-12">
                     <div class="card mt-3">
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered display nowrap" id="dataTable">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>No</th>
                                             <th>Nama</th>
-                                            <th>NISN</th>
-                                            <th>NIK</th>
-                                            <th>No KK</th>
                                             <th>Jenis Kelamin</th>
-                                            <th>Tanggal Lahir</th>
-                                            <th>Tempat Lahir</ths>
-                                            <th>Agama</th>
-                                            <th>Asal Sekolah</th>
-                                            <th>Alamat</th>
-                                            <th>Nama Ayah</th>
-                                            <th>No Telepon Ayah</th>
-                                            <th>Nama Ibu</th>
-                                            <th>No Telepon Ibu</th>
+                                            <th>nama orang tua</th>
+                                            <th>id invoice</th>
+                                            <th>amount</th>
+                                            <th>status</th>
+                                            <th>Link Pembayaran</th>
                                         </tr>
-
                                     </thead>
                                     <tbody>
                                         @forelse ($items as $item)
                                             <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $item->nama_depan }}
-                                                    {{ $item->nama_belakang }}
+                                                <td>{{ $loop->iteration }} </td>
+                                                <td>{{ $item->nama_depan }} {{ $item->nama_belakang }}</td>
+                                                <td>{{ $item->jenis_kelamin }} </td>
+                                                <td>{{ $item->tbl_biodata_ortu->nama_ayah }} </td>
+                                                <td>{{ $item->tbl_pembayaran->invoice_id ?? 'null' }}</td>
+                                                <td>{{ $item->tbl_pembayaran->amount ?? 'null' }}</td>
+                                                <td>{{ $item->tbl_pembayaran->status ?? 'null' }}</td>
+                                                <td><a href="{{ $item->tbl_pembayaran->checkout_link ?? '#' }}">link
+                                                        Pembyaran</a>
                                                 </td>
-                                                <td>{{ $item->nisn }}</td>
-                                                <td>{{ $item->nik }}</td>
-                                                <td>{{ $item->no_kk }}</td>
-                                                <td>{{ $item->jenis_kelamin }}</td>
-                                                <td>{{ $item->tanggal_lahir }}</td>
-                                                <td>{{ $item->tempat_lahir }}</td>
-                                                <td>{{ $item->agama }}</td>
-                                                <td>{{ $item->asal_sekolah }}</td>
-                                                <td>{{ $item->alamat }}</td>
-                                                <td>{{ $item->tbl_biodata_ortu->nama_ayah }}</td>
-                                                <td>{{ $item->tbl_biodata_ortu->no_tlp_ayah }}</td>
-                                                <td>{{ $item->tbl_biodata_ortu->nama_ibu }}</td>
-                                                <td>{{ $item->tbl_biodata_ortu->no_tlp_ibu }}</td>
+
                                             </tr>
                                         @empty
                                             <tr>
