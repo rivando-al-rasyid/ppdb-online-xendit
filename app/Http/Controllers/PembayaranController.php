@@ -148,6 +148,53 @@ class PembayaranController extends Controller
                 $items1 = [
                     [
                         'name' => 'Satu Stel Dasar Pakaian Putih Dongker',
+                        'quantity' => 1,
+                        'price' => 145000,
+                    ],
+                    [
+                        'name' => 'Satu Stel Dasar Pakaian Pramuka',
+                        'quantity' => 1,
+                        'price' => 175000,
+                    ],
+                    [
+                        'name' => 'Dasar Baju Batik Sekolah',
+                        'quantity' => 1,
+                        'price' => 70000,
+                    ],
+                    [
+                        'name' => 'Dasar Pakaian Muslim ( Khusus Jum’at )',
+                        'quantity' => 1,
+                        'price' => 65000,
+                    ],
+                    [
+                        'name' => 'Satu Stel Pakaian Baju Olahraga',
+                        'quantity' => 1,
+                        'price' => 115000,
+                    ],
+                    [
+                        'name' => 'Atribut,topi,dasi,pin,lambang (osis,pramuka,lokasi, dan nama siswa)',
+                        'quantity' => 1,
+                        'price' => 50000,
+                    ],
+                    [
+                        'name' => 'Dua Helai Jelbab',
+                        'quantity' => 1,
+                        'price' => 80000,
+                    ],
+                    [
+                        'name' => 'Sampul Rapor',
+                        'quantity' => 1,
+                        'price' => 50000,
+                    ],
+                    [
+                        'name' => 'Uang Osis (1 tahun)',
+                        'quantity' => 1,
+                        'price' => 20000,
+                    ],
+                ];
+                $items2 = [
+                    [
+                        'name' => 'Satu Stel Dasar Pakaian Putih Dongker',
                         'price' => 140000,
                         'quantity' => 1,
                     ],
@@ -185,51 +232,9 @@ class PembayaranController extends Controller
                         'name' => 'Uang Osis (1 tahun)',
                         'price' => 20000,
                         'quantity' => 1,
-                    ]
-                ];
-                $items2 = [
-                    [
-                        'name' => 'Satu Stel Dasar Pakaian Putih Dongker',
-                        'quantity' => 1,
-                        'price' => 145000,
-                    ],
-                    [
-                        'name' => 'Satu Stel Dasar Pakaian Pramuka',
-                        'quantity' => 1,
-                        'price' => 175000,
-                    ],
-                    [
-                        'name' => 'Dasar Baju Batik Sekolah',
-                        'quantity' => 1,
-                        'price' => 70000,
-                    ],
-                    [
-                        'name' => 'Dasar Pakaian Muslim ( Khusus Jum’at )',
-                        'quantity' => 1,
-                        'price' => 65000,
-                    ],
-                    [
-                        'name' => 'Satu Stel Pakaian Baju Olahraga',
-                        'quantity' => 1,
-                        'price' => 115000,
-                    ],
-                    [
-                        'name' => 'Atribut,topi,dasi,pin,lambang (osis,pramuka,lokasi, dan nama siswa)',
-                        'quantity' => 1,
-                        'price' => 50000,
-                    ],
-                    [
-                        'name' => 'Sampul Rapor',
-                        'quantity' => 1,
-                        'price' => 50000,
-                    ],
-                    [
-                        'name' => 'Uang Osis (1 tahun)',
-                        'quantity' => 1,
-                        'price' => 20000,
                     ],
                 ];
-                if ($data->jenis_kelamin === 'L') {
+                if ($data->jenis_kelamin === 'P') {
                     $items = $items1;
                 } else {
                     $items = $items2;
@@ -287,7 +292,6 @@ class PembayaranController extends Controller
                 $data->save();
 
                 // Success message and redirection
-                Alert::success('Success', 'Invoice created successfully!')->persistent(true)->autoClose(3000);
                 return redirect()->away($result['invoice_url']);
             } else {
                 // If the invoice already exists, redirect to the checkout link
