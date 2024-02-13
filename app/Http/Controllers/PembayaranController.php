@@ -145,51 +145,48 @@ class PembayaranController extends Controller
                 $data = TblPesertaPpdb::where('id_user', $user->id)->with('tbl_biodata_ortu')->first();
 
                 $no_hp = $data->tbl_biodata_ortu->id;
-                // Original items1 array
                 $items1 = [
                     [
                         'name' => 'Satu Stel Dasar Pakaian Putih Dongker',
-                        'quantity' => 1,
                         'price' => 140000,
+                        'quantity' => 1,
                     ],
                     [
                         'name' => 'Satu Stel Dasar Pakaian Pramuka',
-                        'quantity' => 1,
                         'price' => 175000,
+                        'quantity' => 1,
                     ],
                     [
                         'name' => 'Dasar Baju Batik Sekolah',
-                        'quantity' => 1,
                         'price' => 65000,
+                        'quantity' => 1,
                     ],
                     [
                         'name' => 'Dasar Pakaian Muslim ( Khusus Jum’at )',
-                        'quantity' => 1,
                         'price' => 60000,
+                        'quantity' => 1,
                     ],
                     [
                         'name' => 'Satu Stel Pakaian Baju Olahraga',
-                        'quantity' => 1,
                         'price' => 115000,
+                        'quantity' => 1,
                     ],
                     [
                         'name' => 'Atribut, topi, dasi, pin, lambang (osis, pramuka, lokasi, dan nama siswa)',
-                        'quantity' => 1,
                         'price' => 50000,
+                        'quantity' => 1,
                     ],
                     [
                         'name' => 'Sampul Rapor',
-                        'quantity' => 1,
                         'price' => 50000,
+                        'quantity' => 1,
                     ],
                     [
                         'name' => 'Uang Osis (1 tahun)',
-                        'quantity' => 1,
                         'price' => 20000,
+                        'quantity' => 1,
                     ]
                 ];
-
-                // Modified items2 array
                 $items2 = [
                     [
                         'name' => 'Satu Stel Dasar Pakaian Putih Dongker',
@@ -232,8 +229,11 @@ class PembayaranController extends Controller
                         'price' => 20000,
                     ],
                 ];
-
-                // No changes needed for items1, just define items2 as above
+                if ($data->jenis_kelamin === 'L') {
+                    $items = $items1;
+                } else {
+                    $items = $items2;
+                }
 
 
                 $itemsCollect = collect($items);
