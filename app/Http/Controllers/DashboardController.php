@@ -92,7 +92,7 @@ class DashboardController extends Controller
     {
         $items = TblPesertaPpdb::with(['tbl_pembayaran'])->get();
         return view(
-            'dashboards.dashboard.tu.transaksi',
+            'dashboards.laporan.transaksi',
             compact(
                 'items',
             )
