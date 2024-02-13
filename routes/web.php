@@ -4,8 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DaftarController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PembayaranController;
-use App\Http\Controllers\XenditWebhookController;
-use App\Http\Controllers\SekolahController;
+
 
 
 /*
@@ -38,13 +37,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/dashboard', [PembayaranController::class, 'create'])->name('dashboard');
     Route::post('/pembayaran', [PembayaranController::class, 'createInvoice'])->name('pembayaran.store');
-    Route::post('/create-invoice', [PembayaranController::class, 'createInvoice']);
-    Route::get('/invoice', [PembayaranController::class, 'showInvoice'])->name('pembayaran.invoice');
+    Route::get('/invoice', [PembayaranController::class, 'getInvoiceById'])->name('pembayaran.invoice');
 });
-Route::post('/xendit-webhook/invoice', [XenditWebhookController::class, 'handleInvoiceCallback']);
-
-
-// Get Customer by ID
-
+Route::post('/xendit/webhook', [PembayaranController::class, 'webhook']);
 
 require __DIR__ . '/auth.php';

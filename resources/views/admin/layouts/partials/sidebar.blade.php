@@ -37,21 +37,21 @@
 
     <!-- Nav Item - Data Master -->
     <li
-        class="nav-item{{ request()->routeIs('admin.pekerjaan_ortu.index') || request()->routeIs('admin.sekolah.profile') ? ' active' : '' }}">
+        class="nav-item{{ request()->routeIs('admin.pekerjaan_ortu.index') || request()->routeIs('admin.biaya.index') ? ' active' : '' }}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
             aria-expanded="true" aria-controls="collapseOne">
             <i class="fas fa-fw fa-cog"></i>
             <span>Data Master</span>
         </a>
         <div id="collapseOne"
-            class="collapse {{ request()->routeIs('admin.pekerjaan_ortu.index') || request()->routeIs('admin.sekolah.profile') ? ' show' : '' }}"
+            class="collapse {{ request()->routeIs('admin.pekerjaan_ortu.index') || request()->routeIs('admin.biaya.index') ? ' show' : '' }}"
             aria-labelledby="headingOne" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Master Data:</h6>
                 <a class="collapse-item{{ request()->routeIs('admin.pekerjaan_ortu.index') ? ' active' : '' }}"
                     href="{{ route('admin.pekerjaan_ortu.index') }}">Pekerjaan Orang Tua</a>
-                <a class="collapse-item{{ request()->routeIs('admin.sekolah.profile') ? ' active' : '' }}"
-                    href="{{ route('admin.sekolah.profile') }}">Profile Sekolah</a>
+                <a class="collapse-item{{ request()->routeIs('admin.biaya.index') ? ' active' : '' }}"
+                    href="{{ route('admin.biaya.index') }}">Profile Sekolah</a>
             </div>
         </div>
     </li>

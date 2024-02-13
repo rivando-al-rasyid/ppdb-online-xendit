@@ -52,9 +52,9 @@ Breadcrumbs::for('admin.profile.edit', function (BreadcrumbTrail $trail) {
     $trail->push('Profile Admin', route('admin.profile.edit'));
 });
 
-Breadcrumbs::for('sekolah.profile', function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('biaya.index', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.dashboard');
-    $trail->push('Profile Admin', route('sekolah.profile'));
+    $trail->push('Profile Admin', route('biaya.index'));
 });
 Breadcrumbs::for('admin.pekerjaan_ortu.index', function (BreadcrumbTrail $trail) {
     $trail->parent('admin.dashboard');
