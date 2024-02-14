@@ -30,6 +30,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $id_biodata_wali
  * @property int|null $id_kartu
  * @property int|null $id_invoice
+ * @property int|null $id_user
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * 
@@ -37,6 +38,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property TblBiodataWali|null $tbl_biodata_wali
  * @property TblPembayaran|null $tbl_pembayaran
  * @property TblKartu|null $tbl_kartu
+ * @property User|null $user
  * @property Collection|TblHasil[] $tbl_hasils
  *
  * @package App\Models
@@ -54,7 +56,8 @@ class TblPesertaPpdb extends Model
 		'id_biodata_ortu' => 'int',
 		'id_biodata_wali' => 'int',
 		'id_kartu' => 'int',
-		'id_invoice' => 'int'
+		'id_invoice' => 'int',
+		'id_user' => 'int'
 	];
 
 	protected $fillable = [
@@ -73,7 +76,8 @@ class TblPesertaPpdb extends Model
 		'id_biodata_ortu',
 		'id_biodata_wali',
 		'id_kartu',
-		'id_invoice'
+		'id_invoice',
+		'id_user'
 	];
 
 	public function tbl_biodata_ortu()
@@ -94,6 +98,11 @@ class TblPesertaPpdb extends Model
 	public function tbl_kartu()
 	{
 		return $this->belongsTo(TblKartu::class, 'id_kartu');
+	}
+
+	public function user()
+	{
+		return $this->belongsTo(User::class, 'id_user');
 	}
 
 	public function tbl_hasils()
