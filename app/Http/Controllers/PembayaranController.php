@@ -129,7 +129,7 @@ class PembayaranController extends Controller
         try {
             // Retrieve customer data from the authenticated user
             $user = Auth::user();
-            $biaya = TblBiaya::first();
+
             $url = app('url')->to('/invoice');
 
             // Check if any invoice with the same user_id exists
@@ -381,7 +381,6 @@ class PembayaranController extends Controller
     public function create()
     {
         // Retrieve a Sekolah model and pass it to the view
-        $biaya = TblBiaya::first();
         $user = Auth::user();
         return view('dashboards.pembayaran.create', compact('biaya', 'user'));
     }
