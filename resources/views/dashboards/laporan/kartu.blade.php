@@ -34,6 +34,19 @@
                                             <th>PKH</th>
                                         </tr>
                                     </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama</th>
+                                            <th>Jenis Kelamin</th>
+                                            <th>nama orang tua</th>
+                                            <th>KIP</th>
+                                            <th>KKS</th>
+                                            <th>KPS</th>
+                                            <th>PKH</th>
+                                        </tr>
+                                    </tfoot>
+
                                     <tbody>
                                         @forelse ($items as $item)
                                             <tr>

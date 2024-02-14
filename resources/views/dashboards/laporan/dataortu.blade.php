@@ -34,6 +34,19 @@
                                             <th>No Telepon Ibu</th>
                                         </tr>
                                     </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama Depan</th>
+                                            <th>Nama Belakang</th>
+                                            <th>Alamat</th>
+                                            <th>Nama Ayah</th>
+                                            <th>No Telepon Ayah</th>
+                                            <th>Nama Ibu</th>
+                                            <th>No Telepon Ibu</th>
+                                        </tr>
+                                    </tfoot>
+
                                     <tbody>
                                         @forelse ($items as $item)
                                             <tr>

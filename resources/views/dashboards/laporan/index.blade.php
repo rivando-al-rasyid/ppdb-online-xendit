@@ -49,6 +49,32 @@
                                         </tr>
 
                                     </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama</th>
+                                            <th>NISN</th>
+                                            <th>NIK</th>
+                                            <th>No KK</th>
+                                            <th>Jenis Kelamin</th>
+                                            <th>Tanggal Lahir</th>
+                                            <th>Tempat Lahir</ths>
+                                            <th>Agama</th>
+                                            <th>Asal Sekolah</th>
+                                            <th>Alamat</th>
+                                            <th>Nama Ayah</th>
+                                            <th>No Telepon Ayah</th>
+                                            <th>Nama Ibu</th>
+                                            <th>No Telepon Ibu</th>
+                                            <th>Nama Wali</th>
+                                            <th>No Telepon Wali</th>
+                                            <th>KIP</th>
+                                            <th>KKS</th>
+                                            <th>KPS</th>
+                                            <th>PKH</th>
+                                        </tr>
+                                    </tfoot>
+
                                     <tbody>
                                         @forelse ($items as $item)
                                             <tr>

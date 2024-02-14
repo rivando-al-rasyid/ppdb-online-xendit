@@ -34,6 +34,19 @@
                                             <th>Link Pembayaran</th>
                                         </tr>
                                     </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama</th>
+                                            <th>Jenis Kelamin</th>
+                                            <th>nama orang tua</th>
+                                            <th>id invoice</th>
+                                            <th>amount</th>
+                                            <th>status</th>
+                                            <th>Link Pembayaran</th>
+                                        </tr>
+                                    </tfoot>
+
                                     <tbody>
                                         @forelse ($items as $item)
                                             <tr>
