@@ -40,6 +40,12 @@
                                             <th>No Telepon Ayah</th>
                                             <th>Nama Ibu</th>
                                             <th>No Telepon Ibu</th>
+                                            <th>Nama Wali</th>
+                                            <th>No Telepon Wali</th>
+                                            <th>KIP</th>
+                                            <th>KKS</th>
+                                            <th>KPS</th>
+                                            <th>PKH</th>
                                         </tr>
 
                                     </thead>
@@ -47,22 +53,29 @@
                                         @forelse ($items as $item)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $item->tbl_peserta_ppdb->nama_depan }}
-                                                    {{ $item->tbl_peserta_ppdb->nama_belakang }}
-                                                </td>
-                                                <td>{{ $item->tbl_peserta_ppdb->nisn }}</td>
-                                                <td>{{ $item->tbl_peserta_ppdb->nik }}</td>
-                                                <td>{{ $item->tbl_peserta_ppdb->no_kk }}</td>
-                                                <td>{{ $item->tbl_peserta_ppdb->jenis_kelamin }}</td>
-                                                <td>{{ $item->tbl_peserta_ppdb->tanggal_lahir }}</td>
-                                                <td>{{ $item->tbl_peserta_ppdb->tempat_lahir }}</td>
-                                                <td>{{ $item->tbl_peserta_ppdb->agama }}</td>
-                                                <td>{{ $item->tbl_peserta_ppdb->asal_sekolah }}</td>
-                                                <td>{{ $item->tbl_peserta_ppdb->alamat }}</td>
-                                                <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->nama_ayah }}</td>
-                                                <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->no_tlp_ayah }}</td>
-                                                <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->nama_ibu }}</td>
-                                                <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortus->no_tlp_ibu }}</td>
+                                                <td>{{ $item->nama_depan }} {{ $item->nama_belakang }}</td>
+                                                <td>{{ $item->nisn }}</td>
+                                                <td>{{ $item->nik }}</td>
+                                                <td>{{ $item->no_kk }}</td>
+                                                <td>{{ $item->jenis_kelamin }}</td>
+                                                <td>{{ date('d-m-Y', strtotime($item->tanggal_lahir)) }}</td>
+                                                <td>{{ $item->tempat_lahir }}</td>
+                                                <td>{{ $item->agama }}</td>
+                                                <td>{{ $item->asal_sekolah }}</td>
+                                                <td>{{ $item->alamat }}</td>
+                                                <td>{{ $item->tbl_biodata_ortu->nama_ayah }}</td>
+                                                <td>{{ $item->tbl_biodata_ortu->no_tlp_ayah }}</td>
+                                                <td>{{ $item->tbl_biodata_ortu->nama_ibu }}</td>
+                                                <td>{{ $item->tbl_biodata_ortu->no_tlp_ibu }}</td>
+                                                <td>{{ $item->tbl_biodata_wali->nama_wali ?? ' ' }}</td>
+                                                <td>{{ $item->tbl_biodata_wali->no_tlp_wali ?? ' ' }}</td>
+                                                <td>{{ $item->tbl_kartu->kip ?? 'null' }}</td>
+                                                <td>{{ $item->tbl_kartu->kks ?? 'null' }}</td>
+                                                <td>{{ $item->tbl_kartu->kps ?? 'null' }}</td>
+                                                <td>{{ $item->tbl_kartu->pkh ?? 'null' }}</td>
+
+
+
                                             </tr>
                                         @empty
                                             <tr>
@@ -77,16 +90,17 @@
                 </div>
             </div>
         </div>
-    @endsection
-    @push('script')
-        <!-- Page level plugins -->
+    </div>
+@endsection
+@push('script')
+    <!-- Page level plugins -->
 
-        <script src="{{ asset('sbadmin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
-        <script src="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
-        <script src="{{ asset('sbadmin/vendor/datatables/pdfmake-0.2.7/pdfmake.min.js') }}"></script>
-        <script src="{{ asset('sbadmin/vendor/datatables/pdfmake-0.2.7/vfs_fonts.js') }}"></script>
-        <script src="{{ asset('sbadmin/vendor/datatables/pdfmake-0.2.7/datatables.min.js') }}"></script>
-        <script src="https://cdn.datatables.net/v/bs4/jszip-3.10.1/b-2.4.2/b-html5-2.4.2/b-print-2.4.2/datatables.min.js">
-        </script>
-        <script src="{{ asset('sbadmin/js/demo/admin.js') }}"></script>
-    @endpush
+    <script src="{{ asset('sbadmin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('sbadmin/vendor/datatables/pdfmake-0.2.7/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('sbadmin/vendor/datatables/pdfmake-0.2.7/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('sbadmin/vendor/datatables/pdfmake-0.2.7/datatables.min.js') }}"></script>
+    <script src="https://cdn.datatables.net/v/bs4/jszip-3.10.1/b-2.4.2/b-html5-2.4.2/b-print-2.4.2/datatables.min.js">
+    </script>
+    <script src="{{ asset('sbadmin/js/demo/admin.js') }}"></script>
+@endpush

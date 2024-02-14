@@ -14,13 +14,10 @@ return new class extends Migration {
             $table->id();
             $table->string('invoice_id')->unique();
             $table->string('external_id')->unique();
-            $table->string('payer_email');
             $table->text('description');
             $table->bigInteger('amount'); // Use 'bigInteger' for large integers
             $table->string('status');
             $table->string('checkout_link');
-            $table->unsignedBigInteger('user_id'); // Assuming invoices are related to users
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

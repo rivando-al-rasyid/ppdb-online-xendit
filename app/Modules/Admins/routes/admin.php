@@ -4,11 +4,8 @@ use App\Modules\Admins\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PekerjaanOrtuController;
-use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\KelolaTUController;
 use App\Http\Controllers\PembayaranController;
-use App\Http\Controllers\TaskController;
-
 
 
 Route::middleware(['web', 'admin.auth', 'admin.verified'])->get('/admin', function () {
@@ -27,11 +24,8 @@ Route::group(['as' => 'admin.', 'prefix' => '/admin', 'middleware' => ['web', 'a
     Route::patch('/ditolak/{id}', [DashboardController::class, 'tolak'])->name('peserta.ditolak');
     Route::resource('pekerjaan_ortu', PekerjaanOrtuController::class);
     Route::resource('kelola_tu', KelolaTUController::class);
-    Route::get('/sekolah', [SekolahController::class, 'index'])->name('sekolah.profile');
-    // Route to handle form submission
-    Route::post('/sekolah', [SekolahController::class, 'createOrUpdate'])->name('sekolah.store');
     // Route to update existing data
-    Route::get('/create-euser', [PembayaranController::class, 'createCustomer'])->name('create.customer');
+    Route::get('/create-user', [PembayaranController::class, 'createCustomer'])->name('create.customer');
 
 });
 

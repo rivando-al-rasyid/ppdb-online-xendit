@@ -7,10 +7,11 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class TblWali
+ * Class TblBiodataWali
  * 
  * @property int $id
  * @property int|null $id_pekerjaan_wali
@@ -18,28 +19,25 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $no_tlp_wali
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property int $id_peserta_ppdb
  * 
  * @property TblPekerjaanOrtu|null $tbl_pekerjaan_ortu
- * @property TblPesertaPpdb $tbl_peserta_ppdb
+ * @property Collection|TblPesertaPpdb[] $tbl_peserta_ppdbs
  *
  * @package App\Models
  */
-class TblWali extends Model
+class TblBiodataWali extends Model
 {
-	protected $table = 'tbl_wali';
+	protected $table = 'tbl_biodata_wali';
 
 	protected $casts = [
 		'id_pekerjaan_wali' => 'int',
-		'no_tlp_wali' => 'int',
-		'id_peserta_ppdb' => 'int'
+		'no_tlp_wali' => 'int'
 	];
 
 	protected $fillable = [
 		'id_pekerjaan_wali',
 		'nama_wali',
-		'no_tlp_wali',
-		'id_peserta_ppdb'
+		'no_tlp_wali'
 	];
 
 	public function tbl_pekerjaan_ortu()
@@ -47,8 +45,8 @@ class TblWali extends Model
 		return $this->belongsTo(TblPekerjaanOrtu::class, 'id_pekerjaan_wali');
 	}
 
-	public function tbl_peserta_ppdb()
+	public function tbl_peserta_ppdbs()
 	{
-		return $this->belongsTo(TblPesertaPpdb::class, 'id_peserta_ppdb');
+		return $this->hasMany(TblPesertaPpdb::class, 'id_biodata_wali');
 	}
 }

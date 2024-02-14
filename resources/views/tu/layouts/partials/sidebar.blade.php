@@ -32,14 +32,14 @@
 
     <!-- Nav Item - Data Master -->
     <li
-        class="nav-item{{ request()->routeIs('tu.laporan.index') || request()->routeIs('tu.laporan.dataortu') ? ' active' : '' }}">
+        class="nav-item{{ request()->routeIs('tu.laporan.index') || request()->routeIs('tu.laporan.dataortu') || request()->routeIs('tu.laporan.transaksi') || request()->routeIs('tu.laporan.kartu') ? ' active' : '' }}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
             aria-expanded="true" aria-controls="collapseOne">
             <i class="fas fa-fw fa-cog"></i>
             <span>Data Master</span>
         </a>
         <div id="collapseOne"
-            class="collapse {{ request()->routeIs('tu.laporan.index') || request()->routeIs('tu.laporan.dataortu') ? ' show' : '' }}"
+            class="collapse {{ request()->routeIs('tu.laporan.index') || request()->routeIs('tu.laporan.dataortu') || request()->routeIs('tu.laporan.transaksi') || request()->routeIs('tu.laporan.kartu') ? ' show' : '' }}"
             aria-labelledby="headingOne" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header ">Laporan :</h6>
@@ -47,8 +47,11 @@
                     href="{{ route('tu.laporan.index') }}">Laporan Data siswa</a>
                 <a class="collapse-item{{ request()->routeIs('tu.laporan.dataortu') ? ' active' : '' }}"
                     href="{{ route('tu.laporan.dataortu') }}">laporan Data orang tua</a>
-                <a class="collapse-item{{ request()->routeIs('tu.update.invoices') ? ' active' : '' }}"
-                    href="{{ route('tu.laporan.pembayaran') }}">laporan Data Pembayaran</a>
+                <a class="collapse-item{{ request()->routeIs('tu.laporan.transaksi') ? ' active' : '' }}"
+                    href="{{ route('tu.laporan.transaksi') }}">laporan Data Pembayaran</a>
+                <a class="collapse-item{{ request()->routeIs('tu.laporan.kartu') ? ' active' : '' }}"
+                    href="{{ route('tu.laporan.kartu') }}">laporan Data Kartu Sosial</a>
+
             </div>
         </div>
     </li>

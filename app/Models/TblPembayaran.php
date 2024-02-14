@@ -7,6 +7,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -15,16 +16,14 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property string $invoice_id
  * @property string $external_id
- * @property string $payer_email
  * @property string $description
  * @property int $amount
  * @property string $status
  * @property string $checkout_link
- * @property int $user_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * 
- * @property User $user
+ * @property Collection|TblPesertaPpdb[] $tbl_peserta_ppdbs
  *
  * @package App\Models
  */
@@ -33,23 +32,20 @@ class TblPembayaran extends Model
 	protected $table = 'tbl_pembayaran';
 
 	protected $casts = [
-		'amount' => 'int',
-		'user_id' => 'int'
+		'amount' => 'int'
 	];
 
 	protected $fillable = [
 		'invoice_id',
 		'external_id',
-		'payer_email',
 		'description',
 		'amount',
 		'status',
-		'checkout_link',
-		'user_id'
+		'checkout_link'
 	];
 
-	public function user()
+	public function tbl_peserta_ppdbs()
 	{
-		return $this->belongsTo(User::class);
+		return $this->hasMany(TblPesertaPpdb::class, 'id_invoice');
 	}
 }

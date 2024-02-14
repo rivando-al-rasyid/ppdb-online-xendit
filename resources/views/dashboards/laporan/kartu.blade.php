@@ -25,26 +25,27 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama Depan</th>
-                                            <th>Nama Belakang</th>
-                                            <th>Alamat</th>
-                                            <th>Nama Ayah</th>
-                                            <th>No Telepon Ayah</th>
-                                            <th>Nama Ibu</th>
-                                            <th>No Telepon Ibu</th>
+                                            <th>Nama</th>
+                                            <th>Jenis Kelamin</th>
+                                            <th>nama orang tua</th>
+                                            <th>KIP</th>
+                                            <th>KKS</th>
+                                            <th>KPS</th>
+                                            <th>PKH</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @forelse ($items as $item)
                                             <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $item->nama_depan }}</td>
-                                                <td>{{ $item->nama_belakang }}</td>
-                                                <td>{{ $item->alamat }}</td>
-                                                <td>{{ $item->tbl_biodata_ortu->nama_ayah }}</td>
-                                                <td>{{ $item->tbl_biodata_ortu->no_tlp_ayah }}</td>
-                                                <td>{{ $item->tbl_biodata_ortu->nama_ibu }}</td>
-                                                <td>{{ $item->tbl_biodata_ortu->no_tlp_ibu }}</td>
+                                                <td>{{ $loop->iteration }} </td>
+                                                <td>{{ $item->nama_depan }} {{ $item->nama_belakang }}</td>
+                                                <td>{{ $item->jenis_kelamin }} </td>
+                                                <td>{{ $item->tbl_biodata_ortu->nama_ayah }} </td>
+                                                <td>{{ $item->tbl_kartu->kip ?? 'null' }}</td>
+                                                <td>{{ $item->tbl_kartu->kks ?? 'null' }}</td>
+                                                <td>{{ $item->tbl_kartu->kps ?? 'null' }}</td>
+                                                <td>{{ $item->tbl_kartu->pkh ?? 'null' }}</td>
+
                                             </tr>
                                         @empty
                                             <tr>

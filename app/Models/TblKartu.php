@@ -7,6 +7,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -19,9 +20,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $pkh
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property int $id_peserta_ppdb
  * 
- * @property TblPesertaPpdb $tbl_peserta_ppdb
+ * @property Collection|TblPesertaPpdb[] $tbl_peserta_ppdbs
  *
  * @package App\Models
  */
@@ -33,20 +33,18 @@ class TblKartu extends Model
 		'kps' => 'int',
 		'kks' => 'int',
 		'kip' => 'int',
-		'pkh' => 'int',
-		'id_peserta_ppdb' => 'int'
+		'pkh' => 'int'
 	];
 
 	protected $fillable = [
 		'kps',
 		'kks',
 		'kip',
-		'pkh',
-		'id_peserta_ppdb'
+		'pkh'
 	];
 
-	public function tbl_peserta_ppdb()
+	public function tbl_peserta_ppdbs()
 	{
-		return $this->belongsTo(TblPesertaPpdb::class, 'id_peserta_ppdb');
+		return $this->hasMany(TblPesertaPpdb::class, 'id_kartu');
 	}
 }

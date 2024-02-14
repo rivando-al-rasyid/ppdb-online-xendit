@@ -23,18 +23,23 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon $tanggal_lahir
  * @property string $tempat_lahir
  * @property string $agama
- * @property string|null $nilai_rata_rata
+ * @property float|null $nilai_rata_rata
  * @property string $asal_sekolah
  * @property string $alamat
+ * @property int|null $id_biodata_ortu
+ * @property int|null $id_biodata_wali
+ * @property int|null $id_kartu
+ * @property int|null $id_invoice
+ * @property int|null $id_user
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property int|null $id_user
  * 
+ * @property TblBiodataOrtu|null $tbl_biodata_ortu
+ * @property TblBiodataWali|null $tbl_biodata_wali
+ * @property TblPembayaran|null $tbl_pembayaran
+ * @property TblKartu|null $tbl_kartu
  * @property User|null $user
- * @property Collection|TblBiodataOrtu[] $tbl_biodata_ortus
  * @property Collection|TblHasil[] $tbl_hasils
- * @property Collection|TblKartu[] $tbl_kartus
- * @property Collection|TblWali[] $tbl_walis
  *
  * @package App\Models
  */
@@ -47,6 +52,11 @@ class TblPesertaPpdb extends Model
 		'nik' => 'int',
 		'no_kk' => 'int',
 		'tanggal_lahir' => 'datetime',
+		'nilai_rata_rata' => 'float',
+		'id_biodata_ortu' => 'int',
+		'id_biodata_wali' => 'int',
+		'id_kartu' => 'int',
+		'id_invoice' => 'int',
 		'id_user' => 'int'
 	];
 
@@ -63,31 +73,40 @@ class TblPesertaPpdb extends Model
 		'nilai_rata_rata',
 		'asal_sekolah',
 		'alamat',
+		'id_biodata_ortu',
+		'id_biodata_wali',
+		'id_kartu',
+		'id_invoice',
 		'id_user'
 	];
+
+	public function tbl_biodata_ortu()
+	{
+		return $this->belongsTo(TblBiodataOrtu::class, 'id_biodata_ortu');
+	}
+
+	public function tbl_biodata_wali()
+	{
+		return $this->belongsTo(TblBiodataWali::class, 'id_biodata_wali');
+	}
+
+	public function tbl_pembayaran()
+	{
+		return $this->belongsTo(TblPembayaran::class, 'id_invoice');
+	}
+
+	public function tbl_kartu()
+	{
+		return $this->belongsTo(TblKartu::class, 'id_kartu');
+	}
 
 	public function user()
 	{
 		return $this->belongsTo(User::class, 'id_user');
 	}
 
-	public function tbl_biodata_ortus()
-	{
-		return $this->hasMany(TblBiodataOrtu::class, 'id_peserta_ppdb');
-	}
-
 	public function tbl_hasils()
 	{
 		return $this->hasMany(TblHasil::class, 'nis');
-	}
-
-	public function tbl_kartus()
-	{
-		return $this->hasMany(TblKartu::class, 'id_peserta_ppdb');
-	}
-
-	public function tbl_walis()
-	{
-		return $this->hasMany(TblWali::class, 'id_peserta_ppdb');
 	}
 }
