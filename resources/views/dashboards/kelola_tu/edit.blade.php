@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="container-fluid py-4">
-        <h1 class="h3 mb-2 text-gray-800">User</h1>
-        <p class="mb-4">Edit Data User</p>
+        <h1 class="h3 mb-2 text-gray-800">Data Tata Usaha</h1>
+        <p class="mb-4">Edit Data Tata Usaha</p>
 
         <div class="card mb-4">
             <div class="card-body">

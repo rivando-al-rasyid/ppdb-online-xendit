@@ -382,6 +382,6 @@ class PembayaranController extends Controller
     {
         // Retrieve a Sekolah model and pass it to the view
         $user = Auth::user();
-        return view('dashboards.pembayaran.create', compact('biaya', 'user'));
+        return view('dashboards.pembayaran.create', compact('user'));
     }
 }

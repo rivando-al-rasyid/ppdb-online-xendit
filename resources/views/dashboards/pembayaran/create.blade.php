@@ -16,9 +16,9 @@
             <h5 class="card-title mt-4">Data Siswa:</h5>
             <ul class="list-group">
                 <li class="list-group-item"><strong>Nama:</strong> {{ $user->name }}</li>
-                <li class="list-group-item"><strong>Nama Belakang:</strong> {{ $user->surname }}</li>
+                <li class="list-group-item"><strong>Nama Belakang:</strong> </li>
                 <li class="list-group-item"><strong>Email:</strong> {{ $user->email }}</li>
-                <li class="list-group-item"><strong>nomor HP:</strong> {{ $user->no_hp }}</li>
+                <li class="list-group-item"><strong>nomor HP:</strong> </li>
                 {{-- Add other necessary customer data here --}}
             </ul>
 
