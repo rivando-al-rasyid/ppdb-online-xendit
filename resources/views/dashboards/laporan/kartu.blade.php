@@ -28,10 +28,10 @@
                                             <th>Nama</th>
                                             <th>Jenis Kelamin</th>
                                             <th>nama orang tua</th>
-                                            <th>id invoice</th>
-                                            <th>amount</th>
-                                            <th>status</th>
-                                            <th>Link Pembayaran</th>
+                                            <th>KIP</th>
+                                            <th>KKS</th>
+                                            <th>KPS</th>
+                                            <th>PKH</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -41,12 +41,10 @@
                                                 <td>{{ $item->nama_depan }} {{ $item->nama_belakang }}</td>
                                                 <td>{{ $item->jenis_kelamin }} </td>
                                                 <td>{{ $item->tbl_biodata_ortu->nama_ayah }} </td>
-                                                <td>{{ $item->tbl_pembayaran->invoice_id ?? 'null' }}</td>
-                                                <td>{{ $item->tbl_pembayaran->amount ?? 'null' }}</td>
-                                                <td>{{ $item->tbl_pembayaran->status ?? 'null' }}</td>
-                                                <td><a href="{{ $item->tbl_pembayaran->checkout_link ?? '#' }}">link
-                                                        Pembyaran</a>
-                                                </td>
+                                                <td>{{ $item->tbl_kartu->kip ?? 'null' }}</td>
+                                                <td>{{ $item->tbl_kartu->kks ?? 'null' }}</td>
+                                                <td>{{ $item->tbl_kartu->kps ?? 'null' }}</td>
+                                                <td>{{ $item->tbl_kartu->pkh ?? 'null' }}</td>
 
                                             </tr>
                                         @empty

@@ -100,6 +100,17 @@ class DashboardController extends Controller
 
     }
 
+    public function kartu()
+    {
+        $items = TblPesertaPpdb::with(['tbl_kartu'])->get();
+        return view(
+            'dashboards.laporan.kartu',
+            compact(
+                'items',
+            )
+        );
+
+    }
 
 
     public function detail($id)
