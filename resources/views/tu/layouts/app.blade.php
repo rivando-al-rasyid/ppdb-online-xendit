@@ -44,6 +44,7 @@
 
             <!-- Footer -->
             @include('tu.layouts.partials.footer')
+
             <!-- End of Footer -->
 
         </div>
