@@ -50,8 +50,6 @@
                 <h6 class="collapse-header">Master Data:</h6>
                 <a class="collapse-item{{ request()->routeIs('admin.pekerjaan_ortu.index') ? ' active' : '' }}"
                     href="{{ route('admin.pekerjaan_ortu.index') }}">Pekerjaan Orang Tua</a>
-                <a class="collapse-item{{ request()->routeIs('admin.biaya.index') ? ' active' : '' }}"
-                    href="{{ route('admin.biaya.index') }}">Profile Sekolah</a>
             </div>
         </div>
     </li>

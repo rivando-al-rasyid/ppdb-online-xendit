@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\BiayaController;
 use App\Modules\Admins\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
@@ -25,9 +24,6 @@ Route::group(['as' => 'admin.', 'prefix' => '/admin', 'middleware' => ['web', 'a
     Route::patch('/ditolak/{id}', [DashboardController::class, 'tolak'])->name('peserta.ditolak');
     Route::resource('pekerjaan_ortu', PekerjaanOrtuController::class);
     Route::resource('kelola_tu', KelolaTUController::class);
-    Route::get('/biaya_pendaftaran', [BiayaController::class, 'index'])->name('biaya.index');
-    // Route to handle form submission
-    Route::post('/biaya_pendaftaran/update', [BiayaController::class, 'createOrUpdate'])->name('biaya.store');
     // Route to update existing data
     Route::get('/create-user', [PembayaranController::class, 'createCustomer'])->name('create.customer');
 
