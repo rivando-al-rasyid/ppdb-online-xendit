@@ -26,8 +26,7 @@ class PembayaranController extends Controller
     public function __construct()
     {
         // Set Xendit API key in the constructor
-        Configuration::setXenditKey("xnd_development_6hbRVAerHEL4QXhL7VgWn0ejJf8aN1fPm8I1PXBS1lpTj7fDpDJLAtmT4qEaaf");
-
+        Configuration::setXenditKey(env('XENDIT_API_KEY'));
         // Create instances of CustomerApi and InvoiceApi to be used throughout the controller
         $this->customerApiInstance = new CustomerApi();
         $this->invoiceApiInstance = new InvoiceApi();
