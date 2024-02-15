@@ -2,45 +2,79 @@
 
 @section('content')
     <div class="card">
-        <div class="card-body" id="print-content">
-            <h5 class="card-title">Deskripsi:</h5>
-            <ol class="list-group list-group-numbered">
-                <li class="list-group-item">Satu Stel Dasar Pakaian Putih Dongker</li>
-                <li class="list-group-item">Satu Stel Dasar Pakaian Pramuka</li>
-                <li class="list-group-item">Satu Stel Dasar Baju Batik Sekolah</li>
-                <li class="list-group-item">Satu Stel Dasar Pakaian Muslim (Khusus Jum’at)</li>
-                <li class="list-group-item">Satu Stel Pakaian Baju Olahraga</li>
-                <li class="list-group-item">Atribut, topi, dasi, pin, lambang (OSIS, Pramuka, Lokasi, dan Nama Siswa)</li>
-            </ol>
+        <div class="card-body">
+            <div class="container mb-5 mt-3">
+                <div class="row align-items-center">
+                    <div class="col-xl-9">
+                        <p class="text-muted fs-5">Invoice >> <strong>ID: #{{ $invoiceDetails['external_id'] }}</strong></p>
+                    </div>
+                    <div class="col-xl-3 text-end">
+                        <a class="btn btn-light text-uppercase border-0" data-mdb-ripple-color="dark">
+                            <i class="fas fa-print text-primary"></i> Print
+                        </a>
+                        <a class="btn btn-light text-uppercase" data-mdb-ripple-color="dark">
+                            <i class="far fa-file-pdf text-danger"></i> Export
+                        </a>
+                    </div>
+                    <hr class="my-3">
+                </div>
 
-            <h5 class="card-title mt-4">Data Siswa:</h5>
-            <ul class="list-group">
-                <li class="list-group-item"><strong>Nama:</strong> {{ $user->name }}</li>
-                <li class="list-group-item"><strong>Email:</strong> {{ $user->email }}</li>
-                {{-- Add other necessary customer data here --}}
-            </ul>
+                <div class="container">
+                    <div class="col-md-12 text-center">
+                        <i class="fab fa-mdb fa-4x text-primary"></i>
+                        <p class="fs-5">MDBootstrap.com</p>
+                    </div>
 
-            <h5 class="card-title mt-4">Invoice Information:</h5>
-            <ul class="list-group">
-                <li class="list-group-item"><strong>Invoice ID:</strong> {{ $invoice->id }}</li>
-                <li class="list-group-item"><strong>External ID:</strong> {{ $invoice->external_id }}</li>
-                <li class="list-group-item"><strong>Status:</strong> {{ $invoice->status }}</li>
-                <li class="list-group-item"><strong>Total Amount:</strong> {{ $invoice->amount }}</li>
-                <li class="list-group-item"><strong>Expiry Date:</strong> {{ $invoice->expiry_date }}</li>
-                {{-- Add other invoice details here --}}
-            </ul>
+                    <div class="row">
+                        <div class="col-xl-8">
+                            <ul class="list-unstyled text-muted">
+                                <li>To: <span class="text-primary">{{ $user->name }}</span></li>
+                                {{-- Add other customer details here --}}
+                            </ul>
+                        </div>
+                        <div class="col-xl-4">
+                            <p class="text-muted">Invoice</p>
+                            <ul class="list-unstyled text-muted">
+                                <li><i class="fas fa-circle text-primary"></i> <span class="fw-bold">ID:</span>
+                                    #{{ $invoiceDetails['external_id'] }}</li>
+                                <li><i class="fas fa-circle text-primary"></i> <span class="fw-bold">Creation Date:</span>
+                                    {{ $invoiceDetails['created_at'] }}</li>
+                                <li><i class="fas fa-circle text-primary"></i> <span class="me-1 fw-bold">Status:</span>
+                                    @if ($invoiceDetails['status'] === 'PAID')
+                                        <span class="badge bg-success text-white fw-bold">Paid</span>
+                                    @else
+                                        <span
+                                            class="badge bg-warning text-black fw-bold">{{ $invoiceDetails['status'] }}</span>
+                                    @endif
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="row my-2 mx-1 justify-content-center">
+                        {{-- Display invoice items and amounts --}}
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xl-8">
+                            <p class="ms-3 text-muted">Add additional notes and payment information</p>
+                        </div>
+                        <div class="col-xl-3">
+                            {{-- Display invoice subtotal, tax, and total amount --}}
+                        </div>
+                    </div>
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-xl-10">
+                            <p>Thank you for your purchase</p>
+                        </div>
+                        <div class="col-xl-2">
+                            {{-- Display payment button --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-    <button onclick="printContent()" class="btn btn-primary mt-4">Print</button>
-
-    <script>
-        function printContent() {
-            var printContents = document.getElementById("print-content").innerHTML;
-            var originalContents = document.body.innerHTML;
-            document.body.innerHTML = printContents;
-            window.print();
-            document.body.innerHTML = originalContents;
-        }
-    </script>
 @endsection

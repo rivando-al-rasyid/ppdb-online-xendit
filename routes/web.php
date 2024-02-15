@@ -37,8 +37,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/dashboard', [PembayaranController::class, 'create'])->name('dashboard');
     Route::post('/pembayaran', [PembayaranController::class, 'createInvoice'])->name('pembayaran.store');
-    Route::get('/invoice', [PembayaranController::class, 'getInvoiceById'])->name('pembayaran.invoice');
+    Route::get('/bukti/pembayaran', [PembayaranController::class, 'getInvoiceById'])->name('pembayaran.invoice');
 });
-Route::post('/xendit/webhook', [PembayaranController::class, 'webhook']);
+Route::post('/xendit/webhook', [PembayaranController::class, 'webhook'])->middleware('web');
 
 require __DIR__ . '/auth.php';

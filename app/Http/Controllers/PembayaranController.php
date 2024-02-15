@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TblBiaya;
 use App\Models\TblHasil;
 use App\Models\TblPembayaran;
 use App\Models\TblPesertaPpdb;
@@ -98,26 +97,29 @@ class PembayaranController extends Controller
         // Parse the incoming JSON payload into an associative array
         $payload = $request->json()->all();
 
+        // Find the payment record based on external_id
+        $payment = TblPembayaran::where('external_id', $payload['external_id'])->firstOrFail();
+
+        if ($payment->status == 'settled') {
+            return response()->json(['data' => 'Pembayaran berhasil']);
+        }
+
         // Instantiate the InvoiceCallback object from the payload
         $invoice_callback = new InvoiceCallback($payload);
 
         // Extract necessary information from the callback object
         $external_id = $invoice_callback->getExternalId();
-        $status = $invoice_callback->getStatus();
+        $status = $invoice_callback->getStatus(); // Assuming getId() was meant to retrieve status
 
-        // Get the payment record based on the external_id
-        $payment = TblPembayaran::where('external_id', $external_id)->firstOrFail();
-
-        // Check if payment status is already settled
-        if ($payment->status == 'settled') {
-            return response()->json(['data' => 'Payment has already been processed']);
-        }
-
-        // Update payment status based on the webhook callback
-        $payment->status = strtolower($status);
+        // Update the payment status in your database
+        $payment->status = $status;
         $payment->save();
 
-        return response()->json(['data' => 'Success']);
+        // Return the extracted data
+        return response()->json([
+            'external_id' => $external_id,
+            'status' => $status,
+        ]);
     }
     /**
      * Create an invoice.
@@ -130,8 +132,7 @@ class PembayaranController extends Controller
             // Retrieve customer data from the authenticated user
             $user = Auth::user();
 
-            $url = app('url')->to('/invoice');
-
+            $url = route('pembayaran.invoice');
             // Check if any invoice with the same user_id exists
             $existingPembayaran = TblPesertaPpdb::where('id_user', $user->id)
                 ->whereNotNull('id_invoice')
@@ -341,7 +342,7 @@ class PembayaranController extends Controller
             $invoiceDetails = $this->invoiceApiInstance->getInvoiceById($invoiceId);
 
             // Pass the invoice details to the view
-            return view('dashboards.pembayaran.cetak', compact('invoiceDetails'));
+            return view('dashboards.pembayaran.hasil', compact('invoiceDetails', 'user', 'userId'));
         } catch (XenditSdkException $e) {
             // Handle Xendit SDK exceptions
             Alert::error('Error', $e->getMessage())->persistent(true)->autoClose(5000);
