@@ -21,6 +21,7 @@ use LaravelDaily\Invoices\Invoice;
 use LaravelDaily\Invoices\Classes\Party;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
 use Illuminate\Http\JsonResponse;
+use Carbon\Carbon;
 
 class PembayaranController extends Controller
 {
@@ -129,185 +130,418 @@ class PembayaranController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
+    // public function createInvoice(Request $request)
+    // {
+    //     try {
+    //         // Retrieve customer data from the authenticated user
+    //         $user = Auth::user();
+
+    //         $url = route('pembayaran.invoice');
+    //         // Check if any invoice with the same user_id exists
+    //         $existingPembayaran = TblPesertaPpdb::where('id_user', $user->id)
+    //             ->whereNotNull('id_invoice')
+    //             ->with('tbl_pembayaran') // Load the related TblPembayaran
+    //             ->first();
+
+    //         if (!$existingPembayaran) {
+    //             // If the invoice doesn't exist, proceed to create a new one
+
+    //             // Prepare customer data for invoice creation
+    //             $data = TblPesertaPpdb::where('id_user', $user->id)->with('tbl_biodata_ortu')->first();
+
+    //             $no_hp = $data->tbl_biodata_ortu->no_tlp_ayah;
+    //             $items1 = [
+    //                 [
+    //                     'name' => 'Satu Stel Dasar Pakaian Putih Dongker',
+    //                     'quantity' => 1,
+    //                     'price' => 145000,
+    //                 ],
+    //                 [
+    //                     'name' => 'Satu Stel Dasar Pakaian Pramuka',
+    //                     'quantity' => 1,
+    //                     'price' => 175000,
+    //                 ],
+    //                 [
+    //                     'name' => 'Dasar Baju Batik Sekolah',
+    //                     'quantity' => 1,
+    //                     'price' => 70000,
+    //                 ],
+    //                 [
+    //                     'name' => 'Dasar Pakaian Muslim ( Khusus Jum’at )',
+    //                     'quantity' => 1,
+    //                     'price' => 65000,
+    //                 ],
+    //                 [
+    //                     'name' => 'Satu Stel Pakaian Baju Olahraga',
+    //                     'quantity' => 1,
+    //                     'price' => 115000,
+    //                 ],
+    //                 [
+    //                     'name' => 'Atribut,topi,dasi,pin,lambang (osis,pramuka,lokasi, dan nama siswa)',
+    //                     'quantity' => 1,
+    //                     'price' => 50000,
+    //                 ],
+    //                 [
+    //                     'name' => 'Dua Helai Jelbab',
+    //                     'quantity' => 1,
+    //                     'price' => 80000,
+    //                 ],
+    //                 [
+    //                     'name' => 'Sampul Rapor',
+    //                     'quantity' => 1,
+    //                     'price' => 50000,
+    //                 ],
+    //                 [
+    //                     'name' => 'Uang Osis (1 tahun)',
+    //                     'quantity' => 1,
+    //                     'price' => 20000,
+    //                 ],
+    //             ];
+    //             $items2 = [
+    //                 [
+    //                     'name' => 'Satu Stel Dasar Pakaian Putih Dongker',
+    //                     'price' => 140000,
+    //                     'quantity' => 1,
+    //                 ],
+    //                 [
+    //                     'name' => 'Satu Stel Dasar Pakaian Pramuka',
+    //                     'price' => 175000,
+    //                     'quantity' => 1,
+    //                 ],
+    //                 [
+    //                     'name' => 'Dasar Baju Batik Sekolah',
+    //                     'price' => 65000,
+    //                     'quantity' => 1,
+    //                 ],
+    //                 [
+    //                     'name' => 'Dasar Pakaian Muslim ( Khusus Jum’at )',
+    //                     'price' => 60000,
+    //                     'quantity' => 1,
+    //                 ],
+    //                 [
+    //                     'name' => 'Satu Stel Pakaian Baju Olahraga',
+    //                     'price' => 115000,
+    //                     'quantity' => 1,
+    //                 ],
+    //                 [
+    //                     'name' => 'Atribut, topi, dasi, pin, lambang (osis, pramuka, lokasi, dan nama siswa)',
+    //                     'price' => 50000,
+    //                     'quantity' => 1,
+    //                 ],
+    //                 [
+    //                     'name' => 'Sampul Rapor',
+    //                     'price' => 50000,
+    //                     'quantity' => 1,
+    //                 ],
+    //                 [
+    //                     'name' => 'Uang Osis (1 tahun)',
+    //                     'price' => 20000,
+    //                     'quantity' => 1,
+    //                 ],
+    //             ];
+    //             if ($data->jenis_kelamin === 'P') {
+    //                 $items = $items1;
+    //             } else {
+    //                 $items = $items2;
+    //             }
+
+
+    //             $itemsCollect = collect($items);
+
+    //             $total = $itemsCollect->sum(function ($item) {
+    //                 return $item['price'] * $item['quantity'];
+    //             });
+
+    //             $invoiceCustomerData = [
+    //                 'given_names' => $data->nama_depan,
+    //                 'surname' => $data->nama_belakang,
+    //                 'email' => $user->email,
+    //                 'mobile_number' => (string) $no_hp, // Convert to string
+    //                 // Add other necessary customer data here
+    //             ];
+
+    //             // Prepare customer notification preference
+    //             $notificationPreference = [
+    //                 'invoice_created' => ['sms', 'whatsapp', 'email'],
+    //                 'invoice_reminder' => ['sms', 'whatsapp', 'email'],
+    //                 'invoice_paid' => ['sms', 'whatsapp', 'email'],
+    //             ];
+
+    //             // Use $this->invoiceApiInstance for consistency
+    //             $createInvoiceRequest = new CreateInvoiceRequest([
+    //                 'external_id' => (string) Str::uuid(),
+    //                 'amount' => $total,
+    //                 'items' => $items,
+    //                 'description' => 'test',
+    //                 'invoice_duration' => 86400,
+    //                 'customer' => $invoiceCustomerData,
+    //                 'customer_notification_preference' => $notificationPreference,
+    //                 'success_redirect_url' => $url,
+    //             ]);
+
+    //             // Create the invoice
+    //             $result = $this->invoiceApiInstance->createInvoice($createInvoiceRequest);
+
+    //             // Create TblPembayaran entry
+    //             $pembayaran = new TblPembayaran;
+    //             $pembayaran->invoice_id = $result['id'];
+    //             $pembayaran->external_id = $result['external_id'];
+    //             $pembayaran->description = $result['description'];
+    //             $pembayaran->amount = $result['amount'];
+    //             $pembayaran->status = 'pending';
+    //             $pembayaran->checkout_link = $result['invoice_url'];
+    //             $pembayaran->save();
+
+    //             // Update id_invoice field in TblPesertaPpdb model
+    //             $data->id_invoice = $pembayaran['id'];
+    //             $data->save();
+
+    //             // Success message and redirection
+    //             return redirect()->away($result['invoice_url']);
+    //         } else {
+    //             // If the invoice already exists, redirect to the checkout link
+    //             return redirect()->away($existingPembayaran->tbl_pembayaran->checkout_link);
+    //         }
+    //     } catch (XenditSdkException $e) {
+    //         // Error handling
+    //         return response()->json([
+    //             'error' => $e->getMessage(),
+    //             'full_error' => $e->getFullError(),
+    //         ], 500);
+    //     }
+    // }
+    // public function create()
+    // {
+    //     $user = Auth::user();
+
+    //     $data = TblPesertaPpdb::where('id_user', $user->id)->with('tbl_biodata_ortu')->first();
+    //     $no_hp = $data->tbl_biodata_ortu->no_tlp_ayah;
+
+    //     $items1 = [
+
+    //     ];
+    //     $items2 = [
+    //     ];
+    //     if ($data->jenis_kelamin === 'P') {
+    //         $items = $items1;
+    //     } else {
+    //         $items = $items2;
+    //     }
+
+    //     // Retrieve a Sekolah model and pass it to the view
+    //     return view('dashboards.pembayaran.create', compact('user', 'items', 'no_hp'));
+    // }
     public function createInvoice(Request $request)
     {
         try {
-            // Retrieve customer data from the authenticated user
             $user = Auth::user();
+            $existingInvoice = $this->findExistingInvoice($user);
 
-            $url = route('pembayaran.invoice');
-            // Check if any invoice with the same user_id exists
-            $existingPembayaran = TblPesertaPpdb::where('id_user', $user->id)
-                ->whereNotNull('id_invoice')
-                ->with('tbl_pembayaran') // Load the related TblPembayaran
-                ->first();
+            if (!$existingInvoice) {
+                $data = $this->retrieveCustomerData($user);
+                $items = $this->getItemsBasedOnGender($data->jenis_kelamin);
 
-            if (!$existingPembayaran) {
-                // If the invoice doesn't exist, proceed to create a new one
+                $total = $this->calculateTotalAmount($items);
 
-                // Prepare customer data for invoice creation
-                $data = TblPesertaPpdb::where('id_user', $user->id)->with('tbl_biodata_ortu')->first();
+                $invoiceCustomerData = $this->prepareInvoiceCustomerData($data, $user);
+                $notificationPreference = $this->prepareNotificationPreference();
 
-                $no_hp = $data->tbl_biodata_ortu->id;
-                $items1 = [
-                    [
-                        'name' => 'Satu Stel Dasar Pakaian Putih Dongker',
-                        'quantity' => 1,
-                        'price' => 145000,
-                    ],
-                    [
-                        'name' => 'Satu Stel Dasar Pakaian Pramuka',
-                        'quantity' => 1,
-                        'price' => 175000,
-                    ],
-                    [
-                        'name' => 'Dasar Baju Batik Sekolah',
-                        'quantity' => 1,
-                        'price' => 70000,
-                    ],
-                    [
-                        'name' => 'Dasar Pakaian Muslim ( Khusus Jum’at )',
-                        'quantity' => 1,
-                        'price' => 65000,
-                    ],
-                    [
-                        'name' => 'Satu Stel Pakaian Baju Olahraga',
-                        'quantity' => 1,
-                        'price' => 115000,
-                    ],
-                    [
-                        'name' => 'Atribut,topi,dasi,pin,lambang (osis,pramuka,lokasi, dan nama siswa)',
-                        'quantity' => 1,
-                        'price' => 50000,
-                    ],
-                    [
-                        'name' => 'Dua Helai Jelbab',
-                        'quantity' => 1,
-                        'price' => 80000,
-                    ],
-                    [
-                        'name' => 'Sampul Rapor',
-                        'quantity' => 1,
-                        'price' => 50000,
-                    ],
-                    [
-                        'name' => 'Uang Osis (1 tahun)',
-                        'quantity' => 1,
-                        'price' => 20000,
-                    ],
-                ];
-                $items2 = [
-                    [
-                        'name' => 'Satu Stel Dasar Pakaian Putih Dongker',
-                        'price' => 140000,
-                        'quantity' => 1,
-                    ],
-                    [
-                        'name' => 'Satu Stel Dasar Pakaian Pramuka',
-                        'price' => 175000,
-                        'quantity' => 1,
-                    ],
-                    [
-                        'name' => 'Dasar Baju Batik Sekolah',
-                        'price' => 65000,
-                        'quantity' => 1,
-                    ],
-                    [
-                        'name' => 'Dasar Pakaian Muslim ( Khusus Jum’at )',
-                        'price' => 60000,
-                        'quantity' => 1,
-                    ],
-                    [
-                        'name' => 'Satu Stel Pakaian Baju Olahraga',
-                        'price' => 115000,
-                        'quantity' => 1,
-                    ],
-                    [
-                        'name' => 'Atribut, topi, dasi, pin, lambang (osis, pramuka, lokasi, dan nama siswa)',
-                        'price' => 50000,
-                        'quantity' => 1,
-                    ],
-                    [
-                        'name' => 'Sampul Rapor',
-                        'price' => 50000,
-                        'quantity' => 1,
-                    ],
-                    [
-                        'name' => 'Uang Osis (1 tahun)',
-                        'price' => 20000,
-                        'quantity' => 1,
-                    ],
-                ];
-                if ($data->jenis_kelamin === 'P') {
-                    $items = $items1;
-                } else {
-                    $items = $items2;
-                }
+                $createInvoiceRequest = $this->prepareCreateInvoiceRequest($total, $items, $invoiceCustomerData, $notificationPreference);
 
-
-                $itemsCollect = collect($items);
-
-                $total = $itemsCollect->sum(function ($item) {
-                    return $item['price'] * $item['quantity'];
-                });
-
-                $invoiceCustomerData = [
-                    'given_names' => $data->nama_depan,
-                    'surname' => $data->nama_belakang,
-                    'email' => $user->email,
-                    'mobile_number' => (string) $no_hp, // Convert to string
-                    // Add other necessary customer data here
-                ];
-
-                // Prepare customer notification preference
-                $notificationPreference = [
-                    'invoice_created' => ['sms', 'whatsapp', 'email'],
-                    'invoice_reminder' => ['sms', 'whatsapp', 'email'],
-                    'invoice_paid' => ['sms', 'whatsapp', 'email'],
-                ];
-
-                // Use $this->invoiceApiInstance for consistency
-                $createInvoiceRequest = new CreateInvoiceRequest([
-                    'external_id' => (string) Str::uuid(),
-                    'amount' => $total,
-                    'items' => $items,
-                    'description' => 'test',
-                    'invoice_duration' => 86400,
-                    'customer' => $invoiceCustomerData,
-                    'customer_notification_preference' => $notificationPreference,
-                    'success_redirect_url' => $url,
-                ]);
-
-                // Create the invoice
                 $result = $this->invoiceApiInstance->createInvoice($createInvoiceRequest);
 
-                // Create TblPembayaran entry
-                $pembayaran = new TblPembayaran;
-                $pembayaran->invoice_id = $result['id'];
-                $pembayaran->external_id = $result['external_id'];
-                $pembayaran->description = $result['description'];
-                $pembayaran->amount = $result['amount'];
-                $pembayaran->status = 'pending';
-                $pembayaran->checkout_link = $result['invoice_url'];
-                $pembayaran->save();
+                $pembayaran = $this->createPembayaranEntry($result);
+                $this->updatePesertaPpdbInvoiceId($data, $pembayaran);
 
-                // Update id_invoice field in TblPesertaPpdb model
-                $data->id_invoice = $pembayaran['id'];
-                $data->save();
-
-                // Success message and redirection
                 return redirect()->away($result['invoice_url']);
             } else {
-                // If the invoice already exists, redirect to the checkout link
-                return redirect()->away($existingPembayaran->tbl_pembayaran->checkout_link);
+                return redirect()->away($existingInvoice->tbl_pembayaran->checkout_link);
             }
         } catch (XenditSdkException $e) {
-            // Error handling
-            return response()->json([
-                'error' => $e->getMessage(),
-                'full_error' => $e->getFullError(),
-            ], 500);
+            return $this->handleException($e);
         }
+    }
+
+    private function findExistingInvoice($user)
+    {
+        return TblPesertaPpdb::where('id_user', $user->id)
+            ->whereNotNull('id_invoice')
+            ->with('tbl_pembayaran')
+            ->first();
+    }
+
+    private function retrieveCustomerData($user)
+    {
+        return TblPesertaPpdb::where('id_user', $user->id)->with('tbl_biodata_ortu')->first();
+    }
+
+    private function getItemsBasedOnGender($gender)
+    {
+        $items1 = [
+            [
+                'name' => 'Satu Stel Dasar Pakaian Putih Dongker',
+                'quantity' => 1,
+                'price' => 145000,
+            ],
+            [
+                'name' => 'Satu Stel Dasar Pakaian Pramuka',
+                'quantity' => 1,
+                'price' => 175000,
+            ],
+            [
+                'name' => 'Dasar Baju Batik Sekolah',
+                'quantity' => 1,
+                'price' => 70000,
+            ],
+            [
+                'name' => 'Dasar Pakaian Muslim ( Khusus Jum’at )',
+                'quantity' => 1,
+                'price' => 65000,
+            ],
+            [
+                'name' => 'Satu Stel Pakaian Baju Olahraga',
+                'quantity' => 1,
+                'price' => 115000,
+            ],
+            [
+                'name' => 'Atribut,topi,dasi,pin,lambang (osis,pramuka,lokasi, dan nama siswa)',
+                'quantity' => 1,
+                'price' => 50000,
+            ],
+            [
+                'name' => 'Dua Helai Jelbab',
+                'quantity' => 1,
+                'price' => 80000,
+            ],
+            [
+                'name' => 'Sampul Rapor',
+                'quantity' => 1,
+                'price' => 50000,
+            ],
+            [
+                'name' => 'Uang Osis (1 tahun)',
+                'quantity' => 1,
+                'price' => 20000,
+            ],
+        ]; // Items for female
+        $items2 = [
+            [
+                'name' => 'Satu Stel Dasar Pakaian Putih Dongker',
+                'price' => 140000,
+                'quantity' => 1,
+            ],
+            [
+                'name' => 'Satu Stel Dasar Pakaian Pramuka',
+                'price' => 175000,
+                'quantity' => 1,
+            ],
+            [
+                'name' => 'Dasar Baju Batik Sekolah',
+                'price' => 65000,
+                'quantity' => 1,
+            ],
+            [
+                'name' => 'Dasar Pakaian Muslim ( Khusus Jum’at )',
+                'price' => 60000,
+                'quantity' => 1,
+            ],
+            [
+                'name' => 'Satu Stel Pakaian Baju Olahraga',
+                'price' => 115000,
+                'quantity' => 1,
+            ],
+            [
+                'name' => 'Atribut, topi, dasi, pin, lambang (osis, pramuka, lokasi, dan nama siswa)',
+                'price' => 50000,
+                'quantity' => 1,
+            ],
+            [
+                'name' => 'Sampul Rapor',
+                'price' => 50000,
+                'quantity' => 1,
+            ],
+            [
+                'name' => 'Uang Osis (1 tahun)',
+                'price' => 20000,
+                'quantity' => 1,
+            ],
+        ]; // Items for male
+        return ($gender === 'P') ? $items1 : $items2;
+    }
+
+    private function calculateTotalAmount($items)
+    {
+        return collect($items)->sum(function ($item) {
+            return $item['price'] * $item['quantity'];
+        });
+    }
+
+    private function prepareInvoiceCustomerData($data, $user)
+    {
+        return [
+            'given_names' => $data->nama_depan,
+            'surname' => $data->nama_belakang,
+            'email' => $user->email,
+            'mobile_number' => (string) $data->tbl_biodata_ortu->no_tlp_ayah,
+        ];
+    }
+
+    private function prepareNotificationPreference()
+    {
+        return [
+            'invoice_created' => ['sms', 'whatsapp', 'email'],
+            'invoice_reminder' => ['sms', 'whatsapp', 'email'],
+            'invoice_paid' => ['sms', 'whatsapp', 'email'],
+        ];
+    }
+
+    private function prepareCreateInvoiceRequest($total, $items, $invoiceCustomerData, $notificationPreference)
+    {
+        return new CreateInvoiceRequest([
+            'external_id' => (string) Str::uuid(),
+            'amount' => $total,
+            'items' => $items,
+            'description' => 'test',
+            'invoice_duration' => 86400,
+            'customer' => $invoiceCustomerData,
+            'customer_notification_preference' => $notificationPreference,
+            'success_redirect_url' => route('pembayaran.invoice'),
+        ]);
+    }
+
+    private function createPembayaranEntry($result)
+    {
+        $pembayaran = new TblPembayaran;
+        $pembayaran->invoice_id = $result['id'];
+        $pembayaran->external_id = $result['external_id'];
+        $pembayaran->description = $result['description'];
+        $pembayaran->amount = $result['amount'];
+        $pembayaran->status = 'pending';
+        $pembayaran->checkout_link = $result['invoice_url'];
+        $pembayaran->save();
+        return $pembayaran;
+    }
+
+    private function updatePesertaPpdbInvoiceId($data, $pembayaran)
+    {
+        $data->id_invoice = $pembayaran['id'];
+        $data->save();
+    }
+    public function create(Request $request)
+    {
+        $user = Auth::user();
+        $data = $this->retrieveCustomerData($user);
+        // $noHp = $data->tbl_biodata_ortu->no_tlp_ayah;
+        $items = $this->getItemsBasedOnGender($data->jenis_kelamin);
+
+        return view('dashboards.pembayaran.create', compact('user', 'items'));
+    }
+    private function handleException($e)
+    {
+        return response()->json([
+            'error' => $e->getMessage(),
+            'full_error' => $e->getFullError(),
+        ], 500);
     }
 
     /**
@@ -401,6 +635,7 @@ class PembayaranController extends Controller
 
         // Use the Xendit Invoice API instance to retrieve the invoice details
         $data = $this->invoiceApiInstance->getInvoiceById($invoiceId);
+        $carbonDate = Carbon::instance($data['created']);
 
         // Define parties
         $client = new Party([
@@ -410,6 +645,13 @@ class PembayaranController extends Controller
 
         $customer = new Party([
             'name' => $data['customer']['given_names'] . ' ' . $data['customer']['surname'],
+            'phone' => $data['customer']['mobile_number'],
+            'custom_fields' => [
+                'note' => 'Pembayaran Daftar Ulang',
+            ],
+
+
+
             // You can add more fields dynamically based on $data if needed
         ]);
 
@@ -423,18 +665,22 @@ class PembayaranController extends Controller
 
         // Define notes based on $data
         $notes = [
-            'Invoice Description: ' . $data['description'],
-            'Invoice Status: ' . $data['status'],
             // Add more dynamic notes based on $data if needed
         ];
         $notes = implode("<br>", $notes);
 
         // Create the invoice
         $invoice = Invoice::make('receipt')
+            ->serialNumberFormat($data['id'])
+            ->status(__($data['status']))
+            ->date($carbonDate)
+            ->payUntilDays(1)
             ->seller($client)
             ->buyer($customer)
             ->addItems($items)
             ->notes($notes)
+            ->filename($client->name . ' ' . $customer->name)
+
             // You can continue adding more dynamic data based on $data if needed
             ->logo(public_path('vendor/invoices/sample-logo.png'));
 
@@ -469,10 +715,5 @@ class PembayaranController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
-    {
-        // Retrieve a Sekolah model and pass it to the view
-        $user = Auth::user();
-        return view('dashboards.pembayaran.create', compact('user'));
-    }
+
 }
