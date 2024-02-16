@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use RealRashid\SweetAlert\Facades\Alert;
 use Xendit\Invoice\InvoiceCallback;
+use LaravelDaily\Invoices\Invoice;
+use LaravelDaily\Invoices\Classes\Party;
+use LaravelDaily\Invoices\Classes\InvoiceItem;
+use Illuminate\Http\JsonResponse;
 
 class PembayaranController extends Controller
 {
@@ -321,7 +325,7 @@ class PembayaranController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
 
-    public function getInvoiceById()
+    public function getInvoiceById(): JsonResponse
     {
         try {
             // Ensure the user is authenticated
@@ -334,6 +338,10 @@ class PembayaranController extends Controller
                 ->with('tbl_pembayaran') // Load the related TblPembayaran
                 ->first();
 
+            if (!$existingPembayaran || !$existingPembayaran->tbl_pembayaran) {
+                throw new \Exception("Invoice details not found for the user.");
+            }
+
             // Get the invoice ID from the tbl_pembayaran if it exists
             $invoiceId = $existingPembayaran->tbl_pembayaran->invoice_id;
 
@@ -341,17 +349,100 @@ class PembayaranController extends Controller
             $invoiceDetails = $this->invoiceApiInstance->getInvoiceById($invoiceId);
 
             // Pass the invoice details to the view
-            return view('dashboards.pembayaran.hasil', compact('invoiceDetails', 'user', 'userId'));
-        } catch (XenditSdkException $e) {
-            // Handle Xendit SDK exceptions
-            Alert::error('Error', $e->getMessage())->persistent(true)->autoClose(5000);
-            return response()->json(['error' => $e->getMessage()], 500);
+            return response()->json($invoiceDetails);
         } catch (\Exception $e) {
-            // Handle other exceptions
-            Alert::error('Error', 'An error occurred.')->persistent(true)->autoClose(5000);
-            return response()->json(['error' => 'An error occurred'], 500);
+            // Log the error
+            \Log::error('Error retrieving invoice details: ' . $e->getMessage());
+            // Return a JSON response with the error message
+            return response()->json(['error' => 'Failed to retrieve invoice details.'], 500);
         }
     }
+    public function review()
+    {
+        $user = Auth::user();
+        $userId = $user->id;
+
+        // Fetch the payment record based on the provided invoice ID
+        $existingPembayaran = TblPesertaPpdb::where('id_user', $userId)
+            ->whereNotNull('id_invoice')
+            ->with('tbl_pembayaran') // Load the related TblPembayaran
+            ->first();
+
+        if (!$existingPembayaran || !$existingPembayaran->tbl_pembayaran) {
+            throw new \Exception("Invoice details not found for the user.");
+        }
+
+        // Get the invoice ID from the tbl_pembayaran if it exists
+        $invoiceId = $existingPembayaran->tbl_pembayaran->invoice_id;
+
+        // Use the Xendit Invoice API instance to retrieve the invoice details
+        $data = $this->invoiceApiInstance->getInvoiceById($invoiceId);
+
+        // Retrieve a Sekolah model and pass it to the view
+        return view('dashboards.pembayaran.hasil', compact('data'));
+    }
+    public function generateAndDisplayInvoice()
+    {
+        $user = Auth::user();
+        $userId = $user->id;
+
+        // Fetch the payment record based on the provided invoice ID
+        $existingPembayaran = TblPesertaPpdb::where('id_user', $userId)
+            ->whereNotNull('id_invoice')
+            ->with('tbl_pembayaran') // Load the related TblPembayaran
+            ->first();
+
+        if (!$existingPembayaran || !$existingPembayaran->tbl_pembayaran) {
+            throw new \Exception("Invoice details not found for the user.");
+        }
+
+        // Get the invoice ID from the tbl_pembayaran if it exists
+        $invoiceId = $existingPembayaran->tbl_pembayaran->invoice_id;
+
+        // Use the Xendit Invoice API instance to retrieve the invoice details
+        $data = $this->invoiceApiInstance->getInvoiceById($invoiceId);
+
+        // Define parties
+        $client = new Party([
+            'name' => $data['merchant_name'],
+            // You can add more fields dynamically based on $data if needed
+        ]);
+
+        $customer = new Party([
+            'name' => $data['customer']['given_names'] . ' ' . $data['customer']['surname'],
+            // You can add more fields dynamically based on $data if needed
+        ]);
+
+        // Define items based on $data
+        $items = [];
+        foreach ($data['items'] as $item) {
+            $items[] = InvoiceItem::make($item['name'])
+                ->pricePerUnit($item['price'])
+                ->quantity($item['quantity']);
+        }
+
+        // Define notes based on $data
+        $notes = [
+            'Invoice Description: ' . $data['description'],
+            'Invoice Status: ' . $data['status'],
+            // Add more dynamic notes based on $data if needed
+        ];
+        $notes = implode("<br>", $notes);
+
+        // Create the invoice
+        $invoice = Invoice::make('receipt')
+            ->seller($client)
+            ->buyer($customer)
+            ->addItems($items)
+            ->notes($notes)
+            // You can continue adding more dynamic data based on $data if needed
+            ->logo(public_path('vendor/invoices/sample-logo.png'));
+
+        // Return the invoice itself to the browser
+        return $invoice->stream();
+    }
+
+
     /**
      * Expire an invoice by ID.
      *
