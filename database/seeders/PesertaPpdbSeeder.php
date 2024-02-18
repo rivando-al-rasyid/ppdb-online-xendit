@@ -27,6 +27,7 @@ class PesertaPpdbSeeder extends Seeder
                 'nilai_rata_rata' => 85.5,
                 'asal_sekolah' => 'SMP Negeri 1 Jakarta',
                 'alamat' => 'Jl. Jendral Sudirman No. 123, Jakarta',
+                'id_biodata_ortu' => 1,
             ],
             // Add more sample data as needed
         ];
