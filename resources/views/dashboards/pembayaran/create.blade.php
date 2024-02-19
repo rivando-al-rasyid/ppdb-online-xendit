@@ -19,8 +19,11 @@
                             <td>{{ $item['name'] }}</td>
                             <td>{{ $item['quantity'] }}</td>
                             <td>{{ number_format($item['price'], 0, ',', '.') }}</td>
+
                         </tr>
                     @endforeach
+                    <td colspan="2">Jumlah</td>
+                    <td>{{ $total }}</td>
                 </tbody>
             </table>
 

@@ -20,7 +20,7 @@ class PesertaPpdbSeeder extends Seeder
                 'nisn' => 1234567890,
                 'nik' => 9876543210,
                 'no_kk' => 123456789,
-                'jenis_kelamin' => 'Laki-laki',
+                'jenis_kelamin' => 'L',
                 'tanggal_lahir' => '1990-01-01',
                 'tempat_lahir' => 'Jakarta',
                 'agama' => 'Islam',
@@ -28,6 +28,8 @@ class PesertaPpdbSeeder extends Seeder
                 'asal_sekolah' => 'SMP Negeri 1 Jakarta',
                 'alamat' => 'Jl. Jendral Sudirman No. 123, Jakarta',
                 'id_biodata_ortu' => 1,
+                'id_user' => 1,
+
             ],
             // Add more sample data as needed
         ];

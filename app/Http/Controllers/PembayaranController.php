@@ -533,8 +533,9 @@ class PembayaranController extends Controller
         $data = $this->retrieveCustomerData($user);
         // $noHp = $data->tbl_biodata_ortu->no_tlp_ayah;
         $items = $this->getItemsBasedOnGender($data->jenis_kelamin);
+        $total = $this->calculateTotalAmount($items);
 
-        return view('dashboards.pembayaran.create', compact('user', 'items'));
+        return view('dashboards.pembayaran.create', compact('user', 'items', 'total'));
     }
     private function handleException($e)
     {
