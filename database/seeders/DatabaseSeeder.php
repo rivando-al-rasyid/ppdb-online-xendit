@@ -25,9 +25,10 @@ class DatabaseSeeder extends Seeder
             TuSeeder::class,
             PekerjaanOrtuSeeder::class,
             BiodataOrtuSeeder::class,
+            UserSeeder::class,
             PesertaPpdbSeeder::class,
             HasilSeeder::class,
-            UserSeeder::class,
+
         ]);
     }
 }
