@@ -3,7 +3,7 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Pkerjaan Orangtua</h1>
+        <h1 class="h3 mb-2 text-gray-800">Pekerjaan Orangtua</h1>
         <p class="mb-4">
             Edit Data Pekerjaan Orangtua
         </p>

@@ -1,4 +1,23 @@
+/* Ensure that text in table cells doesn't wrap */
+th, td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Display ellipsis (...) for text overflow */
+}
+
+/* Set the width and center the DataTables container */
 div.dataTables_wrapper {
-  width: 80%;
-  margin-right: 20%; /* Reset margin-right */
+  width: 85vw; /* 70% of viewport width */
+  margin: auto; /* Center horizontally */
+  overflow-x: auto; /* Enable horizontal scrolling */
+}
+
+/* Adjust styles for smaller screens */
+@media screen and (max-width: 600px) {
+  /* Allow table cells to wrap on smaller screens */
+  th, td {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+  }
 }
