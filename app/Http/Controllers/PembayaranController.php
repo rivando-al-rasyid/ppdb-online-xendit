@@ -497,11 +497,22 @@ class PembayaranController extends Controller
 
     private function prepareCreateInvoiceRequest($total, $items, $invoiceCustomerData, $notificationPreference)
     {
+        $description = json_encode($invoiceCustomerData, JSON_UNESCAPED_UNICODE);
+        $description = substr($description, 1, -1);
+        $description = '';
+        foreach ($invoiceCustomerData as $key => $value) {
+            $description .= "\"$key\":\"$value\",\n"; // Adding line break after each comma
+        }
+
+        // Remove the trailing comma and line break
+        $description = rtrim($description, ",\n");
+
+
         return new CreateInvoiceRequest([
             'external_id' => (string) Str::uuid(),
             'amount' => $total,
             'items' => $items,
-            'description' => 'test',
+            'description' => $description,
             'invoice_duration' => 86400,
             'customer' => $invoiceCustomerData,
             'customer_notification_preference' => $notificationPreference,

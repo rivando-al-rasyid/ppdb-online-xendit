@@ -134,7 +134,7 @@ class DashboardController extends Controller
         // You can also eager load relationships if needed
         $item->load('tbl_peserta_ppdb');
         return view(
-            'dashboards.dashboard.admin.detail',
+            'dashboards.dashboard.tu.detail',
             compact(
                 'item'
             )
