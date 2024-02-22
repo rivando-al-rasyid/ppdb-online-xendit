@@ -1,4 +1,5 @@
 @extends('tu.layouts.app')
+@section('title', 'Dashboard Tata Usaha')
 @push('style')
     <link href="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 @endpush

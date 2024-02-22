@@ -1,5 +1,5 @@
 @extends('tu.layouts.app')
-
+@section('title', 'Detail Siswa')
 @section('content')
     <div class="container-fluid">
         <a href="{{ route('tu.dashboard') }}" class="btn btn-danger mb-5">Back</a>

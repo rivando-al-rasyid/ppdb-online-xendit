@@ -1,4 +1,6 @@
 @extends('tu.layouts.app')
+@section('title', 'Data Peserta PPDB')
+
 @push('style')
     <link href="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="{{ asset('sbadmin/vendor/datatables/Buttons/css/buttons.dataTables.min.css') }}" rel="stylesheet">
