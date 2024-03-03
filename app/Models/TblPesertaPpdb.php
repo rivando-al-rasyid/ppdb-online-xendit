@@ -26,7 +26,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property float|null $nilai_rata_rata
  * @property string $asal_sekolah
  * @property string $alamat
- * @property int|null $id_file_rapor
+ * @property int|null $id_file
  * @property int|null $id_biodata_ortu
  * @property int|null $id_biodata_wali
  * @property int|null $id_kartu
@@ -37,7 +37,7 @@ use Illuminate\Database\Eloquent\Model;
  * 
  * @property TblBiodataOrtu|null $tbl_biodata_ortu
  * @property TblBiodataWali|null $tbl_biodata_wali
- * @property TblFileRapor|null $tbl_file_rapor
+ * @property TblFile|null $tbl_file
  * @property TblPembayaran|null $tbl_pembayaran
  * @property TblKartu|null $tbl_kartu
  * @property User|null $user
@@ -55,7 +55,7 @@ class TblPesertaPpdb extends Model
 		'no_kk' => 'int',
 		'tanggal_lahir' => 'datetime',
 		'nilai_rata_rata' => 'float',
-		'id_file_rapor' => 'int',
+		'id_file' => 'int',
 		'id_biodata_ortu' => 'int',
 		'id_biodata_wali' => 'int',
 		'id_kartu' => 'int',
@@ -76,7 +76,7 @@ class TblPesertaPpdb extends Model
 		'nilai_rata_rata',
 		'asal_sekolah',
 		'alamat',
-		'id_file_rapor',
+		'id_file',
 		'id_biodata_ortu',
 		'id_biodata_wali',
 		'id_kartu',
@@ -94,9 +94,9 @@ class TblPesertaPpdb extends Model
 		return $this->belongsTo(TblBiodataWali::class, 'id_biodata_wali');
 	}
 
-	public function tbl_file_rapor()
+	public function tbl_file()
 	{
-		return $this->belongsTo(TblFileRapor::class, 'id_file_rapor');
+		return $this->belongsTo(TblFile::class, 'id_file');
 	}
 
 	public function tbl_pembayaran()

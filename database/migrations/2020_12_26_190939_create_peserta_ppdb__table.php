@@ -29,7 +29,7 @@ class CreatePesertaPpdbTable extends Migration
             $table->longText('alamat');
 
             // Foreign keys
-            $table->unsignedBigInteger('id_file_rapor')->nullable();
+            $table->unsignedBigInteger('id_file')->nullable();
 
             $table->unsignedBigInteger('id_biodata_ortu')->nullable();
 

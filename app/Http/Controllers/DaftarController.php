@@ -96,7 +96,7 @@ class DaftarController extends Controller
             'id_biodata_ortu' => $idBiodataOrtu,
             'id_biodata_wali' => $idBiodataWali,
             'id_kartu' => $idKartu,
-            'id_file_rapor' => $idFile,
+            'id_file' => $idFile,
         ]);
     }
 
