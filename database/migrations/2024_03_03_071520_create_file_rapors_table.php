@@ -10,8 +10,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('tbl_file_rapor', function (Blueprint $table) {
+        Schema::create('tbl_file', function (Blueprint $table) {
             $table->id();
+            $table->string('rapor_semester_9')->nullable();
+            $table->string('rapor_semester_10')->nullable();
+            $table->string('rapor_semester_11')->nullable();
+            $table->string('foto')->nullable();
             $table->string('link_file')->nullable();
             $table->timestamps();
         });
@@ -22,6 +26,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('tbl_file_rapor');
+        Schema::dropIfExists('tbl_file');
     }
 };

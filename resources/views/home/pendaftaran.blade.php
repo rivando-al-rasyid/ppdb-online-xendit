@@ -133,12 +133,13 @@
                                         <input type="text" name="tempat_lahir" class="form-control" autocomplete="off">
                                     </div>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Asal Sekolah</label>
                                         <input type="text" name="asal_sekolah" class="form-control" autocomplete="off">
                                     </div>
                                 </div>
+
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label>Alamat</label>
@@ -249,7 +250,7 @@
                         <h3></h3>
                         <fieldset>
                             <span class="step-current"></span>
-                            <h2>Kartu Bantuan (Diisi bila memiliki)</h2>
+                            <h2>Pengiriman File data</h2>
                             <div class="form-group">
                                 <label for="nomor_kps">Nomor KPS:</label>
                                 <input type="text" class="form-control" name="nomor_kps" id="nomor_kps">

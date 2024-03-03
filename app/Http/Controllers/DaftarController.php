@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\TblBiodataWali;
+use App\Models\TblFileRapor;
 use App\Models\TblKartu;
 use App\Models\TblPesertaPpdb;
 use Illuminate\Http\Request;
@@ -14,6 +15,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\TblPekerjaanOrtu;
 use App\Models\TblBiodataOrtu;
 use App\Models\TblHasil;
+use Illuminate\Support\Facades\Storage;
 
 class DaftarController extends Controller
 {
@@ -42,9 +44,9 @@ class DaftarController extends Controller
             $ortu = $this->createOrtu($request);
             $wali = $this->createWali($request);
             $kartu = $this->createKartu($request);
+            $file = $this->createFile($request);
 
-            $daftar = $this->createPeserta($request, $ortu->id, $wali->id, $kartu->id);
-
+            $daftar = $this->createPeserta($request, $ortu->id, $wali->id, $kartu->id, $file->id);
             $hasil = $this->createHasil($daftar);
 
             DB::commit();
@@ -72,11 +74,12 @@ class DaftarController extends Controller
             'tempat_lahir' => 'required',
             'asal_sekolah' => 'required',
             'alamat' => 'required',
+            'file_rapor' => 'required',
             'nilai_rata_rata' => 'nullable|numeric',
         ]);
     }
 
-    private function createPeserta($request, $idBiodataOrtu, $idBiodataWali, $idKartu)
+    private function createPeserta($request, $idBiodataOrtu, $idBiodataWali, $idKartu, $idFile)
     {
         return TblPesertaPpdb::create([
             'nama_depan' => $request->nama_depan,
@@ -93,6 +96,7 @@ class DaftarController extends Controller
             'id_biodata_ortu' => $idBiodataOrtu,
             'id_biodata_wali' => $idBiodataWali,
             'id_kartu' => $idKartu,
+            'id_file_rapor' => $idFile,
         ]);
     }
 
@@ -124,6 +128,13 @@ class DaftarController extends Controller
             'kks' => $request->nomor_kks,
             'kps' => $request->nomor_kps,
             'pkh' => $request->nomor_pkh,
+        ]);
+    }
+    private function createFile($request)
+    {
+
+        return TblFileRapor::create([
+            'file' => $request->link_file,
         ]);
     }
 
