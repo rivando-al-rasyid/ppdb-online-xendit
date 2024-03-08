@@ -265,6 +265,25 @@
                             </div>
                         </fieldset>
 
+                        <h3></h3>
+                        <fieldset>
+                            <span class="step-current"></span>
+                            <h2>Kartu Bantuan (Diisi bila memiliki)</h2>
+                            <div class="form-group">
+                                <label for="nomor_kps">Nomor KPS:</label>
+                                <input type="text" class="form-control" name="nomor_kps" id="nomor_kps">
+
+                                <label for="nomor_kks">Nomor KKS:</label>
+                                <input type="text" class="form-control" name="nomor_kks" id="nomor_kks">
+
+                                <label for="nomor_kip">Nomor KIP:</label>
+                                <input type="text" class="form-control" name="nomor_kip" id="nomor_kip">
+
+                                <label for="nomor_pkh">Nomor PKH:</label>
+                                <input type="text" class="form-control" name="nomor_pkh" id="nomor_pkh">
+                            </div>
+                        </fieldset>
+
                     </form>
 
                 </div>

@@ -8,8 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title>SB tu 2 - Dashboard</title>
+    <title>@yield('title', 'Dashboard TU')</title>
 
     <!-- Custom fonts for this template-->
     @include('tu.layouts.partials.style')

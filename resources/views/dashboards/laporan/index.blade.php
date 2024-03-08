@@ -1,6 +1,9 @@
 @extends('tu.layouts.app')
+@section('title', 'Data Peserta PPDB')
+
 @push('style')
     <link href="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('sbadmin/vendor/datatables/Buttons/css/buttons.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ asset('sbadmin/vendor/datatables/Buttons/css/buttons.bootstrap4.css') }}" rel="stylesheet">
     <link href="{{ asset('sbadmin/css/custom/scroller.css') }}" rel="stylesheet">
 @endpush
@@ -19,7 +22,7 @@
                     <div class="card mt-3">
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered display nowrap" id="dataTable">
+                                <table class="table table-bordered display nowrap" style="width:100%" id="dataTable">
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -122,8 +125,10 @@
     <script src="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('sbadmin/vendor/datatables/pdfmake-0.2.7/pdfmake.min.js') }}"></script>
     <script src="{{ asset('sbadmin/vendor/datatables/pdfmake-0.2.7/vfs_fonts.js') }}"></script>
-    <script src="{{ asset('sbadmin/vendor/datatables/pdfmake-0.2.7/datatables.min.js') }}"></script>
     <script src="https://cdn.datatables.net/v/bs4/jszip-3.10.1/b-2.4.2/b-html5-2.4.2/b-print-2.4.2/datatables.min.js">
     </script>
-    <script src="{{ asset('sbadmin/js/demo/admin.js') }}"></script>
+    <script src="https://cdn.datatables.net/fixedcolumns/5.0.0/js/dataTables.fixedColumns.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedcolumns/5.0.0/js/fixedColumns.dataTables.min.js"></script>
+
+    <script src="{{ asset('sbadmin/js/demo/index.js') }}"></script>
 @endpush

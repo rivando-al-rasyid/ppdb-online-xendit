@@ -2,9 +2,7 @@
 
 @section('content')
     <div class="container-fluid py-4">
-        <h1 class="h3 mb-2 text-gray-800">TU</h1>
-        <p class="mb-4">Tambah Data TU</p>
-
+        <h1 class="h3 mb-2 text-gray-800">Tambah Data TU</h1>
         <div class="card mb-4">
             <div class="card-body">
                 <a href="{{ route('admin.kelola_tu.index') }}" class="btn btn-warning mb-3">Back</a>

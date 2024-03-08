@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
+        //     'name' => 'Test Use r',
         //     'email' => 'test@example.com',
         // ]);
 
@@ -24,7 +24,10 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             TuSeeder::class,
             PekerjaanOrtuSeeder::class,
+            BiodataOrtuSeeder::class,
             UserSeeder::class,
+            PesertaPpdbSeeder::class,
+            HasilSeeder::class,
 
         ]);
     }

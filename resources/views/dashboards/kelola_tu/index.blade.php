@@ -1,79 +1,70 @@
 @extends('admin.layouts.app')
 @push('style')
-    <link href="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ url('sbadmin/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 @endpush
 @section('content')
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-        </div>
-        <!-- Content Row -->
-        <div class="row">
+        <h1 class="h3 mb-2 text-gray-800">Kelola TU</h1>
+        <p class="mb-4">
+            List data TU
+        </p>
 
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="row mt-5">
-                <div class="col-12 d-flex justify-content-between">
-                    <h1>Data Peserta PPDB</h1>
-                </div>
-                <div class="col-12">
-                    <div class="card mt-3">
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <a href="{{ route('admin.kelola_tu.create') }}" class="btn btn-primary mb-2">Tambah
-                                    Data</a>
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <a href="{{ route('admin.pekerjaan_ortu.create') }}" class="btn btn-primary mb-2">Tambah Data</a>
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama TU</th>
+                                <th>Email</th>
+                                <th>Action</th>
 
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nama TU</th>
-                                            <th>Email</th>
-                                            <th>Action</th>
-
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nama TU</th>
-                                            <th>Email</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        @foreach ($items as $item)
-                                            <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $item->name }}</td>
-                                                <td>{{ $item->email }}</td>
-                                                <td>
-                                                    <a href="{{ route('admin.kelola_tu.edit', $item->id) }}"
-                                                        class="btn btn-success me-2">Edit</a>
-                                                    @if (count($items) > 1)
-                                                        <form method="post" class="d-inline-block"
-                                                            action="{{ route('admin.kelola_tu.destroy', $item->id) }}">
-                                                            @method('DELETE')
-                                                            @csrf
-                                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                                        </form>
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama TU</th>
+                                <th>Email</th>
+                                <th>Action</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @foreach ($items as $item)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->email }}</td>
+                                    <td>
+                                        <a href="{{ route('admin.kelola_tu.edit', $item->id) }}"
+                                            class="btn btn-success me-2">Edit</a>
+                                        @if (count($items) > 1)
+                                            <form method="post" class="d-inline-block"
+                                                action="{{ route('admin.kelola_tu.destroy', $item->id) }}">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-    @endsection
-    @push('script')
-        <!-- Page level plugins -->
-        <script src="{{ asset('sbadmin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
-        <script src="{{ asset('sbadmin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
-        <script src="{{ asset('sbadmin/js/demo/admin.js') }}"></script>
-    @endpush
+
+    </div>
+@endsection
+@push('script')
+    <!-- Page level plugins -->
+    <script src="{{ url('sbadmin/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ url('sbadmin/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ url('sbadmin/js/demo/admin.js') }}"></script>
+@endpush
