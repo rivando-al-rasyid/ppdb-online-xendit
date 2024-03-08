@@ -14,7 +14,7 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-body">
-                <a href="{{ route('admin.pekerjaan_ortu.create') }}" class="btn btn-primary mb-2">Tambah Data</a>
+                <a href="{{ route('admin.kelola_tu.create') }}" class="btn btn-primary mb-2">Tambah Data</a>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>

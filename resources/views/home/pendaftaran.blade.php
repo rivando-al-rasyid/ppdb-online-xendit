@@ -133,7 +133,7 @@
                                         <input type="text" name="tempat_lahir" class="form-control" autocomplete="off">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-12">
                                     <div class="form-group">
                                         <label>Asal Sekolah</label>
                                         <input type="text" name="asal_sekolah" class="form-control" autocomplete="off">
