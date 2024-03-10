@@ -3,20 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\TblBiodataWali;
-use App\Models\TblFileRapor;
 use App\Models\TblKartu;
 use App\Models\TblPesertaPpdb;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
-
+use App\Models\TblFile;
 // Load Models
 use App\Models\TblPekerjaanOrtu;
 use App\Models\TblBiodataOrtu;
 use App\Models\TblHasil;
 use Illuminate\Support\Facades\Storage;
-
+use Symfony\Component\Process\Exception\ProcessFailedException;
+use Symfony\Component\Process\Process;
 class DaftarController extends Controller
 {
     public function index()
@@ -74,8 +74,12 @@ class DaftarController extends Controller
             'tempat_lahir' => 'required',
             'asal_sekolah' => 'required',
             'alamat' => 'required',
-            'file_rapor' => 'required',
             'nilai_rata_rata' => 'nullable|numeric',
+            'rapor_semester_9' => 'file|mimes:pdf',
+            'rapor_semester_10' => 'file|mimes:pdf',
+            'rapor_semester_11' => 'file|mimes:pdf',
+            'foto' => 'image|max:2048', // Limit image size to 2MB
+
         ]);
     }
 
@@ -132,10 +136,44 @@ class DaftarController extends Controller
     }
     private function createFile($request)
     {
+        return TblFile::create([
+            'rapor_semester_9' => $request->hasFile('rapor_semester_9') ? $this->compressPDF($request->rapor_semester_9) : null,
+            'rapor_semester_10' => $request->hasFile('rapor_semester_10') ? $this->compressPDF($request->rapor_semester_10) : null,
+            'rapor_semester_11' => $request->hasFile('rapor_semester_11') ? $this->compressPDF($request->rapor_semester_11) : null,
+            'foto' => $request->hasFile('foto') ? $request->foto->store('uploads', 'public') : null,
+        ])->wasRecentlyCreated();
+    }
+    protected function compressPDF($file)
+    {
+        $originalPath = $file->getPathName();
+        $destinationPath = $file->getRealPath() . '_compressed.pdf'; // Modify this path as needed
 
-        return TblFileRapor::create([
-            'file' => $request->link_file,
+        $process = new Process([
+            'gs',
+            '-sDEVICE=pdfwrite',
+            '-dCompatibilityLevel=1.4',
+            '-dPDFSETTINGS=/screen',
+            '-dNOPAUSE',
+            '-dQUIET',
+            '-dBATCH',
+            '-sOutputFile=' . $destinationPath,
+            $originalPath,
         ]);
+
+        $process->run();
+
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+
+        // After compression, save the file to your desired location
+        $finalPath = 'uploads/' . $file->hashName();
+        \Storage::disk('public')->put($finalPath, file_get_contents($destinationPath));
+
+        // Clean up temporary file
+        unlink($destinationPath);
+
+        return $finalPath;
     }
 
     private function createHasil($daftar)

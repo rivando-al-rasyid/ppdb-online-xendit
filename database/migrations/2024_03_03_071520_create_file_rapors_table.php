@@ -16,7 +16,6 @@ return new class extends Migration {
             $table->string('rapor_semester_10')->nullable();
             $table->string('rapor_semester_11')->nullable();
             $table->string('foto')->nullable();
-            $table->string('link_file')->nullable();
             $table->timestamps();
         });
     }
