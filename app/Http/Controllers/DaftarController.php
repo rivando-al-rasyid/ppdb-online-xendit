@@ -121,11 +121,36 @@ class DaftarController extends Controller
     }
     private function storeFileWithCustomName($file, $firstName, $lastName, $fileType)
     {
+        // Replace spaces with underscores in first name and last name
+        $firstName = str_replace(' ', '_', $firstName);
+        $lastName = str_replace(' ', '_', $lastName);
+
+        // Base folder path within the "storage/app" directory
+        $baseFolderPath = 'uploads/';
+        $userFolderName = $firstName . '_' . $lastName;
+        $folderPath = $baseFolderPath . $userFolderName;
+
+        // Check if the directory exists in the "storage/app" folder, if not, create it
+        if (!file_exists(storage_path('app/' . $folderPath))) {
+            if (!mkdir(storage_path('app/' . $folderPath), 0755, true) && !is_dir(storage_path('app/' . $folderPath))) {
+                // Handle the error appropriately - maybe log this or throw an exception
+                return false;
+            }
+        }
+
         $extension = $file->getClientOriginalExtension();
         $fileName = $fileType . '_' . $firstName . '_' . $lastName . '.' . $extension;
-        return $file->storeAs('uploads', $fileName, 'public');
+
+        try {
+            // Store the file in the specified directory within the local disk
+            return $file->storeAs($folderPath, $fileName, 'local');
+        } catch (\Exception $e) {
+            // Handle the exception, maybe log it or notify someone
+            return false;
+        }
     }
-                public function hasil()
+
+    public function hasil()
     {
         $items = TblHasil::with(['tbl_peserta_ppdb'])->get();
         return view('home.hasil', compact('items'));
