@@ -24,8 +24,7 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama Depan</th>
-                                            <th>Nama Belakang</th>
+                                            <th>Nama</th>
                                             <th>Alamat</th>
                                             <th>Nama Ayah</th>
                                             <th>No Telepon Ayah</th>
@@ -37,7 +36,6 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama Depan</th>
-                                            <th>Nama Belakang</th>
                                             <th>Alamat</th>
                                             <th>Nama Ayah</th>
                                             <th>No Telepon Ayah</th>
@@ -50,8 +48,7 @@
                                         @forelse ($items as $item)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $item->nama_depan }}</td>
-                                                <td>{{ $item->nama_belakang }}</td>
+                                                <td>{{ $item->nama_depan }} {{ $item->nama_belakang }}</td>
                                                 <td>{{ $item->alamat }}</td>
                                                 <td>{{ $item->tbl_biodata_ortu->nama_ayah }}</td>
                                                 <td>{{ $item->tbl_biodata_ortu->no_tlp_ayah }}</td>

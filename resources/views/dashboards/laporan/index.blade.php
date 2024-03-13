@@ -27,10 +27,10 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama</th>
+                                            <th>JK</th>
                                             <th>NISN</th>
                                             <th>NIK</th>
                                             <th>No KK</th>
-                                            <th>Jenis Kelamin</th>
                                             <th>Tanggal Lahir</th>
                                             <th>Tempat Lahir</ths>
                                             <th>Agama</th>
@@ -53,10 +53,10 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama</th>
+                                            <th>JK</th>
                                             <th>NISN</th>
                                             <th>NIK</th>
                                             <th>No KK</th>
-                                            <th>Jenis Kelamin</th>
                                             <th>Tanggal Lahir</th>
                                             <th>Tempat Lahir</ths>
                                             <th>Agama</th>
@@ -80,10 +80,11 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $item->nama_depan }} {{ $item->nama_belakang }}</td>
+                                                <td>{{ $item->jenis_kelamin }}</td>
+
                                                 <td>{{ $item->nisn }}</td>
                                                 <td>{{ $item->nik }}</td>
                                                 <td>{{ $item->no_kk }}</td>
-                                                <td>{{ $item->jenis_kelamin }}</td>
                                                 <td>{{ date('d-m-Y', strtotime($item->tanggal_lahir)) }}</td>
                                                 <td>{{ $item->tempat_lahir }}</td>
                                                 <td>{{ $item->agama }}</td>

@@ -26,7 +26,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama</th>
-                                            <th>Jenis Kelamin</th>
+                                            <th>JK</th>
                                             <th>nama orang tua</th>
                                             <th>KIP</th>
                                             <th>KKS</th>
@@ -38,7 +38,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama</th>
-                                            <th>Jenis Kelamin</th>
+                                            <th>JK</th>
                                             <th>nama orang tua</th>
                                             <th>KIP</th>
                                             <th>KKS</th>

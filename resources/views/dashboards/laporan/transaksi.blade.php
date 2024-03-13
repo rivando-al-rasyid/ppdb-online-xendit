@@ -24,7 +24,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama</th>
-                                            <th>Jenis Kelamin</th>
+                                            <th>JK</th>
                                             <th>nama orang tua</th>
                                             <th>id invoice</th>
                                             <th>amount</th>
@@ -36,7 +36,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama</th>
-                                            <th>Jenis Kelamin</th>
+                                            <th>JK</th>
                                             <th>nama orang tua</th>
                                             <th>id invoice</th>
                                             <th>amount</th>
