@@ -20,6 +20,7 @@ use Mostafaznv\PdfOptimizer\Facades\PdfOptimizer;
 use Mostafaznv\PdfOptimizer\Enums\ColorConversionStrategy;
 use Mostafaznv\PdfOptimizer\Enums\PdfSettings;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Carbon;
 
 class DaftarController extends Controller
 {
@@ -41,7 +42,7 @@ class DaftarController extends Controller
                 'no_kk' => 'required|numeric',
                 'jenis_kelamin' => 'required',
                 'agama' => 'required',
-                'tanggal_lahir' => 'required|date|before:yesterday',
+                'tanggal_lahir' => 'required|date|before:',
                 'tempat_lahir' => 'required',
                 'asal_sekolah' => 'required',
                 'alamat' => 'required',
