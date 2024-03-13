@@ -264,7 +264,13 @@
                                 <input type="file" name="rapor_semester_11" id="rapor_semester_11">
                             </div>
                             <div class="form-group">
-                                <label for="foto">Foto (Image):</label>
+                                <label for="sertifikat_tpq">Sertifikat TPQ:</label>
+                                <input type="file" name="sertifikat_tpq" id="sertifikat_tpq">
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="foto">Foto (Gambar):</label>
                                 <input type="file" name="foto" id="foto">
                             </div>
                         </fieldset>

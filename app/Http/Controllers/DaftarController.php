@@ -16,6 +16,10 @@ use App\Models\TblBiodataOrtu;
 use App\Models\TblHasil;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Process;
+use Mostafaznv\PdfOptimizer\Facades\PdfOptimizer;
+use Mostafaznv\PdfOptimizer\Enums\ColorConversionStrategy;
+use Mostafaznv\PdfOptimizer\Enums\PdfSettings;
+use Intervention\Image\Facades\Image;
 
 class DaftarController extends Controller
 {
@@ -28,7 +32,6 @@ class DaftarController extends Controller
     public function daftar(Request $request)
     {
         DB::beginTransaction();
-
         try {
             $validator = Validator::make($request->all(), [
                 'nama_depan' => 'required',
@@ -46,9 +49,9 @@ class DaftarController extends Controller
                 'rapor_semester_9' => 'file|mimes:pdf',
                 'rapor_semester_10' => 'file|mimes:pdf',
                 'rapor_semester_11' => 'file|mimes:pdf',
+                'sertifikat_tpq' => 'file|mimes:pdf',
                 'foto' => 'image|max:2048',
             ]);
-
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator->errors());
             }
@@ -75,17 +78,6 @@ class DaftarController extends Controller
                 'pkh' => $request->nomor_pkh,
             ]);
 
-            $data = [
-                'rapor_semester_9' => $request->hasFile('rapor_semester_9') ? $this->storeFileWithCustomName($request->file('rapor_semester_9'), $request->nama_depan, $request->nama_belakang, 'rapor_semester_9') : null,
-                'rapor_semester_10' => $request->hasFile('rapor_semester_10') ? $this->storeFileWithCustomName($request->file('rapor_semester_10'), $request->nama_depan, $request->nama_belakang, 'rapor_semester_10') : null,
-                'rapor_semester_11' => $request->hasFile('rapor_semester_11') ? $this->storeFileWithCustomName($request->file('rapor_semester_11'), $request->nama_depan, $request->nama_belakang, 'rapor_semester_11') : null,
-                'foto' => $request->hasFile('foto') ? $this->storeFileWithCustomName($request->file('foto'), $request->nama_depan, $request->nama_belakang, 'foto') : null,
-            ];
-            // Remove null values from the data array
-            $filteredData = array_filter($data);
-
-            $file = TblFile::create($filteredData);
-
             $daftar = TblPesertaPpdb::create([
                 'nama_depan' => $request->nama_depan,
                 'nama_belakang' => $request->nama_belakang,
@@ -101,10 +93,20 @@ class DaftarController extends Controller
                 'id_biodata_ortu' => $ortu->id,
                 'id_biodata_wali' => $wali->id,
                 'id_kartu' => $kartu->id,
-                'id_file' => $file->id,
             ]);
 
-            // Create TblHasil record
+            $data = [
+                'rapor_semester_9' => $request->hasFile('rapor_semester_9') ? $this->compressAndStoreFile($request->file('rapor_semester_9'), $request->nama_depan, $request->nama_belakang, 'rapor_semester_9', $daftar->id, 'pdf') : null,
+                'rapor_semester_10' => $request->hasFile('rapor_semester_10') ? $this->compressAndStoreFile($request->file('rapor_semester_10'), $request->nama_depan, $request->nama_belakang, 'rapor_semester_10', $daftar->id, 'pdf') : null,
+                'rapor_semester_11' => $request->hasFile('rapor_semester_11') ? $this->compressAndStoreFile($request->file('rapor_semester_11'), $request->nama_depan, $request->nama_belakang, 'rapor_semester_11', $daftar->id, 'pdf') : null,
+                'sertifikat_tpq' => $request->hasFile('sertifikat_tpq') ? $this->compressAndStoreFile($request->file('sertifikat_tpq'), $request->nama_depan, $request->nama_belakang, 'sertifikat_tpq', $daftar->id, 'pdf') : null,
+                'foto' => $request->hasFile('foto') ? $this->compressAndStoreFile($request->file('foto'), $request->nama_depan, $request->nama_belakang, 'foto', $daftar->id, 'image') : null,
+                        ];
+            $filteredData = array_filter($data);
+            $file = TblFile::create($filteredData);
+            $daftar->id_file = $file->id;
+            $daftar->save();
+
             TblHasil::create([
                 'nis' => $daftar->id
             ]);
@@ -119,38 +121,50 @@ class DaftarController extends Controller
             return redirect()->back();
         }
     }
-    private function storeFileWithCustomName($file, $firstName, $lastName, $fileType)
+    private function compressAndStoreFile($file, $firstName, $lastName, $fileType, $daftarId, $fileFormat)
     {
-        // Replace spaces with underscores in first name and last name
         $firstName = str_replace(' ', '_', $firstName);
         $lastName = str_replace(' ', '_', $lastName);
-
-        // Base folder path within the "storage/app" directory
-        $baseFolderPath = 'uploads/';
-        $userFolderName = $firstName . '_' . $lastName;
+        $baseFolderPath = 'uploads/files/';
+        $userFolderName = $firstName . '_' . $lastName . '_' . $daftarId;
         $folderPath = $baseFolderPath . $userFolderName;
 
-        // Check if the directory exists in the "storage/app" folder, if not, create it
         if (!file_exists(storage_path('app/' . $folderPath))) {
-            if (!mkdir(storage_path('app/' . $folderPath), 0755, true) && !is_dir(storage_path('app/' . $folderPath))) {
-                // Handle the error appropriately - maybe log this or throw an exception
-                return false;
-            }
+            mkdir(storage_path('app/' . $folderPath), 0755, true);
         }
 
-        $extension = $file->getClientOriginalExtension();
-        $fileName = $fileType . '_' . $firstName . '_' . $lastName . '.' . $extension;
+        if ($fileFormat === 'pdf') {
+            // Not compressing PDF files, just moving the original file
+            $optimizedFilePath = $folderPath . '/' . $fileType . '_' . $firstName . '_' . $lastName . '.pdf';
+            $file->move(storage_path('app/' . $folderPath), $optimizedFilePath);
+            return $optimizedFilePath;
+        } elseif ($fileFormat === 'image') {
+            // Compress image
+            $quality = 75; // Initial quality setting
+            $maxFileSize = 2048 * 2048; // 2 MB in bytes
+            $image = Image::make($file);
+            do {
+                // Encode the image with the current quality setting
+                $encodedImage = $image->encode('jpg', $quality);
+                // Get the size of the encoded image
+                $fileSize = strlen($encodedImage);
+                // If the size is greater than 1 MB, reduce the quality
+                if ($fileSize > $maxFileSize) {
+                    $quality -= 5; // Decrease quality by 5
+                }
+            } while ($fileSize > $maxFileSize && $quality > 0);
 
-        try {
-            // Store the file in the specified directory within the local disk
-            return $file->storeAs($folderPath, $fileName, 'local');
-        } catch (\Exception $e) {
-            // Handle the exception, maybe log it or notify someone
-            return false;
+            // Save the compressed image
+            $optimizedFilePath = $folderPath . '/' . $fileType . '_' . $firstName . '_' . $lastName . '.jpg';
+            $image->save(storage_path('app/' . $optimizedFilePath), $quality);
+
+            return $optimizedFilePath;
         }
+
+        return null;
     }
 
-    public function hasil()
+                        public function hasil()
     {
         $items = TblHasil::with(['tbl_peserta_ppdb'])->get();
         return view('home.hasil', compact('items'));
