@@ -27,6 +27,7 @@
                                             <th>No</th>
                                             <th>Nama</th>
                                             <th>JK</th>
+                                            <th>No Pendaftaran</th>
                                             <th>nama orang tua</th>
                                             <th>KIP</th>
                                             <th>KKS</th>
@@ -39,6 +40,7 @@
                                             <th>No</th>
                                             <th>Nama</th>
                                             <th>JK</th>
+                                            <th>No Pendaftaran</th>
                                             <th>nama orang tua</th>
                                             <th>KIP</th>
                                             <th>KKS</th>
@@ -53,6 +55,7 @@
                                                 <td>{{ $loop->iteration }} </td>
                                                 <td>{{ $item->nama_depan }} {{ $item->nama_belakang }}</td>
                                                 <td>{{ $item->jenis_kelamin }} </td>
+                                                <td>{{ $item->id }} </td>
                                                 <td>{{ $item->tbl_biodata_ortu->nama_ayah }} </td>
                                                 <td>{{ $item->tbl_kartu->kip ?? 'null' }}</td>
                                                 <td>{{ $item->tbl_kartu->kks ?? 'null' }}</td>

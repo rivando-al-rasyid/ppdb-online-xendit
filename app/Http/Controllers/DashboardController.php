@@ -73,6 +73,19 @@ class DashboardController extends Controller
             )
         );
     }
+    public function exportindex()
+    {
+        $items = TblPesertaPpdb::with(['tbl_biodata_ortu', 'tbl_biodata_wali'])->get();
+
+        // Count
+        return view(
+            'dashboards.export.index',
+            compact(
+                'items',
+            )
+        );
+    }
+
     public function dataortu()
     {
         $items = TblPesertaPpdb::with(['tbl_biodata_ortu', 'tbl_biodata_wali'])->get();

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DaftarController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\DashboardController;
 
 
 
@@ -42,5 +43,7 @@ Route::middleware('auth')->group(function () {
 Route::post('/xendit/webhook', [PembayaranController::class, 'webhook'])->middleware('web');
 Route::get('/generate-invoice', [PembayaranController::class, 'generateAndDisplayInvoice']);
 Route::get('/review/invoice', [PembayaranController::class, 'review']);
+
+Route::get('/laporan/siswa', [DashboardController::class, 'exportindex'])->name('laporan.index.export');
 
 require __DIR__ . '/auth.php';
