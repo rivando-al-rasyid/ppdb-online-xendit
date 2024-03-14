@@ -253,25 +253,27 @@
                             <h2>Pengiriman File data</h2>
                             <div class="form-group">
                                 <label for="rapor_semester_9">Rapor Semester 9 (PDF):</label>
-                                <input type="file" name="rapor_semester_9" id="rapor_semester_9">
+                                <input type="file" name="rapor_semester_9" id="rapor_semester_9"
+                                    accept="application/pdf">
                             </div>
                             <div class="form-group">
                                 <label for="rapor_semester_10">Rapor Semester 10 (PDF):</label>
-                                <input type="file" name="rapor_semester_10" id="rapor_semester_10">
+                                <input type="file" name="rapor_semester_10" id="rapor_semester_10"
+                                    accept="application/pdf">
                             </div>
                             <div class="form-group">
                                 <label for="rapor_semester_11">Rapor Semester 11 (PDF):</label>
-                                <input type="file" name="rapor_semester_11" id="rapor_semester_11">
+                                <input type="file" name="rapor_semester_11" id="rapor_semester_11"
+                                    accept="application/pdf">
                             </div>
                             <div class="form-group">
                                 <label for="sertifikat_tpq">Sertifikat TPQ:</label>
-                                <input type="file" name="sertifikat_tpq" id="sertifikat_tpq">
+                                <input type="file" name="sertifikat_tpq" id="sertifikat_tpq"
+                                    accept="application/pdf">
                             </div>
-
-
                             <div class="form-group">
                                 <label for="foto">Foto (Gambar):</label>
-                                <input type="file" name="foto" id="foto">
+                                <input type="file" name="foto" id="foto" accept="image/*">
                             </div>
                         </fieldset>
                         <h3></h3>

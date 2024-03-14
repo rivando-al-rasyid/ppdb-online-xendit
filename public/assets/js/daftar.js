@@ -13,7 +13,10 @@
         },
         titleTemplate: '<h3 class="title">#title#</h3>',
         onStepChanging: function (event, currentIndex, newIndex) {
-            return form.valid();
+            if (newIndex > currentIndex) {
+                return form.valid();
+            }
+            return true;
         },
         onFinished: function (event, currentIndex) {
             if (form.valid()) {
@@ -28,18 +31,9 @@
         rules: {
             nama_depan: "required",
             nama_belakang: "required",
-            nisn: {
-                required: true,
-                digits: true,
-            },
-            nik: {
-                required: true,
-                digits: true,
-            },
-            no_kk: {
-                required: true,
-                digits: true,
-            },
+            nisn: { required: true, digits: true },
+            nik: { required: true, digits: true },
+            no_kk: { required: true, digits: true },
             jenis_kelamin: "required",
             agama: "required",
             tanggal_lahir: "required",
@@ -47,36 +41,19 @@
             asal_sekolah: "required",
             nama_ayah: "required",
             id_pekerjaan_ayah: "required",
-            no_telp_ayah: {
-                required: true,
-                digits: true,
-            },
+            no_telp_ayah: { required: true, digits: true },
             nama_ibu: "required",
             id_pekerjaan_ibu: "required",
-            no_telp_ibu: {
-                required: true,
-                digits: true,
-            },
-            rapor_semester_9: {
-                required: true,
-            },
-            rapor_semester_10: {
-                required: true,
-            },
-            rapor_semester_11: {
-                required: true,
-            },
-            foto: {
-                required: true,
-            },
+            no_telp_ibu: { required: true, digits: true },
+            rapor_semester_9: { required: true },
+            rapor_semester_10: { required: true },
+            rapor_semester_11: { required: true },
+            sertifikat_tpq: { required: true },
+            foto: { required: true },
         },
         messages: {
-            nama_depan: {
-                required: "Silakan masukkan nama depan Anda",
-            },
-            nama_belakang: {
-                required: "Silakan masukkan nama belakang Anda",
-            },
+            nama_depan: { required: "Silakan masukkan nama depan Anda" },
+            nama_belakang: { required: "Silakan masukkan nama belakang Anda" },
             nisn: {
                 required: "Silakan masukkan NISN Anda",
                 digits: "Silakan masukkan hanya angka",
@@ -115,9 +92,10 @@
             rapor_semester_11: {
                 required: "Silakan unggah rapor Semester 11 Anda",
             },
-            foto: {
-                required: "Silakan unggah foto Anda",
+            sertifikat_tpq: {
+                required: "Silakan unggah rapor Semester 11 Anda",
             },
+            foto: { required: "Silakan unggah foto Anda" },
         },
         invalidHandler: function (event, validator) {
             var errors = validator.numberOfInvalids();
