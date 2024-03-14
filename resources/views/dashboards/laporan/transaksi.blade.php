@@ -24,7 +24,8 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama</th>
-                                            <th>Jenis Kelamin</th>
+                                            <th>JK</th>
+                                            <th>No Pendaftaran</th>
                                             <th>nama orang tua</th>
                                             <th>id invoice</th>
                                             <th>amount</th>
@@ -36,7 +37,8 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama</th>
-                                            <th>Jenis Kelamin</th>
+                                            <th>JK</th>
+                                            <th>No Pendaftaran</th>
                                             <th>nama orang tua</th>
                                             <th>id invoice</th>
                                             <th>amount</th>
@@ -51,6 +53,8 @@
                                                 <td>{{ $loop->iteration }} </td>
                                                 <td>{{ $item->nama_depan }} {{ $item->nama_belakang }}</td>
                                                 <td>{{ $item->jenis_kelamin }} </td>
+                                                <td>{{ $item->id }}</td>
+
                                                 <td>{{ $item->tbl_biodata_ortu->nama_ayah }} </td>
                                                 <td>{{ $item->tbl_pembayaran->invoice_id ?? 'null' }}</td>
                                                 <td>{{ $item->tbl_pembayaran->amount ?? 'null' }}</td>

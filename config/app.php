@@ -170,6 +170,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        MostafaZnv\PDFOptimizer\PDFOptimizerServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -185,6 +186,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        'PDFOptimizer' => MostafaZnv\PDFOptimizer\Facades\PdfOptimizer::class,
     ])->toArray(),
 
 ];

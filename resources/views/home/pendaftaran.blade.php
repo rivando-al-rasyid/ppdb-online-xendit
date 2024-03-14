@@ -139,6 +139,7 @@
                                         <input type="text" name="asal_sekolah" class="form-control" autocomplete="off">
                                     </div>
                                 </div>
+
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label>Alamat</label>
@@ -249,22 +250,32 @@
                         <h3></h3>
                         <fieldset>
                             <span class="step-current"></span>
-                            <h2>Kartu Bantuan (Diisi bila memiliki)</h2>
+                            <h2>Pengiriman File data</h2>
                             <div class="form-group">
-                                <label for="nomor_kps">Nomor KPS:</label>
-                                <input type="text" class="form-control" name="nomor_kps" id="nomor_kps">
-
-                                <label for="nomor_kks">Nomor KKS:</label>
-                                <input type="text" class="form-control" name="nomor_kks" id="nomor_kks">
-
-                                <label for="nomor_kip">Nomor KIP:</label>
-                                <input type="text" class="form-control" name="nomor_kip" id="nomor_kip">
-
-                                <label for="nomor_pkh">Nomor PKH:</label>
-                                <input type="text" class="form-control" name="nomor_pkh" id="nomor_pkh">
+                                <label for="rapor_semester_9">Rapor Semester 9 (PDF):</label>
+                                <input type="file" name="rapor_semester_9" id="rapor_semester_9"
+                                    accept="application/pdf">
+                            </div>
+                            <div class="form-group">
+                                <label for="rapor_semester_10">Rapor Semester 10 (PDF):</label>
+                                <input type="file" name="rapor_semester_10" id="rapor_semester_10"
+                                    accept="application/pdf">
+                            </div>
+                            <div class="form-group">
+                                <label for="rapor_semester_11">Rapor Semester 11 (PDF):</label>
+                                <input type="file" name="rapor_semester_11" id="rapor_semester_11"
+                                    accept="application/pdf">
+                            </div>
+                            <div class="form-group">
+                                <label for="sertifikat_tpq">Sertifikat TPQ:</label>
+                                <input type="file" name="sertifikat_tpq" id="sertifikat_tpq"
+                                    accept="application/pdf">
+                            </div>
+                            <div class="form-group">
+                                <label for="foto">Foto (Gambar):</label>
+                                <input type="file" name="foto" id="foto" accept="image/*">
                             </div>
                         </fieldset>
-
                         <h3></h3>
                         <fieldset>
                             <span class="step-current"></span>
