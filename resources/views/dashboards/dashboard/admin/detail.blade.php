@@ -43,6 +43,25 @@
                         <tr>
                             <td>Agama</td>
                             <td>{{ $item->tbl_peserta_ppdb->agama }}</td>
+                        </tr>\ <tr>
+                            <td>Rapor Kelas 5 semester 1 </td>
+                            <td>{{ $item->tbl_peserta_ppdb->agama }}</td>
+                        </tr>
+                        <tr>
+                            <td>Rapor Kelas 5 semester 2</td>
+                            <td>{{ $item->tbl_peserta_ppdb->agama }}</td>
+                        </tr>
+                        <tr>
+                            <td>Rapor Kelas 6 semester 1</td>
+                            <td>{{ $item->tbl_peserta_ppdb->agama }}</td>
+                        </tr>
+                        <tr>
+                            <td>Sertifikat TPQ</td>
+                            <td>{{ $item->tbl_peserta_ppdb->agama }}</td>
+                        </tr>
+                        <tr>
+                            <td>Foto</td>
+                            <td>{{ $item->tbl_peserta_ppdb->agama }}</td>
                         </tr>
 
                         <!-- Include the Lightbox2 CSS and JavaScript files in your HTML -->
