@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->string('rapor_semester_9')->nullable();
             $table->string('rapor_semester_10')->nullable();
             $table->string('rapor_semester_11')->nullable();
+            $table->string('sertifikat_tpq')->nullable();
             $table->string('foto')->nullable();
             $table->timestamps();
         });

@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $rapor_semester_9
  * @property string|null $rapor_semester_10
  * @property string|null $rapor_semester_11
+ * @property string|null $sertifikat_tpq
  * @property string|null $foto
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
@@ -33,6 +34,7 @@ class TblFile extends Model
 		'rapor_semester_9',
 		'rapor_semester_10',
 		'rapor_semester_11',
+		'sertifikat_tpq',
 		'foto'
 	];
 
