@@ -63,7 +63,7 @@
                         </tr>
                         <tr>
                             <td>Foto</td>
-                            <td> {{ asset($item->tbl_peserta_ppdb->tbl_file->foto) }}</td>
+                            <td> {{ $item->tbl_peserta_ppdb->tbl_file->foto }}</td>
 
                         </tr>
                         <!-- Include the Lightbox2 CSS and JavaScript files in your HTML -->
