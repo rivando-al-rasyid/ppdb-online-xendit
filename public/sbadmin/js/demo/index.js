@@ -11,7 +11,7 @@ $(document).ready(function () {
             {
                 extend: "pdfHtml5",
                 orientation: "landscape",
-                pageSize: "LEGAL",
+                pageSize: "legal",
             },
         ],
     });
