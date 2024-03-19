@@ -21,6 +21,9 @@ use Mostafaznv\PdfOptimizer\Enums\ColorConversionStrategy;
 use Mostafaznv\PdfOptimizer\Enums\PdfSettings;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Carbon;
+use Vonage\Client\Credentials\Basic;
+use Vonage\Client;
+
 
 class DaftarController extends Controller
 {
@@ -102,7 +105,7 @@ class DaftarController extends Controller
                 'rapor_semester_11' => $request->hasFile('rapor_semester_11') ? $this->compressAndStoreFile($request->file('rapor_semester_11'), $request->nama_depan, $request->nama_belakang, 'rapor_semester_11', $daftar->id, 'pdf') : null,
                 'sertifikat_tpq' => $request->hasFile('sertifikat_tpq') ? $this->compressAndStoreFile($request->file('sertifikat_tpq'), $request->nama_depan, $request->nama_belakang, 'sertifikat_tpq', $daftar->id, 'pdf') : null,
                 'foto' => $request->hasFile('foto') ? $this->compressAndStoreFile($request->file('foto'), $request->nama_depan, $request->nama_belakang, 'foto', $daftar->id, 'image') : null,
-                        ];
+            ];
             $filteredData = array_filter($data);
             $file = TblFile::create($filteredData);
             $daftar->id_file = $file->id;
@@ -114,11 +117,42 @@ class DaftarController extends Controller
 
             DB::commit();
 
-            Alert::success('Success', 'Thank you for registering!');
+            $account_sid = env('TWILIO_SID');
+            $auth_token = env('TWILIO_TOKEN');
+            $twilio_number = env('TWILIO_FROM_NUMBER');
+            $phoneNumber = $request->no_telp_ayah;
+            if (substr($phoneNumber, 0, 1) == '0') {
+                $phoneNumber = '+62' . substr($phoneNumber, 1);
+            } elseif (substr($phoneNumber, 0, 2) == '62') {
+                $phoneNumber = '+' . $phoneNumber;
+            } else {
+                $phoneNumber = '+62' . $phoneNumber;
+            }
+            $client = new \Twilio\Rest\Client($account_sid, $auth_token);
+
+            try {
+                $message = $client->messages->create(
+                    $phoneNumber,
+                    [
+                        "from" => $twilio_number,
+                        "body" => 'Your registration is successful.'
+                    ]
+                );
+
+                if ($message->sid) {
+                    Alert::success('Success', 'Thank you for registering! SMS notification sent successfully.');
+                } else {
+                    Alert::error('Error', 'Thank you for registering! However, SMS notification could not be sent.');
+                }
+            } catch (\Twilio\Exceptions\RestException $e) {
+                Alert::error('Error', 'SMS could not be sent. Error: ' . $e->getMessage());
+            }
+
             return redirect()->route('landing-page');
         } catch (\Exception $e) {
             DB::rollBack();
-            Alert::error('Error', 'Please check your form again!');
+            $errorMessage = 'Error: ' . $e->getMessage() . ' (Code: ' . $e->getCode() . ')';
+            Alert::error('Error', $errorMessage);
             return redirect()->back();
         }
     }
@@ -165,7 +199,7 @@ class DaftarController extends Controller
         return null;
     }
 
-                        public function hasil()
+    public function hasil()
     {
         $items = TblHasil::with(['tbl_peserta_ppdb'])->get();
         return view('home.hasil', compact('items'));

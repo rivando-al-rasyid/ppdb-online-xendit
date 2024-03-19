@@ -18,6 +18,7 @@
         "laraveldaily/laravel-invoices": "^3.3",
         "mostafaznv/pdf-optimizer": "^1.0",
         "realrashid/sweet-alert": "^7.1",
+        "twilio/sdk": "^7.16",
         "xendit/xendit-php": "^4.1"
     },
     "require-dev": {
