@@ -41,11 +41,20 @@
                     {{-- Add other necessary customer data here --}}
                 </tbody>
             </table>
+            <div class="row">
+                <div class="col-auto"> <!-- Use col-auto to only take up as much space as needed -->
+                    <form action="{{ route('pembayaran.store') }}" method="POST" class="d-inline-block mr-2">
+                        <!-- d-inline-block for inline display, mr-2 for a little space to the right -->
+                        @csrf
+                        <button type="submit" class="btn btn-primary mt-4">Bayar</button>
+                    </form>
+                    <a href="{{ route('pembayaran.invoice') }}" class="btn btn-success mt-4 d-inline-block">Bukti
+                        Pembayaran</a>
+                    <!-- d-inline-block for inline display -->
+                </div>
+            </div>
 
-            <form action="{{ route('pembayaran.store') }}" method="POST">
-                @csrf
-                <button type="submit" class="btn btn-primary mt-4">Bayar</button>
-            </form>
+
         </div>
     </div>
 @endsection

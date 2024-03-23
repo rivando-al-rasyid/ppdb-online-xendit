@@ -154,6 +154,17 @@ class DashboardController extends Controller
         );
 
     }
+    private function formatPhoneNumber($phoneNumber)
+    {
+        if (substr($phoneNumber, 0, 1) == '0') {
+            return '+62' . substr($phoneNumber, 1);
+        } elseif (substr($phoneNumber, 0, 2) == '62') {
+            return '+' . $phoneNumber;
+        } else {
+            return '+62' . $phoneNumber;
+        }
+    }
+
 
     public function terima($id)
     {
@@ -161,6 +172,29 @@ class DashboardController extends Controller
         $item->status = 'DITERIMA';
         // Save the new Hasil's ID to the $item->id_Hasil field
         $item->update();
+        $phoneNumber = $item->tbl_peserta_ppdb->tbl_biodata_ortu->no_tlp_ayah;
+        $phoneNumber = $this->formatPhoneNumber($phoneNumber);
+
+        $client = new \Twilio\Rest\Client(env('TWILIO_SID'), env('TWILIO_TOKEN'));
+
+        try {
+            $message = $client->messages->create(
+                $phoneNumber,
+                [
+                    "from" => env('TWILIO_FROM_NUMBER'),
+                    "body" => "Kamu telah Diterima"
+                ]
+            );
+
+            if ($message->sid) {
+                Alert::success('Success', 'Thank you for registering! SMS notification sent successfully.');
+            } else {
+                Alert::error('Error', 'Thank you for registering! However, SMS notification could not be sent.');
+            }
+        } catch (\Twilio\Exceptions\RestException $e) {
+            Alert::error('Error', 'SMS could not be sent. Error: ' . $e->getMessage());
+        }
+
 
         // Display a success message
         Alert::success('Sukses', 'Simpan Data Sukses');
@@ -206,6 +240,5 @@ class DashboardController extends Controller
             view()->share('guard', 'web');
         }
     }
-
 
 }

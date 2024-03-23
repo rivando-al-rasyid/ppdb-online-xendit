@@ -69,8 +69,8 @@ class PembayaranController extends Controller
                     $originalPassword = $randomEmail; // Storing original password for SMS
                     $user->password = bcrypt($originalPassword);
                     $user->save();
-
-                    $student->id_user = $user->id;
+                    $id_user = $user->id;
+                    $student->id_user = $id_user;
                     $student->update();
 
                     $phoneNumber = $item->tbl_peserta_ppdb->tbl_biodata_ortu->no_tlp_ayah;
