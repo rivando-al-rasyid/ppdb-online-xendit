@@ -29,10 +29,10 @@
                                             <th>JK</th>
                                             <th>No Pendaftaran</th>
                                             <th>nama orang tua</th>
-                                            <th>KIP</th>
-                                            <th>KKS</th>
-                                            <th>KPS</th>
-                                            <th>PKH</th>
+                                            <th>Kartu Indonesia Pintar</th>
+                                            <th>Kartu Keluarga Sejahtera</th>
+                                            <th>Kartu Perlindungan Sosial</th>
+                                            <th>Program Keluarga Harapan</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
