@@ -252,17 +252,17 @@
                             <span class="step-current"></span>
                             <h2>Pengiriman File data</h2>
                             <div class="form-group">
-                                <label for="rapor_semester_9">Rapor Semester 9 (PDF):</label>
+                                <label for="rapor_semester_9">Rapor Kelas 5 semester 1 (PDF):</label>
                                 <input type="file" name="rapor_semester_9" id="rapor_semester_9"
                                     accept="application/pdf">
                             </div>
                             <div class="form-group">
-                                <label for="rapor_semester_10">Rapor Semester 10 (PDF):</label>
+                                <label for="rapor_semester_10">Rapor Kelas 5 semester 2 (PDF):</label>
                                 <input type="file" name="rapor_semester_10" id="rapor_semester_10"
                                     accept="application/pdf">
                             </div>
                             <div class="form-group">
-                                <label for="rapor_semester_11">Rapor Semester 11 (PDF):</label>
+                                <label for="rapor_semester_11">Rapor Kelas 6 semester 1 (PDF):</label>
                                 <input type="file" name="rapor_semester_11" id="rapor_semester_11"
                                     accept="application/pdf">
                             </div>

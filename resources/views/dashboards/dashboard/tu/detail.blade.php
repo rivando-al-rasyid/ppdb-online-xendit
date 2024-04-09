@@ -44,9 +44,29 @@
                             <td>Agama</td>
                             <td>{{ $item->tbl_peserta_ppdb->agama }}</td>
                         </tr>
+                        <tr>
+                            <td>Rapor Kelas 5 semester 1 </td>
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_file->rapor_semester_9 }}</td>
 
+                        </tr>
+                        <tr>
+                            <td>Rapor Kelas 5 semester 2</td>
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_file->rapor_semester_10 }}</td>
+                        </tr>
+                        <tr>
+                            <td>Rapor Kelas 6 semester 1</td>
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_file->rapor_semester_11 }}</td>
+                        </tr>
+                        <tr>
+                            <td>Sertifikat TPQ</td>
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_file->sertifikat_tpq }}</td>
+                        </tr>
+                        <tr>
+                            <td>Foto</td>
+                            <td> {{ $item->tbl_peserta_ppdb->tbl_file->foto }}</td>
+
+                        </tr>
                         <!-- Include the Lightbox2 CSS and JavaScript files in your HTML -->
-
                         <tr>
                             <td>Jenis Kelamin</td>
                             <td>{{ $item->tbl_peserta_ppdb->jenis_kelamin }}</td>
@@ -85,7 +105,7 @@
                             <td>
                                 @if ($item->status == 'MENUNGGU')
                                     <form method="post" class="d-inline-block"
-                                        action="{{ route('tu.peserta.diterima', $item->id) }}">
+                                        action="{{ route('admin.peserta.diterima', $item->id) }}">
                                         @method('PATCH')
                                         @csrf
                                         <button type="submit" class="btn btn-success me-2">
@@ -93,7 +113,7 @@
                                         </button>
                                     </form>
                                     <form method="post" class="d-inline-block"
-                                        action="{{ route('tu.peserta.cadangan', $item->id) }}">
+                                        action="{{ route('admin.peserta.cadangan', $item->id) }}">
                                         @method('PATCH')
                                         @csrf
                                         <button type="submit" class="btn btn-primary">
@@ -101,7 +121,7 @@
                                         </button>
                                     </form>
                                     <form method="post" class="d-inline-block"
-                                        action="{{ route('tu.peserta.ditolak', $item->id) }}">
+                                        action="{{ route('admin.peserta.ditolak', $item->id) }}">
                                         @method('PATCH')
                                         @csrf
                                         <button type="submit" class="btn btn-danger">
