@@ -40,12 +40,12 @@
                                             <th>No Telepon Ayah</th>
                                             <th>Nama Ibu</th>
                                             <th>No Telepon Ibu</th>
-                                            {{-- <th>Nama Wali</th>
+                                            <th>Nama Wali</th>
                                             <th>No Telepon Wali</th>
                                             <th>KIP</th>
                                             <th>KKS</th>
                                             <th>KPS</th>
-                                            <th>PKH</th> --}}
+                                            <th>PKH</th>
                                         </tr>
 
                                     </thead>
@@ -69,15 +69,12 @@
                                                 <td>{{ $item->tbl_biodata_ortu->no_tlp_ayah }}</td>
                                                 <td>{{ $item->tbl_biodata_ortu->nama_ibu }}</td>
                                                 <td>{{ $item->tbl_biodata_ortu->no_tlp_ibu }}</td>
-                                                {{-- <td>{{ $item->tbl_biodata_wali->nama_wali ?? ' ' }}</td>
+                                                <td>{{ $item->tbl_biodata_wali->nama_wali ?? ' ' }}</td>
                                                 <td>{{ $item->tbl_biodata_wali->no_tlp_wali ?? ' ' }}</td>
-                                                <td>{{ $item->tbl_kartu->kip ?? 'null' }}</td>
-                                                <td>{{ $item->tbl_kartu->kks ?? 'null' }}</td>
-                                                <td>{{ $item->tbl_kartu->kps ?? 'null' }}</td>
-                                                <td>{{ $item->tbl_kartu->pkh ?? 'null' }}</td>
- --}}
-
-
+                                                <td>{{ $item->tbl_kartu->kip ?? ' ' }}</td>
+                                                <td>{{ $item->tbl_kartu->kks ?? ' ' }}</td>
+                                                <td>{{ $item->tbl_kartu->kps ?? ' ' }}</td>
+                                                <td>{{ $item->tbl_kartu->pkh ?? ' ' }}</td>
                                             </tr>
                                         @empty
                                             <tr>

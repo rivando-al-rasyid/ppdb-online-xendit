@@ -56,32 +56,47 @@ class PembayaranController extends Controller
                 $idpeserta = $item->tbl_peserta_ppdb->id;
                 $student = TblPesertaPpdb::find($idpeserta);
 
-                // Check if $student->id_user is null before creating a new user
                 if ($student->id_user === null) {
                     $namaDepan = $item->tbl_peserta_ppdb->nama_depan;
 
                     $user = new User();
                     $user->name = $namaDepan;
-
                     $baseEmail = $namaDepan . '@example.com';
-                    $randomEmail = User::where('email', $baseEmail)->exists()
-                        ? $namaDepan . $userId . '@example.com'
-                        : $baseEmail;
+                    $emailExists = User::where('email', $baseEmail)->exists();
+                    $randomEmail = $emailExists ? $namaDepan . $userId . '@example.com' : $baseEmail;
 
                     $user->email = $randomEmail;
-                    $user->password = bcrypt($randomEmail);
+                    $originalPassword = $randomEmail; // Storing original password for SMS
+                    $user->password = bcrypt($originalPassword);
                     $user->save();
-
-                    // Update $student->id_user after creating the user
-                    $student->id_user = $user->id;
+                    $id_user = $user->id;
+                    $student->id_user = $id_user;
                     $student->update();
 
-                    // Additional logic for each item in $items collection...
+                    $phoneNumber = $item->tbl_peserta_ppdb->tbl_biodata_ortu->no_tlp_ayah;
+                    $phoneNumber = $this->formatPhoneNumber($phoneNumber);
+
+                    $client = new \Twilio\Rest\Client(env('TWILIO_SID'), env('TWILIO_TOKEN'));
+
+                    try {
+                        $message = $client->messages->create(
+                            $phoneNumber,
+                            [
+                                "from" => env('TWILIO_FROM_NUMBER'),
+                                "body" => "Your registration is successful. Email: $randomEmail, Password: $originalPassword"
+                            ]
+                        );
+
+                        if ($message->sid) {
+                            Alert::success('Success', 'Thank you for registering! SMS notification sent successfully.');
+                        } else {
+                            Alert::error('Error', 'Thank you for registering! However, SMS notification could not be sent.');
+                        }
+                    } catch (\Twilio\Exceptions\RestException $e) {
+                        Alert::error('Error', 'SMS could not be sent. Error: ' . $e->getMessage());
+                    }
                 }
-
-                // End of your existing code...
             }
-
             \DB::commit();
 
             Alert::success('Success', 'Customer created successfully!')->persistent(true)->autoClose(3000);
@@ -94,6 +109,16 @@ class PembayaranController extends Controller
             \DB::rollBack();
             Alert::error('Error', $e->getMessage())->persistent(true)->autoClose(5000);
             return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+    private function formatPhoneNumber($phoneNumber)
+    {
+        if (substr($phoneNumber, 0, 1) == '0') {
+            return '+62' . substr($phoneNumber, 1);
+        } elseif (substr($phoneNumber, 0, 2) == '62') {
+            return '+' . $phoneNumber;
+        } else {
+            return '+62' . $phoneNumber;
         }
     }
     public function webhook(Request $request)
