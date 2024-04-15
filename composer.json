@@ -18,7 +18,7 @@
         "laraveldaily/laravel-invoices": "^3.3",
         "mostafaznv/pdf-optimizer": "^1.0",
         "realrashid/sweet-alert": "^7.1",
-        "twilio/sdk": "^7.16",
+        "twilio/sdk": "^8.0",
         "xendit/xendit-php": "^4.1",
         "yajra/laravel-datatables": "^10.0",
         "yajra/laravel-datatables-oracle": "^10.3.1"
