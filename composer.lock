@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b97d7cfe4c4aec40bf4307ea0e40332f",
+    "content-hash": "9812caf78936312449d68ea4f5518747",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -7129,16 +7129,16 @@
         },
         {
             "name": "xendit/xendit-php",
-            "version": "4.3.0",
+            "version": "5.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/xendit/xendit-php.git",
-                "reference": "a6551654faf76f831705ae07ef1eb4fe342b7480"
+                "reference": "315f6412c9427233cfe98f7eb3645654a83f5e70"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xendit/xendit-php/zipball/a6551654faf76f831705ae07ef1eb4fe342b7480",
-                "reference": "a6551654faf76f831705ae07ef1eb4fe342b7480",
+                "url": "https://api.github.com/repos/xendit/xendit-php/zipball/315f6412c9427233cfe98f7eb3645654a83f5e70",
+                "reference": "315f6412c9427233cfe98f7eb3645654a83f5e70",
                 "shasum": ""
             },
             "require": {
@@ -7183,9 +7183,9 @@
             ],
             "support": {
                 "issues": "https://github.com/xendit/xendit-php/issues",
-                "source": "https://github.com/xendit/xendit-php/tree/4.3.0"
+                "source": "https://github.com/xendit/xendit-php/tree/5.0.0"
             },
-            "time": "2024-03-08T06:19:31+00:00"
+            "time": "2024-04-01T03:39:38+00:00"
         },
         {
             "name": "yajra/laravel-datatables",
