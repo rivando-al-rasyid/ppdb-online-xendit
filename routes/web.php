@@ -41,9 +41,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/bukti-pembayaran', [PembayaranController::class, 'generateAndDisplayInvoice'])->name('pembayaran.invoice');
 });
 Route::post('/xendit/webhook', [PembayaranController::class, 'webhook'])->middleware('web');
-Route::get('/generate-invoice', [PembayaranController::class, 'generateAndDisplayInvoice']);
-Route::get('/review/invoice', [PembayaranController::class, 'review']);
-
 Route::get('/laporan/siswa', [DashboardController::class, 'exportindex'])->name('laporan.index.export');
 
 require __DIR__ . '/auth.php';
