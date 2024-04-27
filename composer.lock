@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "619777e3cd93d1e466e45b9a7be86170",
+    "content-hash": "6290bc7e8e0f6f53a11ccaee42f3e104",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -6267,16 +6267,16 @@
         },
         {
             "name": "twilio/sdk",
-            "version": "7.16.2",
+            "version": "8.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twilio/twilio-php.git",
-                "reference": "02ad214b0cc9fc513bd67df251d54aed8901284f"
+                "reference": "161fbeb588f367e35e70a86841406ff6f0810b14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twilio/twilio-php/zipball/02ad214b0cc9fc513bd67df251d54aed8901284f",
-                "reference": "02ad214b0cc9fc513bd67df251d54aed8901284f",
+                "url": "https://api.github.com/repos/twilio/twilio-php/zipball/161fbeb588f367e35e70a86841406ff6f0810b14",
+                "reference": "161fbeb588f367e35e70a86841406ff6f0810b14",
                 "shasum": ""
             },
             "require": {
@@ -6314,9 +6314,9 @@
             ],
             "support": {
                 "issues": "https://github.com/twilio/twilio-php/issues",
-                "source": "https://github.com/twilio/twilio-php/tree/7.16.2"
+                "source": "https://github.com/twilio/twilio-php/tree/8.0.1"
             },
-            "time": "2024-04-01T10:34:42+00:00"
+            "time": "2024-04-18T11:15:50+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
