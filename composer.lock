@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "619777e3cd93d1e466e45b9a7be86170",
+    "content-hash": "eb47ba44ac7508d40e8bf76c0896e6f2",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -1394,16 +1394,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v10.48.7",
+            "version": "v10.48.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "118c686992f4b90d4da6deaf0901315c337bbaf9"
+                "reference": "ad758500b47964d022addf119600a1b1b0230733"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/118c686992f4b90d4da6deaf0901315c337bbaf9",
-                "reference": "118c686992f4b90d4da6deaf0901315c337bbaf9",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/ad758500b47964d022addf119600a1b1b0230733",
+                "reference": "ad758500b47964d022addf119600a1b1b0230733",
                 "shasum": ""
             },
             "require": {
@@ -1597,20 +1597,20 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-04-10T14:57:20+00:00"
+            "time": "2024-04-23T15:01:33+00:00"
         },
         {
             "name": "laravel/prompts",
-            "version": "v0.1.18",
+            "version": "v0.1.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/prompts.git",
-                "reference": "3b5e6b03f1f1175574b5a32331d99c9819da9848"
+                "reference": "bf9a360c484976692de0f3792f30066f4f4b34a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/prompts/zipball/3b5e6b03f1f1175574b5a32331d99c9819da9848",
-                "reference": "3b5e6b03f1f1175574b5a32331d99c9819da9848",
+                "url": "https://api.github.com/repos/laravel/prompts/zipball/bf9a360c484976692de0f3792f30066f4f4b34a2",
+                "reference": "bf9a360c484976692de0f3792f30066f4f4b34a2",
                 "shasum": ""
             },
             "require": {
@@ -1652,9 +1652,9 @@
             ],
             "support": {
                 "issues": "https://github.com/laravel/prompts/issues",
-                "source": "https://github.com/laravel/prompts/tree/v0.1.18"
+                "source": "https://github.com/laravel/prompts/tree/v0.1.20"
             },
-            "time": "2024-04-04T17:41:50+00:00"
+            "time": "2024-04-18T00:45:25+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -1850,24 +1850,24 @@
         },
         {
             "name": "laraveldaily/laravel-invoices",
-            "version": "3.3.1",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/LaravelDaily/laravel-invoices.git",
-                "reference": "c36b1cb20721a6b291e3a9562aa99c34aff1007b"
+                "reference": "d9fa7eca22a7836fb9b09ee7fc2a97b4dfd7b228"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/LaravelDaily/laravel-invoices/zipball/c36b1cb20721a6b291e3a9562aa99c34aff1007b",
-                "reference": "c36b1cb20721a6b291e3a9562aa99c34aff1007b",
+                "url": "https://api.github.com/repos/LaravelDaily/laravel-invoices/zipball/d9fa7eca22a7836fb9b09ee7fc2a97b4dfd7b228",
+                "reference": "d9fa7eca22a7836fb9b09ee7fc2a97b4dfd7b228",
                 "shasum": ""
             },
             "require": {
                 "barryvdh/laravel-dompdf": "^v2.0",
-                "illuminate/http": "^9|^10",
-                "illuminate/support": "^9|^10",
-                "php": "^8.0",
-                "symfony/http-foundation": "^6.0"
+                "illuminate/http": "^10|^11",
+                "illuminate/support": "^10|^11",
+                "php": ">=8.2",
+                "symfony/http-foundation": "^6|^7"
             },
             "require-dev": {
                 "phpunit/phpunit": "^10.1"
@@ -1910,9 +1910,9 @@
             ],
             "support": {
                 "issues": "https://github.com/LaravelDaily/laravel-invoices/issues",
-                "source": "https://github.com/LaravelDaily/laravel-invoices/tree/3.3.1"
+                "source": "https://github.com/LaravelDaily/laravel-invoices/tree/4.0.0"
             },
-            "time": "2024-01-07T17:00:05+00:00"
+            "time": "2024-03-14T08:31:01+00:00"
         },
         {
             "name": "league/commonmark",
