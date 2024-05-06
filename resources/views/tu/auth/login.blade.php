@@ -14,7 +14,7 @@
     <link rel="shortcut icon" href="img/icons/icon-48x48.png" />
 
 
-    <title>Sign In Admin</title>
+    <title>Sign In Tata Usaha</title>
 
     <link href="{{ asset('adminkit/css/app.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -36,6 +36,26 @@
 
                         <div class="card">
                             <div class="card-body">
+
+                                <!-- Display error messages -->
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+
+                                <!-- Display custom authentication error -->
+                                @if (session('status'))
+                                    <div class="alert alert-danger">
+                                        {{ session('status') }}
+                                    </div>
+                                @endif
+
+
                                 <div class="m-sm-3">
                                     <form method="POST" action="{{ route('tu.login') }}">
                                         @csrf
