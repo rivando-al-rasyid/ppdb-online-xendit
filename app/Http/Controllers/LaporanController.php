@@ -10,10 +10,11 @@ class LaporanController extends Controller
 {
     public function generatePdf()
     {
-        $students = TblHasil::with('tbl_peserta_ppdb')->get();
+        $items = TblHasil::with(['tbl_peserta_ppdb'])->get();
 
-        $pdf = PDF::loadView('dashboards.laporan.downloads.laporanditerima', compact('students'));
+        $pdf = PDF::loadView('dashboards.laporan.downloads.laporanditerima', compact('items'))
+                  ->setPaper('a4', 'landscape');
+
         return $pdf->download('students.pdf');
     }
-
 }
