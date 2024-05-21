@@ -186,7 +186,6 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
-        'PDFOptimizer' => MostafaZnv\PDFOptimizer\Facades\PdfOptimizer::class,
     ])->toArray(),
 
 ];

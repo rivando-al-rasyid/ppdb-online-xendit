@@ -5,7 +5,7 @@ use App\Http\Controllers\DaftarController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\PdfController;
+use App\Http\Controllers\LaporanController;
 
 
 /*
@@ -43,6 +43,6 @@ Route::middleware('auth')->group(function () {
 Route::post('/xendit/webhook', [PembayaranController::class, 'webhook'])->middleware('web');
 Route::get('/laporan/siswa', [DashboardController::class, 'exportindex'])->name('laporan.index.export');
 
-Route::get('/generate-pdf', [PdfController::class, 'generatePdf']);
+Route::get('/generate-pdf', [LaporanController::class, 'generatePdf']);
 
 require __DIR__ . '/auth.php';

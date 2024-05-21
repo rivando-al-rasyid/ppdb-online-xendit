@@ -1,10 +1,12 @@
+<?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use PDF;
 use App\Models\TblHasil;
 
-class PdfController extends Controller
+class LaporanController extends Controller
 {
     public function generatePdf()
     {
@@ -13,4 +15,5 @@ class PdfController extends Controller
         $pdf = PDF::loadView('dashboards.laporan.downloads.laporanditerima', compact('students'));
         return $pdf->download('students.pdf');
     }
+
 }
