@@ -11,9 +11,12 @@
             height: 100%;
             width: 100%;
         }
+
         #Tabel-container {
-            width: 100%; /* Set width to 100% */
-            overflow: auto; /* Enable scrolling */
+            width: 100%;
+            /* Set width to 100% */
+            overflow: auto;
+            /* Enable scrolling */
         }
     </style>
 @endpush
@@ -42,34 +45,105 @@
     <!-- AG Grid JS -->
     <script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.noStyle.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             var tableData = @json($items);
 
-            var columnDefs = [
-                {headerName: "No", valueGetter: "node.rowIndex + 1"},
-                {headerName: "No Pendaftaran", field: "id"},
-                {headerName: "Nama Depan", field: "nama_depan"},
-                {headerName: "Nama Belakang", field: "nama_belakang"},
-                {headerName: "JK", field: "jenis_kelamin"},
-                {headerName: "NISN", field: "nisn"},
-                {headerName: "NIK", field: "nik"},
-                {headerName: "No KK", field: "no_kk"},
-                {headerName: "Tanggal Lahir", field: "tanggal_lahir"},
-                {headerName: "Tempat Lahir", field: "tempat_lahir"},
-                {headerName: "Agama", field: "agama"},
-                {headerName: "Asal Sekolah", field: "asal_sekolah"},
-                {headerName: "Alamat", field: "alamat"},
-                {headerName: "Nilai Rata rata", field: "nilai_rata_rata"},
-                {headerName: "Nama Ayah", field: "tbl_biodata_ortu.nama_ayah"},
-                {headerName: "No Telepon Ayah", field: "tbl_biodata_ortu.no_tlp_ayah"},
-                {headerName: "Nama Ibu", field: "tbl_biodata_ortu.nama_ibu"},
-                {headerName: "No Telepon Ibu", field: "tbl_biodata_ortu.no_tlp_ibu"},
-                {headerName: "Nama Wali", field: "tbl_biodata_wali.nama_wali"},
-                {headerName: "No Telepon Wali", field: "tbl_biodata_wali.no_tlp_wali"},
-                {headerName: "KIP", field: "tbl_kartu.kip"},
-                {headerName: "KKS", field: "tbl_kartu.kks"},
-                {headerName: "KPS", field: "tbl_kartu.kps"},
-                {headerName: "PKH", field: "tbl_kartu.pkh"}
+            var columnDefs = [{
+                    headerName: "No",
+                    valueGetter: "node.rowIndex + 1"
+                },
+                {
+                    headerName: "No Pendaftaran",
+                    field: "id"
+                },
+                {
+                    headerName: "Nama Depan",
+                    field: "nama_depan"
+                },
+                {
+                    headerName: "Nama Belakang",
+                    field: "nama_belakang"
+                },
+                {
+                    headerName: "JK",
+                    field: "jenis_kelamin"
+                },
+                {
+                    headerName: "NISN",
+                    field: "nisn"
+                },
+                {
+                    headerName: "NIK",
+                    field: "nik"
+                },
+                {
+                    headerName: "No KK",
+                    field: "no_kk"
+                },
+                {
+                    headerName: "Tanggal Lahir",
+                    field: "tanggal_lahir"
+                },
+                {
+                    headerName: "Tempat Lahir",
+                    field: "tempat_lahir"
+                },
+                {
+                    headerName: "Agama",
+                    field: "agama"
+                },
+                {
+                    headerName: "Asal Sekolah",
+                    field: "asal_sekolah"
+                },
+                {
+                    headerName: "Alamat",
+                    field: "alamat"
+                },
+                {
+                    headerName: "Nilai Rata rata",
+                    field: "nilai_rata_rata"
+                },
+                {
+                    headerName: "Nama Ayah",
+                    field: "tbl_biodata_ortu.nama_ayah"
+                },
+                {
+                    headerName: "No Telepon Ayah",
+                    field: "tbl_biodata_ortu.no_tlp_ayah"
+                },
+                {
+                    headerName: "Nama Ibu",
+                    field: "tbl_biodata_ortu.nama_ibu"
+                },
+                {
+                    headerName: "No Telepon Ibu",
+                    field: "tbl_biodata_ortu.no_tlp_ibu"
+                },
+                {
+                    headerName: "Nama Wali",
+                    field: "tbl_biodata_wali.nama_wali"
+                },
+                {
+                    headerName: "No Telepon Wali",
+                    field: "tbl_biodata_wali.no_tlp_wali"
+                },
+                {
+                    headerName: "KIP",
+                    field: "tbl_kartu.kip"
+                },
+                {
+                    headerName: "KKS",
+                    field: "tbl_kartu.kks"
+                },
+                {
+                    headerName: "KPS",
+                    field: "tbl_kartu.kps"
+                },
+                {
+                    headerName: "PKH",
+                    field: "tbl_kartu.pkh"
+                }
             ];
 
             var gridOptions = {
