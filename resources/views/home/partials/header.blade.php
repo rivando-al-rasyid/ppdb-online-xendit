@@ -11,7 +11,7 @@
                             href="{{ route('landing-page') }}">Home</a></li>
                     <li class="{{ request()->routeIs('hasil') ? 'active' : '' }}"><a href="{{ route('hasil') }}">Hasil
                             Pendaftaran</a></li>
-                    <li class="get-started"><a href="{{ route('daftar') }}">Daftar</a></li>
+                    <li class="get-started"><a href="{{ route('login') }}">Login</a></li>
                 </ul>
             </nav><!-- .nav-menu -->
         </div><!-- End Header Container -->
