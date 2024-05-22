@@ -42,6 +42,7 @@ class KelolaTUController extends Controller
         $tu = new Tu();
         $tu->name = $request->name;
         $tu->email = $request->email;
+        $tu->nip = $request->nip;
         $tu->email_verified_at = now();
         $tu->password = bcrypt($request->password);
         $tu->remember_token = Str::random(10);

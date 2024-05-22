@@ -21,6 +21,12 @@
                             required>
                     </div>
                     <div class="mb-3">
+                        <label for="nip" class="form-label">NIP</label>
+                        <input type="text" class="form-control" id="nip" name="nip" value="{{ $data->nip }}"
+                            required>
+                    </div>
+
+                    <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control" id="password" name="password" minlength="6">
                     </div>
