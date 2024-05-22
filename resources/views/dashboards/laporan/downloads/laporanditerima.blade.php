@@ -7,7 +7,6 @@
     <title>Daftar Calon Peserta Didik Baru</title>
     <style>
         .container {
-            width: 80%;
             margin: auto;
         }
 
@@ -48,6 +47,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
+            background: white;
         }
 
         th,
@@ -114,57 +114,48 @@
 
         </header>
         <section>
-            <article>
-                <h2>DAFTAR CALON PESERTA DIDIK BARU YANG DITERIMA</h2>
-                <table>
-                    <thead>
+            <h2 style="text-align: center;">DAFTAR CALON PESERTA DIDIK BARU YANG DITERIMA</h2>
+            <h3 style="text-align: center;">TAHUN PELAJARAN 2022 / 2023</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Siswa</th>
+                        <th>JK</th>
+                        <th>No Pendf</th>
+                        <th>NISN</th>
+                        <th>Tempat Lahir</th>
+                        <th>Tanggal Lahir</th>
+                        <th>Agama</th>
+                        <th>RATA RATA</th>
+                        <th>Asal Sekolah</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($items as $item)
                         <tr>
-                            <th>No</th>
-                            <th>Nama Siswa</th>
-                            <th>JK</th>
-                            <th>No NISN</th>
-                            <th>Tempat Lahir</th>
-                            <th>Tanggal Lahir</th>
-                            <th>Agama</th>
-                            <th>RATA RATA</th>
-                            <th>Asal Sekolah</th>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->nama_depan }}
+                                {{ $item->tbl_peserta_ppdb->nama_belakang }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->jenis_kelamin }}</td>
+                            <td>{{ $item->id }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->nisn }}</td>
+                            td>
+                            <td>{{ date('d-m-Y', strtotime($item->tanggal_lahir)) }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->tempat_lahir }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->agama }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->nilai_rata_rata ?? ' ' }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->asal_sekolah }}</td>
+
                         </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($items as $item)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item->nama_depan }} {{ $item->nama_belakang }}</td>
-                                <td>{{ $item->jenis_kelamin }}</td>
-                                <td>{{ $item->id }}</td>
-                                <td>{{ $item->nisn }}</td>
-                                <td>{{ $item->nik }}</td>
-                                <td>{{ $item->no_kk }}</td>
-                                <td>{{ date('d-m-Y', strtotime($item->tanggal_lahir)) }}</td>
-                                <td>{{ $item->tempat_lahir }}</td>
-                                <td>{{ $item->agama }}</td>
-                                <td>{{ $item->asal_sekolah }}</td>
-                                <td>{{ $item->alamat }}</td>
-                                <td>{{ $item->nilai_rata_rata ?? ' ' }}</td>
-                                {{-- <td>{{ $item->tbl_biodata_ortu->nama_ayah }}</td>
-                                <td>{{ $item->tbl_biodata_ortu->no_tlp_ayah }}</td>
-                                <td>{{ $item->tbl_biodata_ortu->nama_ibu }}</td>
-                                <td>{{ $item->tbl_biodata_ortu->no_tlp_ibu }}</td>
-                                <td>{{ $item->tbl_biodata_wali->nama_wali ?? ' ' }}</td>
-                                <td>{{ $item->tbl_biodata_wali->no_tlp_wali ?? ' ' }}</td> --}}
-                                <td>{{ $item->tbl_kartu->kip ?? ' ' }}</td>
-                                <td>{{ $item->tbl_kartu->kks ?? ' ' }}</td>
-                                <td>{{ $item->tbl_kartu->kps ?? ' ' }}</td>
-                                <td>{{ $item->tbl_kartu->pkh ?? ' ' }}</td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="16">No records found.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </article>
+                    @empty
+                        <tr>
+                            <td colspan="16">No records found.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
 
             <aside>
                 <table>
@@ -173,9 +164,7 @@
                         <td style="width: 30%;">
                             <p>Padang Gelugur, 20 Juni 2022</p>
                             <p style="text-align: center;">KEPALA</p>
-                            <p style="text-align: center;"></p>
-                            <p style="text-align: center;">NIP. </p>
-                            <p style="text-align: center;">TAHUN PELAJARAN 2022 / 2023</p>
+                            <p>NIP. </p>
                         </td>
                     </tr>
                 </table>

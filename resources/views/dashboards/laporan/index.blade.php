@@ -28,8 +28,8 @@
             <div class="col-12">
                 <h1>Data Peserta PPDB</h1>
             </div>
-            <div class="col-12">
-                <div class="card mt-3">
+            <div class="col-12 mt-3">
+                <div class="card">
                     <div class="card-body">
                         <div id="Tabel-container"> <!-- Container with defined height -->
                             <div id="Tabel" class="ag-theme-alpine"></div>
@@ -46,23 +46,21 @@
     <script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.noStyle.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var tableData = @json($items);
+            let tableData = @json($items);
 
-            var columnDefs = [{
+            let columnDefs = [{
                     headerName: "No",
-                    valueGetter: "node.rowIndex + 1"
+                    valueGetter: "node.rowIndex + 1",
+                    field: "no"
                 },
                 {
                     headerName: "No Pendaftaran",
                     field: "id"
                 },
                 {
-                    headerName: "Nama Depan",
-                    field: "nama_depan"
-                },
-                {
-                    headerName: "Nama Belakang",
-                    field: "nama_belakang"
+                    headerName: "Nama Lengkap",
+                    field: "nama_lengkap",
+                    valueGetter: params => `${params.data.nama_depan} ${params.data.nama_belakang}`
                 },
                 {
                     headerName: "JK",
@@ -82,7 +80,14 @@
                 },
                 {
                     headerName: "Tanggal Lahir",
-                    field: "tanggal_lahir"
+                    field: "tanggal_lahir",
+                    valueFormatter: params => {
+                        let date = new Date(params.value);
+                        let day = String(date.getDate()).padStart(2, '0');
+                        let month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+                        let year = date.getFullYear();
+                        return `${day}-${month}-${year}`;
+                    }
                 },
                 {
                     headerName: "Tempat Lahir",
@@ -146,7 +151,7 @@
                 }
             ];
 
-            var gridOptions = {
+            let gridOptions = {
                 columnDefs: columnDefs,
                 rowData: tableData,
                 domLayout: 'autoHeight', // Adjusts grid height to content
@@ -155,8 +160,15 @@
                 }
             };
 
-            var eGridDiv = document.querySelector('#Tabel');
+            let eGridDiv = document.querySelector('#Tabel');
             new agGrid.Grid(eGridDiv, gridOptions);
+
+            // Auto size columns after the grid has been initialized
+            gridOptions.api.autoSizeColumns(columnDefs.map(col => col.field));
+
+            window.addEventListener('resize', () => {
+                gridOptions.api.autoSizeColumns(columnDefs.map(col => col.field));
+            });
         });
     </script>
 @endpush
