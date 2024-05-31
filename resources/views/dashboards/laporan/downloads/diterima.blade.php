@@ -92,8 +92,7 @@
             <table style="border: none;">
                 <tr>
                     <td style="border: none; text-align: left;">
-                        <img
-                            src='https://akcdn.detik.net.id/community/media/visual/2023/05/02/lambang-tut-wuri-handayani.png?w=700&q=90'>
+                        <img src='{{ url('./vendor/invoices/gambar2.png') }}'>
                     </td>
                     <td style="border: none; text-align: center;">
                         <h1>PEMERINTAH KABUPATEN PASAMAN</h1>
@@ -104,8 +103,7 @@
 
                     </td>
                     <td style="border: none;text-align: right;">
-                        <img
-                            src='https://akcdn.detik.net.id/community/media/visual/2023/05/02/lambang-tut-wuri-handayani.png?w=700&q=90'>
+                        <img src='{{ url('./vendor/invoices/gambar1.png') }}'>
                     </td>
 
                 </tr>
@@ -115,7 +113,9 @@
         </header>
         <section>
             <h2 style="text-align: center;">DAFTAR CALON PESERTA DIDIK BARU YANG DITERIMA</h2>
-            <h3 style="text-align: center;">TAHUN PELAJARAN 2022 / 2023</h3>
+            <h3 style="text-align: center;">TAHUN PELAJARAN {{ $tentang->first()->tahun_ajar }} /
+                {{ $tentang->first()->tahun_ajar + 1 }}
+            </h3>
 
             <table>
                 <thead>
@@ -139,7 +139,7 @@
                             <td>{{ $item->tbl_peserta_ppdb->nama_depan }}
                                 {{ $item->tbl_peserta_ppdb->nama_belakang }}</td>
                             <td>{{ $item->tbl_peserta_ppdb->jenis_kelamin }}</td>
-                            <td>{{ $item->id }}</td>
+                            <td>P{{ sprintf('%03d', $item->id) }}</td>
                             <td>{{ $item->tbl_peserta_ppdb->nisn }}</td>
                             td>
                             <td>{{ date('d-m-Y', strtotime($item->tanggal_lahir)) }}</td>
@@ -147,7 +147,6 @@
                             <td>{{ $item->tbl_peserta_ppdb->agama }}</td>
                             <td>{{ $item->tbl_peserta_ppdb->nilai_rata_rata ?? ' ' }}</td>
                             <td>{{ $item->tbl_peserta_ppdb->asal_sekolah }}</td>
-
                         </tr>
                     @empty
                         <tr>
@@ -162,9 +161,13 @@
                     <tr>
                         <td style="width: 70%;"></td>
                         <td style="width: 30%;">
-                            <p>Padang Gelugur, 20 Juni 2022</p>
+                            <p>Padang Gelugur, {{ $tentang->first()->tanggal_laporan }}</p>
                             <p style="text-align: center;">KEPALA</p>
-                            <p>NIP. </p>
+                            <br>
+                            <br>
+                            <br>
+                            <p style="text-align: center;">{{ $tentang->first()->nama_kepsek }} </p>
+                            <p style="text-align: center;">NIP. {{ $tentang->first()->nip }}</p>
                         </td>
                     </tr>
                 </table>

@@ -44,12 +44,15 @@
             <span>Data Master</span>
         </a>
         <div id="collapseOne"
-            class="collapse {{ request()->routeIs('admin.pekerjaan_ortu.index') || request()->routeIs('admin.biaya.index') ? ' show' : '' }}"
+            class="collapse {{ request()->routeIs('admin.pekerjaan_ortu.index') || request()->routeIs('admin.biaya.index') || request()->routeIs('informasi_sekolah.manage') ? ' show' : '' }}"
             aria-labelledby="headingOne" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Master Data:</h6>
                 <a class="collapse-item{{ request()->routeIs('admin.pekerjaan_ortu.index') ? ' active' : '' }}"
                     href="{{ route('admin.pekerjaan_ortu.index') }}">Pekerjaan Orang Tua</a>
+                <a class="collapse-item{{ request()->routeIs('informasi_sekolah.manage') ? ' active' : '' }}"
+                    href="{{ route('informasi_sekolah.manage') }}">Informasi Sekolah</a>
+
             </div>
         </div>
     </li>
