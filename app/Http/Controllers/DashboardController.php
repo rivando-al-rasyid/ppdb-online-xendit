@@ -47,6 +47,20 @@ class DashboardController extends Controller
 
         return view('dashboards.dashboard.tu.index', compact('items', 'counts'));
     }
+    public function download($file)
+    {
+        // Define the storage path for private files
+        $filePath = storage_path('app/private/' . $file);
+
+        // Check if the file exists
+        if (!file_exists($filePath)) {
+            abort(404);
+        }
+
+        // Return the file as a response for download
+        return response()->download($filePath);
+    }
+
 
     private function getCounts()
     {

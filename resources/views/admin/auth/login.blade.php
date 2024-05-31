@@ -36,6 +36,24 @@
 
                         <div class="card">
                             <div class="card-body">
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+
+                                <!-- Display custom authentication error -->
+                                @if (session('status'))
+                                    <div class="alert alert-danger">
+                                        {{ session('status') }}
+                                    </div>
+                                @endif
+
+
                                 <div class="m-sm-3">
                                     <form method="POST" action="{{ route('admin.login') }}">
                                         @csrf

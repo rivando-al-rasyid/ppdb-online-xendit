@@ -21,6 +21,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama TU</th>
+                                <th>NIP</th>
                                 <th>Email</th>
                                 <th>Action</th>
 
@@ -30,6 +31,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama TU</th>
+                                <th>NIP</th>
                                 <th>Email</th>
                                 <th>Action</th>
                             </tr>
@@ -39,6 +41,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->name }}</td>
+                                    <td>{{ $item->nip }}</td>
                                     <td>{{ $item->email }}</td>
                                     <td>
                                         <a href="{{ route('admin.kelola_tu.edit', $item->id) }}"

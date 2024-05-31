@@ -15,7 +15,6 @@
         data-sidebar-position="fixed" data-header-position="fixed">
         <div
             class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center">
-
             <div class="d-flex align-items-center justify-content-center w-100">
                 <div class="row justify-content-center w-100">
                     <div class="col-md-8 col-lg-6 col-xxl-3">
@@ -27,6 +26,25 @@
                                         alt="">
                                 </a>
                                 <p class="text-center">Sign in</p>
+
+                                <!-- Display error messages -->
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+
+                                <!-- Display custom authentication error -->
+                                @if (session('status'))
+                                    <div class="alert alert-danger">
+                                        {{ session('status') }}
+                                    </div>
+                                @endif
+
                                 <form method="POST" action="{{ route('login') }}" class="text-start">
                                     @csrf
                                     <div class="mb-3">
@@ -48,7 +66,7 @@
                                             </label>
                                         </div>
                                         <a class="text-primary fw-bold" href="{{ route('password.request') }}">Forgot
-                                            Password ?</a>
+                                            Password?</a>
                                     </div>
                                     <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Sign
                                         In</button>
@@ -58,11 +76,7 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
-
-
     </div>
     <script src="{{ asset('user/libs/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('user/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
