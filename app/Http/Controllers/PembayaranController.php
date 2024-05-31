@@ -531,10 +531,15 @@ class PembayaranController extends Controller
 
         // Remove the trailing comma and line break
         $description = rtrim($description, ",\n");
+        $generateTUB = function ($userId) {
+            return 'TUB' . sprintf('%03d', $userId);
+        };
 
+        // Assuming you have a way to get the current user ID
+        $userId = auth()->user()->id; // or $request->input('user_id') if it's passed in the request
 
         return new CreateInvoiceRequest([
-            'external_id' => (string) Str::uuid(),
+            'external_id' => $generateTUB($userId),
             'amount' => $total,
             'items' => $items,
             'description' => $description,
@@ -543,6 +548,7 @@ class PembayaranController extends Controller
             'customer_notification_preference' => $notificationPreference,
             'success_redirect_url' => route('pembayaran.invoice'),
         ]);
+
     }
 
     private function createPembayaranEntry($result)
@@ -708,7 +714,7 @@ class PembayaranController extends Controller
 
         // Create the invoice
         $invoice = Invoice::make('receipt')
-            ->serialNumberFormat($data['id'])
+            ->serialNumberFormat($data['external_id'])
             ->status(__($data['status']))
             ->date($carbonDate)
             ->payUntilDays(1)

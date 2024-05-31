@@ -89,31 +89,28 @@
 <body>
     <div class="container">
         <header>
-            <table style="border: none;">
+            <table style="border: none; width: 100%;">
                 <tr>
-                    <td style="border: none; text-align: left;">
-                        <img src='{{ asset('vendor/invoices/Gambar2.jpg') }}'>
+                    <td style="border: none; text-align: left; width: 20%;">
+                        <img src="https://i.ibb.co.com/ystrkWy/gambar2.png" alt="Left Image">
                     </td>
-                    <td style="border: none; text-align: center;">
+                    <td style="border: none; text-align: center; width: 60%;">
                         <h1>PEMERINTAH KABUPATEN PASAMAN</h1>
                         <h2>DINAS PENDIDIKAN</h2>
                         <h2>SMP NEGERI 1 PADANG GELUGUR</h2>
                         <p>KECAMATAN PADANG GELUGUR</p>
                         <p>Jl. Medan – Padang, Pegang Baru, Km. 202, Kode Pos 26352</p>
-
                     </td>
-                    <td style="border: none;text-align: right;">
-                        <img
-                            src='https://akcdn.detik.net.id/community/media/visual/2023/05/02/lambang-tut-wuri-handayani.png?w=700&q=90'>
+                    <td style="border: none; text-align: right; width: 20%;">
+                        <img src="https://i.ibb.co.com/tPsNHHm/gambar1.png" alt="Right Image">
                     </td>
-
                 </tr>
             </table>
             <hr>
 
         </header>
         <section>
-            <h2 style="text-align: center;">DAFTAR CALON PESERTA DIDIK BARU YANG DITERIMA</h2>
+            <h2 style="text-align: center;">DAFTAR TRANSAKSI PEMBAYARAN UANG BAJU</h2>
             <h3 style="text-align: center;">TAHUN PELAJARAN {{ $tentang->first()->tahun_ajar }} /
                 {{ $tentang->first()->tahun_ajar + 1 }}
             </h3>
@@ -126,29 +123,28 @@
                         <th>JK</th>
                         <th>No Pendf</th>
                         <th>NISN</th>
-                        <th>Tempat Lahir</th>
-                        <th>Tanggal Lahir</th>
-                        <th>Agama</th>
-                        <th>RATA RATA</th>
-                        <th>Asal Sekolah</th>
+                        <th>Nama Ayah</th>
+                        <th>ID INVOICE</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Link Pembayaran</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse ($items as $item)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->tbl_peserta_ppdb->nama_depan }}
-                                {{ $item->tbl_peserta_ppdb->nama_belakang }}</td>
-                            <td>{{ $item->tbl_peserta_ppdb->jenis_kelamin }}</td>
-                            <td>P{{ sprintf('%03d', $item->id) }}</td>
-                            <td>{{ $item->tbl_peserta_ppdb->nisn }}</td>
+                            <td>{{ $loop->iteration ?? '' }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->nama_depan ?? '' }}
+                                {{ $item->tbl_peserta_ppdb->nama_belakang ?? '' }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->jenis_kelamin ?? '' }}</td>
+                            <td>P{{ sprintf('%03d', $item->id) ?? '' }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->nisn ?? '' }}</td>
                             td>
-                            <td>{{ date('d-m-Y', strtotime($item->tanggal_lahir)) }}</td>
-                            <td>{{ $item->tbl_peserta_ppdb->tempat_lahir }}</td>
-                            <td>{{ $item->tbl_peserta_ppdb->agama }}</td>
-                            <td>{{ $item->tbl_peserta_ppdb->nilai_rata_rata ?? ' ' }}</td>
-                            <td>{{ $item->tbl_peserta_ppdb->asal_sekolah }}</td>
-
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortu->nama_ayah ?? '' }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_pembayaran->external_id ?? '' }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_pembayaran->amount ?? '' }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_pembayaran->status ?? '' }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_pembayaran->checkout_link ?? '' }}</td>
                         </tr>
                     @empty
                         <tr>
@@ -164,9 +160,12 @@
                         <td style="width: 70%;"></td>
                         <td style="width: 30%;">
                             <p>Padang Gelugur, {{ $tentang->first()->tanggal_laporan }}</p>
-                            <p style="text-align: center;">KEPALA</p><br><br><br><br><br>
+                            <p style="text-align: center;">KEPALA</p>
+                            <br>
+                            <br>
+                            <br>
                             <p style="text-align: center;">{{ $tentang->first()->nama_kepsek }} </p>
-                            <p>NIP. {{ $tentang->first()->nip }}</p>
+                            <p style="text-align: center;">NIP. {{ $tentang->first()->nip }}</p>
                         </td>
                     </tr>
                 </table>

@@ -63,11 +63,8 @@
 
         header th {
             background-color: white;
-            /* Sets background color to white */
             font-weight: bold;
-            /* Makes the text bold */
             border: 2px solid black;
-            /* Sets thicker border */
         }
 
         aside table {
@@ -81,7 +78,12 @@
         hr {
             border: 1px solid black;
             margin: 20px 0;
-            /* Adjust as needed */
+        }
+
+        section table,
+        section th,
+        section td {
+            font-size: 11px;
         }
     </style>
 </head>
@@ -89,34 +91,29 @@
 <body>
     <div class="container">
         <header>
-            <table style="border: none;">
+            <table style="border: none; width: 100%;">
                 <tr>
-                    <td style="border: none; text-align: left;">
-                        <img src='{{ url('vendor/invoices/gambar2.jpg') }}'>
+                    <td style="border: none; text-align: left; width: 20%;">
+                        <img src="https://i.ibb.co/ystrkWy/gambar2.png" alt="Left Image">
                     </td>
-                    <td style="border: none; text-align: center;">
+                    <td style="border: none; text-align: center; width: 60%;">
                         <h1>PEMERINTAH KABUPATEN PASAMAN</h1>
                         <h2>DINAS PENDIDIKAN</h2>
                         <h2>SMP NEGERI 1 PADANG GELUGUR</h2>
                         <p>KECAMATAN PADANG GELUGUR</p>
                         <p>Jl. Medan – Padang, Pegang Baru, Km. 202, Kode Pos 26352</p>
-
                     </td>
-                    <td style="border: none;text-align: right;">
-                        <img
-                            src='https://akcdn.detik.net.id/community/media/visual/2023/05/02/lambang-tut-wuri-handayani.png?w=700&q=90'>
+                    <td style="border: none; text-align: right; width: 20%;">
+                        <img src="https://i.ibb.co/tPsNHHm/gambar1.png" alt="Right Image">
                     </td>
-
                 </tr>
             </table>
             <hr>
-
         </header>
         <section>
-            <h2 style="text-align: center;">DAFTAR CALON PESERTA DIDIK BARU YANG DITERIMA</h2>
+            <h2 style="text-align: center;">DAFTAR CALON PESERTA DIDIK BARU</h2>
             <h3 style="text-align: center;">TAHUN PELAJARAN {{ $tentang->first()->tahun_ajar }} /
-                {{ $tentang->first()->tahun_ajar + 1 }}
-            </h3>
+                {{ $tentang->first()->tahun_ajar + 1 }}</h3>
 
             <table>
                 <thead>
@@ -131,21 +128,24 @@
                         <th rowspan="2">Tempat Lahir</th>
                         <th rowspan="2">Tanggal</th>
                         <th rowspan="2">Agama</th>
-                        <th colspan="6">Nama Orang Tua</th>
-                        <th>Ayah</th>
-                        <th>Pekerjaan</th>
-                        <th>No.HP</th>
-                        <th>Ibu</th>
-                        <th>Pekerjaan</th>
-                        <th>No.HP</th>
+                        <th colspan="3">Ayah</th>
+                        <th colspan="3">Ibu</th>
                         <th colspan="3">Wali</th>
+                        <th rowspan="2">Alamat</th>
+                        <th rowspan="2">Rata-rata</th>
+                        <th rowspan="2">Asal Sekolah</th>
+                        <th colspan="4">Memiliki Kartu</th>
+                    </tr>
+                    <tr>
                         <th>Nama</th>
                         <th>Pekerjaan</th>
                         <th>No.HP</th>
-                        <th rowspan="2">ALamat</th>
-                        <th rowspan="2">Rata-rata</th>
-                        <th rowspan="2">Asal Sekolah</th>
-                        <th colspan="3">Memiliki Kartu</th>
+                        <th>Nama</th>
+                        <th>Pekerjaan</th>
+                        <th>No.HP</th>
+                        <th>Nama</th>
+                        <th>Pekerjaan</th>
+                        <th>No.HP</th>
                         <th>NO.KPS</th>
                         <th>NO.KKS</th>
                         <th>NO.KIP</th>
@@ -155,45 +155,41 @@
                 <tbody>
                     @forelse ($items as $item)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->tbl_peserta_ppdb->nama_depan }}
-                                {{ $item->tbl_peserta_ppdb->nama_belakang }}</td>
-                            <td>{{ $item->tbl_peserta_ppdb->jenis_kelamin }}</td>
-                            <td>P{{ sprintf('%03d', $item->id) }}</td>
-                            <td>{{ $item->tbl_peserta_ppdb->nisn }}</td>
-                            td>
-                            <td>{{ date('d-m-Y', strtotime($item->tanggal_lahir)) }}</td>
-                            <td>{{ $item->tbl_peserta_ppdb->tempat_lahir }}</td>
-                            <td>{{ $item->tbl_peserta_ppdb->agama }}</td>
-                            <td>{{ $item->tbl_peserta_ppdb->nilai_rata_rata ?? ' ' }}</td>
-                            <td>{{ $item->tbl_peserta_ppdb->asal_sekolah }}</td>
-                            <td>{{ $item->tbl_peserta_ppdb->nama_depan }}
-                                {{ $item->tbl_peserta_ppdb->nama_belakang }}</td>
-                            <td>{{ $item->tbl_peserta_ppdb->jenis_kelamin }}</td>
-                            <td>{{ $item->id }}</td>
-                            <td>{{ $item->tbl_peserta_ppdb->nisn }}</td>
-                            td>
-                            <td>{{ date('d-m-Y', strtotime($item->tanggal_lahir)) }}</td>
-                            <td>{{ $item->tbl_peserta_ppdb->tempat_lahir }}</td>
-                            <td>{{ $item->tbl_peserta_ppdb->agama }}</td>
-                            <td>{{ $item->tbl_peserta_ppdb->nilai_rata_rata ?? ' ' }}</td>
-                            <td>{{ $item->tbl_peserta_ppdb->asal_sekolah }}</td>
-                            <td>{{ $item->tbl_peserta_ppdb->nama_depan }}
-                                {{ $item->tbl_peserta_ppdb->nama_belakang }}</td>
-                            <td>{{ $item->tbl_peserta_ppdb->jenis_kelamin }}</td>
-                            <td>{{ $item->id }}</td>
-                            <td>{{ $item->tbl_peserta_ppdb->nisn }}</td>
-                            td>
-                            <td>{{ date('d-m-Y', strtotime($item->tanggal_lahir)) }}</td>
-                            <td>{{ $item->tbl_peserta_ppdb->tempat_lahir }}</td>
-                            <td>{{ $item->tbl_peserta_ppdb->agama }}</td>
-                            <td>{{ $item->tbl_peserta_ppdb->nilai_rata_rata ?? ' ' }}</td>
-                            <td>{{ $item->tbl_peserta_ppdb->asal_sekolah }}</td>
-
+                            <td>{{ $loop->iteration ?? '' }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->nama_depan ?? '' }}
+                                {{ $item->tbl_peserta_ppdb->nama_belakang ?? '' }}
+                            </td>
+                            <td>{{ $item->tbl_peserta_ppdb->jenis_kelamin ?? '' }}</td>
+                            <td>P{{ sprintf('%03d', $item->id) ?? '' }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->nisn ?? '' }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->nik ?? '' }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->no_kk ?? '' }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->tempat_lahir ?? '' }}</td>
+                            <td>{{ date('d-m-Y', strtotime($item->tbl_peserta_ppdb->tanggal_lahir)) ?? '' }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->agama ?? '' }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortu->nama_ayah ?? '' }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortu->tbl_pekerjaan_ortu->nama_pekerjaan ?? '' }}
+                            </td>
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortu->no_tlp_ayah ?? '' }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortu->nama_ibu ?? '' }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortu->tbl_pekerjaan_ortu->nama_pekerjaan ?? '' }}
+                            </td>
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_ortu->no_tlp_ibu ?? '' }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_wali->nama_wali ?? '' }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->pekerjaan_wali->tbl_pekerjaan_ortu->nama_pekerjaan ?? '' }}
+                            </td>
+                            <td>{{ $item->tbl_peserta_ppdb->tbl_biodata_wali->no_tlp_wali ?? '' }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->alamat ?? '' }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->nilai_rata_rata ?? (' ' ?? '') }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->asal_sekolah ?? '' }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->no_kps ?? '' }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->no_kks ?? '' }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->no_kip ?? '' }}</td>
+                            <td>{{ $item->tbl_peserta_ppdb->no_pkh ?? '' }}</td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="16">No records found.</td>
+                            <td colspan="31">No records found.</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -206,7 +202,7 @@
                         <td style="width: 30%;">
                             <p>Padang Gelugur, {{ $tentang->first()->tanggal_laporan }}</p>
                             <p style="text-align: center;">KEPALA</p><br><br><br><br><br>
-                            <p style="text-align: center;">{{ $tentang->first()->nama_kepsek }} </p>
+                            <p style="text-align: center;">{{ $tentang->first()->nama_kepsek }}</p>
                             <p>NIP. {{ $tentang->first()->nip }}</p>
                         </td>
                     </tr>

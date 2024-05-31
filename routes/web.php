@@ -49,6 +49,7 @@ Route::get('/laporan/siswa', [DashboardController::class, 'exportindex'])->name(
 Route::get('/LaporanDiterima', [LaporanController::class, 'LaporanDiterima'])->name('laporan.diterima');
 Route::get('/LaporanDiterimaPerempuan', [LaporanController::class, 'LaporanDiterimaPerempuan'])->name('laporan.diterima.perempuan');
 Route::get('/LaporanDiterimaLakiLaki', [LaporanController::class, 'LaporanDiterimaLakiLaki'])->name('laporan.diterima.laki');
+Route::get('/LaporanPembayaran', [LaporanController::class, 'LaporanPembayaran'])->name('laporan.diterima.laki');
 Route::get('/LaporanSemua', [LaporanController::class, 'LaporanSemua'])->name('laporan.semua');
 
 
