@@ -44,14 +44,16 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header ">Laporan :</h6>
                 <a class="collapse-item{{ request()->routeIs('tu.laporan.index') ? ' active' : '' }}"
-                    href="{{ route('tu.laporan.index') }}">Laporan Data siswa</a>
+                    href="{{ route('tu.laporan.index') }}">Laporan Pedaftaran Siswa</a>
+
+                <a class="collapse-item{{ request()->routeIs('tu.laporan.index') ? ' active' : '' }}"
+                    href="{{ route('tu.laporan.index') }}">Laporan Siswa Diterima</a>
                 <a class="collapse-item{{ request()->routeIs('tu.laporan.dataortu') ? ' active' : '' }}"
-                    href="{{ route('tu.laporan.dataortu') }}">laporan Data orang tua</a>
+                    href="{{ route('tu.laporan.dataortu') }}">Laporan Siswa Diterima L</a><a
+                    class="collapse-item{{ request()->routeIs('tu.laporan.transaksi') ? ' active' : '' }}"
+                    href="{{ route('tu.laporan.transaksi') }}">Laporan Siswa Diterima P</a>
                 <a class="collapse-item{{ request()->routeIs('tu.laporan.transaksi') ? ' active' : '' }}"
                     href="{{ route('tu.laporan.transaksi') }}">laporan Data Pembayaran</a>
-                <a class="collapse-item{{ request()->routeIs('tu.laporan.kartu') ? ' active' : '' }}"
-                    href="{{ route('tu.laporan.kartu') }}">laporan Data Kartu Sosial</a>
-
             </div>
         </div>
     </li>

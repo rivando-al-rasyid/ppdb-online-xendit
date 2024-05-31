@@ -719,7 +719,7 @@ class PembayaranController extends Controller
             ->filename($client->name . ' ' . $customer->name)
 
             // You can continue adding more dynamic data based on $data if needed
-            ->logo(public_path('vendor/invoices/sample-logo.png'));
+            ->logo(public_path('vendor/invoices/gambar2.png'));
 
         // Return the invoice itself to the browser
         return $invoice->stream();

@@ -18,6 +18,7 @@ class AdminSeeder extends Seeder
         // Insert dummy data into admins table
         DB::table('admins')->insert([
             'name' => 'Admin User',
+            'nip' => 1234567891011121,
             'email' => 'admin@example.com',
             'email_verified_at' => now(),
             'password' => bcrypt('admin123'), // Hash the password

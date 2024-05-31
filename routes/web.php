@@ -40,6 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [PembayaranController::class, 'create'])->name('dashboard');
     Route::post('/pembayaran', [PembayaranController::class, 'createInvoice'])->name('pembayaran.store');
     Route::get('/bukti-pembayaran', [PembayaranController::class, 'generateAndDisplayInvoice'])->name('pembayaran.invoice');
+    Route::post('/bukti-pembayaran', [PembayaranController::class, 'generateAndDisplayInvoice'])->name('pembayaran.upload');
+
 });
 Route::post('/xendit/webhook', [PembayaranController::class, 'webhook'])->middleware('web');
 Route::get('/laporan/siswa', [DashboardController::class, 'exportindex'])->name('laporan.index.export');
@@ -53,5 +55,6 @@ Route::get('/LaporanSemua', [LaporanController::class, 'LaporanSemua'])->name('l
 Route::get('/informasi-sekolah', [InformasiSekolahController::class, 'manage'])->name('informasi_sekolah.manage');
 Route::post('/informasi-sekolah', [InformasiSekolahController::class, 'store'])->name('informasi_sekolah.store');
 Route::put('/informasi-sekolah/{id}', [InformasiSekolahController::class, 'update'])->name('informasi_sekolah.update');
+Route::get('download/{file}', [DashboardController::class, 'download'])->name('download.file');
 
 require __DIR__ . '/auth.php';

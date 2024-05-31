@@ -23,7 +23,9 @@ class LaporanController extends Controller
     }
     public function LaporanDiterimaLakiLaki()
     {
-        $items = TblHasil::with(['tbl_peserta_ppdb'])->get();
+        $items = TblHasil::whereHas('tbl_peserta_ppdb', function ($query) {
+            $query->where('jenis_kelamin', 'L');
+        })->with('tbl_peserta_ppdb')->get();
         $tentang = InformasiSekolah::all();
         $tahun_ajar = $tentang->first()->tahun_ajar;
         $tahun = $tahun_ajar . '/' . ($tahun_ajar + 1); // Correctly format the academic year
@@ -35,7 +37,9 @@ class LaporanController extends Controller
     }
     public function LaporanDiterimaPerempuan()
     {
-        $items = TblHasil::with(['tbl_peserta_ppdb'])->get();
+        $items = TblHasil::whereHas('tbl_peserta_ppdb', function ($query) {
+            $query->where('jenis_kelamin', 'P');
+        })->with('tbl_peserta_ppdb')->get();
         $tentang = InformasiSekolah::all();
         $tahun_ajar = $tentang->first()->tahun_ajar;
         $tahun = $tahun_ajar . '/' . ($tahun_ajar + 1); // Correctly format the academic year

@@ -32,11 +32,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="mb-3">
-                            <button class="btn btn-primary mr-2">Button 1</button>
-                            <button class="btn btn-primary mr-2">Button 2</button>
-                            <button class="btn btn-primary mr-2">Button 3</button>
-                            <button class="btn btn-primary mr-2">Button 4</button>
-                            <button class="btn btn-primary">Button 5</button>
+                            <button class="btn btn-primary mr-2">Download</button>
                         </div>
                         <div id="Tabel-container"> <!-- Container with defined height -->
                             <div id="Tabel" class="ag-theme-alpine"></div>

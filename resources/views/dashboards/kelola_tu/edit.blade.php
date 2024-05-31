@@ -35,7 +35,7 @@
                         <input type="password" class="form-control" id="password_confirmation" name="password_confirmation"
                             minlength="6">
                     </div>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
                 </form>
             </div>
         </div>

@@ -19,11 +19,12 @@
                             <td>{{ $item['name'] }}</td>
                             <td>{{ $item['quantity'] }}</td>
                             <td>{{ number_format($item['price'], 0, ',', '.') }}</td>
-
                         </tr>
                     @endforeach
-                    <td colspan="2">Jumlah</td>
-                    <td>{{ $total }}</td>
+                    <tr>
+                        <td colspan="2">Jumlah</td>
+                        <td>{{ number_format($total, 0, ',', '.') }}</td>
+                    </tr>
                 </tbody>
             </table>
 
@@ -41,20 +42,43 @@
                     {{-- Add other necessary customer data here --}}
                 </tbody>
             </table>
+
             <div class="row">
-                <div class="col-auto"> <!-- Use col-auto to only take up as much space as needed -->
-                    <form action="{{ route('pembayaran.store') }}" method="POST" class="d-inline-block mr-2">
-                        <!-- d-inline-block for inline display, mr-2 for a little space to the right -->
+                <div class="col-auto">
+                    <form action="{{ route('pembayaran.store') }}" method="POST" class="d-inline-block me-2">
                         @csrf
                         <button type="submit" class="btn btn-primary mt-4">Bayar</button>
                     </form>
-                    <a href="{{ route('pembayaran.invoice') }}" class="btn btn-success mt-4 d-inline-block">Bukti
+                    <a href="{{ route('pembayaran.invoice') }}" class="btn btn-success mt-4 d-inline-block">Bukti Sah
                         Pembayaran</a>
-                    <!-- d-inline-block for inline display -->
+                    <button type="button" class="btn btn-info mt-4 d-inline-block" data-bs-toggle="modal"
+                        data-bs-target="#uploadModal">Upload Bukti Pembayaran</button>
                 </div>
             </div>
 
-
+            <!-- Modal -->
+            <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="uploadModalLabel">Upload Bukti Pembayaran</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('pembayaran.upload') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="paymentProof">Pilih File Bukti Pembayaran</label>
+                                    <input type="file" class="form-control" id="paymentProof" name="payment_proof"
+                                        required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Upload</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Modal -->
         </div>
     </div>
 @endsection
