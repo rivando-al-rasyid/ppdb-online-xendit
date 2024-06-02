@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PekerjaanOrtuController;
 use App\Http\Controllers\KelolaTUController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\InformasiSekolahController;
 
 
 Route::middleware(['web', 'admin.auth', 'admin.verified'])->get('/admin', function () {
@@ -26,6 +27,10 @@ Route::group(['as' => 'admin.', 'prefix' => '/admin', 'middleware' => ['web', 'a
     Route::resource('kelola_tu', KelolaTUController::class);
     // Route to update existing data
     Route::get('/create-user', [PembayaranController::class, 'createCustomer'])->name('create.customer');
+    Route::get('/informasi-sekolah', [InformasiSekolahController::class, 'manage'])->name('informasi_sekolah.manage');
+    Route::post('/informasi-sekolah', [InformasiSekolahController::class, 'store'])->name('informasi_sekolah.store');
+    Route::put('/informasi-sekolah/{id}', [InformasiSekolahController::class, 'update'])->name('informasi_sekolah.update');
+    Route::get('download/{file}', [DashboardController::class, 'download'])->name('download.file');
 
 });
 
