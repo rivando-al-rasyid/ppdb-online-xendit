@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class TblPembayaran
- * 
+ *
  * @property int $id
  * @property string $invoice_id
  * @property string $external_id
@@ -22,30 +22,31 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $checkout_link
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * 
+ *
  * @property Collection|TblPesertaPpdb[] $tbl_peserta_ppdbs
  *
  * @package App\Models
  */
 class TblPembayaran extends Model
 {
-	protected $table = 'tbl_pembayaran';
+    protected $table = 'tbl_pembayaran';
 
-	protected $casts = [
-		'amount' => 'int'
-	];
+    protected $casts = [
+        'amount' => 'int'
+    ];
 
-	protected $fillable = [
-		'invoice_id',
-		'external_id',
-		'description',
-		'amount',
-		'status',
-		'checkout_link'
-	];
+    protected $fillable = [
+        'invoice_id',
+        'external_id',
+        'description',
+        'amount',
+        'status',
+        'checkout_link',
+        'file_bukti_pembayaran'
+    ];
 
-	public function tbl_peserta_ppdbs()
-	{
-		return $this->hasMany(TblPesertaPpdb::class, 'id_invoice');
-	}
+    public function tbl_peserta_ppdbs()
+    {
+        return $this->hasMany(TblPesertaPpdb::class, 'id_invoice');
+    }
 }

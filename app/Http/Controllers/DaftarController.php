@@ -14,15 +14,7 @@ use App\Models\TblFile;
 use App\Models\TblPekerjaanOrtu;
 use App\Models\TblBiodataOrtu;
 use App\Models\TblHasil;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Process;
-use Mostafaznv\PdfOptimizer\Facades\PdfOptimizer;
-use Mostafaznv\PdfOptimizer\Enums\ColorConversionStrategy;
-use Mostafaznv\PdfOptimizer\Enums\PdfSettings;
 use Intervention\Image\Facades\Image;
-use Illuminate\Support\Carbon;
-use Vonage\Client\Credentials\Basic;
-use Vonage\Client;
 
 
 class DaftarController extends Controller

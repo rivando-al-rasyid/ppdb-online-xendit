@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->bigInteger('amount'); // Use 'bigInteger' for large integers
             $table->string('status');
             $table->string('checkout_link');
+            $table->string('file_bukti_pembayaran')->nullable();
             $table->timestamps();
         });
     }
