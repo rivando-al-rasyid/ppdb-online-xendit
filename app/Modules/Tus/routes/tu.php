@@ -3,7 +3,7 @@
 use App\Modules\Tus\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\LaporanController;
 
 
 // Route::middleware(['web', 'tu.auth', 'tu.verified'])->get('/tu', function () {
@@ -23,6 +23,12 @@ Route::group(['as' => 'tu.', 'prefix' => '/tu', 'middleware' => ['web', 'tu.auth
     Route::patch('/diterima/{id}', [DashboardController::class, 'terima'])->name('peserta.diterima');
     Route::patch('/cadangan/{id}', [DashboardController::class, 'cadangan'])->name('peserta.cadangan');
     Route::patch('/ditolak/{id}', [DashboardController::class, 'tolak'])->name('peserta.ditolak');
+    Route::get('/LaporanDiterima', [LaporanController::class, 'LaporanDiterima'])->name('laporan.diterima');
+    Route::get('/LaporanDiterimaPerempuan', [LaporanController::class, 'LaporanDiterimaPerempuan'])->name('laporan.diterima.perempuan');
+    Route::get('/LaporanDiterimaLakiLaki', [LaporanController::class, 'LaporanDiterimaLakiLaki'])->name('laporan.diterima.laki');
+    Route::get('/LaporanPembayaran', [LaporanController::class, 'LaporanPembayaran'])->name('laporan.diterima.laki');
+    Route::get('/LaporanSemua', [LaporanController::class, 'LaporanSemua'])->name('laporan.semua');
+    Route::get('download/{file}', [DashboardController::class, 'download'])->name('download.file');
 
 });
 

@@ -44,28 +44,62 @@
                             <td>Agama</td>
                             <td>{{ $item->tbl_peserta_ppdb->agama }}</td>
                         </tr>
-                        <tr>
+                        {{-- <tr>
                             <td>Rapor Kelas 5 semester 1 </td>
-                            <td>{{ $item->tbl_peserta_ppdb->tbl_file->rapor_semester_9 }}</td>
-
+                            <td><a
+                                    href="{{ route('download.file', ['file' => $item->tbl_peserta_ppdb->tbl_file->rapor_semester_9]) }}">Download</a>
+                            </td>
                         </tr>
                         <tr>
                             <td>Rapor Kelas 5 semester 2</td>
-                            <td>{{ $item->tbl_peserta_ppdb->tbl_file->rapor_semester_10 }}</td>
+                            <td><a
+                                    href="{{ route('download.file', ['file' => $item->tbl_peserta_ppdb->tbl_file->rapor_semester_10]) }}">Download</a>
+                            </td>
                         </tr>
                         <tr>
                             <td>Rapor Kelas 6 semester 1</td>
-                            <td>{{ $item->tbl_peserta_ppdb->tbl_file->rapor_semester_11 }}</td>
+                            <td><a
+                                    href="{{ route('download.file', ['file' => $item->tbl_peserta_ppdb->tbl_file->rapor_semester_11]) }}">Download</a>
+                            </td>
                         </tr>
                         <tr>
                             <td>Sertifikat TPQ</td>
-                            <td>{{ $item->tbl_peserta_ppdb->tbl_file->sertifikat_tpq }}</td>
+                            <td><a
+                                    href="{{ route('download.file', ['file' => $item->tbl_peserta_ppdb->tbl_file->sertifikat_tpq]) }}">Download</a>
+                            </td>
                         </tr>
                         <tr>
                             <td>Foto</td>
-                            <td> {{ $item->tbl_peserta_ppdb->tbl_file->foto }}</td>
-
+                            <td><a
+                                    href="{{ route('download.file', ['file' => $item->tbl_peserta_ppdb->tbl_file->foto]) }}">Download</a>
+                            </td>
+                        </tr> --}}
+                        <tr>
+                            <td>Rapor Kelas 5 semester 1 </td>
+                            <td><a href="#">Download</a>
+                            </td>
                         </tr>
+                        <tr>
+                            <td>Rapor Kelas 5 semester 2</td>
+                            <td><a href="#">Download</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Rapor Kelas 6 semester 1</td>
+                            <td><a href="#">Download</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Sertifikat TPQ</td>
+                            <td><a href="#">Download</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Foto</td>
+                            <td><a href="#">Download</a>
+                            </td>
+                        </tr>
+
                         <!-- Include the Lightbox2 CSS and JavaScript files in your HTML -->
                         <tr>
                             <td>Jenis Kelamin</td>

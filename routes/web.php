@@ -5,8 +5,6 @@ use App\Http\Controllers\DaftarController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\LaporanController;
-use App\Http\Controllers\InformasiSekolahController;
 
 
 /*
@@ -41,21 +39,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/pembayaran', [PembayaranController::class, 'createInvoice'])->name('pembayaran.store');
     Route::get('/bukti-pembayaran', [PembayaranController::class, 'generateAndDisplayInvoice'])->name('pembayaran.invoice');
     Route::post('/bukti-pembayaran', [PembayaranController::class, 'generateAndDisplayInvoice'])->name('pembayaran.upload');
+    Route::post('/pembayaran/upload', [PembayaranController::class, 'upload'])->name('pembayaran.upload');
+
 
 });
 Route::post('/xendit/webhook', [PembayaranController::class, 'webhook'])->middleware('web');
-Route::get('/laporan/siswa', [DashboardController::class, 'exportindex'])->name('laporan.index.export');
-
-Route::get('/LaporanDiterima', [LaporanController::class, 'LaporanDiterima'])->name('laporan.diterima');
-Route::get('/LaporanDiterimaPerempuan', [LaporanController::class, 'LaporanDiterimaPerempuan'])->name('laporan.diterima.perempuan');
-Route::get('/LaporanDiterimaLakiLaki', [LaporanController::class, 'LaporanDiterimaLakiLaki'])->name('laporan.diterima.laki');
-Route::get('/LaporanPembayaran', [LaporanController::class, 'LaporanPembayaran'])->name('laporan.diterima.laki');
-Route::get('/LaporanSemua', [LaporanController::class, 'LaporanSemua'])->name('laporan.semua');
 
 
-Route::get('/informasi-sekolah', [InformasiSekolahController::class, 'manage'])->name('informasi_sekolah.manage');
-Route::post('/informasi-sekolah', [InformasiSekolahController::class, 'store'])->name('informasi_sekolah.store');
-Route::put('/informasi-sekolah/{id}', [InformasiSekolahController::class, 'update'])->name('informasi_sekolah.update');
-Route::get('download/{file}', [DashboardController::class, 'download'])->name('download.file');
+
 
 require __DIR__ . '/auth.php';
