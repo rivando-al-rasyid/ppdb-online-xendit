@@ -19,7 +19,7 @@ Route::group(['as' => 'tu.', 'prefix' => '/tu', 'middleware' => ['web', 'tu.auth
     Route::get('/laporan/siswa/diterima', [DashboardController::class, 'laporanterima'])->name('laporan.terima.index');
     Route::get('/laporan/siswa/diterima/pria', [DashboardController::class, 'laporanterimalaki'])->name('laporan.terima.pria');
     Route::get('/laporan/siswa/diterima/perempuan', [DashboardController::class, 'laporanterimaperempuan'])->name('laporan.terima.perempuan');
-    Route::get('/transaksi', [DashboardController::class, 'transaksi'])->name('laporan.terima.transaksi');
+    Route::get('/laporan/siswa/diterima/transaksi', [DashboardController::class, 'laporantransaksi'])->name('laporan.terima.transaksi');
     Route::get('/detail/{id}', [DashboardController::class, 'detailtu'])->name('peserta.detail');
     Route::patch('/diterima/{id}', [DashboardController::class, 'terima'])->name('peserta.diterima');
     Route::patch('/cadangan/{id}', [DashboardController::class, 'cadangan'])->name('peserta.cadangan');

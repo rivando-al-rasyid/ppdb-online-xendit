@@ -110,7 +110,7 @@
 
         </header>
         <section>
-            <h2 style="text-align: center;">DAFTAR TRANSAKSI PEMBAYARAN UANG BAJU</h2>
+            <h2 style="text-align: center;">DAFTAR TRANSAKSI PESERTA DIDIK BARU </h2>
             <h3 style="text-align: center;">TAHUN PELAJARAN {{ $tentang->first()->tahun_ajar }} /
                 {{ $tentang->first()->tahun_ajar + 1 }}
             </h3>
@@ -151,7 +151,6 @@
                     @endforelse
                 </tbody>
             </table>
-
             <aside>
                 <table>
                     <tr>
@@ -168,8 +167,6 @@
                         </td>
                     </tr>
                 </table>
-            </aside>
-
         </section>
     </div>
 </body>

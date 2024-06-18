@@ -20,7 +20,7 @@
             text-align: left;
             background-color: #fff;
             font-size: 10px;
-            margin: 36pt;
+            margin: 15pt;
         }
 
         h4 {
@@ -145,6 +145,14 @@
 
         .cool-gray {
             color: #6B7280;
+        }
+
+        aside table {
+            width: 100%;
+        }
+
+        aside td {
+            border: none;
         }
     </style>
 </head>
@@ -379,18 +387,6 @@
         </tbody>
     </table>
 
-    @if ($invoice->notes)
-        <p>
-            {{ __('invoices::invoice.notes') }}: {!! $invoice->notes !!}
-        </p>
-    @endif
-
-    <p>
-    </p>
-    <p>
-        {{ __('invoices::invoice.pay_until') }}: {{ $invoice->getPayUntilDate() }}
-    </p>
-
     <script type="text/php">
             if (isset($pdf) && $PAGE_COUNT > 1) {
                 $text = "{{ __('invoices::invoice.page') }} {PAGE_NUM} / {PAGE_COUNT}";
@@ -407,18 +403,17 @@
             <tr>
                 <td style="width: 70%;"></td>
                 <td style="width: 30%;">
-                    <p>Padang Gelugur, {{ \Carbon\Carbon::parse($tentang->tanggal_laporan)->format('d-m-Y') }}
-                    </p>
-                    <p style="text-align: center;">KEPALA</p>
-                    <br>
-                    <br>
-                    <br>
-                    <p style="text-align: center;">{{ $tentang->nama_kepsek }} </p>
-                    <p style="text-align: center;">NIP. {{ $tentang->nip }}</p>
+                    @if ($invoice->notes)
+                        {!! $invoice->notes !!}
+                    @endif
                 </td>
             </tr>
         </table>
     </aside>
+    <p>
+        {{ __('invoices::invoice.pay_until') }}: {{ $invoice->getPayUntilDate() }}
+    </p>
+
 </body>
 
 </html>

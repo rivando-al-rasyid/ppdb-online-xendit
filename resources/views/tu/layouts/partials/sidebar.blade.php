@@ -37,7 +37,7 @@
             request()->routeIs('tu.laporan.terima.index') ||
             request()->routeIs('tu.laporan.terima.pria') ||
             request()->routeIs('tu.laporan.terima.perempuan') ||
-            request()->routeIs('tu.laporan.transaksi')
+            request()->routeIs('tu.laporan.terima.transaksi')
                 ? ' active'
                 : '' }}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
@@ -52,7 +52,7 @@
                     'tu.laporan.terima.index',
                     'tu.laporan.terima.pria',
                     'tu.laporan.terima.perempuan',
-                    'tu.laporan.transaksi',
+                    'tu.laporan.terima.transaksi',
                 )
                     ? ' show'
                     : '' }}"
@@ -67,8 +67,8 @@
                     href="{{ route('tu.laporan.terima.pria') }}">Laporan Siswa Diterima L</a>
                 <a class="collapse-item{{ request()->routeIs('tu.laporan.terima.perempuan') ? ' active' : '' }}"
                     href="{{ route('tu.laporan.terima.perempuan') }}">Laporan Siswa Diterima P</a>
-                <a class="collapse-item{{ request()->routeIs('tu.laporan.transaksi') ? ' active' : '' }}"
-                    href="{{ route('tu.laporan.transaksi') }}">Laporan Data Pembayaran</a>
+                <a class="collapse-item{{ request()->routeIs('tu.laporan.terima.transaksi') ? ' active' : '' }}"
+                    href="{{ route('tu.laporan.terima.transaksi') }}">Laporan Data Pembayaran</a>
             </div>
         </div>
     </li>

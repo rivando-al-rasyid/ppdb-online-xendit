@@ -501,12 +501,21 @@ class PembayaranController extends Controller
                 ->pricePerUnit($item['price'])
                 ->quantity($item['quantity']);
         }
-        $tentang = Tu::first();
+        $tentang = InformasiSekolah::first();
+        $tu = Tu::first();
 
         // Define notes based on $data
         $notes = [
             // Add more dynamic notes based on $data if needed
-            $tentang
+            '
+                            <p>Padang Gelugur, ' . \Carbon\Carbon::parse($tentang->tanggal_laporan)->format('d-m-Y') . '</p>
+                            <p style="text-align: center;">Ketua Panitia</p>
+                            <br>
+                            <br>
+                            <br>
+                            <p style="text-align: center;">' . $tu->name . '</p>
+                            <p style="text-align: center;">NIP. ' . $tu->nip . '</p>
+                        '
         ];
         $notes = implode("<br>", $notes);
 
