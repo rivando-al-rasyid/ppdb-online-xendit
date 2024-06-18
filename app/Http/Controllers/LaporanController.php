@@ -16,13 +16,9 @@ class LaporanController extends Controller
         $items = TblHasil::with(['tbl_peserta_ppdb:id,nama_depan,nama_belakang,jenis_kelamin,nisn,tanggal_lahir,tempat_lahir,agama,nilai_rata_rata,asal_sekolah'])
             ->where('status', 'DITERIMA')
             ->get(['id', 'status', 'nis']); // fetch only needed columns
-        // Cache the 'InformasiSekolah' table if it doesn't change often
-        $tentang = Cache::remember('informasi_sekolah', 60 * 60, function () {
-            return InformasiSekolah::all(['tahun_ajar']);
-        });
-
         // Ensure we only call first() once
-        $tahun_ajar = $tentang->first()->tahun_ajar;
+        $tentang = InformasiSekolah::first();
+        $tahun_ajar = $tentang->tahun_ajar;
         $tahun = $tahun_ajar . '/' . ($tahun_ajar + 1); // Correctly format the academic year
 
         // Pass only the necessary data to the view
