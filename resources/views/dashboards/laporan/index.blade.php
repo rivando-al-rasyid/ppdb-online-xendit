@@ -12,7 +12,9 @@
                 <div class="card">
                     <div class="card-body">
                         <iframe src="{{ route('tu.laporan.diterima') }}" type="application/pdf"
-                            style="width: 100%; height: 800px;">
+                            style="width: 100%; height: 800px;" onload="this.style.visibility='visible';"
+                            style="visibility:hidden;">
+                        </iframe>
                     </div>
                 </div>
             </div>
