@@ -127,7 +127,6 @@
                         <th>ID INVOICE</th>
                         <th>Total</th>
                         <th>Status</th>
-                        <th>Link Pembayaran</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -144,7 +143,6 @@
                             <td>{{ $item->tbl_peserta_ppdb->tbl_pembayaran->external_id ?? '' }}</td>
                             <td>{{ $item->tbl_peserta_ppdb->tbl_pembayaran->amount ?? '' }}</td>
                             <td>{{ $item->tbl_peserta_ppdb->tbl_pembayaran->status ?? '' }}</td>
-                            <td>{{ $item->tbl_peserta_ppdb->tbl_pembayaran->checkout_link ?? '' }}</td>
                         </tr>
                     @empty
                         <tr>
@@ -159,17 +157,19 @@
                     <tr>
                         <td style="width: 70%;"></td>
                         <td style="width: 30%;">
-                            <p>Padang Gelugur, {{ $tentang->first()->tanggal_laporan }}</p>
+                            <p>Padang Gelugur, {{ \Carbon\Carbon::parse($tentang->tanggal_laporan)->format('d-m-Y') }}
+                            </p>
                             <p style="text-align: center;">KEPALA</p>
                             <br>
                             <br>
                             <br>
-                            <p style="text-align: center;">{{ $tentang->first()->nama_kepsek }} </p>
-                            <p style="text-align: center;">NIP. {{ $tentang->first()->nip }}</p>
+                            <p style="text-align: center;">{{ $tentang->nama_kepsek }} </p>
+                            <p style="text-align: center;">NIP. {{ $tentang->nip }}</p>
                         </td>
                     </tr>
                 </table>
             </aside>
+
         </section>
     </div>
 </body>

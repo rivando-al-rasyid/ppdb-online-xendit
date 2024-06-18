@@ -15,10 +15,11 @@ Route::group(['as' => 'tu.', 'prefix' => '/tu', 'middleware' => ['web', 'tu.auth
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/', [DashboardController::class, 'indextu'])->name('dashboard');
-    Route::get('/laporan/siswa', [DashboardController::class, 'laporan'])->name('laporan.index');
-    Route::get('/laporan/ortu', [DashboardController::class, 'dataortu'])->name('laporan.dataortu');
-    Route::get('/laporan/kartusosial', [DashboardController::class, 'kartu'])->name('laporan.kartu');
-    Route::get('/transaksi', [DashboardController::class, 'transaksi'])->name('laporan.transaksi');
+    Route::get('/laporan/siswa', [DashboardController::class, 'laporan'])->name('laporan.siswa.index');
+    Route::get('/laporan/siswa/diterima', [DashboardController::class, 'laporanterima'])->name('laporan.terima.index');
+    Route::get('/laporan/siswa/diterima/pria', [DashboardController::class, 'laporanterimalaki'])->name('laporan.terima.pria');
+    Route::get('/laporan/siswa/diterima/perempuan', [DashboardController::class, 'laporanterimaperempuan'])->name('laporan.terima.perempuan');
+    Route::get('/transaksi', [DashboardController::class, 'transaksi'])->name('laporan.terima.transaksi');
     Route::get('/detail/{id}', [DashboardController::class, 'detailtu'])->name('peserta.detail');
     Route::patch('/diterima/{id}', [DashboardController::class, 'terima'])->name('peserta.diterima');
     Route::patch('/cadangan/{id}', [DashboardController::class, 'cadangan'])->name('peserta.cadangan');
@@ -26,10 +27,9 @@ Route::group(['as' => 'tu.', 'prefix' => '/tu', 'middleware' => ['web', 'tu.auth
     Route::get('/LaporanDiterima', [LaporanController::class, 'LaporanDiterima'])->name('laporan.diterima');
     Route::get('/LaporanDiterimaPerempuan', [LaporanController::class, 'LaporanDiterimaPerempuan'])->name('laporan.diterima.perempuan');
     Route::get('/LaporanDiterimaLakiLaki', [LaporanController::class, 'LaporanDiterimaLakiLaki'])->name('laporan.diterima.laki');
-    Route::get('/LaporanPembayaran', [LaporanController::class, 'LaporanPembayaran'])->name('laporan.diterima.laki');
+    Route::get('/LaporanPembayaran', [LaporanController::class, 'LaporanPembayaran'])->name('laporan.transaksi');
     Route::get('/LaporanSemua', [LaporanController::class, 'LaporanSemua'])->name('laporan.semua');
     Route::get('download/{file}', [DashboardController::class, 'download'])->name('download.file');
-
 });
 
 require __DIR__ . '/auth.php';

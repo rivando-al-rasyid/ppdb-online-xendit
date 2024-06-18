@@ -402,6 +402,23 @@
                 $pdf->page_text($x, $y, $text, $font, $size);
             }
         </script>
+    <aside>
+        <table>
+            <tr>
+                <td style="width: 70%;"></td>
+                <td style="width: 30%;">
+                    <p>Padang Gelugur, {{ \Carbon\Carbon::parse($tentang->tanggal_laporan)->format('d-m-Y') }}
+                    </p>
+                    <p style="text-align: center;">KEPALA</p>
+                    <br>
+                    <br>
+                    <br>
+                    <p style="text-align: center;">{{ $tentang->nama_kepsek }} </p>
+                    <p style="text-align: center;">NIP. {{ $tentang->nip }}</p>
+                </td>
+            </tr>
+        </table>
+    </aside>
 </body>
 
 </html>

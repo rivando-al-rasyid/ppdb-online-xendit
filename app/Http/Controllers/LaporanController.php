@@ -23,7 +23,7 @@ class LaporanController extends Controller
 
         // Pass only the necessary data to the view
         $pdf = PDF::loadView('dashboards.laporan.downloads.diterima', compact('items', 'tentang'))
-            ->setPaper('a4', 'portrait');
+            ->setPaper('a4');
 
         // Ensure proper concatenation for the filename
         return $pdf->stream('Laporan_Siswa_Diterima_' . $tahun . '.pdf');
@@ -32,34 +32,35 @@ class LaporanController extends Controller
 
     public function LaporanDiterimaLakiLaki()
     {
-        $items = TblHasil::whereHas('tbl_peserta_ppdb', function ($query) {
-            $query->where('jenis_kelamin', 'L');
-        })->where('status', 'DITERIMA')
-            ->with('tbl_peserta_ppdb')
-            ->get();
-        $tentang = InformasiSekolah::all();
-        $tahun_ajar = $tentang->first()->tahun_ajar;
+        $items = TblHasil::with(['tbl_peserta_ppdb:id,nama_depan,nama_belakang,jenis_kelamin,nisn,tanggal_lahir,tempat_lahir,agama,nilai_rata_rata,asal_sekolah'])
+            ->where('status', 'DITERIMA')
+            ->whereHas('tbl_peserta_ppdb', function ($query) {
+                $query->where('jenis_kelamin', 'L');
+            })
+            ->get(['id', 'status', 'nis']);
+        $tentang = InformasiSekolah::first();
+        $tahun_ajar = $tentang->tahun_ajar;
         $tahun = $tahun_ajar . '/' . ($tahun_ajar + 1); // Correctly format the academic year
-
         $pdf = PDF::loadView('dashboards.laporan.downloads.diterima', compact('items', 'tentang'))
-            ->setPaper('a4', 'landscape');
+            ->setPaper('a4');
 
         return $pdf->stream('Laporan Siswa Diterima Laki-Laki' . $tahun . '.pdf'); // Ensure proper concatenation for the filename
     }
 
     public function LaporanDiterimaPerempuan()
     {
-        $items = TblHasil::whereHas('tbl_peserta_ppdb', function ($query) {
-            $query->where('jenis_kelamin', 'P');
-        })->where('status', 'DITERIMA')
-            ->with('tbl_peserta_ppdb')
-            ->get();
-        $tentang = InformasiSekolah::all();
-        $tahun_ajar = $tentang->first()->tahun_ajar;
+        $items = TblHasil::with(['tbl_peserta_ppdb:id,nama_depan,nama_belakang,jenis_kelamin,nisn,tanggal_lahir,tempat_lahir,agama,nilai_rata_rata,asal_sekolah'])
+            ->where('status', 'DITERIMA')
+            ->whereHas('tbl_peserta_ppdb', function ($query) {
+                $query->where('jenis_kelamin', 'P');
+            })
+            ->get(['id', 'status', 'nis']);
+        $tentang = InformasiSekolah::first();
+        $tahun_ajar = $tentang->tahun_ajar;
         $tahun = $tahun_ajar . '/' . ($tahun_ajar + 1); // Correctly format the academic year
 
         $pdf = PDF::loadView('dashboards.laporan.downloads.diterima', compact('items', 'tentang'))
-            ->setPaper('a4', 'landscape');
+            ->setPaper('a4');
 
         return $pdf->stream('Laporan Siswa Diterima Perempuan' . $tahun . '.pdf'); // Ensure proper concatenation for the filename
     }
@@ -67,8 +68,8 @@ class LaporanController extends Controller
     public function LaporanSemua()
     {
         $items = TblHasil::with(['tbl_peserta_ppdb'])->get();
-        $tentang = InformasiSekolah::all();
-        $tahun_ajar = $tentang->first()->tahun_ajar;
+        $tentang = InformasiSekolah::first();
+        $tahun_ajar = $tentang->tahun_ajar;
         $tahun = $tahun_ajar . '/' . ($tahun_ajar + 1); // Correctly format the academic year
 
         $pdf = PDF::loadView('dashboards.laporan.downloads.semua', compact('items', 'tentang'))
@@ -82,13 +83,13 @@ class LaporanController extends Controller
         $items = TblHasil::with(['tbl_peserta_ppdb'])
             ->where('status', 'DITERIMA')
             ->get();
-        $tentang = InformasiSekolah::all();
-        $tahun_ajar = $tentang->first()->tahun_ajar;
+        $tentang = InformasiSekolah::first();
+        $tahun_ajar = $tentang->tahun_ajar;
         $tahun = $tahun_ajar . '/' . ($tahun_ajar + 1); // Correctly format the academic year
 
         $pdf = PDF::loadView('dashboards.laporan.downloads.pembayaran', compact('items', 'tentang'))
-            ->setPaper('a4', 'landscape');
+            ->setPaper('a4');
 
-        return $pdf->stream('Laporan Siswa pembayaran ' . $tahun . '.pdf'); // Ensure proper concatenation for the filename
+        return $pdf->stream('Laporan  pembayaran Siswa' . $tahun . '.pdf'); // Ensure proper concatenation for the filename
     }
 }

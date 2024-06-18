@@ -41,27 +41,7 @@ class HasilSeeder extends Seeder
                 'nis' => 7,
                 'status' => 'MENUNGGU',
             ],
-            [
-                'nis' => 8,
-                'status' => 'DITERIMA',
-            ],
-            [
-                'nis' => 9,
-                'status' => 'DITOLAK',
-            ],
-            [
-                'nis' => 10,
-                'status' => 'MENUNGGU',
-            ],
-            // Continue adding more entries as needed
-            [
-                'nis' => 11,
-                'status' => 'DITERIMA',
-            ],
-            [
-                'nis' => 12,
-                'status' => 'DITOLAK',
-            ],
+
 
         ];
 
