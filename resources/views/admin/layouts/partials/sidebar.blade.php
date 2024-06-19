@@ -44,7 +44,7 @@
             <span>Data Master</span>
         </a>
         <div id="collapseOne"
-            class="collapse {{ request()->routeIs('admin.pekerjaan_ortu.index') || request()->routeIs('admin.biaya.index') || request()->routeIs('informasi_sekolah.manage') ? ' show' : '' }}"
+            class="collapse {{ request()->routeIs('admin.pekerjaan_ortu.index') || request()->routeIs('admin.biaya.index') || request()->routeIs('admin.informasi_sekolah.manage') ? ' show' : '' }}"
             aria-labelledby="headingOne" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Master Data:</h6>

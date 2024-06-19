@@ -8,7 +8,7 @@
             <div class="card-body">
                 <a href="{{ route('admin.kelola_tu.index') }}" class="btn btn-warning mb-3">Back</a>
                 <form
-                    action="{{ $informasiSekolah ? route('informasi_sekolah.update', $informasiSekolah->id) : route('informasi_sekolah.store') }}"
+                    action="{{ $informasiSekolah ? route('admin.informasi_sekolah.update', $informasiSekolah->id) : route('admin.informasi_sekolah.store') }}"
                     method="POST">
                     @csrf
                     @if ($informasiSekolah)

@@ -22,6 +22,8 @@ use LaravelDaily\Invoices\Classes\Party;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
 use Illuminate\Http\JsonResponse;
 use Carbon\Carbon;
+use App\Models\InformasiSekolah;
+use App\Models\Tu;
 
 class PembayaranController extends Controller
 {
@@ -343,7 +345,6 @@ class PembayaranController extends Controller
             'customer_notification_preference' => $notificationPreference,
             'success_redirect_url' => route('pembayaran.invoice'),
         ]);
-
     }
 
     private function createPembayaranEntry($result)
@@ -500,10 +501,21 @@ class PembayaranController extends Controller
                 ->pricePerUnit($item['price'])
                 ->quantity($item['quantity']);
         }
+        $tentang = InformasiSekolah::first();
+        $tu = Tu::first();
 
         // Define notes based on $data
         $notes = [
             // Add more dynamic notes based on $data if needed
+            '
+                            <p>Padang Gelugur, ' . \Carbon\Carbon::parse($tentang->tanggal_laporan)->format('d-m-Y') . '</p>
+                            <p style="text-align: center;">Ketua Panitia</p>
+                            <br>
+                            <br>
+                            <br>
+                            <p style="text-align: center;">' . $tu->name . '</p>
+                            <p style="text-align: center;">NIP. ' . $tu->nip . '</p>
+                        '
         ];
         $notes = implode("<br>", $notes);
 
@@ -581,5 +593,4 @@ class PembayaranController extends Controller
             $payment->save();
         }
     }
-
 }

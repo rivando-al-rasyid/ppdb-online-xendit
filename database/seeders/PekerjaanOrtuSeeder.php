@@ -18,7 +18,7 @@ class PekerjaanOrtuSeeder extends Seeder
             "Petani",
             "Peternak",
             "Guru/Tutor",
-            "Pengelola Usaha Kecil dan Menengah (UKM)",
+            "UKM",
             "Pengelola Desa Wisata",
             "Petugas Kesehatan",
             "Pengelola Air",

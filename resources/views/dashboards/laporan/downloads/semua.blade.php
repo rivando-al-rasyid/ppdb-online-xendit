@@ -48,6 +48,8 @@
             width: 100%;
             border-collapse: collapse;
             background: white;
+            font-size: 11px;
+            /* Set font size to 12px */
         }
 
         th,
@@ -79,12 +81,6 @@
             border: 1px solid black;
             margin: 20px 0;
         }
-
-        section table,
-        section th,
-        section td {
-            font-size: 11px;
-        }
     </style>
 </head>
 
@@ -94,7 +90,7 @@
             <table style="border: none; width: 100%;">
                 <tr>
                     <td style="border: none; text-align: left; width: 20%;">
-                        <img src="https://i.ibb.co/ystrkWy/gambar2.png" alt="Left Image">
+                        <img src="https://i.ibb.co.com/ystrkWy/gambar2.png" alt="Left Image">
                     </td>
                     <td style="border: none; text-align: center; width: 60%;">
                         <h1>PEMERINTAH KABUPATEN PASAMAN</h1>
@@ -104,7 +100,7 @@
                         <p>Jl. Medan – Padang, Pegang Baru, Km. 202, Kode Pos 26352</p>
                     </td>
                     <td style="border: none; text-align: right; width: 20%;">
-                        <img src="https://i.ibb.co/tPsNHHm/gambar1.png" alt="Right Image">
+                        <img src="https://i.ibb.co.com/tPsNHHm/gambar1.png" alt="Right Image">
                     </td>
                 </tr>
             </table>
@@ -112,8 +108,9 @@
         </header>
         <section>
             <h2 style="text-align: center;">DAFTAR CALON PESERTA DIDIK BARU</h2>
-            <h3 style="text-align: center;">TAHUN PELAJARAN {{ $tentang->first()->tahun_ajar }} /
-                {{ $tentang->first()->tahun_ajar + 1 }}</h3>
+            <h3 style="text-align: center;">TAHUN PELAJARAN {{ $tentang->tahun_ajar }} /
+                {{ $tentang->tahun_ajar + 1 }}
+            </h3>
 
             <table>
                 <thead>
@@ -198,12 +195,16 @@
             <aside>
                 <table>
                     <tr>
-                        <td style="width: 70%;"></td>
-                        <td style="width: 30%;">
-                            <p>Padang Gelugur, {{ $tentang->first()->tanggal_laporan }}</p>
-                            <p style="text-align: center;">KEPALA</p><br><br><br><br><br>
-                            <p style="text-align: center;">{{ $tentang->first()->nama_kepsek }}</p>
-                            <p>NIP. {{ $tentang->first()->nip }}</p>
+                        <td style="width: 80%;"></td>
+                        <td style="width: 20%;">
+                            <p>Padang Gelugur, {{ \Carbon\Carbon::parse($tentang->tanggal_laporan)->format('d-m-Y') }}
+                            </p>
+                            <p style="text-align: center;">KEPALA</p>
+                            <br>
+                            <br>
+                            <br>
+                            <p style="text-align: center;">{{ $tentang->nama_kepsek }} </p>
+                            <p style="text-align: center;">NIP. {{ $tentang->nip }}</p>
                         </td>
                     </tr>
                 </table>

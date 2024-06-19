@@ -77,66 +77,33 @@ class DashboardController extends Controller
     }
     public function laporan()
     {
-        $items = TblPesertaPpdb::with(['tbl_biodata_ortu', 'tbl_biodata_wali'])->get();
-
-        // Count
         return view(
-            'dashboards.laporan.index',
-            compact(
-                'items',
-            )
+            'dashboards.laporan.index'
         );
     }
-    public function exportindex()
+    public function laporanterima()
     {
-        $items = TblPesertaPpdb::with(['tbl_biodata_ortu', 'tbl_biodata_wali'])->get();
-
-        // Count
         return view(
-            'dashboards.export.index',
-            compact(
-                'items',
-            )
+            'dashboards.laporan.terima'
         );
     }
-
-    public function dataortu()
+    public function laporanterimalaki()
     {
-        $items = TblPesertaPpdb::with(['tbl_biodata_ortu', 'tbl_biodata_wali'])->get();
-
-        // Count
         return view(
-            'dashboards.laporan.dataortu',
-            compact(
-                'items',
-            )
+            'dashboards.laporan.terimalaki'
         );
     }
-
-
-
-    public function transaksi()
+    public function laporanterimaperempuan()
     {
-        $items = TblPesertaPpdb::with(['tbl_pembayaran'])->get();
         return view(
-            'dashboards.laporan.transaksi',
-            compact(
-                'items',
-            )
+            'dashboards.laporan.terimaperempuan'
         );
-
     }
-
-    public function kartu()
+    public function laporantransaksi()
     {
-        $items = TblPesertaPpdb::with(['tbl_kartu'])->get();
         return view(
-            'dashboards.laporan.kartu',
-            compact(
-                'items',
-            )
+            'dashboards.laporan.transaksi'
         );
-
     }
 
 
@@ -152,7 +119,6 @@ class DashboardController extends Controller
                 'item'
             )
         );
-
     }
     public function detailtu($id)
     {
@@ -166,7 +132,6 @@ class DashboardController extends Controller
                 'item'
             )
         );
-
     }
     private function formatPhoneNumber($phoneNumber)
     {
@@ -254,5 +219,4 @@ class DashboardController extends Controller
             view()->share('guard', 'web');
         }
     }
-
 }
