@@ -67,18 +67,6 @@ class DaftarController extends Controller
                 'no_tlp_wali' => $request->no_telp_wali,
                 'id_pekerjaan_wali' => $request->id_pekerjaan_wali,
             ]);
-            $nilai = TblNilai::create([
-                'id_peserta_ppdb' => $daftar->id,
-                'nilai_mtk_5_1' => $request->nilai_mtk_5_1,
-                'nilai_ipa_5_1' => $request->nilai_ipa_5_1,
-                'nilai_bi_5_1' => $request->nilai_bi_5_1,
-                'nilai_mtk_5_2' => $request->nilai_mtk_5_2,
-                'nilai_ipa_5_2' => $request->nilai_ipa_5_2,
-                'nilai_bi_5_2' => $request->nilai_bi_5_2,
-                'nilai_mtk_6_1' => $request->nilai_mtk_6_1,
-                'nilai_ipa_6_1' => $request->nilai_ipa_6_1,
-                'nilai_bi_6_1' => $request->nilai_bi_6_1,
-            ]);
 
             $kartu = TblKartu::create([
                 'kip' => $request->nomor_kip,
@@ -86,7 +74,14 @@ class DaftarController extends Controller
                 'kps' => $request->nomor_kps,
                 'pkh' => $request->nomor_pkh,
             ]);
-
+            $ratarata = number_format(
+                ($request->nilai_mtk_5_1 + $request->nilai_ipa_5_1 + $request->nilai_bi_5_1 +
+                    $request->nilai_mtk_5_2 + $request->nilai_ipa_5_2 + $request->nilai_bi_5_2 +
+                    $request->nilai_mtk_6_1 + $request->nilai_ipa_6_1 + $request->nilai_bi_6_1) / 9,
+                2,
+                '.',
+                ''
+            );
             $daftar = TblPesertaPpdb::create([
                 'nama_depan' => $request->nama_depan,
                 'nama_belakang' => $request->nama_belakang,
@@ -102,13 +97,19 @@ class DaftarController extends Controller
                 'id_biodata_ortu' => $ortu->id,
                 'id_biodata_wali' => $wali->id,
                 'id_kartu' => $kartu->id,
-                'nilai_rata_rata' => number_format(min(
-                    100,
-                    ($request->nilai_mtk_5_1 + $request->nilai_ipa_5_1 + $request->nilai_bi_5_1 +
-                        $request->nilai_mtk_5_2 + $request->nilai_ipa_5_2 + $request->nilai_bi_5_2 +
-                        $request->nilai_mtk_6_1 + $request->nilai_ipa_6_1 + $request->nilai_bi_6_1) / 9
-                ), 2, '.', '')
-
+                'nilai_rata_rata' => $ratarata,
+            ]);
+            $nilai = TblNilai::create([
+                'id_peserta_ppdb' => $daftar->id,
+                'nilai_mtk_5_1' => $request->nilai_mtk_5_1,
+                'nilai_ipa_5_1' => $request->nilai_ipa_5_1,
+                'nilai_bi_5_1' => $request->nilai_bi_5_1,
+                'nilai_mtk_5_2' => $request->nilai_mtk_5_2,
+                'nilai_ipa_5_2' => $request->nilai_ipa_5_2,
+                'nilai_bi_5_2' => $request->nilai_bi_5_2,
+                'nilai_mtk_6_1' => $request->nilai_mtk_6_1,
+                'nilai_ipa_6_1' => $request->nilai_ipa_6_1,
+                'nilai_bi_6_1' => $request->nilai_bi_6_1,
             ]);
 
             $data = [
@@ -160,7 +161,7 @@ class DaftarController extends Controller
                 Alert::error('Error', 'SMS could not be sent. Error: ' . $e->getMessage());
             }
 
-            return redirect()->route('landing-page');
+            return redirect()->route('hasil');
         } catch (\Exception $e) {
             DB::rollBack();
             $errorMessage = 'Error: ' . $e->getMessage() . ' (Code: ' . $e->getCode() . ')';
