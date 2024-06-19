@@ -102,6 +102,13 @@ class DaftarController extends Controller
                 'id_biodata_ortu' => $ortu->id,
                 'id_biodata_wali' => $wali->id,
                 'id_kartu' => $kartu->id,
+                'nilai_rata_rata' => number_format(min(
+                    100,
+                    ($request->nilai_mtk_5_1 + $request->nilai_ipa_5_1 + $request->nilai_bi_5_1 +
+                        $request->nilai_mtk_5_2 + $request->nilai_ipa_5_2 + $request->nilai_bi_5_2 +
+                        $request->nilai_mtk_6_1 + $request->nilai_ipa_6_1 + $request->nilai_bi_6_1) / 9
+                ), 2, '.', '')
+
             ]);
 
             $data = [
