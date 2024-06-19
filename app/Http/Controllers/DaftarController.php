@@ -14,6 +14,7 @@ use App\Models\TblFile;
 use App\Models\TblPekerjaanOrtu;
 use App\Models\TblBiodataOrtu;
 use App\Models\TblHasil;
+use App\Models\TblNilai;
 use Intervention\Image\Facades\Image;
 
 
@@ -65,6 +66,18 @@ class DaftarController extends Controller
                 'nama_wali' => $request->nama_wali,
                 'no_tlp_wali' => $request->no_telp_wali,
                 'id_pekerjaan_wali' => $request->id_pekerjaan_wali,
+            ]);
+            $nilai = TblNilai::create([
+                'id_peserta_ppdb' => $daftar->id,
+                'nilai_mtk_5_1' => $request->nilai_mtk_5_1,
+                'nilai_ipa_5_1' => $request->nilai_ipa_5_1,
+                'nilai_bi_5_1' => $request->nilai_bi_5_1,
+                'nilai_mtk_5_2' => $request->nilai_mtk_5_2,
+                'nilai_ipa_5_2' => $request->nilai_ipa_5_2,
+                'nilai_bi_5_2' => $request->nilai_bi_5_2,
+                'nilai_mtk_6_1' => $request->nilai_mtk_6_1,
+                'nilai_ipa_6_1' => $request->nilai_ipa_6_1,
+                'nilai_bi_6_1' => $request->nilai_bi_6_1,
             ]);
 
             $kartu = TblKartu::create([
