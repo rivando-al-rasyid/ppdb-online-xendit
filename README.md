@@ -2,7 +2,7 @@
 
 | **Langkah** | **Deskripsi** | **Deploy** |
 |-------------|---------------|------------|
-| 1. **Kloning Repositori** | Mulai dengan mengkloning repositori GitHub ke lokal Anda menggunakan perintah: <br> ``` https://github.com/rivando-al-rasyid/ppdb-online-xendit.git ``` | - |
+| 1. **Kloning Repositori** | Mulai dengan mengkloning repositori GitHub ke lokal Anda menggunakan perintah: <br> ``` https://github.com/rivando-al-rasyid/ppdb-online-xendit.git ``` | https://github.com/rivando-al-rasyid/ppdb-online-xendit.git |
 | 2. **Instalasi Dependensi** | Install semua dependensi yang diperlukan dengan Composer: <br> ``` composer install ``` | - |
 | 3. **Konfigurasi Environment** | Salin file `.env.example` ke `.env` untuk mengatur konfigurasi lingkungan: <br> ``` cp .env.example .env ``` <br> Atau gunakan: <br> ``` copy .env.example .env ``` <br> Sesuaikan pengaturan database dan tambahkan API key aplikasi Anda dalam file `.env`. Ikuti panduan pembuatan API key yang tersedia di dokumentasi. | - |
 | 4. **Generate Application Key** | Buat kunci aplikasi dengan artisan command: <br> ``` php artisan key:generate ``` | - |
