@@ -42,6 +42,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property TblKartu|null $tbl_kartu
  * @property User|null $user
  * @property Collection|TblHasil[] $tbl_hasils
+ * @property Collection|TblNilai[] $tbl_nilais
  *
  * @package App\Models
  */
@@ -117,5 +118,10 @@ class TblPesertaPpdb extends Model
 	public function tbl_hasils()
 	{
 		return $this->hasMany(TblHasil::class, 'nis');
+	}
+
+	public function tbl_nilais()
+	{
+		return $this->hasMany(TblNilai::class, 'id_peserta_ppdb');
 	}
 }
