@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\InformasiSekolah;
 use Illuminate\Database\Seeder;
 
 class InformasiSekolahSeeder extends Seeder
@@ -12,7 +12,7 @@ class InformasiSekolahSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('informasi_sekolah')->insert([
+        InformasiSekolah::create([
             'tahun_ajar' => '2023',
             'tanggal_laporan' => '2023-06-01',
             'nama_kepsek' => 'Budi Santoso',
