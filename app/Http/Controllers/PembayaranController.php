@@ -160,28 +160,62 @@ class PembayaranController extends Controller
             $existingInvoice = $this->findExistingInvoice($user);
 
             if (!$existingInvoice) {
+                // Retrieve customer data
                 $data = $this->retrieveCustomerData($user);
-                $items = $this->getItemsBasedOnGender($data->jenis_kelamin);
+                if (!$data) {
+                    throw new Exception('Customer data not found');
+                }
 
+                // Determine items based on gender
+                $items = $this->getItemsBasedOnGender($data->jenis_kelamin);
                 $total = $this->calculateTotalAmount($items);
 
+                // Prepare customer data and notification preference
                 $invoiceCustomerData = $this->prepareInvoiceCustomerData($data, $user);
                 $notificationPreference = $this->prepareNotificationPreference();
 
+                // Prepare create invoice request
                 $createInvoiceRequest = $this->prepareCreateInvoiceRequest($total, $items, $invoiceCustomerData, $notificationPreference);
 
+                // Create invoice via API
                 $result = $this->invoiceApiInstance->createInvoice($createInvoiceRequest);
 
+                // Create pembayaran entry
                 $pembayaran = $this->createPembayaranEntry($result);
+
+                // Update PesertaPpdb invoice ID
                 $this->updatePesertaPpdbInvoiceId($data, $pembayaran);
 
+                // Redirect to invoice URL
                 return redirect()->away($result['invoice_url']);
             } else {
+                // Redirect to existing invoice checkout link
                 return redirect()->away($existingInvoice->tbl_pembayaran->checkout_link);
             }
         } catch (XenditSdkException $e) {
             return $this->handleException($e);
+        } catch (Exception $e) {
+            // Log the error and show a user-friendly message
+            \Log::error('Invoice creation failed', ['error' => $e->getMessage()]);
+            return response()->json(['error' => 'Invoice creation failed, please try again later'], 500);
         }
+    }
+
+    public function create(Request $request)
+    {
+        $user = Auth::user();
+        $data = $this->retrieveCustomerData($user);
+        if (!$data) {
+            abort(404, 'Customer data not found');
+        }
+
+        $items = $this->getItemsBasedOnGender($data->jenis_kelamin);
+        $total = $this->calculateTotalAmount($items);
+
+        // Retrieve existing Pembayaran entry related to the user if needed
+        $pembayaran = $this->findExistingPembayaran($user);
+
+        return view('dashboards.pembayaran.create', compact('user', 'items', 'total', 'pembayaran'));
     }
 
     private function findExistingInvoice($user)
@@ -194,7 +228,9 @@ class PembayaranController extends Controller
 
     private function retrieveCustomerData($user)
     {
-        return TblPesertaPpdb::where('id_user', $user->id)->with('tbl_biodata_ortu')->first();
+        return TblPesertaPpdb::where('id_user', $user->id)
+            ->with('tbl_biodata_ortu')
+            ->first();
     }
 
     private function getItemsBasedOnGender($gender)
@@ -246,6 +282,7 @@ class PembayaranController extends Controller
                 'price' => 20000,
             ],
         ]; // Items for female
+
         $items2 = [
             [
                 'name' => 'Satu Stel Dasar Pakaian Putih Dongker',
@@ -288,6 +325,7 @@ class PembayaranController extends Controller
                 'quantity' => 1,
             ],
         ]; // Items for male
+
         return ($gender === 'P') ? $items1 : $items2;
     }
 
@@ -296,6 +334,12 @@ class PembayaranController extends Controller
         return collect($items)->sum(function ($item) {
             return $item['price'] * $item['quantity'];
         });
+    }
+
+    private function findExistingPembayaran($user)
+    {
+        // Example logic to find existing pembayaran entry
+        return TblPembayaran::where('user_id', $user->id)->first();
     }
 
     private function prepareInvoiceCustomerData($data, $user)
@@ -362,19 +406,10 @@ class PembayaranController extends Controller
 
     private function updatePesertaPpdbInvoiceId($data, $pembayaran)
     {
-        $data->id_invoice = $pembayaran['id'];
+        $data->id_invoice = $pembayaran->id;
         $data->save();
     }
-    public function create(Request $request)
-    {
-        $user = Auth::user();
-        $data = $this->retrieveCustomerData($user);
-        // $noHp = $data->tbl_biodata_ortu->no_tlp_ayah;
-        $items = $this->getItemsBasedOnGender($data->jenis_kelamin);
-        $total = $this->calculateTotalAmount($items);
 
-        return view('dashboards.pembayaran.create', compact('user', 'items', 'total'));
-    }
     private function handleException($e)
     {
         return response()->json([
