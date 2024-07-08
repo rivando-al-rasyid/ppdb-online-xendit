@@ -22,6 +22,8 @@ use LaravelDaily\Invoices\Classes\Party;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
 use Illuminate\Http\JsonResponse;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class PembayaranController extends Controller
 {
@@ -46,7 +48,7 @@ class PembayaranController extends Controller
     public function createCustomer(Request $request)
     {
         try {
-            \DB::beginTransaction();
+            DB::beginTransaction();
 
             $userId = $request->input('id');
             $items = TblHasil::with(['tbl_peserta_ppdb'])->where('status', 'DITERIMA')->get();
@@ -97,16 +99,16 @@ class PembayaranController extends Controller
                     }
                 }
             }
-            \DB::commit();
+            DB::commit();
 
             Alert::success('Success', 'Customer created successfully!')->persistent(true)->autoClose(3000);
             return redirect()->route('admin.dashboard');
         } catch (ModelNotFoundException $e) {
-            \DB::rollBack();
+            DB::rollBack();
             Alert::error('Error', $e->getMessage())->persistent(true)->autoClose(5000);
             return response()->json(['error' => $e->getMessage()], 404);
         } catch (\Exception $e) {
-            \DB::rollBack();
+            DB::rollBack();
             Alert::error('Error', $e->getMessage())->persistent(true)->autoClose(5000);
             return response()->json(['error' => $e->getMessage()], 500);
         }
@@ -261,7 +263,7 @@ class PembayaranController extends Controller
                 'quantity' => 1,
             ],
             [
-                'name' => 'Dasar Pakaian Muslim ( Khusus Jum’at )',
+                'name' => "Dasar Pakaian Muslim ( Khusus Jum'at )",
                 'price' => 60000,
                 'quantity' => 1,
             ],
@@ -343,7 +345,6 @@ class PembayaranController extends Controller
             'customer_notification_preference' => $notificationPreference,
             'success_redirect_url' => route('pembayaran.invoice'),
         ]);
-
     }
 
     private function createPembayaranEntry($result)
@@ -364,6 +365,15 @@ class PembayaranController extends Controller
         $data->id_invoice = $pembayaran['id'];
         $data->save();
     }
+    private function handleException($e)
+    {
+        return response()->json([
+            'error' => $e->getMessage(),
+            'full_error' => $e->getFullError(),
+        ], 500);
+    }
+
+
     public function create(Request $request)
     {
         $user = Auth::user();
@@ -374,14 +384,6 @@ class PembayaranController extends Controller
 
         return view('dashboards.pembayaran.create', compact('user', 'items', 'total'));
     }
-    private function handleException($e)
-    {
-        return response()->json([
-            'error' => $e->getMessage(),
-            'full_error' => $e->getFullError(),
-        ], 500);
-    }
-
     /**
      * Get customer by ID and return the result in a view.
      *
@@ -424,7 +426,7 @@ class PembayaranController extends Controller
             return response()->json($invoiceDetails);
         } catch (\Exception $e) {
             // Log the error
-            \Log::error('Error retrieving invoice details: ' . $e->getMessage());
+            Log::error('Error retrieving invoice details: ' . $e->getMessage());
             // Return a JSON response with the error message
             return response()->json(['error' => 'Failed to retrieve invoice details.'], 500);
         }
@@ -581,5 +583,4 @@ class PembayaranController extends Controller
             $payment->save();
         }
     }
-
 }
