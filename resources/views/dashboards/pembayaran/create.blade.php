@@ -23,7 +23,20 @@
                     @endforeach
                     <tr>
                         <td colspan="2">Jumlah</td>
-                        <td>{{ number_format($total, 0, ',', '.') }}</td>
+                        <td>
+                            {{ number_format(
+                                array_reduce(
+                                    $items,
+                                    function ($carry, $item) {
+                                        return $carry + $item['price'] * $item['quantity'];
+                                    },
+                                    0,
+                                ),
+                                0,
+                                ',',
+                                '.',
+                            ) }}
+                        </td>
                     </tr>
                 </tbody>
             </table>

@@ -157,44 +157,82 @@ class PembayaranController extends Controller
     {
         try {
             $user = Auth::user();
-            $existingInvoice = $this->findExistingInvoice($user);
 
-            if (!$existingInvoice) {
-                $data = $this->retrieveCustomerData($user);
-                $items = $this->getItemsBasedOnGender($data->jenis_kelamin);
+            $existingInvoice = TblPesertaPpdb::where('id_user', $user->id)
+                ->whereNotNull('id_invoice')
+                ->with('tbl_pembayaran')
+                ->first();
 
-                $total = $this->calculateTotalAmount($items);
-
-                $invoiceCustomerData = $this->prepareInvoiceCustomerData($data, $user);
-                $notificationPreference = $this->prepareNotificationPreference();
-
-                $createInvoiceRequest = $this->prepareCreateInvoiceRequest($total, $items, $invoiceCustomerData, $notificationPreference);
-
-                $result = $this->invoiceApiInstance->createInvoice($createInvoiceRequest);
-
-                $pembayaran = $this->createPembayaranEntry($result);
-                $this->updatePesertaPpdbInvoiceId($data, $pembayaran);
-
-                return redirect()->away($result['invoice_url']);
-            } else {
+            if ($existingInvoice) {
                 return redirect()->away($existingInvoice->tbl_pembayaran->checkout_link);
             }
+
+            $data = TblPesertaPpdb::where('id_user', $user->id)->with('tbl_biodata_ortu')->first();
+            $items = $this->getItemsBasedOnGender($data->jenis_kelamin);
+
+            $total = collect($items)->sum(function ($item) {
+                return $item['price'] * $item['quantity'];
+            });
+
+            $invoiceCustomerData = [
+                'given_names' => $data->nama_depan,
+                'surname' => $data->nama_belakang,
+                'email' => $user->email,
+                'mobile_number' => (string) $data->tbl_biodata_ortu->no_tlp_ayah,
+            ];
+
+            $notificationPreference = [
+                'invoice_created' => ['sms', 'whatsapp', 'email'],
+                'invoice_reminder' => ['sms', 'whatsapp', 'email'],
+                'invoice_paid' => ['sms', 'whatsapp', 'email'],
+            ];
+
+            $description = json_encode($invoiceCustomerData, JSON_UNESCAPED_UNICODE);
+            $description = substr($description, 1, -1);
+            $description = '';
+            foreach ($invoiceCustomerData as $key => $value) {
+                $description .= "\"$key\":\"$value\",\n";
+            }
+            $description = rtrim($description, ",\n");
+
+            $generateTUB = function ($userId) {
+                return 'TUB' . sprintf('%03d', $userId);
+            };
+
+            $userId = auth()->user()->id;
+
+            $createInvoiceRequest = new CreateInvoiceRequest([
+                'external_id' => $generateTUB($userId),
+                'amount' => $total,
+                'items' => $items,
+                'description' => $description,
+                'invoice_duration' => 86400,
+                'customer' => $invoiceCustomerData,
+                'customer_notification_preference' => $notificationPreference,
+                'success_redirect_url' => route('pembayaran.invoice'),
+            ]);
+
+            $result = $this->invoiceApiInstance->createInvoice($createInvoiceRequest);
+
+            $pembayaran = new TblPembayaran;
+            $pembayaran->invoice_id = $result['id'];
+            $pembayaran->external_id = $result['external_id'];
+            $pembayaran->description = $result['description'];
+            $pembayaran->amount = $result['amount'];
+            $pembayaran->status = 'pending';
+            $pembayaran->checkout_link = $result['invoice_url'];
+            $pembayaran->save();
+
+            $data->id_invoice = $pembayaran['id'];
+            $data->save();
+
+            return redirect()->away($result['invoice_url']);
         } catch (XenditSdkException $e) {
-            return $this->handleException($e);
+            return response()->json([
+                'error' => $e->getMessage(),
+                'full_error' => $e->getFullError(),
+            ], 500);
         }
-    }
-
-    private function findExistingInvoice($user)
-    {
-        return TblPesertaPpdb::where('id_user', $user->id)
-            ->whereNotNull('id_invoice')
-            ->with('tbl_pembayaran')
-            ->first();
-    }
-
-    private function retrieveCustomerData($user)
-    {
-        return TblPesertaPpdb::where('id_user', $user->id)->with('tbl_biodata_ortu')->first();
     }
 
     private function getItemsBasedOnGender($gender)
@@ -291,98 +329,13 @@ class PembayaranController extends Controller
         return ($gender === 'P') ? $items1 : $items2;
     }
 
-    private function calculateTotalAmount($items)
-    {
-        return collect($items)->sum(function ($item) {
-            return $item['price'] * $item['quantity'];
-        });
-    }
-
-    private function prepareInvoiceCustomerData($data, $user)
-    {
-        return [
-            'given_names' => $data->nama_depan,
-            'surname' => $data->nama_belakang,
-            'email' => $user->email,
-            'mobile_number' => (string) $data->tbl_biodata_ortu->no_tlp_ayah,
-        ];
-    }
-
-    private function prepareNotificationPreference()
-    {
-        return [
-            'invoice_created' => ['sms', 'whatsapp', 'email'],
-            'invoice_reminder' => ['sms', 'whatsapp', 'email'],
-            'invoice_paid' => ['sms', 'whatsapp', 'email'],
-        ];
-    }
-
-    private function prepareCreateInvoiceRequest($total, $items, $invoiceCustomerData, $notificationPreference)
-    {
-        $description = json_encode($invoiceCustomerData, JSON_UNESCAPED_UNICODE);
-        $description = substr($description, 1, -1);
-        $description = '';
-        foreach ($invoiceCustomerData as $key => $value) {
-            $description .= "\"$key\":\"$value\",\n"; // Adding line break after each comma
-        }
-
-        // Remove the trailing comma and line break
-        $description = rtrim($description, ",\n");
-        $generateTUB = function ($userId) {
-            return 'TUB' . sprintf('%03d', $userId);
-        };
-
-        // Assuming you have a way to get the current user ID
-        $userId = auth()->user()->id; // or $request->input('user_id') if it's passed in the request
-
-        return new CreateInvoiceRequest([
-            'external_id' => $generateTUB($userId),
-            'amount' => $total,
-            'items' => $items,
-            'description' => $description,
-            'invoice_duration' => 86400,
-            'customer' => $invoiceCustomerData,
-            'customer_notification_preference' => $notificationPreference,
-            'success_redirect_url' => route('pembayaran.invoice'),
-        ]);
-    }
-
-    private function createPembayaranEntry($result)
-    {
-        $pembayaran = new TblPembayaran;
-        $pembayaran->invoice_id = $result['id'];
-        $pembayaran->external_id = $result['external_id'];
-        $pembayaran->description = $result['description'];
-        $pembayaran->amount = $result['amount'];
-        $pembayaran->status = 'pending';
-        $pembayaran->checkout_link = $result['invoice_url'];
-        $pembayaran->save();
-        return $pembayaran;
-    }
-
-    private function updatePesertaPpdbInvoiceId($data, $pembayaran)
-    {
-        $data->id_invoice = $pembayaran['id'];
-        $data->save();
-    }
-    private function handleException($e)
-    {
-        return response()->json([
-            'error' => $e->getMessage(),
-            'full_error' => $e->getFullError(),
-        ], 500);
-    }
-
-
     public function create(Request $request)
     {
         $user = Auth::user();
-        $data = $this->retrieveCustomerData($user);
-        // $noHp = $data->tbl_biodata_ortu->no_tlp_ayah;
+        $data = TblPesertaPpdb::where('id_user', $user->id)->with('tbl_biodata_ortu')->first();
         $items = $this->getItemsBasedOnGender($data->jenis_kelamin);
-        $total = $this->calculateTotalAmount($items);
 
-        return view('dashboards.pembayaran.create', compact('user', 'items', 'total'));
+        return view('dashboards.pembayaran.create', compact('user', 'items', 'data'));
     }
     /**
      * Get customer by ID and return the result in a view.
