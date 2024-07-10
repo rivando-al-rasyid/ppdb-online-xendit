@@ -209,7 +209,7 @@ class PembayaranController extends Controller
                 'invoice_duration' => 86400,
                 'customer' => $invoiceCustomerData,
                 'customer_notification_preference' => $notificationPreference,
-                'success_redirect_url' => route('pembayaran.invoice'),
+                'success_redirect_url' => route('dashboard'),
             ]);
 
             $result = $this->invoiceApiInstance->createInvoice($createInvoiceRequest);
@@ -333,9 +333,10 @@ class PembayaranController extends Controller
     {
         $user = Auth::user();
         $data = TblPesertaPpdb::where('id_user', $user->id)->with('tbl_biodata_ortu')->first();
+        $pembayaran = TblPembayaran::where('id', $data->id_invoice)->first();
         $items = $this->getItemsBasedOnGender($data->jenis_kelamin);
 
-        return view('dashboards.pembayaran.create', compact('user', 'items', 'data'));
+        return view('dashboards.pembayaran.create', compact('user', 'items', 'data', 'pembayaran'));
     }
     /**
      * Get customer by ID and return the result in a view.
