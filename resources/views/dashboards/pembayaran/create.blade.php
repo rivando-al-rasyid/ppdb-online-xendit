@@ -95,7 +95,7 @@
         </div>
     </div>
 
-    @if ($pembayaran && $pembayaran->status !== 'settled')
+    @if ($pembayaran && !$pembayaran->file_bukti_pembayaran)
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 var uploadModal = new bootstrap.Modal(document.getElementById('uploadModal'));

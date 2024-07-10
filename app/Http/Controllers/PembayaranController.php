@@ -1,4 +1,4 @@
-<!-- <?php
+<?php
 
 namespace App\Http\Controllers;
 
@@ -209,7 +209,7 @@ class PembayaranController extends Controller
                 'invoice_duration' => 86400,
                 'customer' => $invoiceCustomerData,
                 'customer_notification_preference' => $notificationPreference,
-                'success_redirect_url' => route('pembayaran.invoice'),
+                'success_redirect_url' => route('dashboard'),
             ]);
 
             $result = $this->invoiceApiInstance->createInvoice($createInvoiceRequest);
@@ -334,8 +334,8 @@ class PembayaranController extends Controller
         $user = Auth::user();
         $data = TblPesertaPpdb::where('id_user', $user->id)->with('tbl_biodata_ortu')->first();
         $items = $this->getItemsBasedOnGender($data->jenis_kelamin);
-
-        return view('dashboards.pembayaran.create', compact('user', 'items'));
+        $pembayaran = TblPembayaran::where('id', $data->id_invoice)->first();
+        return view('dashboards.pembayaran.create', compact('user', 'items', 'pembayaran'));
     }
 
 
@@ -495,6 +495,12 @@ class PembayaranController extends Controller
         return $invoice->stream();
     }
 
+    public function invoice()
+    {
+        return view(
+            'dashboards.pembayaran.invoice'
+        );
+    }
 
     /**
      * Expire an invoice by ID.
@@ -550,4 +556,4 @@ class PembayaranController extends Controller
             $payment->save();
         }
     }
-} -->
+}
