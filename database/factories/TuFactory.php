@@ -2,6 +2,7 @@
 
 namespace App\Modules\Tus\Database\Factories;
 
+use App\Modules\Tus\Models\Tu;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -15,7 +16,7 @@ class TuFactory extends Factory
      *
      * @var class-string<\Illuminate\Database\Eloquent\Model|TModel>
      */
-    protected $model = \App\Modules\Tus\Models\Tu::class;
+    protected $model = Tu::class;
 
     /**
      * Define the model's default state.
@@ -25,10 +26,10 @@ class TuFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            'name' => $this->faker->name(),
+            'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => bcrypt('password'), // password
             'remember_token' => Str::random(10),
         ];
     }
