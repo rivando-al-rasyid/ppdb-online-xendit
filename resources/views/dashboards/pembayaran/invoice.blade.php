@@ -70,9 +70,7 @@
             </div>
 
             <!-- Modal -->
-            <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true"
-                data-show-modal="{{ $tbl_pembayaran->external_id ? 'true' : 'false' }}"
-                data-close-modal="{{ $tbl_pembayaran->file_bukti_pembayaran ? 'true' : 'false' }}">
+            <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -105,5 +103,5 @@
             });
         </script>
     @endif
-
 @endsection
+pembayaran.invoice
