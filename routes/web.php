@@ -37,11 +37,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/dashboard', [PembayaranController::class, 'create'])->name('dashboard');
     Route::post('/pembayaran', [PembayaranController::class, 'createInvoice'])->name('pembayaran.store');
-    Route::get('/bukti-pembayaran', [PembayaranController::class, 'generateAndDisplayInvoice'])->name('pembayaran.invoice');
+    Route::get('/bukti-pembayaran', [PembayaranController::class, 'generateAndDisplayInvoice'])->name('pembayaran.yeah');
+    Route::get('/bukti/pembayaran', [PembayaranController::class, 'invoice'])->name('pembayaran.invoice');
+
     Route::post('/bukti-pembayaran', [PembayaranController::class, 'generateAndDisplayInvoice'])->name('pembayaran.upload');
     Route::post('/pembayaran/upload', [PembayaranController::class, 'upload'])->name('pembayaran.upload');
-
-
 });
 Route::post('/xendit/webhook', [PembayaranController::class, 'webhook'])->middleware('web');
 
