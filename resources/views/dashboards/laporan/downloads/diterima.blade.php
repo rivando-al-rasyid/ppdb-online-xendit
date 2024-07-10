@@ -159,17 +159,17 @@
                     <tr>
                         <td style="width: 70%;"></td>
                         <td style="width: 30%;">
-                            <p>Padang Gelugur, {{ $tentang->first()->tanggal_laporan }}</p>
+                            <p>Padang Gelugur, {{ \Carbon\Carbon::parse($tentang->tanggal_laporan)->format('d-m-Y') }}
+                            </p>
                             <p style="text-align: center;">KEPALA</p>
                             <br>
                             <br>
                             <br>
-                            <p style="text-align: center;">{{ $tentang->first()->nama_kepsek }} </p>
-                            <p style="text-align: center;">NIP. {{ $tentang->first()->nip }}</p>
+                            <p style="text-align: center;">{{ $tentang->nama_kepsek }} </p>
+                            <p style="text-align: center;">NIP. {{ $tentang->nip }}</p>
                         </td>
                     </tr>
                 </table>
-            </aside>
         </section>
     </div>
 </body>

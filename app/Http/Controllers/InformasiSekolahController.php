@@ -26,7 +26,7 @@ class InformasiSekolahController extends Controller
         InformasiSekolah::create($request->all());
 
         Alert::success('Success', 'Informasi Sekolah created successfully.');
-        return redirect()->route('informasi_sekolah.manage');
+        return redirect()->route('admin.informasi_sekolah.manage');
     }
 
     public function update(Request $request, $id)
@@ -42,6 +42,6 @@ class InformasiSekolahController extends Controller
         $informasiSekolah->update($request->all());
 
         Alert::success('Success', 'Informasi Sekolah updated successfully.');
-        return redirect()->route('informasi_sekolah.manage');
+        return redirect()->route('admin.informasi_sekolah.manage');
     }
 }

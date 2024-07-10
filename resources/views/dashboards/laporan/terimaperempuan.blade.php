@@ -8,7 +8,7 @@
             <div class="col-12 mt-3">
                 <div class="card">
                     <div class="card-body">
-                        <iframe src="{{ route('tu.laporan.transaksi') }}" type="application/pdf"
+                        <iframe src="{{ route('tu.laporan.diterima.perempuan') }}" type="application/pdf"
                             style="width: 100%; height: 800px; visibility:hidden;" onload="this.style.visibility='visible';"
                             async>
                         </iframe>
