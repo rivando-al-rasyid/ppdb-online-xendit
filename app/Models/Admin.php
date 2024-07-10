@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * 
  * @property int $id
  * @property string $name
+ * @property int $nip
  * @property string $email
  * @property Carbon|null $email_verified_at
  * @property string $password
@@ -28,6 +29,7 @@ class Admin extends Model
 	protected $table = 'admins';
 
 	protected $casts = [
+		'nip' => 'int',
 		'email_verified_at' => 'datetime'
 	];
 
@@ -38,6 +40,7 @@ class Admin extends Model
 
 	protected $fillable = [
 		'name',
+		'nip',
 		'email',
 		'email_verified_at',
 		'password',

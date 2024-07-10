@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property string $name
  * @property string $email
+ * @property int $nip
  * @property Carbon|null $email_verified_at
  * @property string $password
  * @property string|null $remember_token
@@ -28,6 +29,7 @@ class Tu extends Model
 	protected $table = 'tus';
 
 	protected $casts = [
+		'nip' => 'int',
 		'email_verified_at' => 'datetime'
 	];
 
@@ -39,6 +41,7 @@ class Tu extends Model
 	protected $fillable = [
 		'name',
 		'email',
+		'nip',
 		'email_verified_at',
 		'password',
 		'remember_token'

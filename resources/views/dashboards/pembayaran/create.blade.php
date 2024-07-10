@@ -57,7 +57,9 @@
             </div>
 
             <!-- Modal -->
-            <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+            <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true"
+                data-show-modal="{{ $tbl_pembayaran->external_id ? 'true' : 'false' }}"
+                data-close-modal="{{ $tbl_pembayaran->file_bukti_pembayaran ? 'true' : 'false' }}">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -81,4 +83,22 @@
             <!-- End of Modal -->
         </div>
     </div>
+    @push('scripts')
+        <!-- Include Bootstrap JS and dependencies -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', (event) => {
+                const modalElement = document.getElementById('uploadModal');
+                const modalInstance = new bootstrap.Modal(modalElement);
+                const showModal = modalElement.getAttribute('data-show-modal');
+                const closeModal = modalElement.getAttribute('data-close-modal');
+
+                if (showModal === 'true' && closeModal !== 'true') {
+                    modalInstance.show();
+                } else if (closeModal === 'true') {
+                    modalInstance.hide();
+                }
+            });
+        </script>
+    @endpush
 @endsection
