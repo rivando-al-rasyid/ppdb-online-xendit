@@ -24,6 +24,8 @@ use Illuminate\Http\JsonResponse;
 use Carbon\Carbon;
 use App\Models\InformasiSekolah;
 use App\Models\Tu;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class PembayaranController extends Controller
 {
@@ -48,7 +50,7 @@ class PembayaranController extends Controller
     public function createCustomer(Request $request)
     {
         try {
-            \DB::beginTransaction();
+            DB::beginTransaction();
 
             $userId = $request->input('id');
             $items = TblHasil::with(['tbl_peserta_ppdb'])->where('status', 'DITERIMA')->get();
@@ -85,7 +87,7 @@ class PembayaranController extends Controller
                             $phoneNumber,
                             [
                                 "from" => env('TWILIO_FROM_NUMBER'),
-                                "body" => "Your registration is successful. Email: $randomEmail, Password: $originalPassword"
+                                "body" => "Pendaftaran Barhasil. Email: $randomEmail, Password: $originalPassword"
                             ]
                         );
 
@@ -99,16 +101,16 @@ class PembayaranController extends Controller
                     }
                 }
             }
-            \DB::commit();
+            DB::commit();
 
             Alert::success('Success', 'Customer created successfully!')->persistent(true)->autoClose(3000);
             return redirect()->route('admin.dashboard');
         } catch (ModelNotFoundException $e) {
-            \DB::rollBack();
+            DB::rollBack();
             Alert::error('Error', $e->getMessage())->persistent(true)->autoClose(5000);
             return response()->json(['error' => $e->getMessage()], 404);
         } catch (\Exception $e) {
-            \DB::rollBack();
+            DB::rollBack();
             Alert::error('Error', $e->getMessage())->persistent(true)->autoClose(5000);
             return response()->json(['error' => $e->getMessage()], 500);
         }
@@ -382,7 +384,7 @@ class PembayaranController extends Controller
             return response()->json($invoiceDetails);
         } catch (\Exception $e) {
             // Log the error
-            \Log::error('Error retrieving invoice details: ' . $e->getMessage());
+            Log::error('Error retrieving invoice details: ' . $e->getMessage());
             // Return a JSON response with the error message
             return response()->json(['error' => 'Failed to retrieve invoice details.'], 500);
         }

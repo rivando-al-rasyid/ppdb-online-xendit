@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\TblPesertaPpdb;
 use RealRashid\SweetAlert\Facades\Alert;
 
-
 // Load Models
 use App\Models\TblHasil;
 use App\Modules\Tus\Models\Tu;
@@ -144,16 +143,21 @@ class DashboardController extends Controller
         }
     }
 
-
-    public function terima($id)
+    public function updateStatus($id, $status, $messageBody)
     {
         $item = TblHasil::findOrFail($id);
-        $item->status = 'DITERIMA';
-        // Save the new Hasil's ID to the $item->id_Hasil field
+        $item->status = $status;
         $item->update();
-        $phoneNumber = $item->tbl_peserta_ppdb->tbl_biodata_ortu->no_tlp_ayah;
-        $phoneNumber = $this->formatPhoneNumber($phoneNumber);
 
+        $this->sendSMSNotification($item->tbl_peserta_ppdb->tbl_biodata_ortu->no_tlp_ayah, $messageBody);
+
+        Alert::success('Sukses', 'Simpan Data Sukses');
+        return $this->redirectToDashboard();
+    }
+
+    private function sendSMSNotification($phoneNumber, $messageBody)
+    {
+        $phoneNumber = $this->formatPhoneNumber($phoneNumber);
         $client = new \Twilio\Rest\Client(env('TWILIO_SID'), env('TWILIO_TOKEN'));
 
         try {
@@ -161,7 +165,7 @@ class DashboardController extends Controller
                 $phoneNumber,
                 [
                     "from" => env('TWILIO_FROM_NUMBER'),
-                    "body" => "Kamu telah Diterima"
+                    "body" => $messageBody
                 ]
             );
 
@@ -173,10 +177,10 @@ class DashboardController extends Controller
         } catch (\Twilio\Exceptions\RestException $e) {
             Alert::error('Error', 'SMS could not be sent. Error: ' . $e->getMessage());
         }
+    }
 
-
-        // Display a success message
-        Alert::success('Sukses', 'Simpan Data Sukses');
+    private function redirectToDashboard()
+    {
         if (Auth::guard('tu')->check()) {
             return redirect()->route('tu.dashboard');
         } elseif (Auth::guard('admin')->check()) {
@@ -184,39 +188,20 @@ class DashboardController extends Controller
         } else {
             view()->share('guard', 'web');
         }
+    }
 
-        // Redirect the Hasil to the 'home' route
+    public function terima($id)
+    {
+        return $this->updateStatus($id, 'DITERIMA', 'Kamu telah Diterima');
     }
 
     public function tolak($id)
     {
-        $item = TblHasil::findOrFail($id);
-
-        $item->status = 'DITOLAK';
-        $item->update();
-
-        Alert::success('Sukses', 'Simpan Data Sukses');
-        if (Auth::guard('tu')->check()) {
-            return redirect()->route('tu.dashboard');
-        } elseif (Auth::guard('admin')->check()) {
-            return redirect()->route('admin.dashboard');
-        } else {
-            view()->share('guard', 'web');
-        }
+        return $this->updateStatus($id, 'DITOLAK', 'Maaf, kamu belum diterima.');
     }
+
     public function cadangan($id)
     {
-        $item = TblHasil::findOrFail($id);
-        $item->status = 'CADANGAN';
-        $item->update();
-
-        Alert::success('Sukses', 'Simpan Data Sukses');
-        if (Auth::guard('tu')->check()) {
-            return redirect()->route('tu.dashboard');
-        } elseif (Auth::guard('admin')->check()) {
-            return redirect()->route('admin.dashboard');
-        } else {
-            view()->share('guard', 'web');
-        }
+        return $this->updateStatus($id, 'CADANGAN', 'Kamu berada di daftar cadangan.');
     }
 }
