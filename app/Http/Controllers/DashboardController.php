@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\TblPesertaPpdb;
 use RealRashid\SweetAlert\Facades\Alert;
 
-
 // Load Models
 use App\Models\TblHasil;
 use App\Modules\Tus\Models\Tu;
