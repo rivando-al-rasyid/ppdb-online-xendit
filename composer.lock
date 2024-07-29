@@ -2466,16 +2466,16 @@
         },
         {
             "name": "mostafaznv/pdf-optimizer",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mostafaznv/pdf-optimizer.git",
-                "reference": "2bd3552503ab796b6476bfa3b6e4b59e5cfd8f27"
+                "reference": "f7db1bd2ffd93325b6d5efdcf7df6610121b36fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mostafaznv/pdf-optimizer/zipball/2bd3552503ab796b6476bfa3b6e4b59e5cfd8f27",
-                "reference": "2bd3552503ab796b6476bfa3b6e4b59e5cfd8f27",
+                "url": "https://api.github.com/repos/mostafaznv/pdf-optimizer/zipball/f7db1bd2ffd93325b6d5efdcf7df6610121b36fd",
+                "reference": "f7db1bd2ffd93325b6d5efdcf7df6610121b36fd",
                 "shasum": ""
             },
             "require": {
@@ -2533,7 +2533,7 @@
                 "issues": "https://github.com/mostafaznv/pdf-optimizer/issues",
                 "source": "https://github.com/mostafaznv/pdf-optimizer"
             },
-            "time": "2024-03-14T21:37:31+00:00"
+            "time": "2024-07-20T15:16:11+00:00"
         },
         {
             "name": "nesbot/carbon",
