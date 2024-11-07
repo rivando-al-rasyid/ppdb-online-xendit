@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             'name' => 'User',
-            'email' => 'asura@example.com',
+            'email' => 'user@example.com',
             'email_verified_at' => now(),
             'password' => bcrypt('admin123'), // Hash the password
             'remember_token' => Str::random(10),
