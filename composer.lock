@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e4651fa75bc35c723c0084ef5afbafa9",
+    "content-hash": "3b336de3eb3f4ea6464f7ebdb3e5fc41",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -6517,16 +6517,16 @@
         },
         {
             "name": "xendit/xendit-php",
-            "version": "5.0.0",
+            "version": "6.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/xendit/xendit-php.git",
-                "reference": "315f6412c9427233cfe98f7eb3645654a83f5e70"
+                "reference": "0ff74164fd7730481297b37d25e6466e5a466585"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xendit/xendit-php/zipball/315f6412c9427233cfe98f7eb3645654a83f5e70",
-                "reference": "315f6412c9427233cfe98f7eb3645654a83f5e70",
+                "url": "https://api.github.com/repos/xendit/xendit-php/zipball/0ff74164fd7730481297b37d25e6466e5a466585",
+                "reference": "0ff74164fd7730481297b37d25e6466e5a466585",
                 "shasum": ""
             },
             "require": {
@@ -6571,9 +6571,9 @@
             ],
             "support": {
                 "issues": "https://github.com/xendit/xendit-php/issues",
-                "source": "https://github.com/xendit/xendit-php/tree/5.0.0"
+                "source": "https://github.com/xendit/xendit-php/tree/6.0.0"
             },
-            "time": "2024-04-01T03:39:38+00:00"
+            "time": "2024-08-15T06:16:23+00:00"
         }
     ],
     "packages-dev": [
@@ -9680,12 +9680,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.1"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
