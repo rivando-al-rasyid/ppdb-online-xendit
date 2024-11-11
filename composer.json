@@ -20,7 +20,7 @@
         "mostafaznv/pdf-optimizer": "^1.0",
         "realrashid/sweet-alert": "^7.1",
         "twilio/sdk": "^8.2",
-        "xendit/xendit-php": "^5.0"
+        "xendit/xendit-php": "^6.0"
     },
     "require-dev": {
         "bmatovu/multi-auth": "^12.0",
