@@ -2531,16 +2531,16 @@
         },
         {
             "name": "mostafaznv/pdf-optimizer",
-            "version": "1.2.0",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mostafaznv/pdf-optimizer.git",
-                "reference": "f7db1bd2ffd93325b6d5efdcf7df6610121b36fd"
+                "reference": "f8aa39b7442c4d3bb1620358ceaf5cf4d07023f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mostafaznv/pdf-optimizer/zipball/f7db1bd2ffd93325b6d5efdcf7df6610121b36fd",
-                "reference": "f7db1bd2ffd93325b6d5efdcf7df6610121b36fd",
+                "url": "https://api.github.com/repos/mostafaznv/pdf-optimizer/zipball/f8aa39b7442c4d3bb1620358ceaf5cf4d07023f5",
+                "reference": "f8aa39b7442c4d3bb1620358ceaf5cf4d07023f5",
                 "shasum": ""
             },
             "require": {
@@ -2598,7 +2598,7 @@
                 "issues": "https://github.com/mostafaznv/pdf-optimizer/issues",
                 "source": "https://github.com/mostafaznv/pdf-optimizer"
             },
-            "time": "2024-07-20T15:16:11+00:00"
+            "time": "2024-11-15T07:33:55+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -5549,16 +5549,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v6.4.14",
+            "version": "v6.4.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "25214adbb0996d18112548de20c281be9f27279f"
+                "reference": "3cb242f059c14ae08591c5c4087d1fe443564392"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/25214adbb0996d18112548de20c281be9f27279f",
-                "reference": "25214adbb0996d18112548de20c281be9f27279f",
+                "url": "https://api.github.com/repos/symfony/process/zipball/3cb242f059c14ae08591c5c4087d1fe443564392",
+                "reference": "3cb242f059c14ae08591c5c4087d1fe443564392",
                 "shasum": ""
             },
             "require": {
@@ -5590,7 +5590,7 @@
             "description": "Executes commands in sub-processes",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/process/tree/v6.4.14"
+                "source": "https://github.com/symfony/process/tree/v6.4.15"
             },
             "funding": [
                 {
@@ -5606,7 +5606,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-11-06T09:25:01+00:00"
+            "time": "2024-11-06T14:19:14+00:00"
         },
         {
             "name": "symfony/routing",
@@ -9680,12 +9680,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.1"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
